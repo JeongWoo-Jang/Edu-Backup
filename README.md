@@ -13,4 +13,4 @@
 2. ORACLE
 3. JDBC
 4. ERD
-5. HTML & CSS
+5. HTML & CSS & JS
