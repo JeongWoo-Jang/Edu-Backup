@@ -55,11 +55,7 @@
                 pathX.shift();
                 pathY.shift();
             };
-            move();
 
-        };
-
-        function move() {
             for (var i=0; i<cat.length; i++) {
                 if (pathX[i] != null) {
                     cat[i].style.left = pathX[i] - 65 + "px";
@@ -67,6 +63,7 @@
                     cat[i].style.display = "block";
                 };
             };
+
         };
 
     </script>
