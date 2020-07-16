@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/jquery-ui.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <script src="js/jquery-1.12.4.js"></script>
+    <script src="js/jquery-ui.js"></script>
+	<script src="js/bootstrap.js"></script>
+    <style>
+
+        body { margin: 0 auto; }
+        h1 { font-family: "Arial Black"; }
+        #main { width: 100%; }
+        #top {
+            /* border: 1px solid black; */
+            width: 100%;
+            height: 700px;
+            margin: 0 auto;
+            background-color: black;
+            
+        }
+        #middle {
+            /* border: 1px solid black; */
+            /* height: auto; */
+            width: 1600px;
+            margin: 0 auto;
+        }
+        #bottom {
+            /* border: 1px solid black; */
+            height: 200px;
+            background-color: black;
+            color: white;
+        }
+        #topmenu {
+            /* border: 1px solid white; */
+            background-color: black;
+            width: 100%;
+            height: 40px;
+            color: white;
+            text-align: center;
+            font-size: 15px;
+            padding: 40px 0;
+            position: absolute;
+        }
+        .menubar {
+            margin: 0 5px;
+        }
+        #topmenu > span {
+            cursor: pointer;
+        }
+        .switch {
+            /* border: 1px solid white; */
+            position: relative;
+            top: 50%;
+        }        
+        #topleft {
+            display: inline-block;
+            /* border: 1px solid white; */
+            width: 100px;
+            height: 65px;
+            background-image: url("../images//title.png");
+            background-repeat: no-repeat;
+            background-position: center center;
+            position: absolute;
+            left : 10px;
+            top: 10px;
+            cursor: pointer;
+        }
+        #topright {
+            font-size: 13px;
+            position: absolute;
+            right : 5px;
+            top: 42px;
+            cursor: pointer;
+        }
+        .prev {
+            float: left;
+            padding-left: 20px;
+        }
+        .after {
+            float:right;
+            padding-right: 20px;
+        }
+        #search {
+            border: 0;
+            border-bottom: 1px solid white;
+            background-color: transparent;
+            outline: none;
+            color: white;
+
+        }
+        .img {
+            width: 230px;
+            height: 330px;
+            border: 1px solid black;
+            background-color: cornflowerblue;
+            display: inline-block;
+            margin: 10px 0 0 10px;
+            cursor: pointer;
+        }
+        #banner {
+            height: 400px;
+            background-image: url("../images//banner.png");
+            background-repeat: no-repeat;
+            background-position: center center;
+            margin-top: 20px;
+        }
+        #chatbot {
+            width: 88px;
+            height: 88px;
+            position: fixed;
+            bottom: 10px;
+            left: 10px;
+            cursor: pointer;
+            z-index: 1;
+        }
+        #movetop {
+            width: 40px;
+            height: 40px;
+            background-color: gray;
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            text-align: center;
+            padding-top: 3px;
+        }
+        #movetop:hover {
+            background-color: orange;
+        }
+        #movetop a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            font-size: 1.5em;
+        }
+        #avi {
+            width: 900px;
+            height: 500px;
+            /* display: none; */
+        }
+        #avibox {
+            width: 900px;
+            /* border: 1px solid white; */
+            margin: 0px  auto;
+            padding-top: 100px;
+        }
+
+
+    </style>
+</head>
+<body>
+    
+    <div id="main">
+<!-------------------------------- 화면 상단부 -------------------------------->
+        <div id="top">
+            <div id="topmenu">
+                <!-- 상단메뉴 좌측(메인화면으로 돌아가기) -->
+                <a href="#" id="topleft"></a>
+                <!-- 상단메뉴 센터(콘서트, 뮤지컬, 연극, 클래식, 전시) -->
+                <span data-item="item1" class="menubar">콘서트</span>
+                <span data-item="item2" class="menubar">뮤지컬</span>
+                <span data-item="item3" class="menubar">연극</span>
+                <span data-item="item4" class="menubar">클래식</span>
+                <span data-item="item5" class="menubar">전시</span>
+                <!-- 상단메뉴 우측(랭킹, 이벤트, 검색창, 마이페이지) -->
+                <div id="topright">
+                    <span data-item="item6" class="menubar">랭킹</span>
+                    <span data-item="item7" class="menubar">이벤트</span>
+                    <input type="text" value="" id="search">
+                    <label for="search" class="glyphicon glyphicon-search"
+                        style="font-size: 14px; cursor: pointer;"></label>
+                    <div class="glyphicon glyphicon-user" 
+                        style="font-size: 14px; cursor: pointer; margin: 0 10px; "></div>
+                </div>
+            </div>
+            <!-- 메인화면 좌우로 넘기는 버튼 -->
+            <div class="switch">
+                <img src="../images/slide-dir-prev.png" class="prev">
+                <img src="../images/slide-dir-next.png" class="after">
+            </div>
+            <!-- 동영상 -->
+            <div id="avibox">
+                <iframe id="avi" src="https://www.youtube.com/embed/GbpP3Sxp-1U" frameborder="0"
+                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+<!-------------------------------- 내용부분 -------------------------------->
+        <div id="middle">
+            <!-- 최신, 인기 공연 목록(순위별) -->
+            <div style="text-align: center;"><h1>WHAT'S HOT</h1>
+                <div style="padding: 10px 0;">
+                    <div class="img" id="bigimg" style="width: 420px; height: 675px; display: inline-block;">
+                    </div>
+                    <div style="display: inline-block;">
+                        <div class="img"></div>
+                        <div class="img"></div>
+                        <div class="img"></div>
+                        <div style="display: block;"></div>
+                        <div class="img"></div>
+                        <div class="img"></div>
+                        <div class="img"></div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <!-- 오픈 예정 티켓 목록 -->
+            <div style="text-align: center;"><h1>TICKET OPEN</h1>
+                <div>
+                    <div class="img"></div>
+                    <div class="img"></div>
+                    <div class="img"></div>
+                    <div class="img"></div>
+                    <div class="img"></div>
+                </div>
+                <!-- 티켓오픈 더보기 버튼 -->
+                <input type="button" value="티켓오픈 더보기" id="btnticket" style="margin-top: 20px;">
+            </div>
+            <hr>
+            <!-- 배너 이미지 -->
+            <div id="banner"></div>
+            <hr>
+            <div style="text-align: center;"><h1>RANKING</h1>
+                <!-- 랭킹 해시태그 버튼 -->
+                <input type="button" value="#뮤지컬" id="hashtagmusical">
+                <input type="button" value="#콘서트" id="hashtagconcert">
+                <input type="button" value="#연극" id="hashtagplay">
+                <input type="button" value="#클래식" id="hashtagclassic">
+                <input type="button" value="#전시" id="hashtagexhibition">
+                <!-- 랭킹 이미지 -->
+                <div style="margin-top: 20px">
+                    <div class="img"></div>
+                    <div class="img"></div>
+                    <div class="img"></div>
+                </div>
+                <!-- 랭킹 더보기 버튼 -->
+                <input type="button" value="랭킹 더보기" id="btnrank" style="margin-top: 20px;">
+            </div>
+            <hr>
+            <!-- 뮤지컬, 연극 목록 -->
+            <div style="text-align: center;"><h1>MUSICAL & PLAY</h1>
+                <div>
+                    <div class="img"></div>
+                    <div class="img"></div>
+                    <div class="img"></div>
+                    <div class="img"></div>
+                    <div class="img"></div>
+                    <div class="img"></div>
+                </div>
+            </div>
+            <hr>
+            <!-- 콘서트, 클래식 목록 -->
+            <div style="text-align: center;"><h1>CONCERT & CLASSIC</h1>
+                <div>
+                    <div class="img"></div>
+                    <div class="img"></div>
+                    <div class="img"></div>
+                    <div class="img"></div>
+                    <div class="img"></div>
+                    <div class="img"></div>
+                </div>
+            </div>
+            <hr>
+            <!-- 전시 목록 -->
+            <div style="text-align: center; margin-bottom: 30px;"><h1>EXHIBITION</h1>
+                <div>
+                    <div class="img"></div>
+                    <div class="img"></div>
+                    <div class="img"></div>
+                    <div class="img"></div>
+                    <div class="img"></div>
+                    <div class="img"></div>
+                </div>
+            </div>
+            <hr>
+            <!-- 챗봇 -->
+            <img src="../images/face35.png" id="chatbot">
+            <!-- 제일 위로 돌아가기 버튼 -->
+            <div id="movetop"><a href="#top">↑</a></div>
+        </div>
+<!-------------------------------- 화면 하단부 -------------------------------->
+        <div id="bottom">
+            <div style="width: 1600px; margin: auto;">
+                <!-- 회사 마크 -->
+                <img src="../images/title2.png" style="transform: translate(0, 40px);">
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <script>
+
+        //상단 메뉴 css
+        $(".menubar").mouseover(function() {
+            $(".menubar").css("border", "");
+            $(this).css("border-bottom", "5px solid orange");
+        });
+
+        var flag = false;
+
+        $(document).scroll(function() {
+            //메뉴가 시야에서 사라지는 순간 -> 메뉴를 붙박이로 만들기
+            // if (!flag) {
+                if ($(document).scrollTop() > $("#middle").position().top) {
+                    $("#topmenu").css({
+                        position: "fixed",
+                        top: "0px",
+                        bottom: "",
+                        zIndex: "1"
+                    });
+                    // $("#topmenu").animate({
+                    //     top: "0px"
+                    // }, 1000, function() {
+                    //     flag=true;
+                    // });
+                };
+            // };
+
+            //상단 헤더(top)이 눈에 보일때 쯤
+            if ($(document).scrollTop() <= $("#topmenu").position().top) {
+                $("#topmenu").css({
+                    position: "absolute",
+                    top: "0px",
+                    bottom: ""
+                });
+                // flag = false;                
+            }
+        });
+
+        //그림 URL
+        var imglist = ["../images/bg1.jpg", "../images/bg2.jpg", "../images/bg3.jpg"];
+        var imgnum = 0;
+
+        //top에있는 그림 이전으로
+        $(".prev").click(function() {
+            imgnum--
+            if (imgnum < 0) imgnum = 3;
+            $("#top").css("background-image", `url(${imglist[imgnum]})`)
+            $("#top").css("background-repeat", "no-repeat")
+            $("#top").css("background-position", "center center")
+            if (imgnum!=3) {
+                $("#avi").css("display","none")
+            }
+            if (imgnum==3) {
+                $("#top").css("background-color", "black")
+                $("#avi").css("display","block")
+                
+            }
+        });
+        //top에있는 그림 다음으로
+        $(".after").click(function() {
+            $("#top").css("background-image", `url(${imglist[imgnum]})`)
+            $("#top").css("background-repeat", "no-repeat")
+            $("#top").css("background-position", "center center")
+            $("#avi").css("display","none")
+            if (imgnum!=3) {
+                $("#avi").css("display","none")    
+            }
+            if (imgnum==3) {
+                $("#top").css("background-color", "black")
+                $("#avi").css("display","block")
+                
+            }
+            imgnum++
+            if(imgnum > 3) imgnum = 0;
+        });
+
+        //이미지에 마우스 올리면 크게
+        $(".img").mouseover(function() {
+            $(this).css("transform", "scale(1.05, 1.05)");
+        });
+        //이미지에 마우스 떼면 다시 돌아오게
+        $(".img").mouseout(function() {
+            $(this).css("transform", "scale(1, 1)");
+        });
+
+        //챗봇 클릭시 행동
+        $("#chatbot").dblclick(function() {
+            alert("챗봇입니다!");
+        });
+        //챗봇 이동 가능
+        $("#chatbot").draggable();
+        
+
+    </script>
+
+</body>
+</html>
