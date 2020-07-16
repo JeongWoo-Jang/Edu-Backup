@@ -8,7 +8,8 @@
     <link rel="stylesheet" href="css/bootstrap.css">
     <script src="js/jquery-1.12.4.js"></script>
     <script src="js/jquery-ui.js"></script>
-	<script src="js/bootstrap.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/Backstretch.js"></script>
     <style>
 
         body { margin: 0 auto; }
@@ -16,15 +17,16 @@
         #main { width: 100%; }
         #top {
             /* border: 1px solid black; */
-            width: 100%;
+            min-width: 1600px;
             height: 700px;
             margin: 0 auto;
-            background-color: black;
-            
+            /* background-color: black; */
+            /* background-image: url("../images/bg1.jpg");
+            background-repeat: no-repeat;
+            background-position: center center; */
         }
         #middle {
             /* border: 1px solid black; */
-            /* height: auto; */
             width: 1600px;
             margin: 0 auto;
         }
@@ -79,10 +81,12 @@
         .prev {
             float: left;
             padding-left: 20px;
+            cursor: pointer;
         }
         .after {
             float:right;
             padding-right: 20px;
+            cursor: pointer;
         }
         #search {
             border: 0;
@@ -95,7 +99,7 @@
         .img {
             width: 230px;
             height: 330px;
-            border: 1px solid black;
+            /* border: 1px solid black; */
             background-color: cornflowerblue;
             display: inline-block;
             margin: 10px 0 0 10px;
@@ -107,6 +111,9 @@
             background-repeat: no-repeat;
             background-position: center center;
             margin-top: 20px;
+        }
+        #middle input {
+            outline: none;
         }
         #chatbot {
             width: 88px;
@@ -139,7 +146,7 @@
         #avi {
             width: 900px;
             height: 500px;
-            /* display: none; */
+            display: none;
         }
         #avibox {
             width: 900px;
@@ -147,7 +154,6 @@
             margin: 0px  auto;
             padding-top: 100px;
         }
-
 
     </style>
 </head>
@@ -182,11 +188,11 @@
                 <img src="../images/slide-dir-next.png" class="after">
             </div>
             <!-- 동영상 -->
-            <div id="avibox">
+            <!-- <div id="avibox">
                 <iframe id="avi" src="https://www.youtube.com/embed/GbpP3Sxp-1U" frameborder="0"
                     allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
                 </iframe>
-            </div>
+            </div> -->
         </div>
 <!-------------------------------- 내용부분 -------------------------------->
         <div id="middle">
@@ -217,7 +223,7 @@
                     <div class="img"></div>
                 </div>
                 <!-- 티켓오픈 더보기 버튼 -->
-                <input type="button" value="티켓오픈 더보기" id="btnticket" style="margin-top: 20px;">
+                <input type="button" value="티켓오픈 더보기" class="btn btn-default" id="btnticket" style="margin-top: 20px;">
             </div>
             <hr>
             <!-- 배너 이미지 -->
@@ -225,11 +231,11 @@
             <hr>
             <div style="text-align: center;"><h1>RANKING</h1>
                 <!-- 랭킹 해시태그 버튼 -->
-                <input type="button" value="#뮤지컬" id="hashtagmusical">
-                <input type="button" value="#콘서트" id="hashtagconcert">
-                <input type="button" value="#연극" id="hashtagplay">
-                <input type="button" value="#클래식" id="hashtagclassic">
-                <input type="button" value="#전시" id="hashtagexhibition">
+                <input type="button" class="btn btn-default" value="#뮤지컬" id="hashmusical">
+                <input type="button" class="btn btn-default" value="#콘서트" id="hashconcert">
+                <input type="button" class="btn btn-default" value="#연극" id="hashplay">
+                <input type="button" class="btn btn-default" value="#클래식" id="hashclassic">
+                <input type="button" class="btn btn-default" value="#전시" id="hashexhibition">
                 <!-- 랭킹 이미지 -->
                 <div style="margin-top: 20px">
                     <div class="img"></div>
@@ -237,7 +243,7 @@
                     <div class="img"></div>
                 </div>
                 <!-- 랭킹 더보기 버튼 -->
-                <input type="button" value="랭킹 더보기" id="btnrank" style="margin-top: 20px;">
+                <input type="button" value="랭킹 더보기" class="btn btn-default" id="btnrank" style="margin-top: 20px;">
             </div>
             <hr>
             <!-- 뮤지컬, 연극 목록 -->
@@ -297,8 +303,10 @@
 
         //상단 메뉴 css
         $(".menubar").mouseover(function() {
-            $(".menubar").css("border", "");
             $(this).css("border-bottom", "5px solid orange");
+        });
+        $(".menubar").mouseout(function() {
+            $(this).css("border-bottom", "");
         });
 
         var flag = false;
@@ -308,6 +316,7 @@
             // if (!flag) {
                 if ($(document).scrollTop() > $("#middle").position().top) {
                     $("#topmenu").css({
+                        width: "100%",
                         position: "fixed",
                         top: "0px",
                         bottom: "",
@@ -322,7 +331,7 @@
             // };
 
             //상단 헤더(top)이 눈에 보일때 쯤
-            if ($(document).scrollTop() <= $("#topmenu").position().top) {
+            if ($(document).scrollTop() <= $("#middle").position().top) {
                 $("#topmenu").css({
                     position: "absolute",
                     top: "0px",
@@ -332,51 +341,34 @@
             }
         });
 
-        //그림 URL
-        var imglist = ["../images/bg1.jpg", "../images/bg2.jpg", "../images/bg3.jpg"];
-        var imgnum = 0;
+        //top에있는 그림 자동 슬라이드
+        $("#top").backstretch([
+            "../images/bg1.jpg",
+            "../images/bg2.jpg",
+            "../images/bg3.jpg"
+        ], {duration:3000, fade:1000});
 
         //top에있는 그림 이전으로
         $(".prev").click(function() {
-            imgnum--
-            if (imgnum < 0) imgnum = 3;
-            $("#top").css("background-image", `url(${imglist[imgnum]})`)
-            $("#top").css("background-repeat", "no-repeat")
-            $("#top").css("background-position", "center center")
-            if (imgnum!=3) {
-                $("#avi").css("display","none")
-            }
-            if (imgnum==3) {
-                $("#top").css("background-color", "black")
-                $("#avi").css("display","block")
-                
-            }
+            $("#top").backstretch("prev");
         });
         //top에있는 그림 다음으로
         $(".after").click(function() {
-            $("#top").css("background-image", `url(${imglist[imgnum]})`)
-            $("#top").css("background-repeat", "no-repeat")
-            $("#top").css("background-position", "center center")
-            $("#avi").css("display","none")
-            if (imgnum!=3) {
-                $("#avi").css("display","none")    
-            }
-            if (imgnum==3) {
-                $("#top").css("background-color", "black")
-                $("#avi").css("display","block")
-                
-            }
-            imgnum++
-            if(imgnum > 3) imgnum = 0;
+            $("#top").backstretch("next");
         });
 
-        //이미지에 마우스 올리면 크게
+        //이미지에 마우스 올릴때
         $(".img").mouseover(function() {
-            $(this).css("transform", "scale(1.05, 1.05)");
+            $(this).css("box-shadow", "1px 1px 1px 2px gray");
         });
-        //이미지에 마우스 떼면 다시 돌아오게
+        //이미지에 마우스 뗄때
         $(".img").mouseout(function() {
-            $(this).css("transform", "scale(1, 1)");
+            $(this).css("box-shadow", "");
+        });
+        
+        //이미지 클릭시 이동
+        $(".img").click(function() {
+            location.href = "#";
         });
 
         //챗봇 클릭시 행동
