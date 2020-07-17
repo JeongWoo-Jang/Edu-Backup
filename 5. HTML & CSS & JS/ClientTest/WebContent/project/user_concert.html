@@ -6,19 +6,24 @@
     <title>Document</title>
     <link rel="stylesheet" href="css/jquery-ui.css">
     <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/slick-theme.css">
+    <link rel="stylesheet" href="css/slick.css">
     <script src="js/jquery-1.12.4.js"></script>
     <script src="js/jquery-ui.js"></script>
     <script src="js/bootstrap.js"></script>
     <script src="js/Backstretch.js"></script>
     <style>
 
+        * {
+            outline: none;
+        }
         body { margin: 0 auto; }
-        h1 { font-family: "Arial Black"; }
+        h1 { font-family: "Arial Black"; font-weight: bold; }
         #main { width: 100%; }
         #top {
             /* border: 1px solid black; */
             min-width: 1600px;
-            height: 700px;
+            height: 650px;
             margin: 0 auto;
         }
         #middle {
@@ -33,11 +38,11 @@
             color: white;
         }
         #topmenu {
-            /* border: 1px solid white; */
+            border-bottom: 1px solid #ddd;
             background-color: transparent;
             width: 100%;
             height: 40px;
-            color: white;
+            color: black;
             text-align: center;
             font-size: 18px;
             font-weight: bold;
@@ -49,12 +54,7 @@
         }
         #topmenu > span {
             cursor: pointer;
-        }
-        .switch {
-            /* border: 1px solid white; */
-            position: relative;
-            top: 50%;
-        }        
+        }     
         #topleft {
             display: inline-block;
             /* border: 1px solid white; */
@@ -87,11 +87,10 @@
         }
         #search {
             border: 0;
-            border-bottom: 1px solid white;
+            border-bottom: 1px solid black;
             background-color: transparent;
             outline: none;
-            color: white;
-
+            color: black;
         }
         .img {
             width: 230px;
@@ -112,15 +111,6 @@
         #middle input {
             outline: none;
         }
-        #chatbot {
-            width: 88px;
-            height: 88px;
-            position: fixed;
-            bottom: 10px;
-            left: 10px;
-            cursor: pointer;
-            z-index: 1;
-        }
         #movetop {
             width: 40px;
             height: 40px;
@@ -140,21 +130,64 @@
             font-weight: bold;
             font-size: 1.5em;
         }
-        #avi {
-            width: 900px;
-            height: 500px;
-            display: none;
-        }
-        #avibox {
-            width: 900px;
-            /* border: 1px solid white; */
-            margin: 0px  auto;
-            padding-top: 100px;
-        }
         #frogue-container, .frogue-chat {
             position: absolute;
             left:20px;
             bottom: 0;
+        }
+        .recomand {
+            /* border: 1px solid black; */
+            width: 1600px;
+            /* margin-bottom: 20px; */
+            height: 400px;
+            overflow: hidden;
+        }
+        .recomand h1 {
+            padding: 40px;
+        }
+        .rank, .region {
+            display: inline-block;
+            /* border: 1px solid black; */
+            height: 200px;
+            width: 150px;
+            margin-right: 140px;
+            background-color: cornflowerblue;
+            cursor: pointer;
+        }
+        #rankpage {
+            width: 3600px;
+            /* border: 1px solid black; */
+        }
+        .rank:first-child {
+            margin-left: -450px;
+        }
+        .region:last-child {
+            margin-right: 0;
+        }
+        .name {
+            /* border:1px solid black; */
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            position: relative;
+            left: 49px;
+            top: 75px;
+            background-image: url("../images/서울.png");
+            background-position: center center;
+            color: white;
+        }
+        .slider {
+            margin: 0px auto;
+            position: relative;
+            top: 150px;
+        }
+        .slick-slide img {
+            transform: scale(.9);
+            transition: all .5s;
+        }
+        .slick-center img {
+            transform: scale(1);
+            transition: all .5s;
         }
 
     </style>
@@ -184,18 +217,16 @@
                         style="font-size: 14px; cursor: pointer; margin: 0 10px; "></div>
                 </div>
             </div>
-            <!-- 메인화면 좌우로 넘기는 버튼 -->
-            <div class="switch">
-                <img src="../images/slide-dir-prev.png" class="prev">
-                <img src="../images/slide-dir-next.png" class="after">
+            <!-- 메인화면 슬라이더 -->
+            <div class="slider">
+                <div><img src="../images/slide1.jpg"></div>
+                <div><img src="../images/slide2.jpg"></div>
+                <div><img src="../images/slide3.jpg"></div>
+                <div><img src="../images/slide4.jpg"></div>
+                <div><img src="../images/slide5.jpg"></div>
             </div>
-            <!-- 동영상 -->
-            <!-- <div id="avibox">
-                <iframe id="avi" src="https://www.youtube.com/embed/GbpP3Sxp-1U" frameborder="0"
-                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
-                </iframe>
-            </div> -->
         </div>
+        <hr>
 <!-------------------------------- 내용부분 -------------------------------->
         <div id="middle">
             <!-- 최신, 인기 공연 목록(순위별) -->
@@ -215,65 +246,49 @@
                 </div>
             </div>
             <hr>
-            <!-- 오픈 예정 티켓 목록 -->
-            <div style="text-align: center;"><h1>TICKET OPEN</h1>
-                <div>
-                    <div class="img"></div>
-                    <div class="img"></div>
-                    <div class="img"></div>
-                    <div class="img"></div>
-                    <div class="img"></div>
-                </div>
-                <!-- 티켓오픈 더보기 버튼 -->
-                <input type="button" value="티켓오픈 더보기" class="btn btn-default" id="btnticket" style="margin-top: 20px;">
-            </div>
-            <hr>
-            <!-- 배너 이미지 -->
+            <!-- 동영상 들어갈 자리 -->
             <div id="banner"></div>
             <hr>
-            <div style="text-align: center;"><h1>RANKING</h1>
-                <!-- 랭킹 해시태그 버튼 -->
-                <input type="button" class="btn btn-default" value="#뮤지컬" id="hashmusical">
-                <input type="button" class="btn btn-default" value="#콘서트" id="hashconcert">
-                <input type="button" class="btn btn-default" value="#연극" id="hashplay">
-                <input type="button" class="btn btn-default" value="#클래식" id="hashclassic">
-                <input type="button" class="btn btn-default" value="#전시" id="hashexhibition">
-                <!-- 랭킹 이미지 -->
-                <div style="margin-top: 20px">
-                    <div class="img"></div>
-                    <div class="img"></div>
-                    <div class="img"></div>
+            <!-- 주간 랭킹, 지역별 추천 -->
+            <div style="text-align: center; background-color: #eee;">
+                <!-- 주간 랭킹 -->
+                <div class="recomand">
+                    <div>
+                        <h1>WEEKLY RANKING</h1>
+                        <img src="../images/slide-dir-prev.png" class="prev" id="rankprev"
+                            style="position: relative; top: 60px; z-index: 1;">
+                        <!-- 주간 랭킹 이미지 -->
+                        <div id="rankpage">
+                            <div class="rank"></div>
+                            <div class="rank"></div>
+                            <div class="rank"></div>
+                            <div class="rank"></div>
+                            <div class="rank"></div>
+                            <div class="rank"></div>
+                            <div class="rank"></div>
+                            <div class="rank"></div>
+                            <div class="rank"></div>
+                            <div class="rank"></div>
+                        </div>
+                    </div>
+                    <img src="../images/slide-dir-next.png" class="after" id="rankafter"
+                            style="position: relative; bottom: 160px;">
                 </div>
-                <!-- 랭킹 더보기 버튼 -->
-                <input type="button" value="랭킹 더보기" class="btn btn-default" id="btnrank" style="margin-top: 20px;">
+                <!-- 지역별 추천 -->
+                <div class="recomand">
+                    <h1>지역별 추천</h1>
+                    <div id="regionpage">
+                        <div class="region"><p class="name"></p></div>
+                        <div class="region"><p class="name"></p></div>
+                        <div class="region"><p class="name"></p></div>
+                        <div class="region"><p class="name"></p></div>
+                        <div class="region"><p class="name"></p></div>
+                    </div>
+                </div>
             </div>
             <hr>
             <!-- 뮤지컬, 연극 목록 -->
-            <div style="text-align: center;"><h1>MUSICAL & PLAY</h1>
-                <div>
-                    <div class="img"></div>
-                    <div class="img"></div>
-                    <div class="img"></div>
-                    <div class="img"></div>
-                    <div class="img"></div>
-                    <div class="img"></div>
-                </div>
-            </div>
-            <hr>
-            <!-- 콘서트, 클래식 목록 -->
-            <div style="text-align: center;"><h1>CONCERT & CLASSIC</h1>
-                <div>
-                    <div class="img"></div>
-                    <div class="img"></div>
-                    <div class="img"></div>
-                    <div class="img"></div>
-                    <div class="img"></div>
-                    <div class="img"></div>
-                </div>
-            </div>
-            <hr>
-            <!-- 전시 목록 -->
-            <div style="text-align: center; margin-bottom: 30px;"><h1>EXHIBITION</h1>
+            <div style="text-align: center;"><h1>AT'S PICKS</h1>
                 <div>
                     <div class="img"></div>
                     <div class="img"></div>
@@ -285,8 +300,6 @@
             </div>
             <hr>
             <!-- 챗봇 : 단비봇 -->
-            <!-- <img src="./images/face35.png" id="chatbot"> -->
-
             <div id="frogue-container" class="position-right-bottom"
                 data-chatbot="e4957de9-dad9-448d-a709-e43eeb644f63"
                 data-user="사용자ID"
@@ -316,7 +329,7 @@
 
 
 
-
+    <script src="js/slick.min.js"></script>
     <script>
 
         //상단 메뉴 css
@@ -339,7 +352,7 @@
                         top: "0px",
                         bottom: "",
                         zIndex: "1",
-                        "background-color": "black"
+                        "background-color": "white"
                     });
                     // $("#topmenu").animate({
                     //     top: "0px"
@@ -361,28 +374,13 @@
             }
         });
 
-        //top에있는 그림 자동 슬라이드
-        $("#top").backstretch([
-            "../images/bg1.jpg",
-            "../images/bg2.jpg",
-            "../images/bg3.jpg"
-        ], {duration:3000, fade:1000});
-
-        //top에있는 그림 이전으로
-        $(".prev").click(function() {
-            $("#top").backstretch("prev");
-        });
-        //top에있는 그림 다음으로
-        $(".after").click(function() {
-            $("#top").backstretch("next");
-        });
 
         //이미지에 마우스 올릴때
-        $(".img").mouseover(function() {
+        $(".img, .rank, .region").mouseover(function() {
             $(this).css("box-shadow", "1px 1px 1px 2px gray");
         });
         //이미지에 마우스 뗄때
-        $(".img").mouseout(function() {
+        $(".img, .rank, .region").mouseout(function() {
             $(this).css("box-shadow", "");
         });
         
@@ -390,7 +388,59 @@
         $(".img").click(function() {
             location.href = "#";
         });
+
+        //주간랭킹
+        var temp = 0;
+        $("#rankprev").click(function() {
+            if (temp == 0) {
+                temp -= 1478;
+            } else {
+                temp += 1478;
+            }
+            $("#rankpage").css("transform", "translate(" + temp + "px, 0)")
+            $("#rankpage").css("transition", "all .5s linear")
+        });
+        $("#rankafter").click(function() {
+            temp -= 1478;
+            if (temp <= -(1478*2)) {
+                temp = 0;
+            }
+            $("#rankpage").css("transform", "translate(" + temp + "px, 0)")
+            $("#rankpage").css("transition", "all .5s linear")
+        });
         
+        //상단 이미지 슬라이더
+        $('.slider').slick({
+            centerMode: true,
+            infinite : true,
+            autoplay : true,
+            autoplaySpeed : 3000,
+            dots : true,
+            dotsClass : "slick-dots",
+            centerPadding: '180px',
+            slidesToShow: 3,
+            responsive: [
+                {
+                breakpoint: 768,
+                settings: {
+                    arrows: false,
+                    centerMode: true,
+                    centerPadding: '180px',
+                    slidesToShow: 3
+                }
+                },
+                {
+                breakpoint: 480,
+                settings: {
+                    arrows: false,
+                    centerMode: true,
+                    centerPadding: '180px',
+                    slidesToShow: 1
+                }
+                }
+            ]
+        });
+
 
     </script>
 
