@@ -41,6 +41,7 @@
             border-bottom: 1px solid #ddd;
             background-color: transparent;
             width: 100%;
+            min-width: 1600px;
             height: 40px;
             color: black;
             text-align: center;
@@ -51,10 +52,8 @@
         }
         .menubar {
             margin: 0 5px;
-        }
-        #topmenu > span {
             cursor: pointer;
-        }     
+        }
         #topleft {
             display: inline-block;
             /* border: 1px solid white; */
@@ -199,21 +198,23 @@
         <div id="top">
             <div id="topmenu">
                 <!-- 상단메뉴 좌측(메인화면으로 돌아가기) -->
-                <a href="#" id="topleft"></a>
+                <a href="main.html" id="topleft"></a>
                 <!-- 상단메뉴 센터(콘서트, 뮤지컬, 연극, 클래식, 전시) -->
-                <span data-item="item1" class="menubar">콘서트</span>
-                <span data-item="item2" class="menubar">뮤지컬</span>
-                <span data-item="item3" class="menubar">연극</span>
-                <span data-item="item4" class="menubar">클래식</span>
-                <span data-item="item5" class="menubar">전시</span>
+                <div id="topcenter">
+                    <span data-lo="user_concert.html" class="menubar">콘서트</span>
+                    <span data-lo="user_musical.html" class="menubar">뮤지컬</span>
+                    <span data-lo="user_play.html" class="menubar">연극</span>
+                    <span data-lo="user_classic.html" class="menubar">클래식</span>
+                    <span data-lo="user_exhibition.html" class="menubar">전시</span>
+                </div>
                 <!-- 상단메뉴 우측(랭킹, 이벤트, 검색창, 마이페이지) -->
                 <div id="topright">
-                    <span data-item="item6" class="menubar">랭킹</span>
-                    <span data-item="item7" class="menubar">이벤트</span>
+                    <span data-lo="user_ranking.html" class="menubar">랭킹</span>
+                    <span data-lo="user_event.html" class="menubar">이벤트</span>
                     <input type="text" value="" id="search">
                     <label for="search" class="glyphicon glyphicon-search"
                         style="font-size: 14px; cursor: pointer;"></label>
-                    <div class="glyphicon glyphicon-user" 
+                    <div class="glyphicon glyphicon-user" id="mypage" 
                         style="font-size: 14px; cursor: pointer; margin: 0 10px; "></div>
                 </div>
             </div>
@@ -339,6 +340,10 @@
         $(".menubar").mouseout(function() {
             $(this).css("border-bottom", "");
         });
+        //상단 메뉴 클릭시
+        $(".menubar").click(function() {
+            location.href = $(this).data("lo");
+        });
 
         var flag = false;
 
@@ -348,11 +353,20 @@
                 if ($(document).scrollTop() > $("#middle").position().top) {
                     $("#topmenu").css({
                         width: "100%",
+                        "min-width": "0px",
                         position: "fixed",
                         top: "0px",
                         bottom: "",
                         zIndex: "1",
                         "background-color": "white"
+                    });
+                    $(window).resize(function() {
+                        if($(window).width() < 970) {
+                            // console.log($(window).width());
+                            $("#topcenter").css("transform", "translate(-100px, 0)");
+                        } else {
+                            $("#topcenter").css("transform", "translate(0, 0)");
+                        }
                     });
                     // $("#topmenu").animate({
                     //     top: "0px"
@@ -365,6 +379,7 @@
             //상단 헤더(top)이 눈에 보일때 쯤
             if ($(document).scrollTop() <= $("#middle").position().top) {
                 $("#topmenu").css({
+                    "min-width": "1600px",
                     position: "absolute",
                     top: "0px",
                     bottom: "",
@@ -417,7 +432,7 @@
             autoplaySpeed : 3000,
             dots : true,
             dotsClass : "slick-dots",
-            centerPadding: '180px',
+            centerPadding: '100px',
             slidesToShow: 3,
             responsive: [
                 {
@@ -425,7 +440,7 @@
                 settings: {
                     arrows: false,
                     centerMode: true,
-                    centerPadding: '180px',
+                    centerPadding: '100px',
                     slidesToShow: 3
                 }
                 },
@@ -434,11 +449,16 @@
                 settings: {
                     arrows: false,
                     centerMode: true,
-                    centerPadding: '180px',
+                    centerPadding: '100px',
                     slidesToShow: 1
                 }
                 }
             ]
+        });
+
+        //마이페이지 클릭시 이동
+        $("#mypage").click(function() {
+            location.href = "mypage.html";
         });
 
 
