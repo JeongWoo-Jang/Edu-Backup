@@ -217,15 +217,15 @@
             margin-left: -35px;
         }
         #right > ul > li:first-child {
-            border: 2px solid #7A98B4;
-            border-bottom: 1px solid white;
-        }
-        #right > ul > li:last-child {
             border: 1px solid #ddd;
             background-color: #eee;
             font-size: 13px;
-            margin-left: -1px;
             cursor: pointer;
+        }
+        #right > ul > li:last-child {
+            border: 2px solid #7A98B4;
+            border-bottom: 1px solid white;
+            margin-left: -1px;
         }
         #right > p {
             padding: 5px 10px;
@@ -243,7 +243,7 @@
             font-weight: bold;
             text-decoration: underline;
         }
-        #coupon {
+        #ticket {
             border: 1px solid #ccc;
             border-left: 0;
             border-right: 0;
@@ -254,10 +254,10 @@
             font-weight: bold;
             margin-bottom: 20px;
         }
-        #coupon > input {
+        #ticket > input {
             outline: none;
         }
-        #coupontxt {
+        #tickettxt {
             padding: 5px 10px;
             border: 4px solid #777;
             text-align: center;
@@ -307,7 +307,9 @@
         #precaution > p > i {
             margin-right: 5px;
         }
-        #precaution > p:nth-child(5) {
+        #precaution > p:nth-child(4),
+        #precaution > p:nth-child(6) {
+            text-indent: 2em;
             margin-top: -7px;
         }
         #line {
@@ -420,31 +422,31 @@
             <div id="right">
                 <h1>할인쿠폰/예매권</h1>
                 <ul>
-                    <li><span>▶</span> 공연 할인쿠폰</li>
-                    <li id="ticket"><span>▶</span> 공연 예매권</li>
+                    <li id="coupon"><span>▶</span> 공연 할인쿠폰</li>
+                    <li><span>▶</span> 공연 예매권</li>
                 </ul>
                 <div id="line"></div>
                 <p><i class="glyphicon glyphicon-menu-right
-                    "></i><span>장x우</span>님이 가지고 계신 <span style="color: #7A98B4">할인쿠폰 번호 12자리</span>를 입력해 주세요.
+                    "></i><span style="color: #7A98B4">예매권번호 20자리</span>를 입력해 주세요. 등록 후에는 예매권 등록을 취소하실 수 없습니다.
                 </p>
-                <div id="coupon">
-                    공연 할인쿠폰 <input type="text" id="coupontxt" placeholder="할인쿠폰 번호 12자리"><input type="button" value="등록하기" class="btn btn-default" id="btncoupon">
+                <div id="ticket">
+                    공연 예매권 번호 <input type="text" id="tickettxt" placeholder="예매권 번호 20자리"><input type="button" value="등록하기" class="btn btn-default" id="btnticket">
                 </div>
-                <h2>사용가능한 쿠폰</h2>
+                <h2>사용가능한 예매권</h2>
                 <p><i class="glyphicon glyphicon-menu-right
-                    "></i>현재 사용 가능한 공연 할인 쿠폰은 <span style="color: red;">0</span>매 입니다.
+                    "></i>현재 사용 가능한 공연 예매권은 <span style="color: red;">0</span>매 입니다.
                 </p>
                 <table id="tbl1">
                     <thead>
-                        <th>쿠폰</th>
-                        <th>할인금액</th>
-                        <th>사용조건</th>
+                        <th>예매권명</th>
+                        <th>좌석등급</th>
+                        <th>에매권번호</th>
                         <th>사용기간</th>
-                        <th>등록일</th>
+                        <th>예매가능 공연기간</th>
                     </thead>
                     <tbody>
                         <tr>
-                            <td colspan="5">사용 가능한 쿠폰 목록이 없습니다.</td>
+                            <td colspan="5">예매권 목록이 없습니다.</td>
                         </tr>
                     </tbody>
                 </table>
@@ -456,11 +458,11 @@
                 </div>
                 <div id="precaution">
                     <p><i class="glyphicon glyphicon-ok-sign"></i>공연 할인쿠폰 사용 안내</p>
-                    <p>- 쿠폰은 사용조건에 따라 장르 , 특정 공연, 회차, 좌석등급 등에 대한 제한이 있을 수 있으니, 사용조건을 반드시 확인해주시기 바랍니다.</p>
-                    <p>- 예매 시 사용하실 쿠폰을 클릭하시면 결제 시점에 자동으로 할인가격 만큼 차감되어 결제 총 금액에 표시됩니다.</p>
-                    <p>- 예매 취소 시 해당 공연에 적용된 할인금액을 제외하고 실 결제금액만큼 환불됩니다.</p>
-                    <p>(단, 쿠폰을 사용한 경우 부분취소는 불가합니다. 부분취소를 원할 경우 고객센터로 문의해주세요.)</p>
-                    <p>- 사용기간이 지난 쿠폰은 사용하실 수 없습니다.</p>
+                    <p>- 공연 예매권은 예매권 등록 후 결제방법 > 공연예매권 선택으로 사용가능합니다.</p>
+                    <p>- 공연 예매권은 지정된 공연, 지정회차, 좌석등급에 한하여 1매 예매 시 사용 가능합니다.</p>
+                    <p>다른 좌석 등급이나 다른 공연으로 변경은 불가합니다.</p>
+                    <p>- 사용기간 내에 사용하지 않으면 자동 소멸됩니다. 예매권 사용기간이 남아있더라도 매진 시에는 예매가 불가하오니,</p>
+                    <p>미리 예매해주시기 바랍니다.</p>
                 </div>
             </div>
 
@@ -531,14 +533,14 @@
             location.href = $(this).data("lo");
         });
 
-        //공연 예매권 클릭시 이동
-        $("#ticket").click(function() {
-            location.href = "mypage_ticket.html";
+        //공연 할인쿠폰 클릭시 이동
+        $("#coupon").click(function() {
+            location.href = "mypage_coupon.html";
         });
 
         //할인쿠폰 등록 시
-        $("#btncoupon").click(function() {
-            console.log($("#coupontxt").val());
+        $("#btnticket").click(function() {
+            console.log($("#tickettxt").val());
         });
 
         //movetop

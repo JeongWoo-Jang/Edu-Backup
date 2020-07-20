@@ -305,15 +305,14 @@
             right: 0;
             text-align: center;
             padding-top: 3px;
-        }
-        #movetop:hover {
-            background-color: orange;
-        }
-        #movetop a {
             text-decoration: none;
             color: white;
             font-weight: bold;
             font-size: 1.5em;
+        }
+        #movetop:hover {
+            background-color: orange;
+            cursor: pointer;
         }
         #frogue-container, .frogue-chat {
             position: absolute;
@@ -335,9 +334,9 @@
                 <!-- 상단메뉴 센터(콘서트, 뮤지컬, 연극, 클래식, 전시) -->
                 <span data-lo="user_concert.html" class="menubar">콘서트</span>
                 <span data-lo="user_musical.html" class="menubar">뮤지컬</span>
-                <span data-lo="user_play.html" class="menubar">연극</span>
+                <span data-lo="user_theater.html" class="menubar">연극</span>
                 <span data-lo="user_classic.html" class="menubar">클래식</span>
-                <span data-lo="user_exhibition.html" class="menubar">전시</span>
+                <span data-lo="user_Exhibition.html" class="menubar">전시</span>
                 <!-- 상단메뉴 우측(랭킹, 이벤트, 검색창, 마이페이지) -->
                 <div id="topright">
                     <span data-lo="user_ranking.html" class="menubar">랭킹</span>
@@ -368,11 +367,11 @@
                 </div>
                 <!-- 유저 메뉴 -->
                 <div id="usermenu">
-                    <p>예매확인/취소<span>▶</span></p>
-                    <p>할인쿠폰/예매권<span>▶</span></p>
-                    <p>나의 관심 공연<span>▶</span></p>
-                    <p>나의 관람 공연<span>▶</span></p>
-                    <p>나의 맞춤 설정<span>▶</span></p>
+                    <p class="usermenu" data-lo="mypage_reservation.html">예매확인/취소<span>▶</span></p>
+                    <p class="usermenu" data-lo="mypage_coupon.html">할인쿠폰/예매권<span>▶</span></p>
+                    <p class="usermenu" data-lo="mypage_interest.html">나의 관심 공연<span>▶</span></p>
+                    <p class="usermenu" data-lo="mypage_watched.html">나의 관람 공연<span>▶</span></p>
+                    <p class="usermenu" data-lo="mypage_personalize.html">나의 맞춤 설정<span>▶</span></p>
                 </div>
                 <!-- 맞춤별 예매 -->
                 <div id="personalize">
@@ -485,7 +484,7 @@
                 }(document, 'script', 'frogue-embed'));
             </script>
             <!-- 제일 위로 돌아가기 버튼 -->
-            <div id="movetop"><a href="#top">↑</a></div>
+            <div id="movetop">↑</div>
         </div>
 <!-------------------------------- 화면 하단부 -------------------------------->
         <div id="bottom">
@@ -549,7 +548,28 @@
         $("#btnsearch").click(function() {
             console.log($("#from").val());
             console.log($("#to").val());
-        })
+        });
+
+        //유저메뉴 css
+        $(".usermenu").mouseover(function() {
+            $(this).css("color", "#4E7AD1");
+        });
+        $(".usermenu").mouseout(function() {
+            $(this).css("color", "");
+        });
+        //유저메뉴 클릭시 이동
+        $(".usermenu").click(function() {
+            // console.log($(this).data("lo"));
+            location.href = $(this).data("lo");
+        });
+
+        //movetop
+        $("#movetop").click(function() {
+            event.preventDefault();
+            $("html, body").animate({
+                scrollTop: 0
+            }, 500);
+        });
 
 
 

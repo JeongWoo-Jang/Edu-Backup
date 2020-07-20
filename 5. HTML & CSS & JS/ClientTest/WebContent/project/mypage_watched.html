@@ -14,7 +14,7 @@
         * { outline: none; }
         #btnpoint, #btninfo, #btncalendar { outline: none; }
         body { margin: 0 auto; }
-        h1, h2 { font-family: "Arial Black"; font-weight: bold; }
+        h1 { font-family: "Arial Black"; font-weight: bold; }
         #main { width: 100%; }
         #top {
             /* border: 1px solid black; */
@@ -200,122 +200,61 @@
             font-size: 18px;
             margin-top: 0px;
         }
-        #right > h2 {
-            font-size: 16px;
-            letter-spacing: -1px;
-            margin-bottom: 5px;
+        #right #datesearch {
+            border: 1px solid #DDD;
+            padding: 15px 20px;
+            font-size: 12px;
+            background-color: #EEE;
+            margin: 20px 0;
         }
-        #right > ul > li {
-            display: inline-block;
-            padding: 10px 15px;
+        #right #datesearch > p {
+            border-bottom: 1px dotted #CCC;
+            padding-bottom: 10px;
+        }
+        #right #datesearch > p > span:first-child {
             font-weight: bold;
         }
-        #right > ul > li > span {
-            font-size: 10px;
-        }
-        #right > ul {
-            margin-left: -35px;
-        }
-        #right > ul > li:first-child {
-            border: 2px solid #7A98B4;
-            border-bottom: 1px solid white;
-        }
-        #right > ul > li:last-child {
-            border: 1px solid #ddd;
-            background-color: #eee;
-            font-size: 13px;
-            margin-left: -1px;
-            cursor: pointer;
-        }
-        #right > p {
-            padding: 5px 10px;
-            font-size: 13px;
-        }
-        #right > p > i {
-            font-size: 10px;
-            border: 1px solid #7A98B4;
-            border-radius: 50%;
-            background-color: #7A98B4;
-            color: white;
-            margin-right: 5px;
-        }
-        #right > p > span {
+        #right #datesearch > p > span:nth-child(2) {
             font-weight: bold;
+            color: red;
             text-decoration: underline;
         }
-        #coupon {
-            border: 1px solid #ccc;
-            border-left: 0;
-            border-right: 0;
-            text-align: center;
-            background-color: rgb(248, 248, 248);
-            padding: 50px 0;
-            font-size: 14px;
-            font-weight: bold;
-            margin-bottom: 20px;
+        #right #datesearch > ul > li {
+            display: inline-block;
+            margin-top: 15px;
+            margin-bottom: -15px;
         }
-        #coupon > input {
+        #right #datesearch > ul > li:first-child {
+            margin-left: -40px;
+            margin-right: 30px;
+        }
+        #right #datesearch > ul > li > input {
             outline: none;
         }
-        #coupontxt {
-            padding: 5px 10px;
-            border: 4px solid #777;
-            text-align: center;
-            color: #777;
-            width: 300px;
-            font-size: 13px;
-            height: 35px;
-            margin-right: 10px;
-        }
-        #tbl1 {
-            border-collapse: collapse;
-            width: 100%;
-        }
-        #tbl1 th, #tbl1 td {
-            border: 1px solid #D3D3D3;
-            text-align: center;
-            font-size: 13px;
-            color: #444;
-            padding: 10px 0;
-        }
-        #tbl1 th {
-            background-color: #EEE;
-            border-top: 3px solid #666;
-            border-bottom: 1px solid #CCC;
-        }
-        #tbl1 th:first-child {
-            width: 30%;
-        }
-        #paging {
-            text-align: center;
-            letter-spacing: 1px;
-            margin: 40px 0;
-        }
-        #precaution {
-            border-top: 2px solid #666;
-            padding: 20px 10px 10px 10px;
-            border-bottom: 2px solid #CCC;
-            background-color: rgb(248, 248, 248);
-        }
-        #precaution > p {
-            font-size: 12px;
-            letter-spacing: -1px;
-        }
-        #precaution > p:first-child {
-            font-weight: bold;
-        }
-        #precaution > p > i {
+        #from, #to {
             margin-right: 5px;
         }
-        #precaution > p:nth-child(5) {
-            margin-top: -7px;
+        #genre {
+            padding: 2px 5px;
+            width: 150px;
         }
-        #line {
-            border: 1px solid #7A98B4;
-            margin-left: 5px;
-            margin-top: -10px;
+        #right #datesearch > ul > li:last-child {
+            display: block;
+            margin-left:  -40px;
         }
-        
+        #right #datesearch > ul > li:last-child > input:first-child {
+            width: 250px;
+            padding: 2px 5px;
+        }
+        #list {
+            border-top: 1px solid #CCC;
+            border-bottom: 1px solid #CCC;
+            width: 100%;
+            min-height: 250px;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+        }
 
         #movetop {
             width: 40px;
@@ -396,8 +335,7 @@
                 </div>
                 <!-- 맞춤별 예매 -->
                 <div id="personalize">
-                    <p><span class="glyphicon glyphicon-hand-up
-                        "></span> 맞춤별 예매</p>
+                    <p><span class="glyphicon glyphicon-hand-up"></span> 맞춤별 예매</p>
                     <p class="personaltitle">지역별예매</p>
                     └<a href="#">서울</a>,<a href="#">경기/인천</a>,<a href="#">대전/충청/강원</a>,<br><a href="#">부산/대구/울산/경상</a>,<a href="#">광주/전라</a>,<a href="#">제주</a>
                     <p class="personaltitle" style="margin-top: 20px;">공연장별예매</p>
@@ -418,52 +356,42 @@
 
             <!-- 마이페이지 우측 -->
             <div id="right">
-                <h1>할인쿠폰/예매권</h1>
-                <ul>
-                    <li><span>▶</span> 공연 할인쿠폰</li>
-                    <li id="ticket"><span>▶</span> 공연 예매권</li>
-                </ul>
-                <div id="line"></div>
-                <p><i class="glyphicon glyphicon-menu-right
-                    "></i><span>장x우</span>님이 가지고 계신 <span style="color: #7A98B4">할인쿠폰 번호 12자리</span>를 입력해 주세요.
-                </p>
-                <div id="coupon">
-                    공연 할인쿠폰 <input type="text" id="coupontxt" placeholder="할인쿠폰 번호 12자리"><input type="button" value="등록하기" class="btn btn-default" id="btncoupon">
+                <h1>나의 관람 공연</h1>
+                <div id="datesearch">
+                    <p><span>장x우</span>님의 관란 공연은 총<span>0</span>건 입니다.(<span id="today"></span>기준)</p>
+                    <ul>
+                        <li>
+                            ▶ 기간별
+                            <input type="text" id="from">
+                            ~
+                            <input type="text" id="to">
+                        </li>
+                        <li>
+                            ▶ 장르별
+                            <select name="genre" id="genre">
+                                <option value="default">장르선택</option>
+                                <option value="concert">콘서트</option>
+                                <option value="musical">뮤지컬</option>
+                                <option value="theater">연극</option>
+                                <option value="classic">클래식</option>
+                                <option value="Exhibition">전시</option>
+                            </select>
+                            <input type="button" value="조회" class="btn btn-default btn-sm" id="genresearch">
+                        </li>
+                        <li>
+                            ▶ 공연명
+                            <input type="text" id="nametxt" placeholder="공연명을 입력해주세요.">
+                            <input type="button" value="조회" class="btn btn-default btn-sm" id="namesearch">
+                        </li>
+                    </ul>
                 </div>
-                <h2>사용가능한 쿠폰</h2>
-                <p><i class="glyphicon glyphicon-menu-right
-                    "></i>현재 사용 가능한 공연 할인 쿠폰은 <span style="color: red;">0</span>매 입니다.
-                </p>
-                <table id="tbl1">
-                    <thead>
-                        <th>쿠폰</th>
-                        <th>할인금액</th>
-                        <th>사용조건</th>
-                        <th>사용기간</th>
-                        <th>등록일</th>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td colspan="5">사용 가능한 쿠폰 목록이 없습니다.</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div id="paging">
-                    <button class="glyphicon glyphicon-menu-left left"></button>
-                    <span>1</span>
-                    <span>(<span>1</span>/1)</span>
-                    <button class="glyphicon glyphicon-menu-right right"></button>
-                </div>
-                <div id="precaution">
-                    <p><i class="glyphicon glyphicon-ok-sign"></i>공연 할인쿠폰 사용 안내</p>
-                    <p>- 쿠폰은 사용조건에 따라 장르 , 특정 공연, 회차, 좌석등급 등에 대한 제한이 있을 수 있으니, 사용조건을 반드시 확인해주시기 바랍니다.</p>
-                    <p>- 예매 시 사용하실 쿠폰을 클릭하시면 결제 시점에 자동으로 할인가격 만큼 차감되어 결제 총 금액에 표시됩니다.</p>
-                    <p>- 예매 취소 시 해당 공연에 적용된 할인금액을 제외하고 실 결제금액만큼 환불됩니다.</p>
-                    <p>(단, 쿠폰을 사용한 경우 부분취소는 불가합니다. 부분취소를 원할 경우 고객센터로 문의해주세요.)</p>
-                    <p>- 사용기간이 지난 쿠폰은 사용하실 수 없습니다.</p>
+                <div id="list">
+                    <div>
+                        <p style="padding-top: 100px;">관람하신 공연이 없습니다.</p>
+                    </div>
                 </div>
             </div>
-
+            
             <!-- 챗봇 : 단비봇 -->
             <div id="frogue-container" class="position-right-bottom"
                 data-chatbot="e4957de9-dad9-448d-a709-e43eeb644f63"
@@ -518,6 +446,38 @@
             location.href = "mypage.html";
         });
 
+        //주문일자 텍스트창 css
+        $("#from, #to").css("width", "90px");
+        $("#genresearch, #namesearch")
+            .css("background-color", "#666")
+            .css("color", "white")
+            .css("padding", "3px 7px");
+
+        //주문일자 선택
+        $(function() {
+            $.datepicker.setDefaults({
+                dateFormat: "yy-mm-dd",
+                showOn: "button",
+                buttonText: "달력"
+            });
+            $("#from").datepicker();
+            $("#to").datepicker();
+
+            $("#from").datepicker("setDate", "-6M");
+            $("#to").datepicker("setDate", "today");
+        });
+
+        //기간별 조회 클릭시
+        $(".month").click(function() {
+            $("#from").datepicker("setDate", "-" + $(this).data("month") + "M");
+        });
+
+        //조회 클릭시
+        $("#genresearch, #namesearch").click(function() {
+            console.log($("#from").val());
+            console.log($("#to").val());
+        });
+
         //유저메뉴 css
         $(".usermenu").mouseover(function() {
             $(this).css("color", "#4E7AD1");
@@ -531,16 +491,6 @@
             location.href = $(this).data("lo");
         });
 
-        //공연 예매권 클릭시 이동
-        $("#ticket").click(function() {
-            location.href = "mypage_ticket.html";
-        });
-
-        //할인쿠폰 등록 시
-        $("#btncoupon").click(function() {
-            console.log($("#coupontxt").val());
-        });
-
         //movetop
         $("#movetop").click(function() {
             event.preventDefault();
@@ -548,6 +498,7 @@
                 scrollTop: 0
             }, 500);
         });
+
 
 
     </script>

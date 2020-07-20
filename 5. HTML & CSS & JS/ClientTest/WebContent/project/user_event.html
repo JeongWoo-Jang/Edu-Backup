@@ -119,14 +119,15 @@
             right: 0;
             text-align: center;
             padding-top: 3px;
+        }
+        #movetop:hover {
+            background-color: orange;
+        }
+        #movetop a {
             text-decoration: none;
             color: white;
             font-weight: bold;
             font-size: 1.5em;
-        }
-        #movetop:hover {
-            background-color: orange;
-            cursor: pointer;
         }
         #frogue-container, .frogue-chat {
             position: absolute;
@@ -187,6 +188,59 @@
             transform: scale(1);
             transition: all .5s;
         }
+        .event-main-tit {
+    text-align: center;
+    font-size: 26px;
+    font-weight: bold;
+    font-family: 'Noto Sans KR', 'NanumBarunGothic', '맑은 고딕', 'Malgun Gothic', sans-serif;
+    margin-bottom: 38px;
+}
+
+.event-division {
+    text-align: center;
+    font-size: 0;
+    margin-bottom: 60px;
+}
+.eventmenubar {
+            margin: 0 5px;
+}
+
+.event-main-list {
+    /* display: inline-block; */
+    width: 1500px;
+    margin: 0px auto;
+}
+
+
+
+
+
+.evemark{
+    margin-top: 5px;
+    border: 1px solid red;
+    color: red;
+    width: 80px;
+    text-align: center;
+    
+}
+
+.evetxt{
+    color: rgba(156, 156, 156, 0.76);
+    font-size: 11px;
+}
+#eventbox {
+    display: inline-block;
+    width: 400px;
+    margin-left: 80px;
+}
+   
+.pbar {
+    width: 370px;
+}
+
+
+
+
 
     </style>
 </head>
@@ -213,110 +267,172 @@
                     <input type="text" value="" id="search">
                     <label for="search" class="glyphicon glyphicon-search"
                         style="font-size: 14px; cursor: pointer;"></label>
-                    <div class="glyphicon glyphicon-user" id="mypage" 
+                        <div class="glyphicon glyphicon-user" id="mypage" 
                         style="font-size: 14px; cursor: pointer; margin: 0 10px; "></div>
                 </div>
             </div>
             <!-- 메인화면 슬라이더 -->
             <div class="slider">
-                <div><img src="../images/slide1.jpg"></div>
-                <div><img src="../images/slide2.jpg"></div>
-                <div><img src="../images/slide3.jpg"></div>
-                <div><img src="../images/slide4.jpg"></div>
-                <div><img src="../images/slide5.jpg"></div>
+                <div><img src="../images/eventslide1.png"></div>
+                <div><img src="../images/eventslide2.png"></div>
+                <div><img src="../images/eventslide3.png"></div>
+                <div><img src="../images/eventslide4.png"></div>
+                <div><img src="../images/eventslide5.png"></div>
             </div>
         </div>
         <hr>
 <!-------------------------------- 내용부분 -------------------------------->
-        <div id="middle">
-            <!-- 최신, 인기 공연 목록(순위별) -->
-            <div style="text-align: center;"><h1>WHAT'S HOT</h1>
-                <div style="padding: 10px 0;">
-                    <div class="img" id="bigimg" style="width: 420px; height: 675px; display: inline-block;">
+        <p class="event-main-tit">이벤트</p>
+        <div class="event-division">
+            <a href="#" class="on">"전체보기"::after</a>
+            
+
+        </div>
+        <div class="event-main-list">                
+                    <div id="eventbox">
+                        <img src="../images/eventsmall1.jpg" alt="">
+                        <div class="eve-mlist-box">
+                            <p class="evemark">프로모션</p>
+                            <p class="evetit">컴백스테이지</p>
+                            <p class="evetxt">2020.07-15 ~ 2020.08.31</p>
+                            <div class="evepc" data-percent="20">
+                                <progress value="20" max="100" class="pbar"></progress>                         
+                            </div>
+                            <p class="eve-mlist-dday">44일 남음</p>
+                        </div>                   
                     </div>
-                    <div style="display: inline-block;">
-                        <div class="img"></div>
-                        <div class="img"></div>
-                        <div class="img"></div>
-                        <div style="display: block;"></div>
-                        <div class="img"></div>
-                        <div class="img"></div>
-                        <div class="img"></div>
+                    <div id="eventbox">
+                        <img src="../images/eventsmall2.jpg" alt="">
+                        <div class="eve-mlist-box">
+                            <p class="evemark">초대이벤트</p>
+                            <p class="evetit">뮤지컬 <베르테르> 기대평 이벤트</p>
+                            <p class="evetxt">2020.07-15 ~ 2020.08.31</p>
+                            <div class="evepc" data-percent="20">
+                                <progress value="20" max="100" class="pbar"></progress>                           
+                            </div>
+                            <p class="eve-mlist-dday">44일 남음</p>
+                        </div>                   
                     </div>
-                </div>
-            </div>
-            <hr>
-            <!-- 동영상 들어갈 자리 -->
-            <div id="banner"></div>
-            <hr>
-            <!-- 주간 랭킹, 지역별 추천 -->
-            <div style="text-align: center; background-color: #eee;">
-                <!-- 주간 랭킹 -->
-                <div class="recomand">
-                    <div>
-                        <h1>WEEKLY RANKING</h1>
-                        <img src="../images/slide-dir-prev.png" class="prev" id="rankprev"
-                            style="position: relative; top: 60px; z-index: 1;">
-                        <!-- 주간 랭킹 이미지 -->
-                        <div id="rankpage">
-                            <div class="rank"></div>
-                            <div class="rank"></div>
-                            <div class="rank"></div>
-                            <div class="rank"></div>
-                            <div class="rank"></div>
-                            <div class="rank"></div>
-                            <div class="rank"></div>
-                            <div class="rank"></div>
-                            <div class="rank"></div>
-                            <div class="rank"></div>
-                        </div>
+                    <div id="eventbox">
+                        <img src="../images/eventsmall3.png" alt="">
+                        <div class="eve-mlist-box">
+                            <p class="evemark">초대이벤트</p>
+                            <p class="evetit">연극 <가족사진> 기대평 이벤트</p>
+                            <p class="evetxt">2020.07-15 ~ 2020.08.31</p>
+                            <div class="evepc" data-percent="20">
+                                <progress value="40" max="100" class="pbar"></progress>                          
+                            </div>
+                            <p class="eve-mlist-dday">44일 남음</p>
+                        </div>                   
                     </div>
-                    <img src="../images/slide-dir-next.png" class="after" id="rankafter"
-                            style="position: relative; bottom: 160px;">
-                </div>
-                <!-- 지역별 추천 -->
-                <div class="recomand">
-                    <h1>지역별 추천</h1>
-                    <div id="regionpage">
-                        <div class="region"><p class="name"></p></div>
-                        <div class="region"><p class="name"></p></div>
-                        <div class="region"><p class="name"></p></div>
-                        <div class="region"><p class="name"></p></div>
-                        <div class="region"><p class="name"></p></div>
+                    <div id="eventbox">
+                        <img src="../images/eventsmall4.png" alt="">
+                        <div class="eve-mlist-box">
+                            <p class="evemark">초대이벤트</p>
+                            <p class="evetit">뮤지컬 <오페라의 유령> - 대구 기대평 이벤트</p>
+                            <p class="evetxt">2020.07-15 ~ 2020.08.31</p>
+                            <div class="evepc" data-percent="20">
+                                <progress value="10" max="100" class="pbar"></progress>                            
+                            </div>
+                            <p class="eve-mlist-dday">64일 남음</p>
+                        </div>                   
                     </div>
-                </div>
-            </div>
-            <hr>
-            <!-- 뮤지컬, 연극 목록 -->
-            <div style="text-align: center;"><h1>AT'S PICKS</h1>
-                <div>
-                    <div class="img"></div>
-                    <div class="img"></div>
-                    <div class="img"></div>
-                    <div class="img"></div>
-                    <div class="img"></div>
-                    <div class="img"></div>
-                </div>
-            </div>
-            <hr>
-            <!-- 챗봇 : 단비봇 -->
-            <div id="frogue-container" class="position-right-bottom"
-                data-chatbot="e4957de9-dad9-448d-a709-e43eeb644f63"
-                data-user="사용자ID"
-                data-init-key="value">
-            </div>
-            <!-- data-init-식별키=값 으로 셋팅하면 챗플로우에 파라미터와 연동가능. 식별키는 소문자만 가능 -->
-            <script>
-                (function(d, s, id){
-                    var js, fjs = d.getElementsByTagName(s)[0];
-                    if (d.getElementById(id)) {return;}
-                    js = d.createElement(s); js.id = id;
-                    js.src = "https:\/\/danbee.ai/js/plugins/frogue-embed/frogue-embed.min.js";
-                    fjs.parentNode.insertBefore(js, fjs);
-                }(document, 'script', 'frogue-embed'));
-            </script>
-            <!-- 제일 위로 돌아가기 버튼 -->
-            <div id="movetop">↑</div>
+                    <div id="eventbox">
+                        <img src="../images/eventsmall5.jpg" alt="">
+                        <div class="eve-mlist-box">
+                            <p class="evemark">초대이벤트</p>
+                            <p class="evetit">뮤지컬 <더 모먼트> 기대평 이벤트</p>
+                            <p class="evetxt">2020.07-15 ~ 2020.08.31</p>
+                            <div class="evepc" data-percent="20">
+                                <progress value="80" max="100" class="pbar"></progress>                            
+                            </div>
+                            <p class="eve-mlist-dday">8일 남음</p>
+                        </div>                   
+                    </div>
+                    <div id="eventbox">
+                        <img src="../images/eventsmall6.jpg" alt="">
+                        <div class="eve-mlist-box">
+                            <p class="evemark">초대이벤트</p>
+                            <p class="evetit">연극 <라스트 세션> 기대평 이벤트</p>
+                            <p class="evetxt">2020.07-15 ~ 2020.08.31</p>
+                            <div class="evepc" data-percent="20">
+                                <progress value="92" max="100" class="pbar"></progress>                           
+                            </div>
+                            <p class="eve-mlist-dday">2일 남음</p>
+                        </div>                   
+                    </div> 
+                    <div id="eventbox">
+                        <img src="../images/eventsmall7.jpg" alt="">
+                        <div class="eve-mlist-box">
+                            <p class="evemark">초대이벤트</p>
+                            <p class="evetit">뮤지컬 <펀홈> 기대평 이벤트</p>
+                            <p class="evetxt">2020.07-15 ~ 2020.08.31</p>
+                            <div class="evepc" data-percent="20">
+                                <progress value="20" max="100" class="pbar"></progress>                        
+                            </div>
+                            <p class="eve-mlist-dday">44일 남음</p>
+                        </div>                   
+                    </div>
+                    <div id="eventbox">
+                        <img src="../images/eventsmall8.png" alt="">
+                        <div class="eve-mlist-box">
+                            <p class="evemark">초대이벤트</p>
+                            <p class="evetit">락뮤지컬 <프리즌> 기대평 이벤트</p>
+                            <p class="evetxt">2020.07-15 ~ 2020.08.31</p>
+                            <div class="evepc" data-percent="20">
+                                <progress value="40" max="100" class="pbar"></progress>                         
+                            </div>
+                            <p class="eve-mlist-dday">34일 남음</p>
+                        </div>                   
+                    </div>
+                    <div id="eventbox">
+                        <img src="../images/eventsmall9.jpg" alt="">
+                        <div class="eve-mlist-box">
+                            <p class="evemark">초대이벤트</p>
+                            <p class="evetit">연극 <그남자 그여자> 기대평 이벤트</p>
+                            <p class="evetxt">2020.07-15 ~ 2020.08.31</p>
+                            <div class="evepc" data-percent="20">
+                                <progress value="60" max="100" class="pbar"></progress>                           
+                            </div>
+                            <p class="eve-mlist-dday">24일 남음</p>
+                        </div>                   
+                    </div>
+                    <div id="eventbox">
+                        <img src="../images/eventsmall10.png" alt="">
+                        <div class="eve-mlist-box">
+                            <p class="evemark">초대이벤트</p>
+                            <p class="evetit">Super Junior Beyond Live</p>
+                            <p class="evetxt">2020.07-15 ~ 2020.08.31</p>
+                            <div class="evepc" data-percent="20">
+                                <progress value="20" max="100" class="pbar"></progress>                             
+                            </div>
+                            <p class="eve-mlist-dday">44일 남음</p>
+                        </div>                   
+                    </div>
+                    <div id="eventbox">
+                        <img src="../images/eventsmall11.jpg" alt="">
+                        <div class="eve-mlist-box">
+                            <p class="evemark">초대이벤트</p>
+                            <p class="evetit"> 뮤지컬 <6시퇴근> 기대평 이벤트</6></p>
+                            <p class="evetxt">2020.07-15 ~ 2020.08.31</p>
+                            <div class="evepc" data-percent="20">
+                                <progress value="60" max="100" class="pbar"></progress>                             
+                            </div>
+                            <p class="eve-mlist-dday">34일 남음</p>
+                        </div>                   
+                    </div>
+                    <div id="eventbox">
+                        <img src="../images/eventsmall12.jpg" alt="">
+                        <div class="eve-mlist-box">
+                            <p class="evemark">초대이벤트</p>
+                            <p class="evetit">연극 <나의 PS파트너> 기대평 이벤트</p>
+                            <p class="evetxt">2020.07-15 ~ 2020.08.31</p>
+                            <div class="evepc" data-percent="20">
+                                <progress value="40" max="100" class="pbar"></progress>                           
+                            </div>
+                            <p class="eve-mlist-dday">44일 남음</p>
+                        </div>                   
+                    </div>  
         </div>
 <!-------------------------------- 화면 하단부 -------------------------------->
         <div id="bottom">
@@ -352,7 +468,6 @@
                 if ($(document).scrollTop() > $("#middle").position().top) {
                     $("#topmenu").css({
                         width: "100%",
-                        "min-width": "0px",
                         position: "fixed",
                         top: "0px",
                         bottom: "",
@@ -378,7 +493,6 @@
             //상단 헤더(top)이 눈에 보일때 쯤
             if ($(document).scrollTop() <= $("#middle").position().top) {
                 $("#topmenu").css({
-                    "min-width": "1600px",
                     position: "absolute",
                     top: "0px",
                     bottom: "",
@@ -458,14 +572,6 @@
         //마이페이지 클릭시 이동
         $("#mypage").click(function() {
             location.href = "mypage.html";
-        });
-
-        //movetop
-        $("#movetop").click(function() {
-            event.preventDefault();
-            $("html, body").animate({
-                scrollTop: 0
-            }, 1000);
         });
 
 
