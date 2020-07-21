@@ -422,8 +422,8 @@
                 <div class="event">
                     <p>COUPON</p>
                     <ul>
-                        <li>공연 할인 쿠폰 : 사용가능 <span>0</span> 매</li>
-                        <li>공연 예매권 : 사용가능 <span>0</span> 매</li>
+                        <li>공연 할인 쿠폰 : 사용가능 <span class="coupon">0</span> 매</li>
+                        <li>공연 예매권 : 사용가능 <span class="coupon">0</span> 매</li>
                     </ul>
                 </div>
                 <div class="event">
@@ -486,7 +486,7 @@
                             </li> -->
                             <div>
                                 <p>'나의 관심 공연'으로 담은 공연이 없습니다.</p>
-                                <button class="btn btn-default btn-xs" style="outline: none; margin-top: -5px;">관심 공연 담기<span>+</span></button>
+                                <button class="btn btn-default btn-xs" style="outline: none; margin-top: -5px;" id="add">관심 공연 담기<span>+</span></button>
                             </div>
                         </ul>
                     </div>
@@ -602,6 +602,26 @@
             $("html, body").animate({
                 scrollTop: 0
             }, 500);
+        });
+
+        //팝업창 가운데 배치
+        var popupWidth = 900;
+        var popupheight = 650;
+        var popupX = (window.screen.width / 2) - (popupWidth / 2);
+        var popupY = (window.screen.height / 2) - (popupheight / 2);
+        //관심 공연 담기 팝업창
+        $("#add").click(function() {
+            window.open("mypage_interest_popup.html","_black",`left=${popupX}, top=${popupY}, width=${popupWidth}, height=${popupheight};`);
+        });
+
+        //쿠폰에 매수 클릭시
+        $(".coupon").click(function() {
+            location.href = "mypage_coupon.html";
+        });
+
+        //포인트 안내 클릭시
+        $("#btnpoint").click(function() {
+            location.href = "InfoUse.html";
         });
 
     </script>
