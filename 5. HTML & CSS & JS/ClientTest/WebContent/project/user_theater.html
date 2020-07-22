@@ -39,6 +39,8 @@
             }
             #bottom {
                 /* border: 1px solid black; */
+                width: 100%;
+                min-width: 1600px;
                 height: 200px;
                 background-color: #eee;
                 color: white;
@@ -479,7 +481,7 @@
             </div>
             <!-------------------------------- 화면 하단부 -------------------------------->
             <div id="bottom">
-                <div style="width: 1600px; margin: auto;">
+                <div>
                     <!-- 회사 마크 -->
                     <img
                         src="../images/title2.png"
@@ -510,8 +512,7 @@
 
             $(document).scroll(function () {
                 //메뉴가 시야에서 사라지는 순간 -> 메뉴를 붙박이로 만들기
-                // if (!flag) {
-                    if ($(document).scrollTop() > $("#middle").position().top) {
+                if ($(document).scrollTop() > $("#middle").position().top) {
                     $("#topmenu").css({
                         width: "100%",
                         "min-width": "0px",
@@ -529,13 +530,7 @@
                             $("#topcenter").css("transform", "translate(0, 0)");
                         }
                     });
-                    // $("#topmenu").animate({
-                    //     top: "0px"
-                    // }, 1000, function() {
-                    //     flag=true;
-                    // });
                 }
-                // };
 
                 //상단 헤더(top)이 눈에 보일때 쯤
                 if ($(document).scrollTop() <= $("#middle").position().top) {
@@ -546,7 +541,6 @@
                         bottom: "",
                         "background-color": "transparent"
                     });
-                    // flag = false;                
                 }
             });
 

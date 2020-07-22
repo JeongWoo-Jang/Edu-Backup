@@ -91,6 +91,9 @@
         #tbl2 > tbody > tr:nth-child(4) > th {
             padding-left: 10px;
         }
+        input {
+            border: 1px solid #888;
+        }
         #name { width: 150px; }
         .register { width: 150px; }
         .phone { width: 70px; }
@@ -170,7 +173,7 @@
                         <td>
                             <input type="text" id="frontregnum" class="register" autocomplete="off">
                             -
-                            <input type="text" id="backregnum" class="register" autocomplete="off">
+                            <input type="password" id="backregnum" class="register" autocomplete="off">
                         </td>
                     </tr>
                     <tr>
@@ -1042,7 +1045,7 @@
             };
             //비밀번호 확인
             if ($("#passwordcheck").val() != $("#password").val()) {
-                alert("비밀번호를 정확하게 입력해주세요.");
+                alert("비밀번호가 일치하지 않습니다.");
                 $("#passwordcheck").val('');
                 $("#passwordcheck").focus();
                 return false;

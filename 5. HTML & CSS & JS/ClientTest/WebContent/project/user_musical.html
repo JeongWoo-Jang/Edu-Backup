@@ -39,6 +39,8 @@
             }
             #bottom {
                 /* border: 1px solid black; */
+                width: 100%;
+                min-width: 1600px;
                 height: 200px;
                 background-color: #eee;
                 color: white;
@@ -303,7 +305,7 @@
                 background-image: url("../images/music11.jpeg");
                 background-size: contain;
             }
-            .atimg {
+            .atimg6 {
                 background-image: url("../images/music1.jpeg");
                 background-size: contain;
             }
@@ -318,24 +320,45 @@
                     <a href="main.html" id="topleft"></a>
                     <!-- 상단메뉴 센터(콘서트, 뮤지컬, 연극, 클래식, 전시) -->
                     <div id="topcenter">
-                        <span data-lo="user_concert.html" class="menubar">콘서트</span>
-                        <span data-lo="user_musical.html" class="menubar">뮤지컬</span>
-                        <span data-lo="user_theater.html" class="menubar">연극</span>
-                        <span data-lo="user_classic.html" class="menubar">클래식</span>
-                        <span data-lo="user_Exhibition.html" class="menubar">전시</span>
+                        <span data-lo="user_concert.html" class="menubar"
+                            >콘서트</span
+                        >
+                        <span data-lo="user_musical.html" class="menubar"
+                            >뮤지컬</span
+                        >
+                        <span data-lo="user_theater.html" class="menubar"
+                            >연극</span
+                        >
+                        <span data-lo="user_classic.html" class="menubar"
+                            >클래식</span
+                        >
+                        <span data-lo="user_Exhibition.html" class="menubar"
+                            >전시</span
+                        >
                     </div>
                     <!-- 상단메뉴 우측(랭킹, 이벤트, 검색창, 마이페이지) -->
                     <div id="topright">
-                        <span data-lo="user_ranking.html" class="menubar">랭킹</span>
-                        <span data-lo="user_event.html" class="menubar">이벤트</span>
+                        <span data-lo="user_ranking.html" class="menubar"
+                            >랭킹</span
+                        >
+                        <span data-lo="user_event.html" class="menubar"
+                            >이벤트</span
+                        >
                         <input type="text" value="" id="search" />
                         <label
                             for="search"
                             class="glyphicon glyphicon-search"
                             style="font-size: 14px; cursor: pointer;"
                         ></label>
-                        <div class="glyphicon glyphicon-user" id="mypage" 
-                        style="font-size: 14px; cursor: pointer; margin: 0 10px; "></div>
+                        <div
+                            class="glyphicon glyphicon-user"
+                            id="mypage"
+                            style="
+                                font-size: 14px;
+                                cursor: pointer;
+                                margin: 0 10px;
+                            "
+                        ></div>
                     </div>
                 </div>
                 <!-- 메인화면 슬라이더 -->
@@ -479,7 +502,7 @@
             </div>
             <!-------------------------------- 화면 하단부 -------------------------------->
             <div id="bottom">
-                <div style="width: 1600px; margin: auto;">
+                <div>
                     <!-- 회사 마크 -->
                     <img
                         src="../images/title2.png"
@@ -492,14 +515,14 @@
         <script src="js/slick.min.js"></script>
         <script>
             //상단 메뉴 css
-            $(".menubar").mouseover(function() {
-            $(this).css("border-bottom", "5px solid orange");
+            $(".menubar").mouseover(function () {
+                $(this).css("border-bottom", "5px solid orange");
             });
-            $(".menubar").mouseout(function() {
+            $(".menubar").mouseout(function () {
                 $(this).css("border-bottom", "");
             });
             //상단 메뉴 클릭시
-            $(".menubar").click(function() {
+            $(".menubar").click(function () {
                 location.href = $(this).data("lo");
             });
 
@@ -507,7 +530,6 @@
 
             $(document).scroll(function () {
                 //메뉴가 시야에서 사라지는 순간 -> 메뉴를 붙박이로 만들기
-                // if (!flag) {
                 if ($(document).scrollTop() > $("#middle").position().top) {
                     $("#topmenu").css({
                         width: "100%",
@@ -518,21 +540,18 @@
                         zIndex: "1",
                         "background-color": "white",
                     });
-                    $(window).resize(function() {
-                        if($(window).width() < 970) {
+                    $(window).resize(function () {
+                        if ($(window).width() < 970) {
                             // console.log($(window).width());
-                            $("#topcenter").css("transform", "translate(-100px, 0)");
+                            $("#topcenter").css(
+                                "transform",
+                                "translate(-100px, 0)"
+                            );
                         } else {
                             $("#topcenter").css("transform", "translate(0, 0)");
                         }
                     });
-                    // $("#topmenu").animate({
-                    //     top: "0px"
-                    // }, 1000, function() {
-                    //     flag=true;
-                    // });
                 }
-                // };
 
                 //상단 헤더(top)이 눈에 보일때 쯤
                 if ($(document).scrollTop() <= $("#middle").position().top) {
@@ -541,9 +560,8 @@
                         position: "absolute",
                         top: "0px",
                         bottom: "",
-                        "background-color": "transparent"
+                        "background-color": "transparent",
                     });
-                    // flag = false;                
                 }
             });
 
@@ -614,18 +632,20 @@
             });
 
             //마이페이지 클릭시 이동
-            $("#mypage").click(function() {
+            $("#mypage").click(function () {
                 location.href = "mypage.html";
             });
 
             //movetop
-            $("#movetop").click(function() {
+            $("#movetop").click(function () {
                 event.preventDefault();
-                $("html, body").animate({
-                    scrollTop: 0
-                }, 1000);
+                $("html, body").animate(
+                    {
+                        scrollTop: 0,
+                    },
+                    1000
+                );
             });
-
         </script>
     </body>
 </html>

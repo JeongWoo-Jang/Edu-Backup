@@ -126,6 +126,15 @@
         #copyright > span {
             font-weight: bold;
         }
+        #menu > ul > li:hover {
+            color: #196AB3;
+        }
+        #mypage {
+            float: right;
+            position: relative;
+            top: 30px;
+            outline: none;
+        }
 
     </style>
 </head>
@@ -136,12 +145,14 @@
         <a href="main.html" id="topleft"></a>
         <!-- 상단메뉴 좌측(로그인 문구) -->
         <h1>나의 정보</h1>
+        <!-- 상단메뉴 우측(마이페이지로 돌아가기) -->
+        <input type="button" value="마이페이지" class="btn btn-default" id="mypage">
     </div>
     <div id="middle">
         <div id="menu">
             <ul>
                 <li>회원정보</li>
-                <li>회원탈퇴</li>
+                <li id="withdraw">회원탈퇴</li>
             </ul>
         </div>
         <div>
@@ -169,6 +180,16 @@
     
 
     <script>
+
+        //마이페이지로 이동
+        $("#mypage").click(function() {
+            location.href = "mypage.html";
+        });
+
+        //회원탈퇴 페이지로 이동
+        $("#withdraw").click(function() {
+            location.href = "mypage_revision_withdraw.html";
+        });
 
         //비밀번호 입력 후 확인 클릭시
         $("#enter").click(function() {

@@ -36,6 +36,8 @@
             height: 200px;
             background-color: #eee;
             color: white;
+            width: 100%;
+            min-width: 1600px;
         }
         #topmenu {
             border-bottom: 1px solid #ddd;
@@ -436,7 +438,7 @@
         </div>
 <!-------------------------------- 화면 하단부 -------------------------------->
         <div id="bottom">
-            <div style="width: 1600px; margin: auto;">
+            <div>
                 <!-- 회사 마크 -->
                 <img src="../images/title2.png" style="transform: translate(0, 40px);">
             </div>
@@ -464,31 +466,24 @@
 
         $(document).scroll(function() {
             //메뉴가 시야에서 사라지는 순간 -> 메뉴를 붙박이로 만들기
-            // if (!flag) {
-                if ($(document).scrollTop() > $("#middle").position().top) {
-                    $("#topmenu").css({
-                        width: "100%",
-                        position: "fixed",
-                        top: "0px",
-                        bottom: "",
-                        zIndex: "1",
-                        "background-color": "white"
-                    });
-                    $(window).resize(function() {
-                        if($(window).width() < 970) {
-                            // console.log($(window).width());
-                            $("#topcenter").css("transform", "translate(-100px, 0)");
-                        } else {
-                            $("#topcenter").css("transform", "translate(0, 0)");
-                        }
-                    });
-                    // $("#topmenu").animate({
-                    //     top: "0px"
-                    // }, 1000, function() {
-                    //     flag=true;
-                    // });
-                };
-            // };
+            if ($(document).scrollTop() > $("#middle").position().top) {
+                $("#topmenu").css({
+                    width: "100%",
+                    position: "fixed",
+                    top: "0px",
+                    bottom: "",
+                    zIndex: "1",
+                    "background-color": "white"
+                });
+                $(window).resize(function() {
+                    if($(window).width() < 970) {
+                        // console.log($(window).width());
+                        $("#topcenter").css("transform", "translate(-100px, 0)");
+                    } else {
+                        $("#topcenter").css("transform", "translate(0, 0)");
+                    }
+                });
+            };
 
             //상단 헤더(top)이 눈에 보일때 쯤
             if ($(document).scrollTop() <= $("#middle").position().top) {
@@ -498,7 +493,6 @@
                     bottom: "",
                     "background-color": "transparent"
                 });
-                // flag = false;                
             }
         });
 
