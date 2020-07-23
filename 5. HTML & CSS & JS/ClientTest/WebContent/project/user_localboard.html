@@ -293,12 +293,13 @@
             }
 
             #container1 {
-                display: inline-block;
+                position: relative;
                 width: 800px;
 
                 height: 400px;
 
                 opacity: 0;
+                right: 420px;
             }
             #container2 {
                 position: relative;
@@ -306,6 +307,7 @@
                 bottom: 400px;
                 opacity: 0;
                 height: 400px;
+                right: 420px;
             }
             #container3 {
                 position: relative;
@@ -313,6 +315,7 @@
                 bottom: 820px;
                 opacity: 1;
                 height: 400px;
+                right: 420px;
             }
 
             .highcharts-figure,
@@ -393,6 +396,99 @@
             input[type="number"] {
                 min-width: 50px;
             }
+
+            #slideItem {
+                /* border: 1px solid orange; */
+                /* border-radius: 20%; */
+                width: 600px;
+                height: 280px;
+                position: relative;
+                /* left: 1100px;
+                bottom: 1150px; */
+                overflow: hidden;
+                z-index: 10;
+            }
+            .slide {
+                /* border: 1px solid red; */
+                height: 280px; /* 이미지 크기 * 이미지 개수 + 여유 */
+                position: absolute;
+            }
+            .slide li {
+                display: block;
+                /* margin-bottom: 130px; */
+                /* position: absolute; */
+            }
+            .slide > li > img {
+                width: 200px;
+                /* position: absolute; */
+                margin-left: -5px;
+            }
+
+            .slide > li > span {
+                font-size: 18px;
+                margin-top: 120px;
+            }
+
+            .slide > li > span:nth-child(1) {
+                margin-left: -20px;
+            }
+            .slide > li > span:nth-child(2) {
+                margin-left: 30px;
+                display: inline-block;
+                width: 70px;
+            }
+            .slide > li > span:nth-child(3) {
+                margin-left: 27px;
+                display: inline-block;
+                width: 100px;
+            }
+            .slide > li > span:last-child {
+                margin-left: 65px;
+                display: inline-block;
+                width: 65px;
+            }
+            #slidebox {
+                /* border: 1px solid gray; */
+                border-left: 1px solid gray;
+                /* background-color: #eeeeee; */
+                padding-left: 80px;
+                width: 600px;
+                height: 400px;
+                position: relative;
+                left: 950px;
+                bottom: 1250px;
+                z-index: 5;
+            }
+            .rankslide th {
+                font-size: 18px;
+                border-bottom: 2px solid orange;
+                padding-bottom: 5px;
+                margin-bottom: 5px;
+            }
+            .rankslide th:nth-child(1){
+                width: 7%;
+                text-align: center;
+
+                
+            }
+            
+            .rankslide th:nth-child(2){
+                text-align: center;
+                width: 15%;
+            }
+            .rankslide th:nth-child(3){
+                text-align: left;
+                padding-left: 35px;
+                width: 27%;
+            }
+            .rankslide th:nth-child(4){
+                text-align: left;
+                padding-left: 45px;
+                width: 37%;
+            }
+            .rankslide th:nth-child(5){
+                width:23%;
+            }
         </style>
     </head>
     <body>
@@ -441,9 +537,10 @@
                 <div
                     style="
                         width: 300px;
-                        margin: 0px auto;
-                        margin-top: 30px;
+
                         padding-left: 30px;
+                        float: left;
+                        margin-left: 400px;
                     "
                 >
                     <input
@@ -479,6 +576,59 @@
                     <figure class="highcharts-figure">
                         <div id="container3"></div>
                     </figure>
+                </div>
+                <div id="slidebox">
+                    <h3>실시간 공연 예매 랭킹</h4>
+                        <br>
+                    <table class="rankslide" style="border-bottom: 1px solid gray; width: 600px;">
+                        <tr style="padding: 20px 20px;">
+                            <th>순위</th>
+                            <th>장르</th>
+                            <th>제목</th>
+                            <th>포스터</td>
+                            <th>예매율</th>
+                        </tr>
+                    </table>
+                    <div id="slideItem">
+                        <ul class="slide">
+                            <li>
+                                <span>1</span>
+                                <span>뮤지컬</span>
+                                <span>cats</span>
+                                <img src="../images/notice3.jpg" />
+                                <span>3.8%</span>
+                            </li>
+
+                            <li>
+                                <span>2</span>
+                                <span>뮤지컬</span>
+                                <span>베르테르</span>
+                                <img src="../images/notice1.jpg" alt="" />
+                                <span>2.6%</span>
+                            </li>
+                            <li>
+                                <span>3</span>
+                                <span>뮤지컬</span>
+                                <span>레베카</span>
+                                <img src="../images/music11.jpeg" alt="" />
+                                <span>1.8%</span>
+                            </li>
+                            <li>
+                                <span>4</span>
+                                <span>콘서트</span>
+                                <span>팬텀싱어</span>
+                                <img src="../images/consert6.jpeg" />
+                                <span>1.3%</span>
+                            </li>
+                            <li>
+                                <span>5</span>
+                                <span>뮤지컬</span>
+                                <span>머더발라드</span>
+                                <img src="../images/music10.jpeg" alt="" />
+                                <span>1.2%</span>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
             <div class="event-main-list"></div>
@@ -1054,6 +1204,75 @@
                 $("#container2").css("opacity", "0");
                 $("#container3").css("opacity", "1");
             });
+        </script>
+        <script>
+            //실시간 공연 예매 랭킹
+            var idx = 0; // 함수 호출 횟수
+            var i = 0; // 이미지 인덱스
+            var imgNum = 5; // 이미지 개수
+            var imgSize = 280; // 이미지 크기
+
+            var imgs = [
+                "notice3.jpg",
+                "notice1.jpg",
+                "music11.jpeg",
+                "consert6.jpeg",
+                "music10.jpeg",
+            ];
+            var category = [
+                "<span>뮤지컬</span>",
+                "<span>뮤지컬</span>",
+                "<span>뮤지컬</span>",
+                "<span>콘서트</span>",
+                "<span>뮤지컬</span>",
+            ];
+            var titles = [
+                "<span>cats</span>",
+                "<span>베르테르</span>",
+                "<span>레베카</span>",
+                "<span>팬텀싱어</span>",
+                "<span>머더발라드</span>",
+            ];
+            var booking = [
+                "<span>3.8%</span>",
+                "<span>2.6%</span>",
+                "<span>1.8%</span>",
+                "<span>1.3%</span>",
+                "<span>1.2%</span>",
+            ];
+
+            function imgSlide() {
+                idx++;
+                if (i > 4) {
+                    i = 0;
+                }
+                $(".slide").css({ top: "-20px" });
+                $(".slide")
+                    .stop()
+                    .animate({ top: -imgSize + "px" }, "slow");
+
+                if (idx > 1) {
+                    $(".slide>li:first").remove();
+
+                    $(".slide").append(
+                        "<li><span>" +
+                            (i + 1) +
+                            "</span>" +
+                            category[i] +
+                            titles[i] +
+                            '<img style="margin-left:5px" src="../images/' +
+                            imgs[i] +
+                            '" alt="">' +
+                            booking[i] +
+                            "</li>"
+                    );
+                    i++;
+                }
+            }
+            // 3초에 한번 함수를 실행
+            setInterval(function () {
+                imgSlide();
+            }, 4000);
         </script>
     </body>
 </html>

@@ -39,8 +39,6 @@
             }
             #bottom {
                 /* border: 1px solid black; */
-                width: 100%;
-                min-width: 1600px;
                 height: 200px;
                 background-color: #eee;
                 color: white;
@@ -101,7 +99,7 @@
             }
             .img {
                 width: 230px;
-                height: 330px;
+                height: 325px;
                 /* border: 1px solid black; */
                 background-color: cornflowerblue;
                 display: inline-block;
@@ -146,7 +144,7 @@
                 /* border: 1px solid black; */
                 width: 1600px;
                 /* margin-bottom: 20px; */
-                height: 400px;
+                height: 420px;
                 overflow: hidden;
             }
             .recomand h1 {
@@ -156,19 +154,27 @@
             .region {
                 display: inline-block;
                 /* border: 1px solid black; */
-                height: 200px;
+                height: 240px;
                 width: 150px;
                 margin-right: 140px;
-                background-color: cornflowerblue;
+                /* background-color: cornflowerblue; */
+                background-repeat: no-repeat;
                 cursor: pointer;
             }
             #rankpage {
                 width: 3600px;
                 /* border: 1px solid black; */
             }
+            .rank > p {
+                position: relative;
+                top: 215px;
+                font-weight: bold;
+            }
+            
             .rank:first-child {
                 margin-left: -450px;
             }
+            
             .region:last-child {
                 margin-right: 0;
             }
@@ -184,6 +190,11 @@
                 background-position: center center;
                 color: white;
             }
+            .rtitle {
+                position: relative;
+                top: 150px;
+                font-weight: bold;
+            }
             .slider {
                 margin: 0px auto;
                 position: relative;
@@ -197,8 +208,55 @@
                 transform: scale(1);
                 transition: all 0.5s;
             }
+
+            .img-cover {
+                position: absolute;
+                width: 420px;
+                height: 675px;
+                background-color: rgba(0, 0, 0, 0.7);
+                z-index: 1;
+                opacity: 0;
+
+            }
+            .text {
+                /* border: 1px solid white; */
+                position: absolute;
+                text-align: center;
+                color: white;
+                margin-left: 150px;
+                margin-top: 300px;
+                z-index: 2;
+                opacity: 0;
+
+            }
+            .img-cover1 {
+                display: inline-block;
+                position: relative;
+                width: 230px;
+                height: 325px;
+                background-color: rgba(0, 0, 0, 0.7);
+                z-index: 1;
+                opacity: 0;
+
+            }
+            .text1 {
+                display: inline-block;
+                /* border: 1px solid white; */
+                position: absolute;
+                color: white;
+                margin-top: 100px;
+                margin-left: -70px;
+                z-index: 2;
+                opacity: 0;
+
+            }
+
+
+
+
             #bigimg {
                 background-image: url("../images/big_theater.jpeg");
+                
             }
             .img1 {
                 background-image: url("../images/theater1.jpeg");
@@ -309,6 +367,7 @@
                 background-image: url("../images/theater1.jpeg");
                 background-size: contain;
             }
+            
         </style>
     </head>
     <body>
@@ -357,22 +416,90 @@
                     <h1>WHAT'S HOT</h1>
                     <div style="padding: 10px 0;">
                         <div
-                            class="img"
+                            class="img img0"
                             id="bigimg"
                             style="
                                 width: 420px;
                                 height: 675px;
                                 display: inline-block;
                             "
-                        ></div>
+                            value="temp0"
+                        >
+                            <div class="img-cover cover0" value="cover0">
+                                <div class="text temp0">
+                                    <h4>select shop</h4>
+                                    <span>10cm X 데이브레이크</span>
+                                </div>
+                            </div>
+                        </div>
                         <div style="display: inline-block;">
-                            <div class="img img1"></div>
-                            <div class="img img2"></div>
-                            <div class="img img3"></div>
+                            <div class="img img1" value="temp1">
+                                <div
+                                class="img-cover1 cover1"
+                                value="cover1"
+                                >
+                                <div class="text1 temp1">
+                                    <h4>select shop</h4>
+                                    <span>10cm X 데이브레이크</span>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="img img2" value=temp2>
+                                <div
+                                    class="img-cover1 cover2"
+                                    value="cover2"
+                                >
+                                    <div class="text1 temp2">
+                                        <h4>select shop</h4>
+                                        <span>10cm X 데이브레이크</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="img img3" value="temp3">
+                                <div
+                                class="img-cover1 cover3"
+                                value="cover3"
+                                >
+                                <div class="text1 temp3">
+                                    <h4>select shop</h4>
+                                    <span>10cm X 데이브레이크</span>
+                                </div>
+                            </div>
+                            </div>
                             <div style="display: block;"></div>
-                            <div class="img img4"></div>
-                            <div class="img img5"></div>
-                            <div class="img img6"></div>
+                            <div class="img img4" value="temp4">
+                                <div
+                                class="img-cover1 cover4"
+                                value="cover4"
+                                >
+                                <div class="text1 temp4">
+                                    <h4>select shop</h4>
+                                    <span>10cm X 데이브레이크</span>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="img img5" value="temp5">
+                                <div
+                                    class="img-cover1 cover5"
+                                    value="cover5"
+                                >
+                                    <div class="text1 temp5" >
+                                        <h4>select shop</h4>
+                                        <span>10cm X 데이브레이크</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="img img6" value="temp6">
+                                <div
+                                    class="img-cover1 cover6"
+                                    value="cover6"
+                                >
+                                    <div class="text1 temp6">
+                                        <h4>select shop</h4>
+                                        <span>10cm X 데이브레이크</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -398,16 +525,46 @@
                             />
                             <!-- 주간 랭킹 이미지 -->
                             <div id="rankpage">
-                                <div class="rank rank1"></div>
-                                <div class="rank rank2"></div>
-                                <div class="rank rank3"></div>
-                                <div class="rank rank4"></div>
-                                <div class="rank rank5"></div>
-                                <div class="rank rank6"></div>
-                                <div class="rank rank7"></div>
-                                <div class="rank rank8"></div>
-                                <div class="rank rank9"></div>
-                                <div class="rank rank10"></div>
+                                
+                                <div class="rank rank1">
+                                    <p><연극>WIFE</p>
+                                </div>
+                                
+                                <div class="rank rank2">
+                                    <p><연극>WIFE</p>
+
+                                </div>
+                                <div class="rank rank3">
+                                    <p><연극>WIFE</p>
+
+                                </div>
+                                <div class="rank rank4">
+                                    <p><연극>WIFE</p>
+
+                                </div>
+                                <div class="rank rank5">
+                                    <p><연극>WIFE</p>
+
+                                </div>
+                                <div class="rank rank6">
+                                    <p><연극>WIFE</p>
+
+                                </div>
+                                <div class="rank rank7">
+                                    <p><연극>WIFE</p>
+
+                                </div>
+                                <div class="rank rank8">
+                                    <p><연극>WIFE</p>
+
+                                </div>
+                                <div class="rank rank9">
+                                    <p><연극>WIFE</p>
+
+                                </div>
+                                <div class="rank rank10">
+                                    <p><연극>WIFE</p>
+                                </div>
                             </div>
                         </div>
                         <img
@@ -423,18 +580,23 @@
                         <div id="regionpage">
                             <div class="region region1">
                                 <p class="name"></p>
+                                <p class="rtitle">ss</p>
                             </div>
                             <div class="region region2">
                                 <p class="name"></p>
+                                <p class="rtitle">ss</p>
                             </div>
                             <div class="region region3">
                                 <p class="name"></p>
+                                <p class="rtitle">ss</p>
                             </div>
                             <div class="region region4">
                                 <p class="name"></p>
+                                <p class="rtitle">ss</p>
                             </div>
                             <div class="region region5">
                                 <p class="name"></p>
+                                <p class="rtitle">ss</p>
                             </div>
                         </div>
                     </div>
@@ -444,12 +606,72 @@
                 <div style="text-align: center;">
                     <h1>AT'S PICKS</h1>
                     <div>
-                        <div class="img atimg1"></div>
-                        <div class="img atimg2"></div>
-                        <div class="img atimg3"></div>
-                        <div class="img atimg4"></div>
-                        <div class="img atimg5"></div>
-                        <div class="img atimg6"></div>
+                        <div class="img atimg1" value="temp7">
+                            <div
+                                    class="img-cover1 cover7"
+                                    value="cover7"
+                            >
+                                <div class="text1 temp7">
+                                    <h4>select shop</h4>
+                                    <span>10cm X 데이브레이크</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="img atimg2" value="temp8">
+                            <div
+                                    class="img-cover1 cover8"
+                                    value="cover8"
+                            >
+                                <div class="text1 temp8">
+                                    <h4>select shop</h4>
+                                    <span>10cm X 데이브레이크</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="img atimg3" value="temp9">
+                            <div
+                                    class="img-cover1 cover9"
+                                    value="cover9"
+                            >
+                                <div class="text1 temp9">
+                                    <h4>select shop</h4>
+                                    <span>10cm X 데이브레이크</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="img atimg4" value="temp10">
+                            <div
+                            class="img-cover1 cover10"
+                            value="cover10"
+                            >
+                                <div class="text1 temp10">
+                                    <h4>select shop</h4>
+                                    <span>10cm X 데이브레이크</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="img atimg5" value="temp11">
+                            <div
+                            class="img-cover1 cover11"
+                            value="cover11"
+                            >
+                                <div class="text1 temp11">
+                                    <h4>select shop</h4>
+                                    <span>10cm X 데이브레이크</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="img atimg6" value="temp12">
+                            <div
+                            class="img-cover1 cover12"
+                            value="cover12"
+                            >
+                                <div class="text1 temp12">
+                                    <h4>select shop</h4>
+                                    <span>10cm X 데이브레이크</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <hr />
@@ -481,7 +703,7 @@
             </div>
             <!-------------------------------- 화면 하단부 -------------------------------->
             <div id="bottom">
-                <div>
+                <div style="width: 1600px; margin: auto;">
                     <!-- 회사 마크 -->
                     <img
                         src="../images/title2.png"
@@ -544,14 +766,37 @@
                 }
             });
 
+
+
+
             //이미지에 마우스 올릴때
-            $(".img, .rank, .region").mouseover(function () {
-                $(this).css("box-shadow", "1px 1px 1px 2px gray");
+            $(".img-cover, .img-cover1").mouseover(function () {
+            var add = "." + $(this).attr("value");
+            $(this).css("transition", "all 0.5s");
+            $(add).css("opacity", "0.7");
             });
             //이미지에 마우스 뗄때
-            $(".img, .rank, .region").mouseout(function () {
-                $(this).css("box-shadow", "");
+            $(".img-cover, .img-cover1").mouseout(function () {
+                var add = "." + $(this).attr("value");
+                $(this).css("transition", "all 0.5s");
+                $(add).css("opacity", "0");
             });
+
+            //이미지에 마우스 올릴때
+            $(".img, .rank, .region").mouseover(function () {
+                var add = "." + $(this).attr("value");
+                $(add).css("opacity", "1");
+                $(this).css("transform","scale(1)");
+            });
+
+            //이미지에 마우스 뗄때
+            $(".img, .rank, .region").mouseout(function () {
+                var add = "." + $(this).attr("value");
+                $(add).css("opacity", "0");
+                $(this).css("transform","scale(0.97)");
+            });
+
+
 
             //이미지 클릭시 이동
             $(".img").click(function () {
