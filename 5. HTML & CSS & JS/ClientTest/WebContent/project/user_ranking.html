@@ -1998,11 +1998,7 @@
             dayNamesShort: [ "일", "월", "화", "수", "목", "금", "토" ]
         });
 
-        // .rank-best > div img:hover {
-        //     transform: scale(1.1, 1.1);
-        //     transition: all .5s;
-        // }
-
+        //랭킹 이미지 확대/축소
         $(".rank-best > div").mouseover(function() {
             $(this).children().children("img").css("transform", "scale(1.1, 1.1)");
         });

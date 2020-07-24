@@ -33,8 +33,6 @@
         }
         #bottom {
             /* border: 1px solid black; */
-            width: 100%;
-            min-width: 1600px;
             height: 200px;
             background-color: #eee;
             color: white;
@@ -107,6 +105,32 @@
         .golist {
             cursor: pointer;
         }
+
+        #movetop {
+                width: 40px;
+                height: 40px;
+                background-color: gray;
+                position: fixed;
+                bottom: 0;
+                right: 0;
+                text-align: center;
+                padding-top: 3px;
+            }
+            #movetop:hover {
+                background-color: orange;
+            }
+            #movetop a {
+                text-decoration: none;
+                color: white;
+                font-weight: bold;
+                font-size: 1.5em;
+            }
+             #frogue-container,
+            .frogue-chat {
+                position: absolute;
+                left: 20px;
+                bottom: 0;
+            }
         
         
       
@@ -149,7 +173,7 @@
         <p style="text-align: center; margin-left: 1000px; padding-top: 10px; color: gray;">등록일 : 2020-07-20 조회수: 25</p>
 
         <div style="width: 1200px; height: 370px; background-color: #eeeeee; margin: 0px auto;" >
-            <div style="width: 180px; height: 252px; margin-left: 50px; "><img style="margin-top: 50px; width: 180px; height: 252px;" src="./images/noticeimage.jpg" alt=""></div>
+            <div style="width: 180px; height: 252px; margin-left: 50px; "><img style="margin-top: 50px; width: 180px; height: 252px;" src="../images/noticeimage.jpg" alt=""></div>
             <span style="font-size: 18px; margin-left: 300px; position: relative; bottom: 180px; left: 0px;">Good Bye! 오페라의 유령! 뮤지컬 [오페라의 유령] 월드투어-서울 7/21(화) 2시 티켓오픈!</span>
             <div style=" padding-left: 30px; padding-top: 18px; background-color: rgb(253, 221, 190); position: relative; bottom: 120px; margin-left: 300px; margin-bottom: 500px; border: 1px solid gray; width: 840px; height: 60px;">
                 <span class="glyphicon glyphicon-time" style= "color: orange; font-weight: bold;" ;>&nbsp;티켓오픈</span><span style="padding-left: 30px;">|</span>
@@ -306,9 +330,38 @@ Special 2. 지정석 20% <br>
       
 <!-------------------------------- 화면 하단부 -------------------------------->
         <div id="bottom">
-            <div>
+            <div style="width: 1600px; margin: auto;">
                 <!-- 회사 마크 -->
                 <img src="../images/title2.png" style="transform: translate(0, 40px);">
+                <!-- 챗봇 : 단비봇 -->
+                        <div
+                            id="frogue-container"
+                            class="position-right-bottom"
+                            data-chatbot="e4957de9-dad9-448d-a709-e43eeb644f63"
+                            data-user="사용자ID"
+                            data-init-key="value"
+                        ></div>
+                        <!-- data-init-식별키=값 으로 셋팅하면 챗플로우에 파라미터와 연동가능. 식별키는 소문자만 가능 -->
+                        <script>
+                            (function (d, s, id) {
+                                var js,
+                                    fjs = d.getElementsByTagName(s)[0];
+                                if (d.getElementById(id)) {
+                                    return;
+                                }
+                                js = d.createElement(s);
+                                js.id = id;
+                                js.src =
+                                    "https:\/\/danbee.ai/js/plugins/frogue-embed/frogue-embed.min.js";
+                                fjs.parentNode.insertBefore(js, fjs);
+                            })(document, "script", "frogue-embed");
+                        </script>
+                        <!-- 제일 위로 돌아가기 버튼 -->
+                        <div id="movetop">↑</div>
+                    </div>
+                </div>
+            </div>
+        </div>
             </div>
         </div>
     </div>
@@ -325,7 +378,16 @@ Special 2. 지정석 20% <br>
         $(".menubar").mouseout(function() {
             $(this).css("border-bottom", "");
         });
-
+         //movetop
+            $("#movetop").click(function () {
+                event.preventDefault();
+                $("html, body").animate(
+                    {
+                        scrollTop: 0,
+                    },
+                    1000
+                );
+            });
       
 
        

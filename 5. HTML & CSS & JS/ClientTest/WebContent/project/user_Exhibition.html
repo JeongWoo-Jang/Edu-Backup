@@ -107,15 +107,27 @@
                 cursor: pointer;
             }
             #banner {
-                height: 400px;
-                background-image: url("../images//banner.png");
+                min-width: 1905px;
+                height: 250px;
+                background-image: url("../images//exhibition_banner.jpeg");
                 background-repeat: no-repeat;
                 background-position: center center;
-                margin-top: 20px;
+                background-color: #1A4377;
+                margin-top: 50px;
+                margin-bottom: 50px;
+                margin-left: -155px;
+            }
+            #topbanner {
+                background-image: url("../images//exhibition_banner2.jpeg");
+                background-repeat: no-repeat;
+                background-position: center center;
+                height: 170px;
+                margin-bottom: 100px;
             }
             #middle input {
                 outline: none;
             }
+
             #movetop {
                 width: 40px;
                 height: 40px;
@@ -424,6 +436,8 @@
             <hr />
             <!-------------------------------- 내용부분 -------------------------------->
             <div id="middle">
+                <div id="topbanner"> </div>
+
                 <!-- 최신, 인기 공연 목록(순위별) -->
                 <div style="text-align: center;">
                     <h1>WHAT'S HOT</h1>
@@ -520,101 +534,7 @@
                 <!-- 동영상 들어갈 자리 -->
                 <div id="banner"></div>
                 <hr />
-                <!-- 주간 랭킹, 지역별 추천 -->
-                <div style="text-align: center; background-color: #eee;">
-                    <!-- 주간 랭킹 -->
-                    <div class="recomand">
-                        <div>
-                            <h1>WEEKLY RANKING</h1>
-                            <img
-                                src="../images/slide-dir-prev.png"
-                                class="prev"
-                                id="rankprev"
-                                style="
-                                    position: relative;
-                                    top: 60px;
-                                    z-index: 1;
-                                "
-                            />
-                            <!-- 주간 랭킹 이미지 -->
-                            <div id="rankpage">
-                                
-                                <div class="rank rank1">
-                                    <p><연극>WIFE</p>
-                                </div>
-                                
-                                <div class="rank rank2">
-                                    <p><연극>WIFE</p>
-
-                                </div>
-                                <div class="rank rank3">
-                                    <p><연극>WIFE</p>
-
-                                </div>
-                                <div class="rank rank4">
-                                    <p><연극>WIFE</p>
-
-                                </div>
-                                <div class="rank rank5">
-                                    <p><연극>WIFE</p>
-
-                                </div>
-                                <div class="rank rank6">
-                                    <p><연극>WIFE</p>
-
-                                </div>
-                                <div class="rank rank7">
-                                    <p><연극>WIFE</p>
-
-                                </div>
-                                <div class="rank rank8">
-                                    <p><연극>WIFE</p>
-
-                                </div>
-                                <div class="rank rank9">
-                                    <p><연극>WIFE</p>
-
-                                </div>
-                                <div class="rank rank10">
-                                    <p><연극>WIFE</p>
-                                </div>
-                            </div>
-                        </div>
-                        <img
-                            src="../images/slide-dir-next.png"
-                            class="after"
-                            id="rankafter"
-                            style="position: relative; bottom: 160px;"
-                        />
-                    </div>
-                    <!-- 지역별 추천 -->
-                    <div class="recomand">
-                        <h1>지역별 추천</h1>
-                        <div id="regionpage">
-                            <div class="region region1">
-                                <p class="name"></p>
-                                <p class="rtitle">ss</p>
-                            </div>
-                            <div class="region region2">
-                                <p class="name"></p>
-                                <p class="rtitle">ss</p>
-                            </div>
-                            <div class="region region3">
-                                <p class="name"></p>
-                                <p class="rtitle">ss</p>
-                            </div>
-                            <div class="region region4">
-                                <p class="name"></p>
-                                <p class="rtitle">ss</p>
-                            </div>
-                            <div class="region region5">
-                                <p class="name"></p>
-                                <p class="rtitle">ss</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <hr />
+                
                 <!-- 뮤지컬, 연극 목록 -->
                 <div style="text-align: center;">
                     <h1>AT'S PICKS</h1>

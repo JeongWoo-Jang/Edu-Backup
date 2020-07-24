@@ -32,9 +32,10 @@
                 height: 650px;
                 margin: 0 auto;
             }
-            #middle {
+            #middle1,
+            #middle2 {
                 /* border: 1px solid black; */
-                width: 1600px;
+                min-width: 1600px;
                 margin: 0 auto;
             }
             #bottom {
@@ -107,13 +108,26 @@
                 cursor: pointer;
             }
             #banner {
-                height: 400px;
-                background-image: url("../images//banner.png");
-                background-repeat: no-repeat;
-                background-position: center center;
+                min-width: 1600px;
+                height: 250px;
                 margin-top: 20px;
+
+                background-image: url("../images/theaterbanner.gif");
+
+                text-align: center;
+                background-position: center center;
+                background-repeat: no-repeat;
+                background-size: cover;
             }
-            #middle input {
+            #bannerimg {
+                width: 286px;
+                height: 400px;
+                background-image: url("../images/bannerimg.png");
+                display: inline-block;
+                margin-right: 160px;
+            }
+            #middle1 input,
+            #middle2 input {
                 outline: none;
             }
             #movetop {
@@ -140,61 +154,6 @@
                 left: 20px;
                 bottom: 0;
             }
-            .recomand {
-                /* border: 1px solid black; */
-                width: 1600px;
-                /* margin-bottom: 20px; */
-                height: 420px;
-                overflow: hidden;
-            }
-            .recomand h1 {
-                padding: 40px;
-            }
-            .rank,
-            .region {
-                display: inline-block;
-                /* border: 1px solid black; */
-                height: 240px;
-                width: 150px;
-                margin-right: 140px;
-                /* background-color: cornflowerblue; */
-                background-repeat: no-repeat;
-                cursor: pointer;
-            }
-            #rankpage {
-                width: 3600px;
-                /* border: 1px solid black; */
-            }
-            .rank > p {
-                position: relative;
-                top: 215px;
-                font-weight: bold;
-            }
-            
-            .rank:first-child {
-                margin-left: -450px;
-            }
-            
-            .region:last-child {
-                margin-right: 0;
-            }
-            .name {
-                /* border:1px solid black; */
-                width: 50px;
-                height: 50px;
-                border-radius: 50%;
-                position: relative;
-                left: 49px;
-                top: 75px;
-                background-image: url("../images/서울.png");
-                background-position: center center;
-                color: white;
-            }
-            .rtitle {
-                position: relative;
-                top: 150px;
-                font-weight: bold;
-            }
             .slider {
                 margin: 0px auto;
                 position: relative;
@@ -216,7 +175,6 @@
                 background-color: rgba(0, 0, 0, 0.7);
                 z-index: 1;
                 opacity: 0;
-
             }
             .text {
                 /* border: 1px solid white; */
@@ -227,7 +185,6 @@
                 margin-top: 300px;
                 z-index: 2;
                 opacity: 0;
-
             }
             .img-cover1 {
                 display: inline-block;
@@ -237,7 +194,6 @@
                 background-color: rgba(0, 0, 0, 0.7);
                 z-index: 1;
                 opacity: 0;
-
             }
             .text1 {
                 display: inline-block;
@@ -248,22 +204,17 @@
                 margin-left: -70px;
                 z-index: 2;
                 opacity: 0;
-
             }
-
-
-
 
             #bigimg {
                 background-image: url("../images/big_theater.jpeg");
-                
             }
             .img1 {
                 background-image: url("../images/theater1.jpeg");
                 background-size: contain;
             }
             .img2 {
-                background-image: url("../images/theater2.jpeg");
+                background-image: url("../images/theater3.jpeg");
                 background-size: contain;
             }
             .img3 {
@@ -279,67 +230,6 @@
                 background-size: contain;
             }
             .img6 {
-                background-image: url("../images/theater6.jpeg");
-                background-size: contain;
-            }
-            .rank1 {
-                background-image: url("../images/theater7.jpeg");
-                background-size: contain;
-            }
-            .rank2 {
-                background-image: url("../images/theater8.jpeg");
-                background-size: contain;
-            }
-            .rank3 {
-                background-image: url("../images/theater9.jpeg");
-                background-size: contain;
-            }
-            .rank4 {
-                background-image: url("../images/theater10.jpeg");
-                background-size: contain;
-            }
-            .rank5 {
-                background-image: url("../images/theater11.jpeg");
-                background-size: contain;
-            }
-            .rank6 {
-                background-image: url("../images/theater12.jpeg");
-                background-size: contain;
-            }
-            .rank7 {
-                background-image: url("../images/theater13.jpeg");
-                background-size: contain;
-            }
-            .rank8 {
-                background-image: url("../images/theater14.jpeg");
-                background-size: contain;
-            }
-            .rank9 {
-                background-image: url("../images/theater15.jpeg");
-                background-size: contain;
-            }
-            .rank10 {
-                background-image: url("../images/theater16.jpeg");
-                background-size: contain;
-            }
-
-            .region1 {
-                background-image: url("../images/theater17.jpeg");
-                background-size: contain;
-            }
-            .region2 {
-                background-image: url("../images/theater18.jpeg");
-                background-size: contain;
-            }
-            .region3 {
-                background-image: url("../images/theater19.jpeg");
-                background-size: contain;
-            }
-            .region4 {
-                background-image: url("../images/theater20.jpeg");
-                background-size: contain;
-            }
-            .region5 {
                 background-image: url("../images/theater6.jpeg");
                 background-size: contain;
             }
@@ -367,7 +257,6 @@
                 background-image: url("../images/theater1.jpeg");
                 background-size: contain;
             }
-            
         </style>
     </head>
     <body>
@@ -379,24 +268,45 @@
                     <a href="main.html" id="topleft"></a>
                     <!-- 상단메뉴 센터(콘서트, 뮤지컬, 연극, 클래식, 전시) -->
                     <div id="topcenter">
-                        <span data-lo="user_concert.html" class="menubar">콘서트</span>
-                        <span data-lo="user_musical.html" class="menubar">뮤지컬</span>
-                        <span data-lo="user_theater.html" class="menubar">연극</span>
-                        <span data-lo="user_classic.html" class="menubar">클래식</span>
-                        <span data-lo="user_Exhibition.html" class="menubar">전시</span>
+                        <span data-lo="user_concert.html" class="menubar"
+                            >콘서트</span
+                        >
+                        <span data-lo="user_musical.html" class="menubar"
+                            >뮤지컬</span
+                        >
+                        <span data-lo="user_theater.html" class="menubar"
+                            >연극</span
+                        >
+                        <span data-lo="user_classic.html" class="menubar"
+                            >클래식</span
+                        >
+                        <span data-lo="user_Exhibition.html" class="menubar"
+                            >전시</span
+                        >
                     </div>
                     <!-- 상단메뉴 우측(랭킹, 이벤트, 검색창, 마이페이지) -->
                     <div id="topright">
-                        <span data-lo="user_ranking.html" class="menubar">랭킹</span>
-                        <span data-lo="user_event.html" class="menubar">이벤트</span>
+                        <span data-lo="user_ranking.html" class="menubar"
+                            >랭킹</span
+                        >
+                        <span data-lo="user_event.html" class="menubar"
+                            >이벤트</span
+                        >
                         <input type="text" value="" id="search" />
                         <label
                             for="search"
                             class="glyphicon glyphicon-search"
                             style="font-size: 14px; cursor: pointer;"
                         ></label>
-                        <div class="glyphicon glyphicon-user" id="mypage" 
-                        style="font-size: 14px; cursor: pointer; margin: 0 10px; "></div>
+                        <div
+                            class="glyphicon glyphicon-user"
+                            id="mypage"
+                            style="
+                                font-size: 14px;
+                                cursor: pointer;
+                                margin: 0 10px;
+                            "
+                        ></div>
                     </div>
                 </div>
                 <!-- 메인화면 슬라이더 -->
@@ -408,9 +318,48 @@
                     <div><img src="../images/theaterslide5.jpeg" /></div>
                 </div>
             </div>
-            <hr />
+            <!-- <hr /> -->
             <!-------------------------------- 내용부분 -------------------------------->
-            <div id="middle">
+            <div id="middle1">
+                <div
+                    style="width: 1300px; margin: 0px auto; text-align: center;"
+                >
+                    <h1>Focus On</h1>
+                    <div
+                        style="
+                            display: inline-block;
+                            border: 1px solid #eeeeee;
+                        "
+                    >
+                        <div
+                            style="
+                                display: inline-block;
+                                border: 1px solid #eeeeee;
+                            "
+                        >
+                            <img src="../images/focus1.jpeg" alt="" />
+                        </div>
+                        <div
+                            style="
+                                display: inline-block;
+                                border: 1px solid #eeeeee;
+                                float: left;
+                            "
+                        >
+                            <img src="../images/focus2.jpeg" alt="" />
+                        </div>
+                        <div
+                            style="
+                                display: inline-block;
+                                border: 1px solid #eeeeee;
+                                float: left;
+                            "
+                        >
+                            <img src="../images/focus3.jpeg" alt="" />
+                        </div>
+                    </div>
+                </div>
+
                 <!-- 최신, 인기 공연 목록(순위별) -->
                 <div style="text-align: center;">
                     <h1>WHAT'S HOT</h1>
@@ -434,21 +383,15 @@
                         </div>
                         <div style="display: inline-block;">
                             <div class="img img1" value="temp1">
-                                <div
-                                class="img-cover1 cover1"
-                                value="cover1"
-                                >
-                                <div class="text1 temp1">
-                                    <h4>select shop</h4>
-                                    <span>10cm X 데이브레이크</span>
+                                <div class="img-cover1 cover1" value="cover1">
+                                    <div class="text1 temp1">
+                                        <h4>select shop</h4>
+                                        <span>10cm X 데이브레이크</span>
+                                    </div>
                                 </div>
                             </div>
-                            </div>
-                            <div class="img img2" value=temp2>
-                                <div
-                                    class="img-cover1 cover2"
-                                    value="cover2"
-                                >
+                            <div class="img img2" value="temp2">
+                                <div class="img-cover1 cover2" value="cover2">
                                     <div class="text1 temp2">
                                         <h4>select shop</h4>
                                         <span>10cm X 데이브레이크</span>
@@ -456,44 +399,32 @@
                                 </div>
                             </div>
                             <div class="img img3" value="temp3">
-                                <div
-                                class="img-cover1 cover3"
-                                value="cover3"
-                                >
-                                <div class="text1 temp3">
-                                    <h4>select shop</h4>
-                                    <span>10cm X 데이브레이크</span>
+                                <div class="img-cover1 cover3" value="cover3">
+                                    <div class="text1 temp3">
+                                        <h4>select shop</h4>
+                                        <span>10cm X 데이브레이크</span>
+                                    </div>
                                 </div>
-                            </div>
                             </div>
                             <div style="display: block;"></div>
                             <div class="img img4" value="temp4">
-                                <div
-                                class="img-cover1 cover4"
-                                value="cover4"
-                                >
-                                <div class="text1 temp4">
-                                    <h4>select shop</h4>
-                                    <span>10cm X 데이브레이크</span>
+                                <div class="img-cover1 cover4" value="cover4">
+                                    <div class="text1 temp4">
+                                        <h4>select shop</h4>
+                                        <span>10cm X 데이브레이크</span>
+                                    </div>
                                 </div>
                             </div>
-                            </div>
                             <div class="img img5" value="temp5">
-                                <div
-                                    class="img-cover1 cover5"
-                                    value="cover5"
-                                >
-                                    <div class="text1 temp5" >
+                                <div class="img-cover1 cover5" value="cover5">
+                                    <div class="text1 temp5">
                                         <h4>select shop</h4>
                                         <span>10cm X 데이브레이크</span>
                                     </div>
                                 </div>
                             </div>
                             <div class="img img6" value="temp6">
-                                <div
-                                    class="img-cover1 cover6"
-                                    value="cover6"
-                                >
+                                <div class="img-cover1 cover6" value="cover6">
                                     <div class="text1 temp6">
                                         <h4>select shop</h4>
                                         <span>10cm X 데이브레이크</span>
@@ -504,113 +435,27 @@
                     </div>
                 </div>
                 <hr />
-                <!-- 동영상 들어갈 자리 -->
-                <div id="banner"></div>
-                <hr />
+            </div>
+            <!-- 동영상 들어갈 자리 -->
+            <div id="banner">
+                <img
+                    style="height: 250px;"
+                    src="../images/theaterbanner.gif"
+                    alt=""
+                />
+            </div>
+            <div id="middle2">
                 <!-- 주간 랭킹, 지역별 추천 -->
-                <div style="text-align: center; background-color: #eee;">
-                    <!-- 주간 랭킹 -->
-                    <div class="recomand">
-                        <div>
-                            <h1>WEEKLY RANKING</h1>
-                            <img
-                                src="../images/slide-dir-prev.png"
-                                class="prev"
-                                id="rankprev"
-                                style="
-                                    position: relative;
-                                    top: 60px;
-                                    z-index: 1;
-                                "
-                            />
-                            <!-- 주간 랭킹 이미지 -->
-                            <div id="rankpage">
-                                
-                                <div class="rank rank1">
-                                    <p><연극>WIFE</p>
-                                </div>
-                                
-                                <div class="rank rank2">
-                                    <p><연극>WIFE</p>
-
-                                </div>
-                                <div class="rank rank3">
-                                    <p><연극>WIFE</p>
-
-                                </div>
-                                <div class="rank rank4">
-                                    <p><연극>WIFE</p>
-
-                                </div>
-                                <div class="rank rank5">
-                                    <p><연극>WIFE</p>
-
-                                </div>
-                                <div class="rank rank6">
-                                    <p><연극>WIFE</p>
-
-                                </div>
-                                <div class="rank rank7">
-                                    <p><연극>WIFE</p>
-
-                                </div>
-                                <div class="rank rank8">
-                                    <p><연극>WIFE</p>
-
-                                </div>
-                                <div class="rank rank9">
-                                    <p><연극>WIFE</p>
-
-                                </div>
-                                <div class="rank rank10">
-                                    <p><연극>WIFE</p>
-                                </div>
-                            </div>
-                        </div>
-                        <img
-                            src="../images/slide-dir-next.png"
-                            class="after"
-                            id="rankafter"
-                            style="position: relative; bottom: 160px;"
-                        />
-                    </div>
-                    <!-- 지역별 추천 -->
-                    <div class="recomand">
-                        <h1>지역별 추천</h1>
-                        <div id="regionpage">
-                            <div class="region region1">
-                                <p class="name"></p>
-                                <p class="rtitle">ss</p>
-                            </div>
-                            <div class="region region2">
-                                <p class="name"></p>
-                                <p class="rtitle">ss</p>
-                            </div>
-                            <div class="region region3">
-                                <p class="name"></p>
-                                <p class="rtitle">ss</p>
-                            </div>
-                            <div class="region region4">
-                                <p class="name"></p>
-                                <p class="rtitle">ss</p>
-                            </div>
-                            <div class="region region5">
-                                <p class="name"></p>
-                                <p class="rtitle">ss</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <!-- <div style="text-align: center; background-color: #FBFBFB;">
+                    
+                </div> -->
                 <hr />
                 <!-- 뮤지컬, 연극 목록 -->
-                <div style="text-align: center;">
+                <div style="text-align: center; margin-bottom: 50px;">
                     <h1>AT'S PICKS</h1>
                     <div>
                         <div class="img atimg1" value="temp7">
-                            <div
-                                    class="img-cover1 cover7"
-                                    value="cover7"
-                            >
+                            <div class="img-cover1 cover7" value="cover7">
                                 <div class="text1 temp7">
                                     <h4>select shop</h4>
                                     <span>10cm X 데이브레이크</span>
@@ -618,10 +463,7 @@
                             </div>
                         </div>
                         <div class="img atimg2" value="temp8">
-                            <div
-                                    class="img-cover1 cover8"
-                                    value="cover8"
-                            >
+                            <div class="img-cover1 cover8" value="cover8">
                                 <div class="text1 temp8">
                                     <h4>select shop</h4>
                                     <span>10cm X 데이브레이크</span>
@@ -629,10 +471,7 @@
                             </div>
                         </div>
                         <div class="img atimg3" value="temp9">
-                            <div
-                                    class="img-cover1 cover9"
-                                    value="cover9"
-                            >
+                            <div class="img-cover1 cover9" value="cover9">
                                 <div class="text1 temp9">
                                     <h4>select shop</h4>
                                     <span>10cm X 데이브레이크</span>
@@ -640,10 +479,7 @@
                             </div>
                         </div>
                         <div class="img atimg4" value="temp10">
-                            <div
-                            class="img-cover1 cover10"
-                            value="cover10"
-                            >
+                            <div class="img-cover1 cover10" value="cover10">
                                 <div class="text1 temp10">
                                     <h4>select shop</h4>
                                     <span>10cm X 데이브레이크</span>
@@ -651,10 +487,7 @@
                             </div>
                         </div>
                         <div class="img atimg5" value="temp11">
-                            <div
-                            class="img-cover1 cover11"
-                            value="cover11"
-                            >
+                            <div class="img-cover1 cover11" value="cover11">
                                 <div class="text1 temp11">
                                     <h4>select shop</h4>
                                     <span>10cm X 데이브레이크</span>
@@ -662,10 +495,7 @@
                             </div>
                         </div>
                         <div class="img atimg6" value="temp12">
-                            <div
-                            class="img-cover1 cover12"
-                            value="cover12"
-                            >
+                            <div class="img-cover1 cover12" value="cover12">
                                 <div class="text1 temp12">
                                     <h4>select shop</h4>
                                     <span>10cm X 데이브레이크</span>
@@ -713,20 +543,17 @@
             </div>
         </div>
 
-
-
-
         <script src="js/slick.min.js"></script>
         <script>
             //상단 메뉴 css
-            $(".menubar").mouseover(function() {
-            $(this).css("border-bottom", "5px solid orange");
+            $(".menubar").mouseover(function () {
+                $(this).css("border-bottom", "5px solid orange");
             });
-            $(".menubar").mouseout(function() {
+            $(".menubar").mouseout(function () {
                 $(this).css("border-bottom", "");
             });
             //상단 메뉴 클릭시
-            $(".menubar").click(function() {
+            $(".menubar").click(function () {
                 location.href = $(this).data("lo");
             });
 
@@ -734,7 +561,7 @@
 
             $(document).scroll(function () {
                 //메뉴가 시야에서 사라지는 순간 -> 메뉴를 붙박이로 만들기
-                if ($(document).scrollTop() > $("#middle").position().top) {
+                if ($(document).scrollTop() > $("#middle1").position().top) {
                     $("#topmenu").css({
                         width: "100%",
                         "min-width": "0px",
@@ -744,10 +571,13 @@
                         zIndex: "1",
                         "background-color": "white",
                     });
-                    $(window).resize(function() {
-                        if($(window).width() < 970) {
+                    $(window).resize(function () {
+                        if ($(window).width() < 970) {
                             // console.log($(window).width());
-                            $("#topcenter").css("transform", "translate(-100px, 0)");
+                            $("#topcenter").css(
+                                "transform",
+                                "translate(-100px, 0)"
+                            );
                         } else {
                             $("#topcenter").css("transform", "translate(0, 0)");
                         }
@@ -755,25 +585,22 @@
                 }
 
                 //상단 헤더(top)이 눈에 보일때 쯤
-                if ($(document).scrollTop() <= $("#middle").position().top) {
+                if ($(document).scrollTop() <= $("#middle1").position().top) {
                     $("#topmenu").css({
                         "min-width": "1600px",
                         position: "absolute",
                         top: "0px",
                         bottom: "",
-                        "background-color": "transparent"
+                        "background-color": "transparent",
                     });
                 }
             });
 
-
-
-
             //이미지에 마우스 올릴때
             $(".img-cover, .img-cover1").mouseover(function () {
-            var add = "." + $(this).attr("value");
-            $(this).css("transition", "all 0.5s");
-            $(add).css("opacity", "0.7");
+                var add = "." + $(this).attr("value");
+                $(this).css("transition", "all 0.5s");
+                $(add).css("opacity", "0.7");
             });
             //이미지에 마우스 뗄때
             $(".img-cover, .img-cover1").mouseout(function () {
@@ -783,44 +610,22 @@
             });
 
             //이미지에 마우스 올릴때
-            $(".img, .rank, .region").mouseover(function () {
+            $(".img").mouseover(function () {
                 var add = "." + $(this).attr("value");
                 $(add).css("opacity", "1");
-                $(this).css("transform","scale(1)");
+                $(this).css("transform", "scale(1)");
             });
 
             //이미지에 마우스 뗄때
-            $(".img, .rank, .region").mouseout(function () {
+            $(".img").mouseout(function () {
                 var add = "." + $(this).attr("value");
                 $(add).css("opacity", "0");
-                $(this).css("transform","scale(0.97)");
+                $(this).css("transform", "scale(0.97)");
             });
-
-
 
             //이미지 클릭시 이동
             $(".img").click(function () {
                 location.href = "#";
-            });
-
-            //주간랭킹
-            var temp = 0;
-            $("#rankprev").click(function () {
-                if (temp == 0) {
-                    temp -= 1478;
-                } else {
-                    temp += 1478;
-                }
-                $("#rankpage").css("transform", "translate(" + temp + "px, 0)");
-                $("#rankpage").css("transition", "all .5s linear");
-            });
-            $("#rankafter").click(function () {
-                temp -= 1478;
-                if (temp <= -(1478 * 2)) {
-                    temp = 0;
-                }
-                $("#rankpage").css("transform", "translate(" + temp + "px, 0)");
-                $("#rankpage").css("transition", "all .5s linear");
             });
 
             //상단 이미지 슬라이더
@@ -856,18 +661,20 @@
             });
 
             //마이페이지 클릭시 이동
-            $("#mypage").click(function() {
+            $("#mypage").click(function () {
                 location.href = "mypage.html";
             });
 
             //movetop
-            $("#movetop").click(function() {
+            $("#movetop").click(function () {
                 event.preventDefault();
-                $("html, body").animate({
-                    scrollTop: 0
-                }, 1000);
+                $("html, body").animate(
+                    {
+                        scrollTop: 0,
+                    },
+                    1000
+                );
             });
-
         </script>
     </body>
 </html>

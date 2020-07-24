@@ -12,6 +12,8 @@
         <script src="js/jquery-ui.js"></script>
         <script src="js/bootstrap.js"></script>
         <script src="js/Backstretch.js"></script>
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet">
+
         <style>
             * {
                 outline: none;
@@ -20,8 +22,14 @@
                 margin: 0 auto;
             }
             h1 {
-                font-family: "Arial Black";
-                font-weight: bold;
+                font-family: 'Noto Sans KR', sans-serif;
+                font-size: 2em;
+                margin: 30px 0;
+            }
+            h1 > i {
+                color: #FF7D1E;
+                margin-left: 5px;
+                font-size: .9em;
             }
             #main {
                 width: 100%;
@@ -110,19 +118,78 @@
                 min-width: 1600px;
                 height: 400px;
                 margin-top: 20px;
-                background-color: black;
+                background-image: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%);
                 text-align: center;
             }
             #bannerimg {
                 width: 286px;
                 height: 400px;
-                background-image: url("../images/bannerimg.png");
+                background-image: url("../images/bannerimg.jpg");
                 display: inline-block;
                 margin-right: 160px;
             }
             #middle1 input, #middle2 input {
                 outline: none;
             }
+            #rankpage {
+                background-color: #F6F6F6;
+                padding: 50px;
+                margin: 0 auto;
+                text-align: center;
+            }
+            #wrap_rankpage { width: 1200px; height: 490px; margin: 0 auto; }
+            #weekly {
+                border: 1px solid #DDD;
+                background-color: white;
+                width: 490px;
+                height: 490px;
+                padding: 40px;
+                float: left;
+            }
+
+            #region {
+                border: 1px solid #DDD;
+                background-color: white;
+                width: 690px;
+                height: 490px;
+                padding: 40px 0;
+                float: right;
+                text-align: center;
+            }
+            #wrap_region {
+                padding: 15px 0;
+            }
+            #wrap_region > div {
+                display: inline-block;
+                margin-right: 30px;
+                height: 300px;
+                overflow: hidden;
+                cursor: pointer;
+            }
+            #wrap_region > div p {
+                font-size: 13px;
+                height: 30px;
+            }
+            #wrap_region > div span {
+                font-size: 12px;
+                color: #888;
+            }
+            #wrap_region > div:last-child {
+                margin-right: 0;
+            }
+            #wrap_region > div > div:first-child {
+                overflow: hidden;
+                height: 220px;
+                margin-bottom: 10px;
+                background-color: black;
+            }
+            .regionimg {
+                width: 170px;
+                height: 220px;
+                margin-bottom: 10px;
+                transition: all .3s;
+            }
+
             #movetop {
                 width: 40px;
                 height: 40px;
@@ -146,61 +213,6 @@
                 position: absolute;
                 left: 20px;
                 bottom: 0;
-            }
-            .recomand {
-                /* border: 1px solid #eee; */
-                width: 1600px;
-                margin-bottom: 20px;
-                height: 550px;
-                overflow: hidden;
-            }
-            .recomand h1 {
-                padding: 40px;
-            }
-            .rank,
-            .region {
-                display: inline-block;
-                /* border: 1px solid black; */
-                height: 336px;
-                width: 210px;
-                margin-right: 90px;
-                background-repeat: no-repeat;
-                cursor: pointer;
-            }
-            #rankpage {
-                width: 3600px;
-                /* border: 1px solid black; */
-                margin-top: 50px;
-            }
-            .rank > p {
-                position: relative;
-                top: 300px;
-                font-weight: bold;
-            }
-
-            .rank:first-child {
-                margin-left: -460px;
-            }
-
-            .region:last-child {
-                margin-right: 0;
-            }
-            .name {
-                /* border:1px solid black; */
-                width: 50px;
-                height: 50px;
-                border-radius: 50%;
-                position: relative;
-                left: 79px;
-                top: 125px;
-                background-image: url("../images/서울.png");
-                background-position: center center;
-                color: white;
-            }
-            .rtitle {
-                position: relative;
-                top: 240px;
-                font-weight: bold;
             }
             .slider {
                 margin: 0px auto;
@@ -281,67 +293,6 @@
                 background-image: url("../images/consert6.jpeg");
                 background-size: contain;
             }
-            .rank1 {
-                background-image: url("../images/consert7.jpeg");
-                background-size: contain;
-            }
-            .rank2 {
-                background-image: url("../images/consert8.jpeg");
-                background-size: contain;
-            }
-            .rank3 {
-                background-image: url("../images/consert9.jpeg");
-                background-size: contain;
-            }
-            .rank4 {
-                background-image: url("../images/consert10.jpeg");
-                background-size: contain;
-            }
-            .rank5 {
-                background-image: url("../images/consert11.jpeg");
-                background-size: contain;
-            }
-            .rank6 {
-                background-image: url("../images/consert12.jpeg");
-                background-size: contain;
-            }
-            .rank7 {
-                background-image: url("../images/consert13.jpeg");
-                background-size: contain;
-            }
-            .rank8 {
-                background-image: url("../images/consert14.jpeg");
-                background-size: contain;
-            }
-            .rank9 {
-                background-image: url("../images/consert15.jpeg");
-                background-size: contain;
-            }
-            .rank10 {
-                background-image: url("../images/consert16.jpeg");
-                background-size: contain;
-            }
-
-            .region1 {
-                background-image: url("../images/consert17.jpeg");
-                background-size: contain;
-            }
-            .region2 {
-                background-image: url("../images/consert18.jpg");
-                background-size: contain;
-            }
-            .region3 {
-                background-image: url("../images/consert11.jpeg");
-                background-size: contain;
-            }
-            .region4 {
-                background-image: url("../images/consert12.jpeg");
-                background-size: contain;
-            }
-            .region5 {
-                background-image: url("../images/consert1.jpeg");
-                background-size: contain;
-            }
             .atimg1 {
                 background-image: url("../images/consert2.jpeg");
                 background-size: contain;
@@ -367,42 +318,47 @@
                 background-size: contain;
             }
 
-            #crown1 {
-                /* border: 1px solid black; */
-                width: 175px;
-                height: 75px;
-                background-image: url("../images/crown.png");
-                background-position: 440px 665px;
-                position: relative;
-                float: left;
-                left: 105px;
-                top: 135px;
-                z-index: 5;
+            #weekly_list {
+                border-top: 2px solid black; 
+                border-bottom: 1px solid black;
+                overflow: hidden;
+                width: 410px;
+                height: 270px;
             }
-            #crown2 {
-                /* border: 1px solid black; */
-                width: 175px;
-                height: 65px;
-                background-image: url("../images/crown.png");
-                background-position: 383px 535px;
-                position: relative;
-                float: left;
-                left: 230px;
-                top: 120px;
-                z-index: 5;
+            #weekly_list dt, #weekly_list dd {
+                display: inline-block;
             }
-            #crown3 {
+            #weekly_list dt {
+                padding-right: 20px;
+                font-size: 16px;
+                text-decoration: underline;
+            }
+            #weekly_list dd p {
+                font-weight: bold;
                 /* border: 1px solid black; */
+                width: 230px;
+                height: 25px;
+                font-size: 16px;
+                text-overflow: ellipsis;
+            }
+            #weekly_list dd span {
+                position: relative;
+                top: 30px;
+                font-size: 12px;
+                color: #888;
+            }
+            #weekly_list img {
                 width: 120px;
-                height: 120px;
-                background-image: url("../images/crown.png");
-                background-position: 122px 0px;
-                position: relative;
-                float: left;
-                left: 290px;
-                top: 130px;
-                z-index: 5;
+                height: 160px;
             }
+            #weekly_list ul {
+                list-style-type: none;
+                padding: 0;
+            }
+            #weekly_list ul li {
+                padding: 50px 0;
+            }
+
 
         </style>
     </head>
@@ -549,14 +505,115 @@
             <!-- 동영상 들어갈 자리 -->
             <div id="banner">
                 <div id="bannerimg"></div>
-                <iframe width="714" height="400" src="https://www.youtube.com/embed/knh13N7k-TY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <iframe width="711" height="400" src="https://www.youtube.com/embed/o_nxIQTM_B0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <hr>
+            <!-- 주간 랭킹, 지역별 추천 -->
+            <div id="rankpage">
+                <div id="wrap_rankpage">
+                    <!-- 주간 랭킹 -->
+                    <div id="weekly">
+                        <h1>WEEKLY RANKING</h1>
+                        <div id="weekly_list">
+                            <ul>
+                                <li>
+                                    <dt>1위</dt>
+                                    <dd>
+                                        <img src="../images/weekly_concert1.jpg">
+                                    </dd>
+                                    <dd>
+                                        <p>2020 WILD KARD IN SEOUL</p>
+                                        <span>
+                                            2020.08.22 ~ 2020.08.22<br>
+                                            노들섬 라이브하우스
+                                        </span>
+                                    </dd>
+                                </li>
+                                <li>
+                                    <dt>2위</dt>
+                                    <dd>
+                                        <img src="../images/rankbest2.jpg">
+                                    </dd>
+                                    <dd>
+                                        <p>2020 태사자 콘서트 [THE RETURN]</p>
+                                        <span>
+                                            2020.07.25 ~ 2020.07.26<br>
+                                            YES24 LIVE HALL(구, 악스홀)
+                                        </span>
+                                    </dd>
+                                </li>
+                                <li>
+                                    <dt>3위</dt>
+                                    <dd>
+                                        <img src="../images/weekly_concert3.jpg">
+                                    </dd>
+                                    <dd>
+                                        <p>가을방학 정규 4집 발매 기념 공연 [세상은 한 장의 손수건]</p>
+                                        <span>
+                                            2020.09.05 ~ 2020.09.06<br>
+                                            노들섬 라이브하우스
+                                        </span>
+                                    </dd>
+                                </li>
+                                <li>
+                                    <dt>4위</dt>
+                                    <dd>
+                                        <img src="../images/weekly_concert4.jpg">
+                                    </dd>
+                                    <dd>
+                                        <p>2020 DMZPOP DRIVE IN CONCERT in CHEOLWON [무료공연]</p>
+                                        <span>
+                                            2020.08.15 ~ 2020.08.15<br>
+                                            김화생활체육공원 특설무대
+                                        </span>
+                                    </dd>
+                                </li>
+                                <li>
+                                    <dt>5위</dt>
+                                    <dd>
+                                        <img src="../images/weekly_concert5.jpg">
+                                    </dd>
+                                    <dd>
+                                        <p>SURL (설) concert 'Ah, ah, ah, ah What can I do?'</p>
+                                        <span>
+                                            2020.08.15 ~ 2020.08.16<br>
+                                            노들섬 라이브하우스
+                                        </span>
+                                    </dd>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- 지역별 추천 -->
+                    <div id="region">
+                        <h1>지역별 추천<i class="glyphicon glyphicon-map-marker"></i></h1>
+                        <div id="wrap_region">
+                            <div>
+                                <div>
+                                    <img src="../images/consert3.jpeg" class="regionimg">
+                                </div>
+                                <p>십센치X데이브레이크</p>
+                                <span>KBS부산홀</span>
+                            </div>
+                            <div>
+                                <div>
+                                    <img src="../images/consert11.jpeg" class="regionimg">
+                                </div>
+                                <p>2020 빅3 "행복한 만남"<br>(진성,김용임,강진)</p>
+                                <span>KBS부산홀</span>
+                            </div>
+                            <div>
+                                <div>
+                                    <img src="../images/consert5.jpeg" class="regionimg">
+                                </div>
+                                <p>서울숲재즈페스티벌 2020</p>
+                                <span>서울숲공원</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div id="middle2">
-                <hr />
-                <!-- 주간 랭킹, 지역별 추천 -->
-                <div style="text-align: center; background-color: #FBFBFB;">
-                    
-                </div>
                 <hr />
                 <!-- 뮤지컬, 연극 목록 -->
                 <div style="text-align: center; margin-bottom: 50px;">
@@ -718,14 +775,14 @@
             });
 
             //이미지에 마우스 올릴때
-            $(".img, .rank, .region").mouseover(function () {
+            $(".img").mouseover(function () {
                 var add = "." + $(this).attr("value");
                 $(add).css("opacity", "1");
                 $(this).css("transform", "scale(1)");
             });
 
             //이미지에 마우스 뗄때
-            $(".img, .rank, .region").mouseout(function () {
+            $(".img").mouseout(function () {
                 var add = "." + $(this).attr("value");
                 $(add).css("opacity", "0");
                 $(this).css("transform", "scale(0.97)");
@@ -734,26 +791,6 @@
             //이미지 클릭시 이동
             $(".img").click(function () {
                 location.href = "#";
-            });
-
-            //주간랭킹
-            var temp = 0;
-            $("#rankprev").click(function () {
-                if (temp == 0) {
-                    temp -= 1518;
-                } else {
-                    temp += 1518;
-                }
-                $("#rankpage").css("transform", "translate(" + temp + "px, 0)");
-                $("#rankpage").css("transition", "all .5s linear");
-            });
-            $("#rankafter").click(function () {
-                temp -= 1518;
-                if (temp <= -(1518 * 2)) {
-                    temp = 0;
-                }
-                $("#rankpage").css("transform", "translate(" + temp + "px, 0)");
-                $("#rankpage").css("transition", "all .5s linear");
             });
 
             //상단 이미지 슬라이더
@@ -803,6 +840,56 @@
                     1000
                 );
             });
+
+            //지역별 추천 이미지
+            $("#wrap_region div").mouseover(function() {
+                $(this).children().children("img")
+                    .css("transform", "scale(1.1, 1.1)")
+                    .css("opacity", ".8");
+            });
+            $("#wrap_region div").mouseout(function() {
+                $(this).children().children("img")
+                    .css("transform", "scale(1, 1)")
+                    .css("opacity", "1");
+            });
+
+
+            //주간 랭킹
+            $(document).ready(function(){
+                
+                var banner = $("#weekly_list").find("ul");
+                var bannerHeight = banner.children().outerHeight();
+                var bannerLength = banner.children().length;
+
+                var rollingTimer;
+
+                rollingTimer = setInterval(function() { rollingStart(); }, 3000);
+
+                banner.mouseover(function() {
+                    clearInterval(rollingTimer);
+                    $(this).css("cursor", "pointer");
+                });
+                banner.mouseout(function() {
+                    rollingTimer = setInterval(function() { rollingStart(); }, 3000);
+                    $(this).css("cursor", "default");
+                });
+
+                function rollingStart() {
+                    
+                    banner.animate({top: bannerHeight + "px"}, function() {
+
+                        $(this).append("<li>" + $(this).find("li:first").html() + "</li>");
+
+                        $(this).find("li:first").remove();
+
+                        $(this).css("top", 0);
+
+                    });
+
+                }
+
+            });
+
         </script>
     </body>
 </html>
