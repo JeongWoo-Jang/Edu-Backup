@@ -14,3 +14,4 @@
 3. JDBC
 4. ERD
 5. HTML & CSS & JS
+6. SERVER
