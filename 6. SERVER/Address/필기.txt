@@ -42,7 +42,19 @@
 		- web.xml > list.do
 
 3. 주소록 수정하기
+	a. 수정 폼 페이지
+		- com.test.address.Edit.java
+		- views > edit.jsp
+	b. 수정 DB 페이지
+		- com.test.address.EditOk.java
+		- views > editok.jsp
+	c. web.xml
+		- /add.do
+		- /addok.do
+
 4. 주소록 삭제하기
 	- com.test.address > Del.java
 	- views > del.jsp
 	- web.xml > del.do
+	
+

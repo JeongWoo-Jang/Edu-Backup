@@ -12,3 +12,4 @@ insert into tblAddress(seq, name, age, address, regdate)
     values (seqAddress.nextVal, '홍길동', 20, '서울시 강남구 역삼동', default);
     
 select * from tblAddress;
+commit;

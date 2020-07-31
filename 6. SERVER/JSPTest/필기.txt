@@ -309,6 +309,22 @@ JSTL 액션 태그(확장)
 
 
 
+JSPTest
+파일 업로드/다운로드
+- com.test.jsp > Ex22_Form.java
+- WebContent > ex22_form.jsp
+
+- com.test.jsp > Ex22_FormOk.java
+- WebContent > ex22_formok.jsp
+
+다중 파일 업로드/다운로드
+- com.test.jsp > Ex23_Form.java
+- WebContent > ex23_form.jsp
+
+- com.test.jsp > Ex23_FormOk.java
+- WebContent > ex23_formok.jsp
+
+
 
 
 
