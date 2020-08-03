@@ -65,7 +65,11 @@
 				<h1>
 					시작 <small>Hello</small>
 				</h1>
-				<div style="height: 747px"></div>
+				<div style="height: 747px">
+				
+					${id}
+				
+				</div>
 			</div>
 		</div>
 		<!-- ########## 내용 끝 -->

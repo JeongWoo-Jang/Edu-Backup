@@ -65,25 +65,30 @@
 			<div>
 				<h1>인증 <small>Auth</small></h1>
                 
-                <div class="loginbox panel panel-default">
-                    <div class="panel-heading">Auth</div>
-                    <div class="panel-body">
-                        <ul class="list-group">
-                            <li class="list-group-item">
-                                <input type="text" id="id" placeholder="ID" class="form-control">
-                            </li>
-                            <li class="list-group-item">
-                                <input type="password" id="pw" placeholder="Password" class="form-control">
-                            </li>
-                            <li class="list-group-item">
-                                <button type="submit" class="btn btn-default">
-                                    <span class="glyphicon glyphicon-lock"></span>
-                                   	로그인
-                                </button>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+                <form method="POST" action="/codestudy/member/login.do">
+                
+	                <div class="loginbox panel panel-default">
+	                    <div class="panel-heading">Auth</div>
+	                    <div class="panel-body">
+	                        <ul class="list-group">
+	                            <li class="list-group-item">
+	                                <input type="text" id="id" name="id" placeholder="ID" class="form-control" required>
+	                            </li>
+	                            <li class="list-group-item">
+	                                <input type="password" id="pw" name="pw" placeholder="Password" class="form-control" required>
+	                            </li>
+	                            <li class="list-group-item">
+	                                <button type="submit" class="btn btn-default">
+	                                    <span class="glyphicon glyphicon-lock"></span>
+	                                   	로그인
+	                                </button>
+	                            </li>
+	                        </ul>
+	                    </div>
+	                </div>
+                
+                </form>
+                
 			</div>
 		</div>
 		<!-- ########## 내용 끝 -->

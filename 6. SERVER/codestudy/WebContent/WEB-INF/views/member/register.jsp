@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 
@@ -65,34 +64,46 @@
 			<div>
 				<h1>가입 <small>Register</small></h1>
                 
+                
+                <form method="POST" action="/codestudy/member/registerok.do" enctype="multipart/form-data">
+                
                 <div class="registerbox panel panel-default">
                     <div class="panel-heading">Register</div>
                     <div class="panel-body">
                         <ul class="list-group">
+                        
                             <li class="list-group-item">
-                                <input type="text" id="id" placeholder="ID" class="form-control">
+                                <input type="text" id="id" name="id" placeholder="ID" class="form-control" required>
+                            </li>
+                            
+                            <li class="list-group-item">
+                                <input type="text" id="name" name="name" placeholder="Name" class="form-control" required>
+                            </li>
+                            
+                            <li class="list-group-item">
+                                <input type="email" id="email" name="email" placeholder="Email" class="form-control" required>
                             </li>
                             <li class="list-group-item">
-                                <input type="email" id="email" placeholder="Email" class="form-control">
+                                <input type="password" id="pw" name="pw" placeholder="Password" class="form-control" required>
                             </li>
                             <li class="list-group-item">
-                                <input type="password" id="pw" placeholder="Password" class="form-control">
+                                <input type="password" id="cpw" name="cpw" placeholder="Confirm Password" class="form-control" required>
                             </li>
                             <li class="list-group-item">
-                                <input type="cpassword" id="pw" placeholder="Confirm Password" class="form-control">
+                                <input type="file" id="pic" name="pic" placeholder="Picture" class="form-control">
                             </li>
                             <li class="list-group-item">
-                                <input type="file" id="pic" placeholder="Picture" class="form-control">
-                            </li>
-                            <li class="list-group-item">
-                                <button type="submit" class="btn btn-default">
+                                <button type="button" class="btn btn-default" id="btnSubmit">
                                     <span class="glyphicon glyphicon-ok"></span>
-                                    	가입
+                                    가입
                                 </button>
                             </li>
                         </ul>
                     </div>
                 </div>
+                
+                </form>
+                
 			</div>
 		</div>
 		<!-- ########## 내용 끝 -->
@@ -107,7 +118,30 @@
 	
 	<script>
     
+		function checkPassword() {
+			
+			//암호 확인 일치?
+			if ($("#pw").val() != $("#cpw").val()) {
+				return false;
+			}
+			
+			return true;			
+		}
+		
+		
+		//자바스크립트 전송 + 유효성 검사 -> 패턴
+		$("#btnSubmit").click(function() {
+			if (checkPassword()) {
+				//전송O - 에뮬레이터 함수
+				this.form.submit(); //전송하기	
+			} else {
+				//전송X
+				alert("암호를 다시 확인하세요.");
+			}
+		});
+	
     </script>
 </body>
 
 </html>
+
