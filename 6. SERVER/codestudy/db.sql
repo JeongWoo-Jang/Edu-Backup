@@ -19,25 +19,162 @@ create sequence seqMember;
 select * from tblMember;
 
 delete from tblMember;
+
 commit;
+
+drop table tblComment;
+drop table tblBoard;
+
 
 -- 게시판
 create table tblBoard (
-    seq number primary key,                 -- 글번호(PK)
-    subject varchar2(1000) not null,        -- 제목
-    content varchar2(2000) not null,        -- 내용
-    regdate date default sysdate not null,  -- 등록일
-    readcount number default 0 not null,    -- 조회수
-    heart number default 0 not null,        -- 추천
-    mseq number not null references tblMember(seq) -- 회원번호(FK)
+    seq number primary key,                 --글번호(PK)
+    subject varchar2(1000) not null,        --제목
+    content varchar2(2000) not null,        --내용
+    regdate date default sysdate not null,  --등록일
+    readcount number default 0 not null,    --조회수
+    --heart number default 0 not null,         --추천
+    mseq number not null references tblMember(seq), --회원번호(FK)
+    thread number not null, --답변
+    depth number not null --답변
 );
+
+delete from tblHeart;
+delete from tblComment;
+delete from tblBoard;
+select * from tblBoard;
+
+alter table tblBoard
+add (thread number not null);
+
+alter table tblBoard
+add (depth number not null);
 
 create sequence seqBoard;
 
 insert into tblBoard (seq, subject, content, regdate, readcount, heart, mseq)
-    values (seqBoard.nextVal, '게시판 테스트입니다.', '글내용입니다.', default, default, default, 5);
-    
+    values (seqBoard.nextVal, '게시판 테스트입니다.', '글내용입니다.', default,
+                default, default, 5);
+
+select * from tblMember;
 select * from tblBoard;
+
 commit;
 
-select seq, subject, (select name from tblMember where seq = tblBoard.mseq) as name, regdate, readcount from tblBoard;
+
+select seq, subject, (select name from tblMember where seq = tblBoard.mseq) as name
+, regdate, readcount from tblBoard;
+
+
+create or replace view vwBoard
+as
+select 
+    seq, subject, 
+    (select name from tblMember where seq = tblBoard.mseq) as name,
+    regdate, readcount,
+    (sysdate - regdate) * 24 as gap,
+    content,
+    (select count(*) from tblComment where bseq = tblBoard.seq) as commentcount,
+    (select count(*) from tblHeart where bseq = tblBoard.seq) as heart,
+    thread, depth
+from tblBoard;
+
+select * from vwBoard;
+
+
+select a.*, 
+    (select name from tblMember where seq = a.mseq) as name, 
+    (select id from tblMember where seq = a.mseq) as id 
+    from tblBoard a where seq = ?;
+
+
+
+-- 작업 히스토리
+create table tblHistory (
+    seq number primary key,
+    content varchar2(2000) not null
+);
+
+insert into tblHistory values (1, 'v0.1\n- 시작');
+
+delete from tblHistory;
+
+commit;
+
+select * from tblBoard;
+delete from tblBoard;
+
+
+-- 댓글
+
+create table tblComment (
+    seq number primary key,
+    commentContent varchar2(1000) not null,
+    regdate date default sysdate,
+    mseq number not null 
+            references tblMember(seq),
+    bseq number not null
+            references tblBoard(seq)
+);
+
+create sequence seqComment;
+
+
+
+select 
+   a.*,
+   (select name from tblMember where seq = a.mseq) as name,
+   (select id from tblMember where seq = a.mseq) as id
+from tblComment a;
+
+
+
+-- 1. join : X
+-- 2. union : O
+-- 3. 상관 서브쿼리 : O
+select count(*) as bcnt from tblBoard where mseq = 5
+union all
+select count(*) as ccnt from tblComment where mseq = 5;
+
+select (select count(*) as bcnt from tblBoard where mseq = 5) as bcnt
+    , (select count(*) as ccnt from tblComment where mseq = 5) as ccnt 
+    from dual;
+
+
+
+-- 1. 댓글 테이블 삭제
+drop table tblComment;
+-- 2. 게시판 테이블 삭제
+drop table tblBoard;
+-- 3. 게시판 테이블 생성(heart 삭제 후)
+-- create table tblBoard
+-- 4. 댓글 테이블 생성
+-- create table tblComment
+-- 5. 추천 테이블 생성
+create table tblHeart (
+    seq number primary key,
+    mseq number not null references tblMember(seq),
+    bseq number not null references tblBoard(seq)
+);
+
+create sequence seqHeart;
+
+
+
+
+select * from tblHeart;
+
+select a.*, 
+    (select name from tblMember where seq = a.mseq) as name, 
+    (select id from tblMember where seq = a.mseq) as id,
+    (select count(*) from tblHeart where bseq = a.seq and mseq = 5) as heart
+from tblBoard a ;
+
+select count(*) as cnt from tblHeart where bseq = 61 and mseq = 5;
+
+select * from tblBoard order by heart desc;
+
+
+-- 한페이지 당 -> 20개씩
+select * from (select a.*, rownum as rnum from (select * from vwBoard order by thread desc) a) where rnum >= 1 and rnum <= 20;
+

@@ -14,6 +14,16 @@ public class Index extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		//1. DB 작업 -> select
+		//2. 결과 전달 + JSP 호출하기
+		
+		//1.
+		HistoryDAO dao = new HistoryDAO();
+		HistoryDTO dto = dao.get();
+		
+		//2.
+		request.setAttribute("dto", dto);
+		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/history/index.jsp");
 		dispatcher.forward(request, response);
 		

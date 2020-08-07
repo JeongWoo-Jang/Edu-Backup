@@ -14,6 +14,7 @@
 				<div class="item">${name}(${id})</div>
 				<div class="item">${email}</div>
 				<div class="item">${regdate}</div>
+				<div class="item">게시물(${map.bcnt}),댓글(${map.ccnt})</div>
 			</div>
 		</div>
 	</div>

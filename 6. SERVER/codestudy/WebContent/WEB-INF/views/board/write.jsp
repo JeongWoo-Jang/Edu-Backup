@@ -65,45 +65,49 @@
 			<div>
 				<h1>자유 게시판 <small>Board</small></h1>
                 
-                <form method="POST" action="/codestudy/board/writeok.do">
+				<form method="POST" action="/codestudy/board/writeok.do">
+				
+                <table class="table write">
+                    <tr>
+                        <td>
+                            <input type="text" class="form-control" placeholder="subject" id="subject" name="subject" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <textarea class="form-control" id="content" placeholder="content" name="content" required></textarea>
+                        </td>
+                    </tr>
+                    <!-- 
+                    <tr>
+                        <td>
+                            <input type="file" class="form-control" placeholder="file" id="file">
+                        </td>
+                    </tr>
+                    -->
+                </table>
 
-	                <table class="table write">
-	                    <tr>
-	                        <td>
-	                            <input type="text" class="form-control" placeholder="subject" id="subject" name="subject" required>
-	                        </td>
-	                    </tr>
-	                    <tr>
-	                        <td>
-	                            <textarea class="form-control" id="content" placeholder="content" name="content" required></textarea>
-	                        </td>
-	                    </tr>
-	                    <!-- 
-	                    <tr>
-	                        <td>
-	                            <input type="file" class="form-control" placeholder="file" id="file">
-	                        </td>
-	                    </tr>
-	                     -->
-	                </table>
-	
-	
-	                <div style="clear:both;"></div>
-	
-	                <div class="btns btn-group">
-	                    <button type="button" class="btn btn-default" onclick="location.href='/codestudy/board/list.do';">
-	                        <span class="glyphicon glyphicon-chevron-left"></span>
-	                        뒤로
-	                    </button>
-	                    <button type="submit" class="btn btn-default">
-	                        <span class="glyphicon glyphicon-plus"></span>
-	                        쓰기
-	                    </button>
-	                </div>
-	                <div style="clear:both;"></div>
+
+                <div style="clear:both;"></div>
+
+                <div class="btns btn-group">
+                    <button type="button" class="btn btn-default" onclick="location.href='/codestudy/board/list.do';">
+                        <span class="glyphicon glyphicon-chevron-left"></span>
+                        뒤로
+                    </button>
+                    <button type="submit" class="btn btn-default">
+                        <span class="glyphicon glyphicon-plus"></span>
+                        쓰기
+                    </button>
+                </div>
+                
+                <input type="hidden" name="reply" value="${reply}">
+                <input type="hidden" name="thread" value="${thread}">
+                <input type="hidden" name="depth" value="${depth}">
                 
                 </form>
                 
+                <div style="clear:both;"></div>
 			</div>
 		</div>
 		<!-- ########## 내용 끝 -->

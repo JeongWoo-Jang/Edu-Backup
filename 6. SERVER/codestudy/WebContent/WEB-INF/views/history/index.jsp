@@ -65,20 +65,11 @@
 			<div>
 				<h1>작업 히스토리 <small>History</small></h1>
                 
-                <div class="history">
-v0.5
-- 자유 게시판 인터페이스 추가
-v0.4.1
-- 작업 히스토리 스크립트 구현                
-v0.4
-- 작업 히스토리 인터페이스 추가
-v0.3
-- 인증 인터페이스 추가
-v0.2
-- 주 메뉴 구현
-v0.1
-- 레이아웃 구현</div>
-                <textarea class="txtHistory"></textarea>
+                <div class="history">${dto.content}</div>
+                
+                <form id="formHistory" method="POST" action="/codestudy/history/history.do">
+                	<textarea class="txtHistory" name="content"></textarea>
+                </form>
 			</div>
 		</div>
 		<!-- ########## 내용 끝 -->
@@ -145,6 +136,9 @@ v0.1
 	            showHistory();
 	            $(".history").show();
 	            $(".txtHistory").hide();
+	            
+	            //편집 내용 -> 서버로 전송
+	            $("#formHistory").submit();
 	        }
 	        event.cancelBubble = true;
 	    });

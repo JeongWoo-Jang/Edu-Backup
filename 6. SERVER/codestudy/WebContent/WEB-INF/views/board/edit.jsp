@@ -65,26 +65,48 @@
 			<div>
 				<h1>자유 게시판 <small>Board</small></h1>
                 
-                <table class="table delete">
+				<form method="POST" action="/codestudy/board/editok.do">
+				
+                <table class="table write">
                     <tr>
-                        <td>삭제</td>
+                        <td>
+                            <input type="text" class="form-control" placeholder="subject" id="subject" name="subject" required value="${dto.subject}">
+                        </td>
                     </tr>
                     <tr>
                         <td>
-                            <button type="button" class="btn btn-default" onclick="location.href='/codestudy/board/view.do?seq=${seq}';">
-                                <span class="glyphicon glyphicon-chevron-left"></span>
-								뒤로
-                            </button>
-                            <button type="button" class="btn btn-default" onclick="location.href='/codestudy/board/deleteok.do?seq=${seq}';">
-                                <span class="glyphicon glyphicon-remove"></span>
-								삭제
-                            </button>
+                            <textarea class="form-control" id="content" placeholder="content" name="content" required>${dto.content}</textarea>
                         </td>
                     </tr>
+                    <!-- 
+                    <tr>
+                        <td>
+                            <input type="file" class="form-control" placeholder="file" id="file">
+                        </td>
+                    </tr>
+                    -->
                 </table>
+
+
+                <div style="clear:both;"></div>
+
+                <div class="btns btn-group">
+                    <button type="button" class="btn btn-default" onclick="location.href='/codestudy/board/list.do';">
+                        <span class="glyphicon glyphicon-chevron-left"></span>
+                        뒤로
+                    </button>
+                    <button type="submit" class="btn btn-default">
+                        <span class="glyphicon glyphicon-minus"></span>
+                        수정
+                    </button>
+                </div>
+                
+                <!-- 수정할 글 번호 -->
+                <input type="hidden" name="seq" value="${dto.seq}">
+                
+                </form>
                 
                 <div style="clear:both;"></div>
-                
 			</div>
 		</div>
 		<!-- ########## 내용 끝 -->

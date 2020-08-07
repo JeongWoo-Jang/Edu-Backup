@@ -14,10 +14,28 @@ public class Write extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		//1. 데이터 가져오기(reply)
+		//2. 결과 전달 + JSP 호출하기
+		
+		//1.
+		String reply = request.getParameter("reply");
+		String thread = request.getParameter("thread");
+		String depth = request.getParameter("depth");
+		
+		//2.
+		request.setAttribute("reply", reply);
+		request.setAttribute("thread", thread);
+		request.setAttribute("depth", depth);
+		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/board/write.jsp");
 		dispatcher.forward(request, response);
 		
 	}
 
 }
+
+
+
+
+
 

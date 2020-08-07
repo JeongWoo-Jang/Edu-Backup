@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.HashMap;
 
 import com.test.codestudy.DBUtil;
 
@@ -116,6 +117,37 @@ public class MemberDAO {
 		} catch (Exception e) {
 			System.out.println(e);
 		}
+		
+		return null;
+	}
+
+	//Auth 서블릿 -> 회원 번호 전달 + 카운트 반환
+	public HashMap<String, Integer> getCount(String seq) {
+		
+		try {
+			
+			String sql = "select (select count(*) as bcnt from tblBoard where mseq = ?) as bcnt,"
+					+ " (select count(*) as ccnt from tblComment where mseq = ?) as ccnt from dual";
+			
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, seq);
+			pstat.setString(2, seq);
+			
+			HashMap<String, Integer> map = new HashMap<String, Integer>();
+			
+			rs = pstat.executeQuery();
+			
+			if (rs.next()) {
+				map.put("bcnt", rs.getInt("bcnt"));
+				map.put("ccnt", rs.getInt("ccnt"));
+			}
+			
+			return map;
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		
 		
 		return null;
 	}
