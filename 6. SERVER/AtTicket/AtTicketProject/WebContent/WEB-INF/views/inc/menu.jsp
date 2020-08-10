@@ -1,13 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<div class = "npbtn" id = "nextbtn"><img src="../images/slide-dir-next.png" alt=""></div>
-    <div id="left">
+  <div id="left">
         
-        <img src="../images/man.png" 
-            style="margin-top: 40px; width: 80px; border: 1px solid #333; border-radius:     50%; background-color: #999;">
+        <img src="<%= request.getContextPath() %>/images/man.png" 
+            style="margin-top: 40px; width: 80px; border: 1px solid #333; border-radius:50%; background-color: #999;">
         <div class="info" style="color:white">
             <span><br>Welcome,</span></br></span>
-            <span>Hong gil dong</span>
+            <span>${id}</span>
         </div>
         <!-- <div class="b">
             <input style="font-weight: bold; background-color: #C27BA0; margin : 80px;" type="button" value="Logout" id="btn2"
@@ -42,7 +41,7 @@
             </div>
             <h3>1:1 문의</h3>
             <div>
-            <div style="margin-left:-30px; padding-left: 30px; width: 231px; height: 25px;"><a href="adminQuestion.html"><span>▶</span> 문의 조회</a></div>
+            <div style="margin-left:-30px; padding-left: 30px; width: 231px; height: 25px;"><a href="/AtTicketProject/admincustomerqna.do"><span>▶</span> 문의 조회</a></div>
             </div>
             <h3>공연 랭킹</h3>
             <div>
@@ -92,7 +91,7 @@
 
         <!-- 티켓 사이트 로고 바로가기 -->
         <div style="margin-top: 20px; position: fixed; bottom: 30px; left: 70px;">
-            <img src="../images/title.png" id="tickethome" 
+            <img src="<%= request.getContextPath() %>/images/title.png" id="tickethome" 
                     style="cursor: pointer; height: 50px;">
         </div>
 
@@ -115,9 +114,9 @@
             </div>
         </div>
     </div>
-
+	
     <div id = "fixedBtn">
-        <img src = "../images/switch_on.png" id="sw" name="sw"
+        <img src = "<%= request.getContextPath() %>/images/switch_on.png" id="sw" name="sw"
             style="width: 70px; position: fixed; bottom: 0px; right: 50px; margin-bottom : 45px;">
 
         <!-- 제일 위로 돌아가기 -->

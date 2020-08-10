@@ -8,228 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="shortcut icon" href="./images/favicon.ico">
+    <link rel="stylesheet" href="css/usermypage.css" />
     <style>
-
-        * { outline: none; }
-        #btnpoint, #btninfo, #btndetail, #btnlogout, #btncalendar { outline: none; }
-        body { margin: 0 auto; }
-        h1 { font-family: "Arial Black"; font-weight: bold; }
-        #main { width: 100%; }
-        #top {
-            /* border: 1px solid black; */
-            min-width: 1300px;
-            height: 80px;
-            margin: 0 auto;
-        }
-        #middle {
-            /* border: 1px solid black; */
-            width: 1245px;
-            min-height: 1100px;
-            margin: 0 auto;
-            padding: 60px;
-        }
-        #bottom {
-            /* border: 1px solid black; */
-            min-width: 1300px;
-            height: 250px;
-            background-color: #eee;
-        }
-        #bottom > div {
-            float: left;
-            position: relative;
-            left: 21%;
-            top: 22%;
-        }
-        #bottom .txt {
-            margin-left: 30px;
-            line-height: 1.1em;
-            color: #666;
-            top: 28%;
-        }
-        #bottom .txt .black {
-            color: black;
-        }
-        #bottom #service {
-            margin-left: 200px;
-            top: 18%;
-        }
-        #bottom #service p:first-child {
-            border-bottom: 1px solid #BBB;
-            padding: 0 0 5px 20px;
-            font-weight: bold;
-            font-size: 1.1em;
-        }
-        #bottom #service p > span {
-            color: #444;
-            font-size: 1.3em;
-        }
-        #bottom #service p:nth-child(2) {
-            text-align: center;
-            font-size: 3em;
-            padding-left: 10px;
-        }
-        #bottom #service p {
-            margin-bottom: -2px;
-            padding-left: 20px;
-        }
-
-        #topmenu {
-            border-bottom: 1px solid #ddd;
-            background-color: transparent;
-            width: 100%;
-            min-width: 1300px;
-            height: 40px;
-            color: black;
-            text-align: center;
-            font-size: 18px;
-            font-weight: bold;
-            padding: 40px 0;
-            position: absolute;
-        }
-        .menubar {
-            margin: 0 5px;
-            cursor: pointer;
-        } 
-        #topleft {
-            display: inline-block;
-            /* border: 1px solid white; */
-            width: 100px;
-            height: 65px;
-            background-image: url("./images//title.png");
-            background-repeat: no-repeat;
-            background-position: center center;
-            position: absolute;
-            left : 10px;
-            top: 10px;
-            cursor: pointer;
-        }
-        #topright {
-            font-size: 13px;
-            position: absolute;
-            right : 5px;
-            top: 42px;
-            cursor: pointer;
-        }
-        #search {
-            border: 0;
-            border-bottom: 1px solid black;
-            background-color: transparent;
-            outline: none;
-            color: black;
-        }
-
-        #left {
-            /* border: 1px solid black; */
-            width: 250px;
-            height: 1000px;
-            float: left;
-        }
-        #left > div {
-            border: 1px solid #C7C7C7;
-            width: 100%;
-            height: 200px;
-            background-color: #FDFDFD;
-        }
-        #left > div:first-child {height: 230px; margin-bottom: 25px;}
-        #left > div:nth-child(3) {height: 278px; margin-bottom: 25px;}
-        #userinfo #infohead {
-            background-color: #eee;
-            font-size: 1.7em;
-            font-weight: bold;
-            color: #444;
-            padding: 10px 0 10px 15px;
-            border-top: 2px solid black;
-            border-bottom: 1px solid #C7C7C7;
-            cursor: pointer;
-        }
-        #userinfo p:nth-child(2) {
-            padding: 2px 15px;
-        }
-        #userinfo p:nth-child(2) span {
-            font-weight: bold;
-        }
-        #point p {
-            border: 1px solid #DBE4F3;
-            border-radius: 5px;
-            padding: 10px;
-            margin: 5px 5px 15px 5px;
-        }
-        #userinfo div:nth-child(4) {
-            margin-bottom: 5px;
-        }
-        #userinfo div:nth-child(4), #userinfo div:nth-child(5) {
-            text-align: center;
-        }
-        #userinfo input {
-            width: 110px;
-        }
-        #left > div:nth-child(2) {
-            border: 5px solid #7A98B4;
-            padding: 15px;
-            font-weight: bold;
-            color: #555;
-            margin-bottom: 25px;
-        }
-        #left > div:nth-child(2) > p {
-            border-bottom: 1px dotted #DBE4F3;
-            margin-bottom: 15px;
-            cursor: pointer;
-        }
-        #left > div:nth-child(2) > p > span {
-            float: right;
-        }
-        #left > div:nth-child(3) > p:first-child {
-            border-bottom: 1px solid #DBE4F3;
-            font-size: 1.2em;
-            text-decoration: underline;
-            color: rgb(71, 125, 224);
-            font-weight: bold;
-            padding: 8px 10px;
-            margin-bottom: -10px;
-            background-color: #EEEEEE;
-        }
-        #left > div:nth-child(3) > .personaltitle {
-            padding: 5px 15px;
-            margin-top: 10px;
-            border-top: 1px solid #DBE4F3;
-            border-bottom: 1px solid #DBE4F3;
-            font-weight: bold;
-            font-size: 14px;
-        }
-        #left > div:nth-child(3) > p:nth-child(2) {
-            border-top: 0;
-        }
-        #left > div:nth-child(3) > a {
-            font-size: 11px;
-            margin-left: 5px;
-            text-decoration: none;
-            color: black;
-        }
-        #left > div:nth-child(3) > a:hover {
-            text-decoration: underline;
-        }
-
-        #left > div:last-child p:first-child {
-            border-bottom: 1px solid #DBE4F3;
-            padding: 5px 0 5px 20px;
-            font-weight: bold;
-            font-size: 1.1em;
-        }
-        #left > div:last-child p:first-child > span {
-            color: #444;
-            font-size: 1.3em;
-        }
-        #left > div:last-child p:nth-child(2) {
-            text-align: center;
-            font-size: 3em;
-        }
-        .time {
-            /* text-align: center; */
-            border-left: 1px solid #888;
-            margin-bottom: -2px;
-            margin-left: 35px;
-            padding-left: 10px;
-        }
 
         #right {
             /* border: 1px solid black; */
@@ -339,31 +119,6 @@
         }
         
 
-        #movetop {
-            width: 40px;
-            height: 40px;
-            background-color: gray;
-            position: fixed;
-            bottom: 0;
-            right: 0;
-            text-align: center;
-            padding-top: 3px;
-            text-decoration: none;
-            color: white;
-            font-weight: bold;
-            font-size: 1.5em;
-        }
-        #movetop:hover {
-            background-color: orange;
-            cursor: pointer;
-        }
-        #frogue-container, .frogue-chat {
-            position: absolute;
-            left:20px;
-            bottom: 0;
-        }
-
-
     </style>
 </head>
 <body>
@@ -374,51 +129,7 @@
 <!-------------------------------- 내용부분 -------------------------------->
         <div id="middle">
             <!-- 마이페이지 좌측 -->
-            <div id="left">
-                <!-- 유저 정보 -->
-                <div id="userinfo">
-                    <p id="infohead">MY공연<small style="color: #BBB"> | MYPAGE</small></p>
-                    <p><span>장x우</span>님은 <span>일반회원</span>입니다.</p>
-                    <div id="point">
-                        <p>Egg포인트 : 0원</p>
-                    </div>
-                    <div>
-                        <input type="button" class="btn btn-default btn-sm" value="포인트 안내▶" id="btnpoint">
-                        <input type="button" class="btn btn-default btn-sm" value="회원정보 수정▶" id="btninfo">
-                    </div>
-                    <div>
-                        <input type="button" class="btn btn-default btn-sm" value="상세 보기▶" id="btndetail">
-                        <input type="button" class="btn btn-default btn-sm" value="로그 아웃▶" id="btnlogout">
-                    </div>
-                </div>
-                <!-- 유저 메뉴 -->
-                <div id="usermenu">
-                    <p class="usermenu" data-lo="mypage_reservation.html">예매확인/취소<span>▶</span></p>
-                    <p class="usermenu" data-lo="mypage_coupon.html">할인쿠폰<span>▶</span></p>
-                    <p class="usermenu" data-lo="mypage_interest.html">나의 관심 공연<span>▶</span></p>
-                    <p class="usermenu" data-lo="mypage_watched.html">나의 관람 공연<span>▶</span></p>
-                    <p class="usermenu" data-lo="mypage_personalize.html">나의 맞춤 설정<span>▶</span></p>
-                </div>
-                <!-- 맞춤별 예매 -->
-                <div id="personalize">
-                    <p><span class="glyphicon glyphicon-hand-up
-                        "></span> 맞춤별 예매</p>
-                    <p class="personaltitle">지역별예매</p>
-                    └<a href="user_local.html">서울</a>,<a href="user_local.html">경기/인천</a>,<a href="user_local.html">대전/충청/강원</a>,<br><a href="user_local.html">부산/대구/울산/경상</a>,<a href="user_local.html">광주/전라</a>,<a href="user_local.html">제주</a>
-                    <p class="personaltitle" style="margin-top: 20px;">공연장별예매</p>
-                    └<a href="user_local.html">세종문화회관</a>,<a href="user_local.html">광림아트센터</a>,<a href="user_local.html">예술의전당</a>,<br><a href="user_local.html">샤롯데씨어터</a>,<a href="user_local.html">한전아트센터</a>
-                    <p class="personaltitle" style="margin-top: 20px;">날짜별예매 <input type="button" value="달력보기" class="btn btn-default btn-xs" id="btncalendar"></p>
-                </div>
-                <!-- 고객센터 -->
-                <div>
-                    <p><span>☎</span> 고객센터 전화상담</p>
-                    <p>1544-6399</p>
-                    <p class="time">평일 09:00 ~ 18:00</p>
-                    <p class="time">토요일 09:00 ~ 17:00</p>
-                    <p class="time">일요일 공휴일 휴무</p>
-                </div>
-            </div>
-
+            <%@include file="/WEB-INF/views/inc/mypageleft.jsp" %>
 <!----------------------------------------------------------------------------->
 
             <!-- 마이페이지 우측 -->
@@ -426,7 +137,7 @@
                 <h1>할인쿠폰/예매권</h1>
                 <div id="line"></div>
                 <p><i class="glyphicon glyphicon-menu-right
-                    "></i><span>장x우</span>님이 가지고 계신 <span style="color: #7A98B4">할인쿠폰 번호 12자리</span>를 입력해 주세요.
+                    "></i><span>${username}</span>님이 가지고 계신 <span style="color: #7A98B4">할인쿠폰 번호 12자리</span>를 입력해 주세요.
                 </p>
                 <div id="coupon">
                     공연 할인쿠폰 <input type="text" id="coupontxt" placeholder="할인쿠폰 번호 12자리"><input type="button" value="등록하기" class="btn btn-default" id="btncoupon">
@@ -466,67 +177,17 @@
             </div>
 
             <!-- 챗봇 : 단비봇 -->
-            <div id="frogue-container" class="position-right-bottom"
-                data-chatbot="e4957de9-dad9-448d-a709-e43eeb644f63"
-                data-user="사용자ID"
-                data-init-key="value">
-            </div>
-            <!-- data-init-식별키=값 으로 셋팅하면 챗플로우에 파라미터와 연동가능. 식별키는 소문자만 가능 -->
-            <script>
-                (function(d, s, id){
-                    var js, fjs = d.getElementsByTagName(s)[0];
-                    if (d.getElementById(id)) {return;}
-                    js = d.createElement(s); js.id = id;
-                    js.src = "https:\/\/danbee.ai/js/plugins/frogue-embed/frogue-embed.min.js";
-                    fjs.parentNode.insertBefore(js, fjs);
-                }(document, 'script', 'frogue-embed'));
-            </script>
+            <%@include file="/WEB-INF/views/inc/userchat.jsp" %>
             <!-- 제일 위로 돌아가기 버튼 -->
             <div id="movetop">↑</div>
         </div>
 <!-------------------------------- 화면 하단부 -------------------------------->
-        <div id="bottom">
-            <div>
-                <!-- 회사 마크 -->
-                <img src="./images/title2.png"/>
-            </div>
-            <div class="txt">
-                <p class="black">At-Ticket (주)</p>
-                <p>서울시 강남구 역삼동 한독빌딩 8층 대표: 한시연 | 개인정보보호책임자: 한시연</p>
-                <p>it1234@atticket.com 사업자등록번호 229-81-37000</p>
-                <p class="black">Copyright &copy; At-Tickey Corp. All Rights Reserved.</p>
-            </div>
-            <div id="service">
-                <p><span>☎</span> 고객센터 전화상담</p>
-                <p>1544-6399</p>
-                <p>평일 09:00 ~ 18:00</p>
-                <p>토요일 09:00 ~ 17:00</p>
-                <p>일요일 공휴일 휴무</p>
-            </div>
-        </div>
+        <%@include file="/WEB-INF/views/inc/mypagebottom.jsp" %>
     </div>
 
 
 
     <script>
-
-        //MY공연 클릭 시
-        $("#infohead").click(function() {
-            location.href = "mypage.html";
-        });
-
-        //유저메뉴 css
-        $(".usermenu").mouseover(function() {
-            $(this).css("color", "#4E7AD1");
-        });
-        $(".usermenu").mouseout(function() {
-            $(this).css("color", "");
-        });
-        //유저메뉴 클릭시 이동
-        $(".usermenu").click(function() {
-            // console.log($(this).data("lo"));
-            location.href = $(this).data("lo");
-        });
 
         //할인쿠폰 등록 시
         $("#btncoupon").click(function() {
@@ -540,28 +201,6 @@
                 scrollTop: 0
             }, 500);
         });
-
-        //포인트 안내 클릭시
-        $("#btnpoint").click(function() {
-            location.href = "InfoUse.html";
-        });
-
-        //회원정보 수정 클릭시
-        $("#btninfo").click(function() {
-            location.href = "mypage_revision.html";
-        });
-
-        //상세보기 클릭시
-        $("#btndetail").click(function() {
-            location.href = "siyeondensityMypage.html";
-        });
-
-        //로그아웃 클릭시
-        $("#btnlogout").click(function() {
-            alert("로그아웃");
-            location.href = "main.html";
-        });
-
 
     </script>
 

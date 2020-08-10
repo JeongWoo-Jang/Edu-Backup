@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <div id="topmenu">
     <!-- 상단메뉴 좌측(메인화면으로 돌아가기) -->
-    <a href="main.html" id="topleft"></a>
+    <a href="/AtTicketProject/userindex.do" id="topleft"></a>
     <!-- 상단메뉴 센터(콘서트, 뮤지컬, 연극, 클래식, 전시) -->
     <div id="topcenter">
         <span data-lo="user_concert.html" class="menubar"
@@ -22,7 +22,7 @@
     </div>
     <!-- 상단메뉴 우측(랭킹, 이벤트, 검색창, 마이페이지) -->
     <div id="topright">
-        <span data-lo="user_ranking.html" class="menubar"
+        <span data-lo="/AtTicketProject/userranking.do" class="menubar"
             >랭킹</span
         >
         <span data-lo="user_event.html" class="menubar"

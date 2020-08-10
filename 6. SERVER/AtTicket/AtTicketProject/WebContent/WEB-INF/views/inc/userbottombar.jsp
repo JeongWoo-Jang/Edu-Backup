@@ -8,7 +8,7 @@
         <p class="black">At-Ticket (주)</p>
         <p>서울시 강남구 역삼동 한독빌딩 8층 대표: 한시연 | 개인정보보호책임자: 한시연</p>
         <p>it1234@atticket.com 사업자등록번호 229-81-37000</p>
-        <p class="black">Copyright &copy; At-Tickey Corp. All Rights Reserved.</p>
+        <p class="black">Copyright &copy; At-Ticket Corp. All Rights Reserved.</p>
     </div>
     <div id="service">
         <p><span>☎</span> 고객센터 전화상담</p>

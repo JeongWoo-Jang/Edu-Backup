@@ -16,8 +16,9 @@
             minDate: now.getFullYear() + "-1-1",
             maxDate: now.getFullYear() + "-12-" + "31"
         });
+    
 
-   
+   	
 
     document.body.bgColor = "white";
     
@@ -32,7 +33,7 @@
             if(swCount % 2 == 0) {
                 // 배경화면 기본상태
                 console.log("들어옴");
-                sw.src="../images/switch_on.png";
+                sw.src="<%= request.getContextPath() %>/images/switch_on.png";
                 $("body").css("background-color","white");
                 $("#homeLogo").css("color","#333333");
                 $("#adminName").css("color","#333333");
@@ -43,7 +44,7 @@
                 $("#moneyTitle").css("color","#333");
             } else {
                 // 배경화면이 어두운 색일 경우
-                sw.src="../images/switch_off.png";
+                sw.src="<%= request.getContextPath() %>/images/switch_off.png";
                 $("body").css("background-color","#292A2D");
                 $("#homeLogo").css("color","white");
                 $("#adminName").css("color","white");
@@ -133,9 +134,3 @@
         // 검색어 넘기기
         window.location.href="adminSearch.html";
     });
-
-
-    //메뉴 링크
-    $("#showmanage").click(function(){  window.location.href="adminShow.html"; });
-    $("#emplomanage").click(function(){  window.location.href="adminEmployee.html"; });
-    

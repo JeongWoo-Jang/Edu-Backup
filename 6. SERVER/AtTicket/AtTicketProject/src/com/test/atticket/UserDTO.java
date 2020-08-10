@@ -13,6 +13,7 @@ public class UserDTO {
 	private String email;//회원 이메일번호
 	private String grade;//회원등급
 	private int delflag;//탈퇴한 회원유무 확인
+
 	
 	
 	

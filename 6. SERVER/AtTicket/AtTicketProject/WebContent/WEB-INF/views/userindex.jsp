@@ -225,35 +225,35 @@
                         class="btn btn-default"
                         value="#뮤지컬"
                         id="hashmusical"
-                        onclick="location.href='user_ranking.html'"
+                        onclick="location.href='/AtTicketProject/userranking.do'"
                     />
                     <input
                         type="button"
                         class="btn btn-default"
                         value="#콘서트"
                         id="hashconcert"
-                        onclick="location.href='user_ranking.html'"
+                        onclick="location.href='/AtTicketProject/userranking.do'"
                     />
                     <input
                         type="button"
                         class="btn btn-default"
                         value="#연극"
                         id="hashplay"
-                        onclick="location.href='user_ranking.html'"
+                        onclick="location.href='/AtTicketProject/userranking.do'"
                     />
                     <input
                         type="button"
                         class="btn btn-default"
                         value="#클래식"
                         id="hashclassic"
-                        onclick="location.href='user_ranking.html'"
+                        onclick="location.href='/AtTicketProject/userranking.do'"
                     />
                     <input
                         type="button"
                         class="btn btn-default"
                         value="#전시"
                         id="hashexhibition"
-                        onclick="location.href='user_ranking.html'"
+                        onclick="location.href='/AtTicketProject/userranking.do'"
                     />
                     <!-- 랭킹 이미지 -->
                     <div style="margin-top: 20px;">
@@ -289,7 +289,7 @@
                         class="btn btn-default"
                         id="btnrank"
                         style="margin-top: 20px;"
-                        onclick="location.href='user_ranking.html'"
+                        onclick="location.href='/AtTicketProject/userranking.do'"
                     />
                 </div>
                 <hr />

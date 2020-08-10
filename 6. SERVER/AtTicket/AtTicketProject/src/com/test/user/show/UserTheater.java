@@ -1,4 +1,4 @@
-package com.test.show;
+package com.test.user.show;
 
 import java.io.IOException;
 
@@ -8,16 +8,26 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-@WebServlet("/show.do")
-public class Show extends HttpServlet{
+@WebServlet("/usertheater.do")
+public class UserTheater extends HttpServlet{
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/admin/show.jsp");
+		
+		HttpSession session = req.getSession();
+		
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/user/usertheater.jsp");
 		dispatcher.forward(req, resp);
+		
+		
+		System.out.println(req.getContextPath());
+		
+		
+		System.out.println(session.getAttribute("userid"));
+		
 	}
-	
 	
 }

@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @WebServlet("/index.do")//xml 연결
 public class Index extends HttpServlet{
@@ -20,9 +21,13 @@ public class Index extends HttpServlet{
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/index.jsp");
 		dispatcher.forward(req, resp);
 		
-		System.out.println(req.getContextPath());
+		HttpSession session = req.getSession();
+		
+		System.out.println(session.getAttribute("id"));
 		
 		
 		
 	}	
 }
+
+

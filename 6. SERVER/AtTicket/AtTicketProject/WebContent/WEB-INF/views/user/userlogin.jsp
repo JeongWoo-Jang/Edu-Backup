@@ -2,8 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@include file="/WEB-INF/views/inc/asset.jsp" %>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,11 +9,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="shortcut icon" href="./images/favicon.ico">
-    <link rel="stylesheet" href="css/jquery-ui.css">
-    <link rel="stylesheet" href="css/bootstrap.css">
-    <script src="js/jquery-1.12.4.js"></script>
-    <script src="js/jquery-ui.js"></script>
-    <script src="js/bootstrap.js"></script>
     <style>
 
         body {
@@ -149,7 +142,7 @@
         $(".create").click(function() {
             window.moveTo(0, 0);
             window.resizeTo(screen.availWidth, screen.availHeight);
-            location.href = "create_account.html";
+            location.href = "/AtTicketProject/usercreateaccount.do";
         });
 
         //로그인 시 메인페이지로 이동
@@ -168,13 +161,13 @@
                 return false;
             };
             
-            if ($("#saveid").prop("checked")) {
+            /* if ($("#saveid").prop("checked")) {
                 console.log("아이디 저장");
             } else {
                 console.log("아이디 미저장");
-            };
+            }; */
 
-            window.opener.location.href = "main.html";
+            window.opener.location.href = "/AtTicketProject/userindex.do";
             window.close();
 
         });

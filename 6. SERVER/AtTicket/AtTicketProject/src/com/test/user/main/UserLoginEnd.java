@@ -63,7 +63,6 @@ public class UserLoginEnd extends HttpServlet{
 			
 			resp.sendRedirect("/AtTicketProject/userindex.do");//다시 메인페이지로 가는데 user의 session을 안고 가는것이다.
 			
-			
 		} else {
 			//로그인에 실패한 경우
 			resp.setContentType("text/html; charset=UTF-8");
