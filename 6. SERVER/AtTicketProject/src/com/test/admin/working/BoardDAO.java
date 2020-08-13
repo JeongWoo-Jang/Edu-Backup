@@ -42,15 +42,15 @@ public class BoardDAO {
 				where = String.format("where (name like '%%%s%%' or title like '%%%s%%' or content like '%%%s%%')", map.get("search"), map.get("search"), map.get("search"));
 			}
 			
-			String sql = String.format("select * from (select a.*, rownum as rnum from (select * from vwBoard order by seq desc) a) where rnum >= %s and rnum <= %s %s order by %s desc", map.get("begin"), map.get("end"), where,map.get("sort"));
+			String sql = String.format("select count(*) as cnt from vwboard order by seq desc");
 			
 			stat = conn.createStatement();
 			rs = stat.executeQuery(sql);
 			
 			if(rs.next()) {
+				System.out.println(rs.getInt("cnt"));
 				return rs.getInt("cnt");
 			}
-			
 			
 			
 		} catch (Exception e) {
@@ -69,13 +69,12 @@ public class BoardDAO {
 			
 			if (map.get("search") != null) {
 				//이름 & 제목 & 내용 - 포괄 검색
-				where = String.format("and (name like '%%%s%%' or title like '%%%s%%' or content like '%%%s%%')", map.get("search"), map.get("search"), map.get("search"));
+				where = String.format("where (name like '%%%s%%' or title like '%%%s%%')", map.get("search"), map.get("search"), map.get("search"));
 			}
+
 			
-//			String temp = "select * from (select a.*, rownum as rnum from (select * from vwBoard order by thread desc) a) where rnum >= 21 and rnum <= 40 %s order by %s desc";
-			
-			//String sql = "select seq,title, (select name from tblemployee where seq = emseq) as name, regdate, nview  from tblemplonotice";
-			String sql = String.format("select a.* from (select rownum as rnum, v.* from vwBoard v) a where rnum >= %s and rnum <= %s %s" , map.get("begin"), map.get("end"), where);
+
+			String sql = String.format("select * from (select * from vwbb %s) where num >= %s and num <= %s"  , where, map.get("begin"), map.get("end"));
 			
 			stat = conn.createStatement();
 			rs = stat.executeQuery(sql);
@@ -106,6 +105,135 @@ public class BoardDAO {
 		
 		return null;
 	}
+
+	public int write(BoardDTO dto) {
+		
+		try {
+
+			
+			String sql = "insert into tblemplonotice (seq, title, content, regdate, nview, emseq, delflag, inputfile) values (emplonoticeseq.nextval, ?, ?, default,default,999,default,?)";
+			
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, dto.getTitle());
+			System.out.println(dto.getContent());
+			pstat.setString(2, dto.getContent());
+			//pstat.setString(3, dto.getEmseq());			
+			pstat.setString(3, dto.getGetInputfile());
+			
+			return pstat.executeUpdate();			
+
+		} catch (Exception e) {
+			System.out.println("BoardDAO.write()");
+			e.printStackTrace();
+		}
+		
+		return 0;
+	}
+
+	public void updateReadcount(String seq) {
+		
+		try {
+
+			String sql = "update tblemplonotice set nview = nview + 1 where seq = ?";
+			
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, seq);
+			
+			pstat.executeUpdate();
+			
+
+		} catch (Exception e) {
+			System.out.println("BoardDAO.updateReadcount()");
+			e.printStackTrace();
+		}
+		
+	}
+
+	public BoardDTO get(BoardDTO dto2) {
+		
+		try {
+			
+			String sql = "select a.*, (select name from tblemployee where seq = a.emseq) as name from tblemplonotice a where seq = ?";
+			
+			pstat = conn.prepareStatement(sql);			
+			pstat.setString(1, dto2.getSeq());
+			
+			rs = pstat.executeQuery();
+			
+			if (rs.next()) {
+				
+				BoardDTO dto = new BoardDTO();
+				
+				dto.setSeq(rs.getString("seq"));
+				dto.setTitle(rs.getString("title"));
+				dto.setContent(rs.getString("content"));
+				dto.setRegdate(rs.getString("regdate"));
+				dto.setNview(rs.getInt("nview"));				
+				dto.setEmseq(rs.getString("emseq"));
+				dto.setDelfalg(rs.getString("delflag"));				
+				dto.setName(rs.getString("name"));			
+				
+				
+				return dto;				
+			}
+			
+			
+			
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+			
+		}
+		
+		return null;
+	}
+
+	public int delete(String seq) {
+		
+		try {
+
+			String sql = "delete from tblemplonotice where seq = ?";
+			
+			System.out.println("바보");
+			System.out.println(seq);
+			
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, seq);
+			
+			return pstat.executeUpdate();
+
+		} catch (Exception e) {
+			System.out.println("BoardDAO.delete()");
+			e.printStackTrace();
+		}
+		
+		return 0;
+	}
+
+	public int edit(BoardDTO dto) {
+		
+		try {
+
+			String sql = "update tblemplonotice set title = ?, content = ? where seq = ?";
+			
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, dto.getTitle());
+			pstat.setString(2, dto.getContent());
+			pstat.setString(3, dto.getSeq());
+			
+			return pstat.executeUpdate();
+
+		} catch (Exception e) {
+			System.out.println("BoardDAO.edit()");
+			e.printStackTrace();
+		}
+		
+		return 0;
+	}
+
+	
+
+
 	
 	
 

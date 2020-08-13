@@ -90,66 +90,32 @@
                                 width: 420px;
                                 height: 675px;
                                 display: inline-block;
+                                background-image: url(./images/${hot.get(0).img});
                             "
                             value="temp"
                         >
                             <div class="img-cover cover" value="cover">
                                 <div class="text temp">
-                                    <h4>select shop</h4>
-                                    <span>10cm X 데이브레이크</span>
+                                    <h4>${hot.get(0).genre}</h4>
+                                    <span>${hot.get(0).name}</span>
                                 </div>
                             </div>
                         </div>
-                        <div style="display: inline-block;">
-                            <div class="img img1" value="temp1">
-                                <div class="img-cover1 cover1" value="cover1">
-                                    <div class="text1 temp1">
-                                        <h4>select shop</h4>
-                                        <span>10cm X 데이브레이크</span>
+                        <div style="display: inline-block; width: 730px;">
+                        
+                        <c:set var="i" value="1" />
+                        <c:forEach items="${hot}" var="hot" begin="1" end="6" step="1">
+                        	<div class="img img${i}" value="temp${i}" style="background-image: url(./images/${hot.img});">
+                                <div class="img-cover1 cover${i}" value="cover${i}">
+                                    <div class="text1 temp${i}">
+	                                    <h4>${hot.genre}</h4>
+	                                    <span>${hot.name}</span>
                                     </div>
                                 </div>
                             </div>
-                            <div class="img img2" value="temp2">
-                                <div class="img-cover1 cover2" value="cover2">
-                                    <div class="text1 temp2">
-                                        <h4>select shop</h4>
-                                        <span>10cm X 데이브레이크</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="img img3" value="temp3">
-                                <div class="img-cover1 cover3" value="cover3">
-                                    <div class="text1 temp3">
-                                        <h4>select shop</h4>
-                                        <span>10cm X 데이브레이크</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div style="display: block;"></div>
-                            <div class="img img4" value="temp4">
-                                <div class="img-cover1 cover4" value="cover4">
-                                    <div class="text1 temp4">
-                                        <h4>select shop</h4>
-                                        <span>10cm X 데이브레이크</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="img img5" value="temp5">
-                                <div class="img-cover1 cover5" value="cover5">
-                                    <div class="text1 temp5">
-                                        <h4>select shop</h4>
-                                        <span>10cm X 데이브레이크</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="img img6" value="temp6">
-                                <div class="img-cover1 cover6" value="cover6">
-                                    <div class="text1 temp6">
-                                        <h4>select shop</h4>
-                                        <span>10cm X 데이브레이크</span>
-                                    </div>
-                                </div>
-                            </div>
+                        <c:set var="i" value="${i + 1}" />
+                        </c:forEach>
+                        
                         </div>
                     </div>
                 </div>
@@ -206,7 +172,7 @@
                         class="btn btn-default"
                         id="btnticket"
                         style="margin-top: 20px;"
-                        onclick="location.href='user_notice.html'"
+                        onclick="location.href='/AtTicketProject/usernotice.do'"
                     />
                 </div>
                 <hr />
@@ -257,30 +223,18 @@
                     />
                     <!-- 랭킹 이미지 -->
                     <div style="margin-top: 20px;">
-                        <div class="img rank" value="temp12" style="background-image: url(./images/${rank.get(0).img})">
-                            <div class="img-cover1 cover12" value="cover12">
-                                <div class="text1 temp12">
-                                    <h4>${rank.get(0).genre}</h4>
-                                    <span>${rank.get(0).name}</span>
+                    <c:set var="i" value="12" />
+                    <c:forEach items="${rank}" var="rank">
+                        <div class="img rank" value="temp${i}" style="background-image: url(./images/${rank.img})">
+                            <div class="img-cover1 cover${i}" value="cover${i}">
+                                <div class="text1 temp${i}">
+                                    <h4>${rank.genre}</h4>
+                                    <span>${rank.name}</span>
                                 </div>
                             </div>
                         </div>
-                        <div class="img rank" value="temp13" style="background-image: url(./images/${rank.get(1).img})">
-                            <div class="img-cover1 cover13" value="cover13">
-                                <div class="text1 temp13">
-                                    <h4>${rank.get(1).genre}</h4>
-                                    <span>${rank.get(1).name}</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="img rank" value="temp14" style="background-image: url(./images/${rank.get(2).img})">
-                            <div class="img-cover1 cover14" value="cover14">
-                                <div class="text1 temp14">
-                                    <h4>${rank.get(2).genre}</h4>
-                                    <span>${rank.get(2).name}</span>
-                                </div>
-                            </div>
-                        </div>
+                    <c:set var="i" value="${i + 1}" />
+                    </c:forEach>
                     </div>
                     <!-- 랭킹 더보기 버튼 -->
                     <input
@@ -297,54 +251,18 @@
                 <div style="text-align: center;">
                     <h1>MUSICAL & PLAY</h1>
                     <div>
-                        <div class="img musicimg" value="temp15" style="background-image: url(./images/${musical.get(0).img})">
-                            <div class="img-cover1 cover15" value="cover15">
-                                <div class="text1 temp15">
-                                    <h4>${musical.get(0).genre}</h4>
-                                    <span>${musical.get(0).name}</span>
+                    <c:set var="i" value="15" />
+                    <c:forEach items="${musical}" var="musical">
+                        <div class="img musicimg" value="temp${i}" style="background-image: url(./images/${musical.img})">
+                            <div class="img-cover1 cover${i}" value="cover${i}">
+                                <div class="text1 temp${i}">
+                                    <h4>${musical.genre}</h4>
+                                    <span>${musical.name}</span>
                                 </div>
                             </div>
                         </div>
-                        <div class="img musicimg" value="temp16" style="background-image: url(./images/${musical.get(1).img})">
-                            <div class="img-cover1 cover16" value="cover16">
-                                <div class="text1 temp16">
-                                    <h4>${musical.get(1).genre}</h4>
-                                    <span>${musical.get(1).name}</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="img musicimg" value="temp17" style="background-image: url(./images/${musical.get(2).img})">
-                            <div class="img-cover1 cover17" value="cover17">
-                                <div class="text1 temp17">
-                                    <h4>${musical.get(2).genre}</h4>
-                                    <span>${musical.get(2).name}</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="img musicimg" value="temp18" style="background-image: url(./images/${musical.get(3).img})">
-                            <div class="img-cover1 cover18" value="cover18">
-                                <div class="text1 temp18">
-                                    <h4>${musical.get(3).genre}</h4>
-                                    <span>${musical.get(3).name}</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="img musicimg" value="temp19" style="background-image: url(./images/${musical.get(4).img})">
-                            <div class="img-cover1 cover19" value="cover19">
-                                <div class="text1 temp19">
-                                    <h4>${musical.get(4).genre}</h4>
-                                    <span>${musical.get(4).name}</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="img musicimg" value="temp20" style="background-image: url(./images/${musical.get(5).img})">
-                            <div class="img-cover1 cover20" value="cover20">
-                                <div class="text1 temp20">
-                                    <h4>${musical.get(5).genre}</h4>
-                                    <span>${musical.get(5).name}</span>
-                                </div>
-                            </div>
-                        </div>
+                    <c:set var="i" value="${i + 1}" />
+                    </c:forEach>
                     </div>
                 </div>
                 <hr />
@@ -352,54 +270,18 @@
                 <div style="text-align: center;">
                     <h1>CONCERT & CLASSIC</h1>
                     <div>
-                        <div class="img consertimg" value="temp21" style="background-image: url(./images/${concert.get(0).img})">
-                            <div class="img-cover1 cover21" value="cover21">
-                                <div class="text1 temp21">
-                                    <h4>${concert.get(0).genre}</h4>
-                                    <span>${concert.get(0).name}</span>
+                    <c:set var="i" value="21" />
+                    <c:forEach items="${concert}" var="concert">
+                        <div class="img consertimg" value="temp${i}" style="background-image: url(./images/${concert.img})">
+                            <div class="img-cover1 cover${i}" value="cover${i}">
+                                <div class="text1 temp${i}">
+                                    <h4>${concert.genre}</h4>
+                                    <span>${concert.name}</span>
                                 </div>
                             </div>
                         </div>
-                        <div class="img consertimg" value="temp22" style="background-image: url(./images/${concert.get(1).img})">
-                            <div class="img-cover1 cover22" value="cover22">
-                                <div class="text1 temp22">
-                                    <h4>${concert.get(1).genre}</h4>
-                                    <span>${concert.get(1).name}</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="img consertimg" value="temp23" style="background-image: url(./images/${concert.get(2).img})">
-                            <div class="img-cover1 cover23" value="cover23">
-                                <div class="text1 temp23">
-                                    <h4>${concert.get(2).genre}</h4>
-                                    <span>${concert.get(2).name}</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="img consertimg" value="temp24" style="background-image: url(./images/${concert.get(3).img})">
-                            <div class="img-cover1 cover24" value="cover24">
-                                <div class="text1 temp24">
-                                    <h4>${concert.get(3).genre}</h4>
-                                    <span>${concert.get(3).name}</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="img consertimg" value="temp25" style="background-image: url(./images/${concert.get(4).img})">
-                            <div class="img-cover1 cover25" value="cover25">
-                                <div class="text1 temp25">
-                                    <h4>${concert.get(4).genre}</h4>
-                                    <span>${concert.get(4).name}</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="img consertimg" value="temp26" style="background-image: url(./images/${concert.get(5).img})">
-                            <div class="img-cover1 cover26" value="cover26">
-                                <div class="text1 temp26">
-                                    <h4>${concert.get(5).genre}</h4>
-                                    <span>${concert.get(5).name}</span>
-                                </div>
-                            </div>
-                        </div>
+					<c:set var="i" value="${i + 1}" />
+                    </c:forEach>
                     </div>
                 </div>
                 <hr />
@@ -407,54 +289,18 @@
                 <div style="text-align: center; margin-bottom: 30px;">
                     <h1>EXHIBITION</h1>
                     <div>
-                        <div class="img dpimg" value="temp27" style="background-image: url(./images/${exhibition.get(0).img})">
-                            <div class="img-cover1 cover27" value="cover27">
-                                <div class="text1 temp27">
-                                    <h4>${exhibition.get(0).genre}</h4>
-                                    <span>${exhibition.get(0).name}</span>
+                    <c:set var="i" value="27" />
+                    <c:forEach items="${exhibition}" var="exhibition">
+                        <div class="img dpimg" value="temp${i}" style="background-image: url(./images/${exhibition.img})">
+                            <div class="img-cover1 cover${i}" value="cover${i}">
+                                <div class="text1 temp${i}">
+                                    <h4>${exhibition.genre}</h4>
+                                    <span>${exhibition.name}</span>
                                 </div>
                             </div>
                         </div>
-                        <div class="img dpimg" value="temp28" style="background-image: url(./images/${exhibition.get(1).img})">
-                            <div class="img-cover1 cover28" value="cover28">
-                                <div class="text1 temp28">
-                                    <h4>${exhibition.get(1).genre}</h4>
-                                    <span>${exhibition.get(1).name}</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="img dpimg" value="temp29" style="background-image: url(./images/${exhibition.get(2).img})">
-                            <div class="img-cover1 cover29" value="cover29">
-                                <div class="text1 temp29">
-                                    <h4>${exhibition.get(2).genre}</h4>
-                                    <span>${exhibition.get(2).name}</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="img dpimg" value="temp30" style="background-image: url(./images/${exhibition.get(3).img})">
-                            <div class="img-cover1 cover30" value="cover30">
-                                <div class="text1 temp30">
-                                    <h4>${exhibition.get(3).genre}</h4>
-                                    <span>${exhibition.get(3).name}</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="img dpimg" value="temp31" style="background-image: url(./images/${exhibition.get(4).img})">
-                            <div class="img-cover1 cover31" value="cover31">
-                                <div class="text1 temp31">
-                                    <h4>${exhibition.get(4).genre}</h4>
-                                    <span>${exhibition.get(4).name}</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="img dpimg" value="temp32" style="background-image: url(./images/${exhibition.get(5).img})">
-                            <div class="img-cover1 cover32" value="cover32">
-                                <div class="text1 temp32">
-                                    <h4>${exhibition.get(5).genre}</h4>
-                                    <span>${exhibition.get(5).name}</span>
-                                </div>
-                            </div>
-                        </div>
+					<c:set var="i" value="${i + 1}" />
+                    </c:forEach>
                     </div>
                 </div>
                 <hr />
@@ -520,13 +366,13 @@
                 var add = "." + $(this).attr("value");
                 $(this).css("box-shadow", "1px 1px 1px 2px gray");
                 $(this).css("transition", "all 0.5s");
-                $(add).css("opacity", "0.7");
+                $(add).css("opacity", "1");
             });
             $(".img-cover").mouseover(function () {
                 var add = "." + $(this).attr("value");
                 $(this).css("box-shadow", "1px 1px 1px 2px gray");
                 $(this).css("transition", "all 0.5s");
-                $(add).css("opacity", "0.7");
+                $(add).css("opacity", "1");
             });
             //이미지에 마우스 올릴때
             $(".img-cover1").mouseout(function () {

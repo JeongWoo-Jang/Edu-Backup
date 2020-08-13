@@ -48,12 +48,12 @@
             /* margin: 20px auto; */
             
         }
-        #content > #add > div {
-            margin: 10px;
+        #content > #add > from > div {
+            margin: 5px;
 
         }
-        #content > #add > div > label {
-            margin: 5px;
+        #content > #add > form > div > label {
+            margin: 10px;
         }
 
         #btnadd {
@@ -92,79 +92,95 @@
 
     <div id="content">
 
+
         <fieldset id="add" class="form-control" style="border: 0px;">
             <!-- <legend class="form-control">공연 정보 추가하기</legend> -->
             
-			<form method="POST" action="/customer/showaddok.do">
+			<form method="POST" action="/AtTicketProject/adminshowaddok.do">
 			
             <div>
                 <label>공연 장르 : </label>
-                <select style="height: 25px;">
-                    <option>뮤지컬</option>
-                    <option>콘서트</option>
-                    <option>연극</option>
-                    <option>클래식</option>
-                    <option>전시</option>
+                <select name="genre" style="height: 25px;">
+                    <option value="뮤지컬">뮤지컬</option>
+                    <option value="콘서트">콘서트</option>
+                    <option value="연극">연극</option>
+                    <option value="클래식">클래식</option>
+                    <option value="전시">전시</option>
                 </select>
             </div>
 
-            <div><label for="txtname">공연 제목 : </label><input type="text" id="txtname" autofocus></div>
+            <div><label for="name">공연 제목 : </label><input type="text" id="name" name="name" autofocus></div>
             <div>
-                <label for="txtopen">오픈 일시 : </label>
-                <input style="width: 100px;" type="text" name="date3" id="date3" class="date" value="">
+                <label for="openDate">오픈 일시 : </label>
+                <input style="width: 100px;" type="text" name="openDate" id="openDate" class="date" value="">
                 <label for "date3"><span style="font-size: 1em;" class="glyphicon glyphicon-calendar" id = "cal3"></span></label>
             </div>
-            <div><label for="txtdate">공연 기간 : </label>
-                <input style="width: 100px;" type="text" name="date1" id="date1" class="date" value="">
+            <div><label for="startDate">공연 기간 : </label>
+                <input style="width: 100px;" type="text" name="startDate" id="startDate" class="date" value="">
                 <label for "date1"><span style="font-size: 1em;" class="glyphicon glyphicon-calendar" id = "cal1"></span></label>
                 <span> - </span>
-                <input style="width: 100px;" type="text" name="date2" id="date2" class="date" value="">
+                <input style="width: 100px;" type="text" name="endDate" id="endDate" class="date" value="">
                 <label for "date1"><span style="font-size: 1em;" class="glyphicon glyphicon-calendar" id = "cal2"></span></label>
             </div>
-            <div><label for="txtprice">공연 가격 : </label><input type="text" id="txtprice" style="width: 100px;" autofocus>원</div>
-            <div><label for="txtmin">소요 시간 : </label><input type="text" id="txtmin" style="width: 100px;" autofocus>분</div>
-            <div><label for="txtage">연령 제한 : </label><input type="text" id="txtage" style="width: 100px;" autofocus>세</div>
+            <div><label for="price">공연 가격 : </label><input type="text" name="price" id="price" style="width: 100px;" autofocus>원</div>
+            <div><label for="min">소요 시간 : </label><input type="text" name="min" id="min" style="width: 100px;" autofocus>분</div>
+            <div><label for="age">연령 제한 : </label><input type="text" name="age" id="age" style="width: 100px;" autofocus>세</div>
             <div id="round">
-                <label for="txtround1">공연 회차 : </label><input type="text" id="txtround1" style="width: 100px;" autofocus>
-                <label for="txttime1">시작 시간 : </label><input type="text" id="txttime1"  style="width: 100px;" autofocus>
+                <label for="round">공연 회차 : </label><input type="text" name="round" id="round" style="width: 100px;" autofocus>
+                <label for="time">시작 시간 : </label><input type="text" name="time" id="time"  style="width: 100px;" autofocus>
                 <button id="addbtn" class="btn btn-default" style="height: 30px; outline: none;">회차 추가</button>
             </div>
             
             <div>
-                <label for="txtplace">공연 장소 : </label>
-                <input type="text" id="txtplace" style="width: 100px;" autofocus>
-                <input type="button" id="btnplace" value="찾기" class="btn btn-default" style="height: 30px;">
+                <label for="place">공연 장소 : </label>
+                <select name="region" id="region">
+                <option value="0" selected disabled hidden>지역</option>
+               	<option value="서울">서울</option>
+               	<option value="인천">인천</option>
+               	<option value="부산">부산</option>
+               	<option value="광주">광주</option>
+               	<option value="대전">대전</option>
+                </select>
+                
+               	<select name="hall" id="hall">
+               	<option value="0" selected disabled hidden>공연장</option>
+               	</select>
+               	
+               	<select name="theater" id="theater">
+               	<!-- <option value="0" selected disabled hidden>상영관</option> -->
+               	</select>
             </div>
 
             <div>
                 <label for="txtagen">기획사 : </label>
-                <select>
-                    <option>㈜프라이빗커브</option>
-                    <option>㈜홍컴퍼니</option>
-                    <option>롯데엔터네인먼트</option>
-                    <option>오픈리뷰</option>
-                    <option>주식회사 스탠바이컴퍼니</option>
-                    <option>㈜월드쇼마켓</option>
-                    <option>롯데컬처웍스㈜</option>
-                    <option>㈜펜타토닉</option>
-                    <option>㈜엠피앤컴퍼니</option>
-                    <option>예술의전당</option>
-                    <option>(㈜인터파크</option>
-                    <option>페이지터너</option>
+                <select name="agency">
+                	<option value="0" selected disabled hidden>기획사</option>
+                    <option value="1">㈜프라이빗커브</option>
+                    <option value="2">㈜홍컴퍼니</option>
+                    <option value="3">롯데엔터네인먼트</option>
+                    <option value="4">오픈리뷰</option>
+                    <option value="5">주식회사 스탠바이컴퍼니</option>
+                    <option value="6">㈜월드쇼마켓</option>
+                    <option value="7">롯데컬처웍스㈜</option>
+                    <option value="8">㈜펜타토닉</option>
+                    <option value="9">㈜엠피앤컴퍼니</option>
+                    <option value="10">예술의전당</option>
+                    <option value="11">(㈜인터파크</option>
+                    <option value="12">페이지터너</option>
                 </select>
             </div>
 
-            <div><label for="txtheader">포스터  : </label><input type="file" id="txtheader" style="display: inline;" autofocus></div>
+            <div><label for="poster">포스터  : </label><input type="file" id="poster" name="poster" style="display: inline;" autofocus></div>
             <div class="img_wrap">
                 <img id="img1" />
             </div>
 
-            <div><label for="txtcontent">공연 내용 : </label><input type="file" id="txtcontent" style="display: inline;" autofocus></div>
+            <div><label for="showcontent">공연 내용 : </label><input type="file" id="showcontent" name="showcontent" style="display: inline;" autofocus></div>
             <div class="img_wrap">
                 <img id="img2" />
             </div>
 
-            <div><input type="button" id="btnadd" value="추가하기" class="btn btn-default"></div>
+            <div><input type="submit" id="btnadd" value="추가하기" class="btn btn-default"></div>
             
 			</form>
 			
@@ -179,17 +195,55 @@
 <script>
 	<%@include file="/WEB-INF/views/inc/adminScript.jsp" %>
 	
-    $("#btnplace").click(function() {
-        window.open("adminShowAdd_hall.html","adminShowAdd_hall","width=500, height=500");
-    });
+	//ajax 공연장 목록
+	$("#region").change(function(){
+		//alert($(this).find(":selected").val());
+		$.ajax({
+			type: "GET",
+			url: "/AtTicketProject/adminshowhall.do",
+			data: "region=" + $(this).find(":selected").val(),
+			dataType: "json",
+			success: function(result) {
+				$("#hall *").remove();
+				$(result).each(function(index, item){
+					$("#hall").append("<option value = " + item.seq + ">" + item.name +"</option>");
+				});
+				$("#hall").change(loadtlist);
+			},
+			error: function(a,b,c) {
+				console.log(a,b,c);
+			}
+		});
+		
+	});
+	
+	//ajax 상영관 목록
+	function loadtlist() {
+		//alert($(this).find(":selected").val());
+		$.ajax({
+			type: "GET",
+			url: "/AtTicketProject/adminshowtheater.do",
+			data: "hseq="+$(this).find(":selected").val(),
+			dataType: "json",
+			success: function(result) {
+				$(result).each(function(index, item){
+				/* 	$("#theater *").remove(); */
+					$("#theater").append("<option value=" + item.seq + ">" + item.name + "</option>");
+				});
+			},
+			error: function(a,b,c){
+				console.log(a,b,c);
+			}
+		});
+	}
 
     var n = 2;
 
     $("#addbtn").mousedown(function() {
 
         
-        $("#round").append("<div class='addshow'><label for='txtround"+ n +"'>공연 회차 : </label><input type='text' class='rtxt' id='txtround"+ n +"' style='width: 100px;' autofocus>"+
-                "<label for='txttime"+ n +"'> 시작 시간 : </label><input type='text' class='rtxt' id='txttime"+ n +"' style='width: 100px;' autofocus></div>");
+        $("#round").append("<div class='addshow'><label for='round"+ n +"'>공연 회차 : </label><input type='text' class='rtxt' name='round"+ n +"' id='round"+ n +"' style='width: 100px;' autofocus>"+
+                "<label for='time"+ n +"'> 시작 시간 : </label><input type='text' class='rtxt' id='time"+ n +"'name='time"+ n +"' style='width: 100px;' autofocus></div>");
 
         n++;
 
@@ -204,8 +258,8 @@
     var sel_file;
 
     $(document).ready(function() {
-        $("#txtheader").on("change", handleImgFileSelect1);
-        $("#txtcontent").on("change", handleImgFileSelect2);
+        $("#poster").on("change", handleImgFileSelect1);
+        $("#showcontent").on("change", handleImgFileSelect2);
     }); 
 
     function handleImgFileSelect1(e) {
@@ -230,10 +284,10 @@
     }
 
     function handleImgFileSelect2(e) {
-        var files = e.target.files;
-        var filesArr = Array.prototype.slice.call(files);
+        var files2 = e.target.files;
+        var filesArr2 = Array.prototype.slice.call(files2);
 
-        filesArr.forEach(function(f) {
+        filesArr2.forEach(function(f) {
             if(!f.type.match("image.*")) {
                 alert("확장자는 이미지 확장자만 가능합니다.");
                 return;
@@ -241,24 +295,24 @@
 
             sel_file = f;
 
-            var reader = new FileReader();
-            reader.onload = function(e) {
+            var reader2 = new FileReader();
+            reader2.onload = function(e) {
                 $("#img2").attr("src", e.target.result);
             }
-            reader.readAsDataURL(f);
+            reader2.readAsDataURL(f);
             
         });
     }
 
-    $("#date1").datepicker({
+    $("#openDate").datepicker({
         dateFormat: "yy-mm-dd",
     });
 
-    $("#date2").datepicker({
+    $("#startDate").datepicker({
         dateFormat: "yy-mm-dd"
     });
 
-    $("#date3").datepicker({
+    $("#endDate").datepicker({
         dateFormat: "yy-mm-dd"
     });
 

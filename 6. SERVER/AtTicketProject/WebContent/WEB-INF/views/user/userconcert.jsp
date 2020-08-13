@@ -113,7 +113,7 @@
                 width: 230px;
                 height: 325px;
                 /* border: 1px solid black; */
-                background-color: cornflowerblue;
+                background-color: #eee;
                 display: inline-block;
                 margin: 10px 0 0 10px;
                 cursor: pointer;
@@ -176,6 +176,7 @@
             #wrap_region > div p {
                 font-size: 13px;
                 height: 30px;
+                width: 170px;
             }
             #wrap_region > div span {
                 font-size: 12px;
@@ -188,7 +189,7 @@
                 overflow: hidden;
                 height: 220px;
                 margin-bottom: 10px;
-                background-color: black;
+                background-color: #eee;
             }
             .regionimg {
                 width: 170px;
@@ -246,10 +247,11 @@
             .text {
                 /* border: 1px solid white; */
                 position: absolute;
-                text-align: center;
                 color: white;
-                margin-left: 150px;
-                margin-top: 300px;
+                top: 50%;
+			    left: 50%;
+			    text-align: center;
+			    transform: translate(-50%, -50%);
                 z-index: 2;
                 opacity: 0;
             }
@@ -267,37 +269,14 @@
                 /* border: 1px solid white; */
                 position: absolute;
                 color: white;
-                margin-top: 100px;
-                margin-left: -70px;
+                top: 50%;
+			    left: 50%;
+			    text-align: center;
+			    transform: translate(-50%, -50%);
                 z-index: 2;
                 opacity: 0;
             }
-
-            #bigimg {
-                background-image: url("./images/big_consert.jpeg");
-            }
-            .img1 {
-                background-image: url("./images/consert1.jpeg");
-                background-size: contain;
-            }
-            .img2 {
-                background-image: url("./images/consert2.jpeg");
-                background-size: contain;
-            }
-            .img3 {
-                background-image: url("./images/consert3.jpeg");
-                background-size: contain;
-            }
-            .img4 {
-                background-image: url("./images/consert4.jpeg");
-                background-size: contain;
-            }
-            .img5 {
-                background-image: url("./images/consert5.jpeg");
-                background-size: contain;
-            }
-            .img6 {
-                background-image: url("./images/consert6.jpeg");
+            .img1, .img2, .img3, .img4, .img5, .img6 {
                 background-size: contain;
             }
             .atimg1 {
@@ -504,13 +483,11 @@
                 <%@include file="/WEB-INF/views/inc/usertopbar.jsp" %>
               
               <!-- 메인화면 슬라이더 -->
-                <div class="slider">
-                    <div><img src="./images/${map.concertslider01}" /></div>
-                    <div><img src="./images/${map.concertslider02}" /></div>
-                    <div><img src="./images/${map.concertslider03}" /></div>
-                    <div><img src="./images/${map.concertslider04}" /></div>
-                    <div><img src="./images/${map.concertslider05}" /></div>
-                </div>
+              <div class="slider">
+              <c:forEach items="${map}" var="map">
+                  <div><img src="./images/${map.value}" /></div>
+              </c:forEach>
+              </div>
             </div>
             <!-- <hr /> -->
             <!-------------------------------- 내용부분 -------------------------------->
@@ -528,66 +505,32 @@
                                 width: 420px;
                                 height: 675px;
                                 display: inline-block;
+                                background-image: url(./images/${hot.get(0).img});
                             "
                             value="temp0"
                         >
                             <div class="img-cover cover0" value="cover0">
                                 <div class="text temp0">
-                                    <h4>select shop</h4>
-                                    <span>10cm X 데이브레이크</span>
+                                    <h4>${hot.get(0).genre}</h4>
+                                    <span>${hot.get(0).name}</span>
                                 </div>
                             </div>
                         </div>
-                        <div style="display: inline-block;">
-                            <div class="img img1" value="temp1">
-                                <div class="img-cover1 cover1" value="cover1">
-                                    <div class="text1 temp1">
-                                        <h4>select shop</h4>
-                                        <span>10cm X 데이브레이크</span>
+                        <div style="display: inline-block; width: 730px;">
+                        
+                        <c:set var="i" value="1" />
+                        <c:forEach items="${hot}" var="hot" begin="1" end="6" step="1">
+                        	<div class="img img${i}" value="temp${i}" style="background-image: url(./images/${hot.img});">
+                                <div class="img-cover1 cover${i}" value="cover${i}">
+                                    <div class="text1 temp${i}">
+	                                    <h4>${hot.genre}</h4>
+	                                    <span>${hot.name}</span>
                                     </div>
                                 </div>
                             </div>
-                            <div class="img img2" value="temp2">
-                                <div class="img-cover1 cover2" value="cover2">
-                                    <div class="text1 temp2">
-                                        <h4>select shop</h4>
-                                        <span>10cm X 데이브레이크</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="img img3" value="temp3">
-                                <div class="img-cover1 cover3" value="cover3">
-                                    <div class="text1 temp3">
-                                        <h4>select shop</h4>
-                                        <span>10cm X 데이브레이크</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div style="display: block;"></div>
-                            <div class="img img4" value="temp4">
-                                <div class="img-cover1 cover4" value="cover4">
-                                    <div class="text1 temp4">
-                                        <h4>select shop</h4>
-                                        <span>10cm X 데이브레이크</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="img img5" value="temp5">
-                                <div class="img-cover1 cover5" value="cover5">
-                                    <div class="text1 temp5">
-                                        <h4>select shop</h4>
-                                        <span>10cm X 데이브레이크</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="img img6" value="temp6">
-                                <div class="img-cover1 cover6" value="cover6">
-                                    <div class="text1 temp6">
-                                        <h4>select shop</h4>
-                                        <span>10cm X 데이브레이크</span>
-                                    </div>
-                                </div>
-                            </div>
+                        <c:set var="i" value="${i + 1}" />
+                        </c:forEach>
+                        
                         </div>
                     </div>
                 </div>
@@ -630,88 +573,24 @@
                         <h1>WEEKLY RANKING</h1>
                         <div id="weekly_list">
                             <ul>
-                                <li>
-                                    <dt>1위</dt>
+                            <c:set var="i" value="1" />
+                            <c:forEach items="${rank}" var="rank">
+                            	<li>
+                                    <dt>${i}위</dt>
                                     <dd>
                                         <img
-                                            src="./images/weekly_concert1.jpg"
+                                            src="./images/${rank.img}"
                                         />
                                     </dd>
                                     <dd>
-                                        <p>2020 WILD KARD IN SEOUL</p>
+                                        <p>${rank.name}</p>
                                         <span>
-                                            2020.08.22 ~ 2020.08.22<br />
-                                            노들섬 라이브하우스
+                                            ${rank.startdate} ~ ${rank.enddate}<br>${rank.hall} ${rank.theater}
                                         </span>
                                     </dd>
                                 </li>
-                                <li>
-                                    <dt>2위</dt>
-                                    <dd>
-                                        <img src="./images/rankbest2.jpg" />
-                                    </dd>
-                                    <dd>
-                                        <p>2020 태사자 콘서트 [THE RETURN]</p>
-                                        <span>
-                                            2020.07.25 ~ 2020.07.26<br />
-                                            YES24 LIVE HALL(구, 악스홀)
-                                        </span>
-                                    </dd>
-                                </li>
-                                <li>
-                                    <dt>3위</dt>
-                                    <dd>
-                                        <img
-                                            src="./images/weekly_concert3.jpg"
-                                        />
-                                    </dd>
-                                    <dd>
-                                        <p>
-                                            가을방학 정규 4집 발매 기념 공연
-                                            [세상은 한 장의 손수건]
-                                        </p>
-                                        <span>
-                                            2020.09.05 ~ 2020.09.06<br />
-                                            노들섬 라이브하우스
-                                        </span>
-                                    </dd>
-                                </li>
-                                <li>
-                                    <dt>4위</dt>
-                                    <dd>
-                                        <img
-                                            src="./images/weekly_concert4.jpg"
-                                        />
-                                    </dd>
-                                    <dd>
-                                        <p>
-                                            2020 DMZPOP DRIVE IN CONCERT in
-                                            CHEOLWON [무료공연]
-                                        </p>
-                                        <span>
-                                            2020.08.15 ~ 2020.08.15<br />
-                                            김화생활체육공원 특설무대
-                                        </span>
-                                    </dd>
-                                </li>
-                                <li>
-                                    <dt>5위</dt>
-                                    <dd>
-                                        <img
-                                            src="./images/weekly_concert5.jpg"
-                                        />
-                                    </dd>
-                                    <dd>
-                                        <p>
-                                            SURL (설) concert 'Ah, ah, ah, ah
-                                            What can I do?'
-                                        </p>
-                                        <span>
-                                            2020.08.15 ~ 2020.08.16<br />
-                                            노들섬 라이브하우스
-                                        </span>
-                                    </dd>
-                                </li>
+                            <c:set var="i" value="${i + 1}" />
+                            </c:forEach>
                             </ul>
                         </div>
                     </div>
@@ -726,34 +605,34 @@
                             <div>
                                 <div>
                                     <img
-                                        src="./images/consert3.jpeg"
+                                        src="./images/${region1[0].img}"
                                         class="regionimg"
                                     />
                                 </div>
-                                <p>십센치X데이브레이크</p>
-                                <span>KBS부산홀</span>
+                                <p>${region1[0].name}</p>
+                                <span>${region1[0].region} ${region1[0].hall}</span>
                             </div>
                             <div>
                                 <div>
                                     <img
-                                        src="./images/consert11.jpeg"
+                                        src="./images/${region2[0].img}"
                                         class="regionimg"
                                     />
                                 </div>
                                 <p>
-                                    2020 빅3 "행복한 만남"<br />(진성,김용임,강진)
+                                    ${region2[0].name}
                                 </p>
-                                <span>KBS부산홀</span>
+                                <span>${region2[0].region} ${region2[0].hall}</span>
                             </div>
                             <div>
                                 <div>
                                     <img
-                                        src="./images/consert5.jpeg"
+                                        src="./images/${region3[0].img}"
                                         class="regionimg"
                                     />
                                 </div>
-                                <p>서울숲재즈페스티벌 2020</p>
-                                <span>서울숲공원</span>
+                                <p>${region3[0].name}</p>
+                                <span>${region3[0].region} ${region3[0].hall}</span>
                             </div>
                         </div>
                     </div>
@@ -898,7 +777,7 @@
             $(".img-cover, .img-cover1").mouseover(function () {
                 var add = "." + $(this).attr("value");
                 $(this).css("transition", "all 0.5s");
-                $(add).css("opacity", "0.7");
+                $(add).css("opacity", "1");
             });
             //이미지에 마우스 뗄때
             $(".img-cover, .img-cover1").mouseout(function () {

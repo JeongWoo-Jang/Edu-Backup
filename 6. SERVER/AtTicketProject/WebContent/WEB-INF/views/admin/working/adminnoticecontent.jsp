@@ -64,25 +64,15 @@
         <table id="tbl" class="table table-bordered" style="width: 600px;">
             <tr>
                 <th style="width: 150px;">개발부</th>
-                <td style="width: 450px;">
-                   이벤트 관련 디자인 보내주세요.
-                </td>
+                <td style="width: 450px;">${dto.title}</td>
             </tr>
             <tr>
                 <th style="width: 150px;">작성자</th>
-                <td style="width: 450px;">
-                    [개]아무개
-                </td>
+                <td style="width: 450px;">${dto.name}</td>
             </tr>
             <tr>
                 <th style="width: 150px;">내용</th>
-                <td style="width: 450px;">
-                   <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem eligendi error architecto nobis id aut dolores est, deserunt vel ratione tenetur quas amet nihil, iste, dolor cumque maxime similique fugiat.
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Incidunt voluptates magni hic tempora atque accusamus modi iure dignissimos fugiat, eos necessitatibus ex, porro dolorum minus non, sequi ad nam qui.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi, nemo quisquam? Voluptatem porro laborum sunt veritatis fugit ex corrupti, incidunt eos consequuntur fugiat dicta illum sed accusantium nam aut vitae.
-                    </p>
-                </td>
+                <td style="width: 450px;"><p>${dto.content}</p></td>
             </tr>
         </table>
         <hr>
@@ -90,8 +80,13 @@
 
 
         <!-- <hr> -->
-        <input type="button" class="btn btn-default" value="목록"
+        <input type="button" class="btn btn-default" value="목록" onclick="location.href='/AtTicketProject/adminworking.do'"
                 style="margin-left: 350px; margin-top: 10px; box-shadow: none; outline: none;" >
+        <input type="button" class="btn btn-default" value="수정" onclick="location.href='/AtTicketProject/adminnoticemodify.do?seq=${dto.seq}';"
+        style="margin-top: 10px; box-shadow: none; outline: none;" >
+        <input type="button" class="btn btn-default" value="삭제" onclick="location.href='/AtTicketProject/adminnoticedelete.do?seq=${dto.seq}';"
+        style="margin-top: 10px; box-shadow: none; outline: none;" >
+        
     </div>
 
 

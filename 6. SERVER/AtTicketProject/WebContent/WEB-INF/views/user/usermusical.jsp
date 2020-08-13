@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -106,7 +107,7 @@
                 width: 230px;
                 height: 325px;
                 /* border: 1px solid black; */
-                background-color: cornflowerblue;
+                background-color: #eee;
                 display: inline-block;
                 margin: 10px 0 0 10px;
                 cursor: pointer;
@@ -121,7 +122,6 @@
             #bannerimg {
                 width: 286px;
                 height: 400px;
-                background-image: url("./images/bannerimg.png");
                 display: inline-block;
                 margin-right: 160px;
             }
@@ -178,10 +178,11 @@
             .text {
                 /* border: 1px solid white; */
                 position: absolute;
-                text-align: center;
                 color: white;
-                margin-left: 150px;
-                margin-top: 300px;
+                top: 50%;
+			    left: 50%;
+			    text-align: center;
+			    transform: translate(-50%, -50%);
                 z-index: 2;
                 opacity: 0;
             }
@@ -199,37 +200,15 @@
                 /* border: 1px solid white; */
                 position: absolute;
                 color: white;
-                margin-top: 100px;
-                margin-left: -70px;
+                top: 50%;
+			    left: 50%;
+			    text-align: center;
+			    transform: translate(-50%, -50%);
                 z-index: 2;
                 opacity: 0;
             }
 
-            #bigimg {
-                background-image: url("./images/big_music.jpeg");
-            }
-            .img1 {
-                background-image: url("./images/music14.jpeg");
-                background-size: contain;
-            }
-            .img2 {
-                background-image: url("./images/music3.jpeg");
-                background-size: contain;
-            }
-            .img3 {
-                background-image: url("./images/music3.jpeg");
-                background-size: contain;
-            }
-            .img4 {
-                background-image: url("./images/music4.jpeg");
-                background-size: contain;
-            }
-            .img5 {
-                background-image: url("./images/music5.jpeg");
-                background-size: contain;
-            }
-            .img6 {
-                background-image: url("./images/music6.jpeg");
+            .img1, .img2, .img3, .img4, .img5, .img6 {
                 background-size: contain;
             }
             .atimg1 {
@@ -393,11 +372,9 @@
                 
                 <!-- 메인화면 슬라이더 -->
                 <div class="slider">
-                    <div><img src="./images/slide1.jpg" /></div>
-                    <div><img src="./images/slide2.jpg" /></div>
-                    <div><img src="./images/slide3.jpg" /></div>
-                    <div><img src="./images/slide4.jpg" /></div>
-                    <div><img src="./images/slide5.jpg" /></div>
+                <c:forEach items="${map}" var="map">
+                  <div><img src="./images/${map.value}" /></div>
+              	</c:forEach>
                 </div>
             </div>
             <hr />
@@ -416,78 +393,59 @@
                                 width: 420px;
                                 height: 675px;
                                 display: inline-block;
+                                background-image: url(./images/${hot.get(0).img});
                             "
                             value="temp0"
                         >
                             <div class="img-cover cover0" value="cover0">
                                 <div class="text temp0">
-                                    <h4>select shop</h4>
-                                    <span>10cm X 데이브레이크</span>
+                                    <h4>${hot.get(0).genre}</h4>
+                                    <span>${hot.get(0).name}</span>
                                 </div>
                             </div>
                         </div>
-                        <div style="display: inline-block;">
-                            <div class="img img1" value="temp1">
-                                <div class="img-cover1 cover1" value="cover1">
-                                    <div class="text1 temp1">
-                                        <h4>select shop</h4>
-                                        <span>10cm X 데이브레이크</span>
+                        <div style="display: inline-block; width: 730px;">
+                        
+                        <c:set var="i" value="1" />
+                        <c:forEach items="${hot}" var="hot" begin="1" end="6" step="1">
+                        	<div class="img img${i}" value="temp${i}" style="background-image: url(./images/${hot.img});">
+                                <div class="img-cover1 cover${i}" value="cover${i}">
+                                    <div class="text1 temp${i}">
+	                                    <h4>${hot.genre}</h4>
+	                                    <span>${hot.name}</span>
                                     </div>
                                 </div>
                             </div>
-                            <div class="img img2" value="temp2">
-                                <div class="img-cover1 cover2" value="cover2">
-                                    <div class="text1 temp2">
-                                        <h4>select shop</h4>
-                                        <span>10cm X 데이브레이크</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="img img3" value="temp3">
-                                <div class="img-cover1 cover3" value="cover3">
-                                    <div class="text1 temp3">
-                                        <h4>select shop</h4>
-                                        <span>10cm X 데이브레이크</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div style="display: block;"></div>
-                            <div class="img img4" value="temp4">
-                                <div class="img-cover1 cover4" value="cover4">
-                                    <div class="text1 temp4">
-                                        <h4>select shop</h4>
-                                        <span>10cm X 데이브레이크</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="img img5" value="temp5">
-                                <div class="img-cover1 cover5" value="cover5">
-                                    <div class="text1 temp5">
-                                        <h4>select shop</h4>
-                                        <span>10cm X 데이브레이크</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="img img6" value="temp6">
-                                <div class="img-cover1 cover6" value="cover6">
-                                    <div class="text1 temp6">
-                                        <h4>select shop</h4>
-                                        <span>10cm X 데이브레이크</span>
-                                    </div>
-                                </div>
-                            </div>
+                        <c:set var="i" value="${i + 1}" />
+                        </c:forEach>
+                        
                         </div>
                     </div>
                 </div>
                 <hr />
             </div>
             <!-- 동영상 들어갈 자리 -->
-            <div id="banner">
-                <div id="bannerimg"></div>
+            <div id="banner" 
+            <c:set var="color" value="${banner.backcolor}" />
+            <c:choose>
+            <c:when test="${fn:length(color) > 8}">
+            	style="background-image: linear-gradient(
+					120deg,
+                    ${fn:substring(color,0,7)} 0%,
+                    ${fn:substring(color,8,15)} 100%
+                    );" 
+            </c:when>
+            <c:when test="${fn:length(color) <= 8}">
+            	style="background-color: color"; 
+            </c:when>
+            </c:choose>
+            >
+                    
+                <div id="bannerimg" style="background-image: url(./images/${banner.img})"></div>
                 <iframe
-                    width="714"
+                    width="711"
                     height="400"
-                    src="https://www.youtube.com/embed/knh13N7k-TY"
+                    src="${banner.link}"
                     frameborder="0"
                     allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                     allowfullscreen
@@ -641,7 +599,7 @@
             $(".img-cover, .img-cover1").mouseover(function () {
                 var add = "." + $(this).attr("value");
                 $(this).css("transition", "all 0.5s");
-                $(add).css("opacity", "0.7");
+                $(add).css("opacity", "1");
             });
             //이미지에 마우스 뗄때
             $(".img-cover, .img-cover1").mouseout(function () {

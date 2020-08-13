@@ -9,8 +9,39 @@ public class BannerDTO {
 	private String backcolor;
 	private String genre;
 	
+	private String startdate;
+	private String enddate;
+	private String hall;
+	private String theater;
+	
+	private String region;
 	
 	
+	
+	public String getStartdate() {
+		return startdate;
+	}
+	public void setStartdate(String startdate) {
+		this.startdate = startdate;
+	}
+	public String getEnddate() {
+		return enddate;
+	}
+	public void setEnddate(String enddate) {
+		this.enddate = enddate;
+	}
+	public String getHall() {
+		return hall;
+	}
+	public void setHall(String hall) {
+		this.hall = hall;
+	}
+	public String getTheater() {
+		return theater;
+	}
+	public void setTheater(String theater) {
+		this.theater = theater;
+	}
 	public String getGenre() {
 		return genre;
 	}
@@ -46,6 +77,12 @@ public class BannerDTO {
 	}
 	public void setBackcolor(String backcolor) {
 		this.backcolor = backcolor;
+	}
+	public String getRegion() {
+		return region;
+	}
+	public void setRegion(String region) {
+		this.region = region;
 	}
 
 }

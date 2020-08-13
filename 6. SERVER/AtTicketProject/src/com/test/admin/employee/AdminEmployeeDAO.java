@@ -39,15 +39,15 @@ public class AdminEmployeeDAO {
 			//목록 or 검색
 			String where = "";
 			
-			if (map.get("search") != null) {
+			if (map.get("search") != null && map.get("search") != "") {
 				//즉 search한게 무엇이라도 있을 경우에 이 구문에 들어오는 것이다 해당 구문에 들어있는걸 찾아주는 역할을 수행한다
 				//해당 검색어에 있는것을 필터링 걸어서 찾아주면 된다.
-				where = String.format("and (name like '%%%s%%' or jikwi like '%%%s%%' or salary like '%%%s%%' or ssn like '%%%s%%' or tel like '%%%s%%' or tn like '%%%s%%')",map.get("search"),map.get("search"),map.get("search"),map.get("search"),map.get("search"),map.get("search"));	
+				where = String.format("where (name like '%%%s%%' or jikwi like '%%%s%%' or salary like '%%%s%%' or ssn like '%%%s%%' or tel like '%%%s%%' or tn like '%%%s%%')",map.get("search"),map.get("search"),map.get("search"),map.get("search"),map.get("search"),map.get("search"));	
 			}
 			
 			//페이징 조건이 여기서 들어가게 된다.
-			String sql = String.format("select a.* from (select rownum as rnum, v.* from vwemployeeinfo v) a where rnum >= %s and rnum <= %s %s order by %s"
-					,map.get("begin"), map.get("end"), where,map.get("sort"));
+			String sql = String.format("select a.* from (select rownum as rnum, v.* from vwemployeeinfo v  %s) a where rnum >= %s and rnum <= %s order by %s"
+					, where,map.get("begin"), map.get("end"),map.get("sort"));
 			
 			stat = conn.createStatement();
 			rs = stat.executeQuery(sql);
@@ -90,9 +90,9 @@ public class AdminEmployeeDAO {
 			String where = "";
 			
 			if (map.get("search") != null) {
-				//즉 search한게 무엇이라도 있을 경우에 이 구문에 들어오는 것이다 해당 구문에 들어있는걸 찾아주는 역할을 수행한다
+				//즉 search한게 무엇이라도 있을 경우에 이 구문에 들어오는 것이다. 해당 구문에 들어있는걸 찾아주는 역할을 수행한다
 				//해당 검색어에 있는것을 필터링 걸어서 찾아주면 된다.
-				where = String.format("and (name like '%%%s%%' or jikwi like '%%%s%%' or salary like '%%%s%%' or ssn like '%%%s%%' or tel like '%%%s%%' or tn like '%%%s%%')",map.get("search"),map.get("search"),map.get("search"),map.get("search"),map.get("search"),map.get("search"));	
+				where = String.format("where name like '%%%s%%' or jikwi like '%%%s%%' or salary like '%%%s%%' or ssn like '%%%s%%' or tel like '%%%s%%' or tn like '%%%s%%'",map.get("search"),map.get("search"),map.get("search"),map.get("search"),map.get("search"),map.get("search"));	
 			}
 			
 			String sql = String.format("select count(*) as cnt from vwemployeeinfo %s",where);//현재 해당 조건을 만족하는 데이터의 행이 몇개인지 받아오는 작업을 수행함.
@@ -111,6 +111,36 @@ public class AdminEmployeeDAO {
 		
 		
 		return 0;
+	}
+	
+	//직원을 추가해준다.
+	public void empadd(AdminEmployeeDTO dto) {
+		
+		try {
+			
+			//String sql = String.format("insert into tblEmployee values (employeeSeq.nextVal,%s,%s,%s,%s,%s,%s,0)",dto.getName(),dto.getJikwi(),dto.getSalary(),dto.getSsn(),dto.getTel(),dto.getBuseo());
+			//String sql = "insert into tblEmployee values (employeeSeq.nextVal,'김옥녀','대리','4500000','860123-1057987','010-7894-1246',4,0)"; 
+			String sql = "insert into tblEmployee values (employeeSeq.nextVal,?,?,?,?,?,?,0)";
+			
+			pstat = conn.prepareStatement(sql);
+			
+			pstat.setString(1, dto.getName());
+			pstat.setString(2, dto.getJikwi());
+			pstat.setString(3, dto.getSalary());
+			pstat.setString(4, dto.getSsn());
+			pstat.setString(5, dto.getTel());
+			pstat.setString(6, dto.getBuseo());
+			
+			pstat.executeUpdate();
+			
+			pstat.close();
+			conn.close();
+			
+						
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	

@@ -33,6 +33,7 @@ public class AdminShow extends HttpServlet{
 			sort = "seq asc"; //기본값
 		}
 		
+		
 		ShowDAO dao = new ShowDAO();
 		
 		ArrayList<ShowDTO> list = new ArrayList<ShowDTO>();
@@ -66,6 +67,7 @@ public class AdminShow extends HttpServlet{
 		String page = req.getParameter("page");
 
 		System.out.println(page);
+		
 		
 		if (page == null || page == "")
 			nowPage = 1; // default
@@ -127,14 +129,14 @@ public class AdminShow extends HttpServlet{
 				pagebar += "</li>";
 			} else {
 				pagebar += "<li>";
-				pagebar += String.format("<a href=\"/AtTicketProject/adminshow.do?page=%d\">%d</a>", n, n);
+				pagebar += String.format("<a href=\"/AtTicketProject/adminshow.do?page=%d&search=%s\">%d</a>", n,search == null ? "" : search,n);
 				pagebar += "</li>";
 			}
 
 			loop++;
 			n++;
 		}
-		
+
 		// 다음 10페이지
 		if (n > totalPage) {
 			// 최대페이지까지만 가게 하자

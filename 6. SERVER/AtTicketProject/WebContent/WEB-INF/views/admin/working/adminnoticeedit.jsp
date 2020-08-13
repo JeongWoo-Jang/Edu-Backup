@@ -61,7 +61,7 @@
     <%@include file="/WEB-INF/views/inc/menu.jsp" %>
     
     <div id = "right">
-
+	<form method="POST" action = "/AtTicketProject/adminnoticeeditok.do">
         <table id="tbl" class="table table-bordered" style="width: 600px;">
             <!-- <tr>
                 <th style="width: 150px;">부서</th>
@@ -80,25 +80,30 @@
                 <th style="width: 150px">제목</th>
                 <td style="width: 450px;">
                     <!-- block태그로 바뀜 -->
-                    <input type="text" class="form-control"> 
+                    <input name = "title" type="text" class="form-control"> 
                 </td>
             </tr>
             <tr>
                 <th style="width: 150px;">내용</th>
                 <td style="width: 450px;">
-                    <textarea class="form-control" style="height: 300px; resize: none;"></textarea>
+                    <textarea name = "content" class="form-control" style="height: 300px; resize: none;"></textarea>
                 </td>
             </tr>
             <tr>
                 <th style="width: 150px; " >파일</th>
                 <td style="width: 450px;">
-                    <input type="file" class="form-control" style = "padding-bottom: 30px;">
+                    <input name ="file" type="file" class="form-control" style = "padding-bottom: 30px;">
                 </td>
             </tr>
         </table>
-
-        <input type="button" class="btn btn-default" value="글쓰기"
+		
+		<input type="button" class="btn btn-default" value="뒤로" onclick="location.href='/AtTicketProject/adminworking.do'"
                 style="margin-left: 300px; box-shadow: none; outline: none;">
+	
+        <input type="submit" class="btn btn-default" value="글쓰기"
+                style="box-shadow: none; outline: none;">
+                
+         </form>
 
 
         

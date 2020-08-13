@@ -1,6 +1,8 @@
 package com.test.user.show;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,6 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.test.user.main.BannerDAO;
+import com.test.user.main.BannerDTO;
+
 @WebServlet("/usermusical.do")
 public class UserMusical extends HttpServlet{
 
@@ -18,14 +23,23 @@ public class UserMusical extends HttpServlet{
 		
 		
 		HttpSession session = req.getSession();
+		String slider = "musicalslider";
+		String page = "musicalbanner";
+		String whatshot = "musical";
+
+		BannerDAO dao = new BannerDAO();
+		HashMap<String,String> map = dao.mainlist(slider);
+		BannerDTO dto = dao.banner(page);
+		ArrayList<BannerDTO> hot = dao.mainhot(whatshot);
+		
+		req.setAttribute("map", map);
+		req.setAttribute("banner", dto);
+		req.setAttribute("hot", hot);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/user/usermusical.jsp");
 		dispatcher.forward(req, resp);
 		
-		
 		System.out.println(req.getContextPath());
-		
-		
 		System.out.println(session.getAttribute("userid"));
 		
 	}

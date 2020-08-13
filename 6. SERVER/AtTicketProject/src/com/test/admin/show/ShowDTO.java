@@ -2,19 +2,54 @@ package com.test.admin.show;
 
 public class ShowDTO {
 	private String seq;
-	private String title;
-	private String startDate;
-	private String endDate;
-	private String price;
-	private String poster;
-	private String content;
-	private String openDate;
-	private String age;
-	private String genre;
-	private String host; //기획사
-	private String theSeq; //상영관
+	private String title; //제목
+	private String startDate; //시작일시
+	private String endDate; //종료일시
+	private String price; //가격
+	private String poster; //포스터
+	private String content; //내용
+	private String openDate; //오픈일시
+	private String age; //연령제한
+	private String genre; //장르
+	private String agency; //기획사
+	private String place; //공연 장소
+	
+	private int min; //소요시간
+	private String round; //회차
+	private String time; //시작 시간
 	
 	
+	@Override
+	public String toString() {
+		return String.format("seq:%s, title:%s, startDate:%s, endDate:%s, price:%s, poster:%s, content:%s, openDate:%s, age:%s, genre:%s,"
+				+ "agency: %s, place: %s, min: %s, round: %s, time: %s\n"
+				,seq,title,startDate,endDate,price,poster,content,openDate,age,genre,agency,place,min,round,time);
+	}
+	
+	public String getPlace() {
+		return place;
+	}
+	public void setPlace(String place) {
+		this.place = place;
+	}
+	public int getMin() {
+		return min;
+	}
+	public void setMin(int min) {
+		this.min = min;
+	}
+	public String getRound() {
+		return round;
+	}
+	public void setRound(String round) {
+		this.round = round;
+	}
+	public String getTime() {
+		return time;
+	}
+	public void setTime(String time) {
+		this.time = time;
+	}
 	public String getSeq() {
 		return seq;
 	}
@@ -75,20 +110,12 @@ public class ShowDTO {
 	public void setGenre(String genre) {
 		this.genre = genre;
 	}
-	public String getTheSeq() {
-		return theSeq;
+	public String getAgency() {
+		return agency;
 	}
-	public void setTheSeq(String theSeq) {
-		this.theSeq = theSeq;
+	public void setAgency(String agency) {
+		this.agency = agency;
 	}
-	public String getHost() {
-		return host;
-	}
-	public void setHost(String host) {
-		this.host = host;
-	}
-	
-	
 	
 	
 	

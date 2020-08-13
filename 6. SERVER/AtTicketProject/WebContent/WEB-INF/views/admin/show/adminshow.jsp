@@ -177,9 +177,9 @@
     <div id="content">
 
         <div id = "slctp1">
-            <button class = "selectNotice" style = "outline : none;" onclick="location.href='/AtTicketProject/adminshow.do?sort=write';"><span><i class = "glyphicon glyphicon-sort"></i></span>등록순</button>
-            <button class = "selectNotice" style = "outline : none;" onclick="location.href='/AtTicketProject/adminshow.do?sort=desc';"><span><i class = "glyphicon glyphicon-sort"></i></span>오름차순</button>
-            <button class = "selectNotice" style = "outline : none;" onclick="location.href='/AtTicketProject/adminshow.do?sort=asc';"><span><i class = "glyphicon glyphicon-sort"></i></span>내림차순</button>
+            <button class = "selectNotice" style = "outline : none;" onclick="location.href='/AtTicketProject/adminshow.do?sort=write&page=${page}&search=${search}';"><span><i class = "glyphicon glyphicon-sort"></i></span>등록순</button>
+            <button class = "selectNotice" style = "outline : none;" onclick="location.href='/AtTicketProject/adminshow.do?sort=desc&page=${page}&search=${search}';"><span><i class = "glyphicon glyphicon-sort"></i></span>오름차순</button>
+            <button class = "selectNotice" style = "outline : none;" onclick="location.href='/AtTicketProject/adminshow.do?sort=asc&page=${page}&search=${search}';"><span><i class = "glyphicon glyphicon-sort"></i></span>내림차순</button>
         </div>
 	
 		<form method="GET" action="/AtTicketProject/adminshow.do" id="searchForm">
@@ -190,7 +190,7 @@
 			</div>
         </div>
         </form>
-		
+
         <table id="tbl" class="table table-striped table-bordered table-condensed">
             <tbody id="tbody">
                 <tr>
@@ -236,8 +236,7 @@
     
     // 추가
     $("#btnadd").click(function(){
-        // window.location.href="adminShowAdd.html";
-        window.open("adminShowAdd.html","_self");
+        window.open("/AtTicketProject/adminshowadd.do","_self");
     });
     // 수정
     $("#btnmodify").click(function(){

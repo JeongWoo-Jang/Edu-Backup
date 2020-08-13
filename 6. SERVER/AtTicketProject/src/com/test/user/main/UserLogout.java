@@ -21,8 +21,7 @@ public class UserLogout extends HttpServlet{
 		
 		session.invalidate();//로그아웃을 했으니 세션을 비워준다
 		
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/userindex.jsp");
-		dispatcher.forward(req, resp);
+		resp.sendRedirect("/AtTicketProject/userindex.do");
 		
 	}
 	

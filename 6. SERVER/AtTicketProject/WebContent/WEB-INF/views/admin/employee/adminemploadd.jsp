@@ -86,149 +86,209 @@
 
 
 
-
+	
     <div id="content">
+    	<form method = "POST" action = "/AtTicketProject/adminemployeeaddok.do">
         <fieldset id="add" class="form-control" style="border: 0px;">
 
-            <div><label for="txtname">이름 : </label><input type="text" id="txtname" style="width: 100px;" autofocus></div>
-            <div><label for="txtjumin">주민번호 : </label>
-                 <input type="text" class="txtjumin" style="width: 100px;" autofocus><span> - </span><input type="text" class="txtjumin" style="width: 100px;" autofocus>
+            <div><label for="txtname">*이름 : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label><input type="text" id="txtname" name = "txtname" style="width: 100px;" autofocus autocomplete="off"></div>
+            <br>
+            <div><label for="txtjumin">*주민번호 : &nbsp;</label>
+                 <input type="text" class="txtjumin" style="width: 100px;" autofocus id = "txtjuminfirst" name = "txtjuminfirst" autocomplete="off"><span> - </span><input type="text" class="txtjumin" style="width: 100px;" autofocus name = "txtjuminlast"  id = "txtjuminlast" autocomplete="off">
             </div>
-            <div><label for="txtphone">전화번호: </label>
-                <input type="text" value="010" class="txtphone" style="width: 50px;">
+            <br>
+            <div><label for="txtphone">*전화번호: &nbsp;</label>
+                <input type="text" value="010" class="txtphone" name = "txtteltop" style="width: 50px;" autocomplete="off">
                 <span> - </span>
-                <input type="text" class="txtphone" style="width: 50px;" autofocus>
+                <input type="text" class="txtphone" style="width: 50px;" autofocus name = "txttelmiddle" id = "txttelmiddle" autocomplete="off">
                 <span> - </span>
-                <input type="text" class="txtphone" style="width: 50px;" autofocus>
+                <input type="text" class="txtphone" style="width: 50px;" autofocus name = "txttelbottom" id = "txttelbottom" autocomplete="off">
             </div>
-            <div><label for="txtgrade">직급 : </label><input type="text" id="txtgrade" style="width: 70px;" autofocus></div>
-            <div><label for="txtsalary">월급 : </label><input type="text" id="txtsalary" style="width: 70px;" autofocus></div>
-			<div><label for="txtbuseo">부서배치 : </label>
-				<select>
-					<option value = "">인사부</option>
-					<option value = "">개발부</option>
-					<option value = "">기획부</option>
-					<option value = "">경영지원</option>
-					<option value = "">홍보부</option>
-					<option value = "">영업부</option>
+            <br>
+            <!-- <div><label for="txtgrade">직급 : </label><input type="text" id="txtgrade" name = "txtgrade" style="width: 70px;" autofocus></div> -->
+            <div>
+            	<label for="txtgrade">*직급 : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+            		<select id="txtgrade" name = "txtgrade" style="width: 70px;">
+            			<option value = "사원">사원</option>
+            			<option value = "대리">대리</option>
+            			<option value = "과장">과장</option>
+            			<option value = "차장">차장</option>
+            			<option value = "부장">부장</option>
+            			<option value = "이사">이사</option>
+            		</select>
+            </div>
+            <br>
+            <div><label for="txtsalary">*월급 : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label><input type="text" id="txtsalary" name = "txtsalary" style="width: 150px;" autofocus autocomplete="off"></div>
+			<br>
+			<div><label for="txtbuseo">*부서배치 : &nbsp;&nbsp;&nbsp;</label>
+				<select name = "txtbuseo">
+					<option value = "인사부">인사부</option>
+					<option value = "개발부">개발부</option>
+					<option value = "기획부">기획부</option>
+					<option value = "경영지원">경영지원</option>
+					<option value = "홍보부">홍보부</option>
+					<option value = "영업부">영업부</option>
 				</select>
 			</div>
-            <div class="img_wrap">
-                <img id="img1" />
-            </div>
-
-            
+			<br>
             <div><input type="button" id="btnadd" value="추가하기" class="btn btn-default"></div>
+            <br>
         </fieldset>
+        </form>
     </div>
 
 
 </body>
 <script>
 
+	//아래에서 유효성 검증을 할것이다.
+		
+	
+	
+
+	var pf = 0;//아직 유효성 검증을 통과하지 못함. -> 0 이 유지되는 경우 유효성 검사를 통과한다.
+	//이걸 다 만족시키려고 하면 어떤방식으로 코딩하면 될까 고민이 되는구만 씨바 아 좆같네 레알 씨발 ㅋㅋㅋ
+	
     $("#btnadd").click(function() {
-        // 추가버튼 >> 입력된 정보 추가하기
+        //입력된 버튼 추가하기 -> 여기서 유효성 검사를 해줄것이다.
+       	//alert("이름을 필수로 입력해주세요");
+         pf = 0;//여기서 초기화 작업 한번 수행해준다.
+        
+        //1.이름에 관련된 유효성검사!
+        var txtname = document.getElementById("txtname");
+        
+        //이름에 아무것도 입력하지 않았을 경우.
+        if ($("#txtname").val() == "") {
+        	alert("이름을 필수로 입력해주세요");
+        	$("#txtname").focus();
+        	pf++;
+        } else {
+            // 쓰긴 썻는데 한글로만 구성되어 있는지 검사하자
+            for (var i=0; i < txtname.value.length; i++) {
+            	
+                var c = txtname.value.charAt(i);
+
+                if(c < "가" || c > "힣") {
+                    alert("이름은 한글로 입력하세요.");
+                    txtName.select();
+                    pf++;
+                    return;//다시 돌지 않고 루프를 그냥 빠져나가기 위함이다.
+                }
+            }        	
+        }
+        
+
+        //2.주민번호에 관련된 유효성 검사
+        var txtjuminfirst = document.getElementById("txtjuminfirst");
+        var txtjuminlast = document.getElementById("txtjuminlast");
+        var juminList = [txtjuminfirst,txtjuminlast];
+        
+        for (var i = 0; i < juminList.length; i++) {
+        	
+        	//주민번호를 하나도 안적은 경우
+        	if (juminList[i].value.length == 0) {
+        		alert("주민번호를 입력해주세요");
+        		juminList[i].select();
+        		pf++;
+        		return;//리턴을 땡기면서 중단시켜주는 역할도 수행한다.
+        	} else {
+        		// 기입하긴 기입 했는데 입력값이 6자가 아닌경우 -> 주민번호는 앞자리 뒷자리 모두 6자리가 되어야 한다!.
+        		if (juminList[i] == txtjuminfirst && juminList[i].value.length != 6) {
+       				alert("주민번호 양식과 동일하게 입력해주세요");
+        			juminList[i].select();
+        			pf++;
+        			
+        		} else if (juminList[i] == txtjuminlast && juminList[i].value.length != 7) {
+        			alert("주민번호 양식과 동일하게 입력해주세요");
+        			juminList[i].select();
+        			pf++;
+        		} else {
+        			// 주민번호 잘 적은경우 -> 숫자로만 구성되어 있는지 볼것이다.
+                	for (var j = 0; j < juminList[i].value.length; j++) {
+                		
+                		var jc = juminList[i].value.charAt(j);
+                		if (jc < "0" || jc > "9") {
+                			alert("주민등록번호는 숫자로만 입력이 가능합니다.");
+                			juminList[i].select();
+                			pf++;
+                			return;
+                		}
+                	} 	
+        		}
+        	}
+        }
+        
+        
+        //3.전화번호 유효성 검사
+        var txttelmiddle = document.getElementById("txttelmiddle");
+        var txttelbottom = document.getElementById("txttelbottom");
+        var telList = [txttelmiddle,txttelbottom];
+        
+        for (var i = 0; i < telList.length; i++) {
+        	
+        	//전화번호를 하나도 입력 안한경우
+        	if (telList[i].value.length == 0) {
+        		alert("전화번호를 입력해주세요");
+        		telList[i].select();
+        		pf++;
+        		return;//리턴을 땡기면서 중단시켜주는 역할도 수행한다.
+        	} else {
+        		//기입하기는 했는데 4자리숫자가 아닌경우.
+        		if (telList[i].value.length != 4) {
+        			alert("전화번호는 4자리 숫자만 입력해주세요");
+        			telList[i].select();
+            		pf++;
+            		return;//리턴을 땡기면서 중단시켜주는 역할도 수행한다.
+        		} else {
+        			//4자리 숫자를 잘 입력한 경우 -> 이제 숫자만 들어있는지 확인해준다.
+                	for (var j = 0; j < telList[i].value.length; j++) {
+                		
+                		var tc = telList[i].value.charAt(j);
+                		if (tc < "0" || tc > "9") {
+                			alert("전화번호는 숫자로만 입력이 가능합니다.");
+                			telList[i].select();
+                			pf++;
+                			return;
+                		}
+                	} 
+        		}	
+        	}
+        }
+        
+      		//4.월급 유효성 검사
+      		var txtsalary = document.getElementById("txtsalary");
+        	if (txtsalary.value.length == 0) {
+        		//월급을 하나도 안적은 경우
+        		alert("해당 직원의 급여를 입력해주세요");
+        		txtsalary.select();
+        		pf++;
+        		return;//리턴을 땡기면서 중단시켜주는 역할도 수행한다.
+        	} else {
+        		//월급에 기입은 했는데 숫자로만 기입하지 않은 경우
+            	for (var j = 0; j < txtsalary.value.length; j++) {
+            		
+            		var ts = txtsalary.value.charAt(j);
+            		if (ts < "0" || ts > "9") {
+            			alert("급여는 숫자로만 입력이 가능합니다.");
+            			txtsalary.select();
+            			pf++;
+            			return;
+            		}
+            	} 
+        	}
+      		//이상이 없을경우  DB로 넘겨주는 작업을 수행한다.
+			
+      		if (pf == 0) {
+      			//하나의 오류도 없는경우 -> 넘겨줄 것이다.
+      			$("#btnadd").attr("type","submit");
+      			alert("성공적으로 저장됨");
+      		}
+      		
+      		
+        
     });
-
-    var sel_file;
-
-    $(document).ready(function() {
-        $("#txtphoto").on("change", handleImgFileSelect1);
-    }); 
-
-    function handleImgFileSelect1(e) {
-        var files = e.target.files;
-        var filesArr = Array.prototype.slice.call(files);
-
-        filesArr.forEach(function(f) {
-            if(!f.type.match("image.*")) {
-                alert("확장자는 이미지 확장자만 가능합니다.");
-                return;
-            }
-
-            sel_file = f;
-
-            var reader = new FileReader();
-            reader.onload = function(e) {
-                $("#img1").attr("src", e.target.result);
-            }
-            reader.readAsDataURL(f);
-            
-        });
-    }
-
-
-    var date = document.getElementById("date");
-    // var date = document.getElementsByClassName("date");
-    var now = new Date();
-    var sw = document.images["sw"];
-    date.value = now.getFullYear() + " / " + (now.getMonth()+1) + " / " + now.getDate();
-    if (date.value != null) {
-        date.readOnly = true;
-    }
 
     
-    $("#date1").datepicker({
-        dateFormat: "yy-mm-dd",
-        minDate: now.getFullYear() + "-1-1",
-        maxDate: now.getFullYear() + "-12-" + "31"
-    });
-
-    $("#date2").datepicker({
-        dateFormat: "yy-mm-dd",
-        minDate: now.getFullYear() + "-1-1",
-        maxDate: now.getFullYear() + "-12-" + "31"
-    });
-
-
-
-    function sample6_execDaumPostcode() {
-        new daum.Postcode({
-            oncomplete: function(data) {
-                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-
-                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
-                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-                var addr = ''; // 주소 변수
-                var extraAddr = ''; // 참고항목 변수
-
-                //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
-                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
-                    addr = data.roadAddress;
-                } else { // 사용자가 지번 주소를 선택했을 경우(J)
-                    addr = data.jibunAddress;
-                }
-
-                // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
-                if(data.userSelectedType === 'R'){
-                    // 법정동명이 있을 경우 추가한다. (법정리는 제외)
-                    // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
-                    if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
-                        extraAddr += data.bname;
-                    }
-                    // 건물명이 있고, 공동주택일 경우 추가한다.
-                    if(data.buildingName !== '' && data.apartment === 'Y'){
-                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-                    }
-                    // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
-                    if(extraAddr !== ''){
-                        extraAddr = ' (' + extraAddr + ')';
-                    }
-                    // 조합된 참고항목을 해당 필드에 넣는다.
-                    document.getElementById("sample6_extraAddress").value = extraAddr;
-                
-                } else {
-                    document.getElementById("sample6_extraAddress").value = '';
-                }
-
-                // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                document.getElementById('sample6_postcode').value = data.zonecode;
-                document.getElementById("sample6_address").value = addr;
-                // 커서를 상세주소 필드로 이동한다.
-                document.getElementById("sample6_detailAddress").focus();
-            }
-        }).open();
-    }
 
 
 

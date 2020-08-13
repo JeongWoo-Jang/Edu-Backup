@@ -48,12 +48,13 @@
         }
 
         #tbl {
-            /* border: 1px solid gray; */
+            border: 1px solid red; 
             border-collapse: collapse;
             width: 880px;
             height: 80px;
-            position: relative;
-            margin: 0px auto;
+            /* position: relative; */
+            margin: 0px;
+            margin-left : 320px;
         }
         #tbl th {
             text-align: center;            
@@ -98,9 +99,8 @@
         #btns {
             width: 800px;
             position: relative;
-            /* margin: 10px auto; */
-            margin-left: 470px;
-            margin-top: -65px;
+            margin-left: 980px;
+            margin-top: 20px;
 
         }
         #btns > a {
@@ -184,6 +184,7 @@
 
 	
     <div id="content">
+    	<!-- 차순 정리.  -->
         <div id = "slctp1">
             <button class = "selectNotice" style = "outline : none;" onclick="location.href='/AtTicketProject/adminemployee.do?sort=write';"><span><i class = "glyphicon glyphicon-sort"></i></span>등록순</button>
             <button class = "selectNotice" style = "outline : none;" onclick="location.href='/AtTicketProject/adminemployee.do?sort=desc';"><span><i class = "glyphicon glyphicon-sort"></i></span>오름차순</button>
@@ -226,27 +227,37 @@
             </tbody>
         </table>
         <!-- <hr style="width: 940px;"> -->
+        
+        
+        <div id="btns">
+	        <a class="btn" id="btnadd"><i class="glyphicon glyphicon-plus"></i> 추가</a>
+	        <a class="btn" id="btnmodify"><i class="glyphicon glyphicon-pencil"></i> 수정</a>
+	        <a class="btn" id="btndelete"><i class="glyphicon glyphicon-trash"></i> 삭제</a>
+    	</div>
+        
  		
- 		<div id="pbar">
+ 		<div id="pbar" style = "padding-left : 500px; margin-top : 30px;">
 	       	${pagebar}
  		</div>
-        
-        	
-       <div id="btns">
-           <a class="btn" id="btnadd"><i class="glyphicon glyphicon-plus"></i> 추가</a>
-           <a class="btn" id="btnmodify"><i class="glyphicon glyphicon-pencil"></i> 수정</a>
-           <a class="btn" id="btndelete"><i class="glyphicon glyphicon-trash"></i> 삭제</a>
-       </div>
+		
+		
     </div>
     
+
 </body>
 <script>
 <%@include file="/WEB-INF/views/inc/adminScript.jsp" %>	
-
+	
+	//로봇이 아님을 증명할 것이다.
+	$("#robotTest").click(function(){
+		 popupCenter("/AtTicketProject/adminsecure.do", 1000, 1000); 
+	});
+	
+	
     // 추가
     $("#btnadd").click(function(){
-        window.open("adminEmploAdd.html","EmployeeAdd","width=600, height=600");
-        // window.location.href="adminEmploAdd.html";
+        //window.open("/AtTicketProject/employee/adminemployeeadd.do","EmployeeAdd","width=600, height=600");
+        popupCenter("/AtTicketProject/employee/adminemployeeadd.do", 600, 600);
     });
     // 수정
     $("#btnmodify").click(function(){
@@ -256,8 +267,6 @@
         }else {
             //선택된 체크박스의 내용 불러오기
             window.open("adminEmploModify.html","EmployeeModify","width=600, height=600");
-
-            // window.location.href="adminEmploModify.html";
         }
     });
     // 삭제
@@ -269,8 +278,20 @@
         }else {
 
         }
-    });5
+    });
+    
+    
 
+   
+   
+    //팝업 중앙정렬 알고리즘
+    function popupCenter(href, w, h) {
+    	var xPos = (document.body.offsetWidth/2) - (w/2); // 가운데 정렬
+    	xPos += window.screenLeft; 
+    	var yPos = (document.body.offsetHeight/2) - (h/2);
+
+    	window.open(href, "pop_name", "width="+w+", height="+h+", left="+xPos+", top="+yPos+", menubar=yes, status=yes, titlebar=yes, resizable=yes");
+    }
     
     
 
