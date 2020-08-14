@@ -18,14 +18,39 @@ public class ShowDTO {
 	private String round; //회차
 	private String time; //시작 시간
 	
+	private String agencyName; //기획사 이름
+	private String addr; //공연 주소
+	private String hallName; //공연장이름
+	private String theaterName; //상영관 이름
+	private String endTime; //종료시간
 	
-	@Override
-	public String toString() {
-		return String.format("seq:%s, title:%s, startDate:%s, endDate:%s, price:%s, poster:%s, content:%s, openDate:%s, age:%s, genre:%s,"
-				+ "agency: %s, place: %s, min: %s, round: %s, time: %s\n"
-				,seq,title,startDate,endDate,price,poster,content,openDate,age,genre,agency,place,min,round,time);
+	
+	
+	public String getAgencyName() {
+		return agencyName;
 	}
-	
+	public void setAgencyName(String agencyName) {
+		this.agencyName = agencyName;
+	}
+	public String getAddr() {
+		return addr;
+	}
+	public void setAddr(String addr) {
+		this.addr = addr;
+	}
+	public String getHallName() {
+		return hallName;
+	}
+	public void setHallName(String hallName) {
+		this.hallName = hallName;
+	}
+	public String getTheaterName() {
+		return theaterName;
+	}
+	public void setTheaterName(String theaterName) {
+		this.theaterName = theaterName;
+	}
+
 	public String getPlace() {
 		return place;
 	}
@@ -117,6 +142,17 @@ public class ShowDTO {
 		this.agency = agency;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return String.format("seq:%s, title:%s, startDate:%s, endDate:%s, price:%s, poster:%s, content:%s, openDate:%s, age:%s, genre:%s,"
+				+ "agency: %s, place: %s, min: %s, round: %s, time: %s\n"
+				,seq,title,startDate,endDate,price,poster,content,openDate,age,genre,agency,place,min,round,time);
+	}
+	public String getEndTime() {
+		return endTime;
+	}
+	public void setEndTime(String endTime) {
+		this.endTime = endTime;
+	}
 	
 }

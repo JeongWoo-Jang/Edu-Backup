@@ -11,7 +11,8 @@ public class CustomerDTO {
 	private String tel;
 	private String email;
 	private String grade;
-	
+	private String photo;
+
 	public String getAddr() {
 		return addr;
 	}
@@ -71,6 +72,12 @@ public class CustomerDTO {
 	}
 	public void setEgg(String egg) {
 		this.egg = egg;
+	}
+	public String getPhoto() {
+		return photo;
+	}
+	public void setPhoto(String photo) {
+		this.photo = photo;
 	}
 	
 	

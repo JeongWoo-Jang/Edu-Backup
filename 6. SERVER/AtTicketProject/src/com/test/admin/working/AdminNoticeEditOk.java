@@ -30,7 +30,7 @@ public class AdminNoticeEditOk extends HttpServlet{
 		String content = req.getParameter("content");
 		String emseq = (String)session.getAttribute("emseq"); //글쓴 회원 번호
 		String file = req.getParameter("file");
-		System.out.println(title);
+		
 		//2. DB 작업 위임 -> BoardDAO
 		
 		BoardDAO dao = new BoardDAO();

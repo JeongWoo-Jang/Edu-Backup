@@ -10,7 +10,7 @@
 
     <style>
         html {
-            width : 600px;
+            width : 1200px;
             height :1000px;
             /* border : 1px solid black; */
         }
@@ -34,19 +34,15 @@
         }
         /* 내가 선택한 그림파일 가져오기 */
         #imgShow {
-            background-image: url("../images/classic15.jpeg");
-            width : 300px;
-            height : 420px;
+            min-width : 300px;
+            min-height : 460px;
             background-repeat: no-repeat;
-            background-size: cover;
-            margin : 20px;
-            margin-left : 110px;
+            background-size: 100% 100%;
+            margin : 20px auto;
             border: 2px solid #F0F0F0;
-            visibility: hidden;
         }
         /* 그림뒤에 배경 */
         #imgback {
-            background-color: #F0F0F0;
             /* width : 320px; */
             margin : 30px;
             height : 460px;
@@ -60,15 +56,15 @@
             margin-left : 27px;
         }
         #btns {
-            margin-left : 200px;
+            margin-left : 130px;
         }
 
         /* 적용하기 삭제하기 버튼 */
         .bottombtn {
             border : 1px solid #F0F0F0;
-            width : 100px;
-            height : 50px;
-            font-size:1.2em;
+            width : 80px;
+            height : 40px;
+            font-size:1em;
         }
         .bottombtn:hover {
             background-color: #DDDDDD;
@@ -77,6 +73,14 @@
         #inputtitle {
             font-size: 1.2em;
             margin-left : 20px;
+        }
+        
+        #submit {
+        	margin: 20px auto;
+        	position: absolute;
+        	left: 45%;
+        	font-size: 14px;
+        	outline: none;
         }
 
         
@@ -88,42 +92,47 @@
     <div id = "title">배너 사진 선택하기</div>
     <hr class = "splitLine">
     <br>
-    <div><input type="file" id = "fileSelect" style></div>
-    <div id = "imgback">
-        <div id = "imgShow"></div>
-    </div>
-    <div id = "inputtitle">내용기입</div>
-    <div id = "writeCont"><textarea name="" id="" cols="74" rows="10" style = "resize : none; border : 3px solid #DDDDDD;"></textarea></div>
-    <div id = "btns">
-        <input type="button" class = "bottombtn" value = "적용하기" id = "applybtn">
-        <input type="button" class = "bottombtn" value = "삭제하기" id = "delbtn">
-    </div>
+    <form method="GET" action="/AtTicketProject/admin/adminbannermain.do" target="parentPage">
+	    <div><input type="file" id = "fileSelect" name="file"></div>
+	    <div id = "imgback">
+	        <div id = "imgShow"></div>
+	    </div>
+	    <div id = "inputtitle">배경색 선택</div>
+	    <div id = "writeCont"><input type="color" id="color" name="color" style="width : 400px;"></div>
+	    <div id = "btns">
+	        <input type="button" class = "bottombtn" value = "적용하기" id = "applybtn">
+	        <input type="button" class = "bottombtn" value = "취소하기" id = "delbtn">
+	    </div>
+	    <input type="submit" class = "btn btn-primary btn-lg" value = "수정완료" id = "submit" onclick="self.close();">
+    </form>
     
     <script>
+    
+        $(document).ready(function(){
 
-        // 파일이 선택될때 -> 파일을 띄워준다.
-        var timer1 = 0;
-        $("#fileSelect").click(function(){
-            timer = setTimeout(function(){
-                $("#imgShow").css("visibility","visible");
-            },2000);
-        });
+			$("#fileSelect").on('change', function(){  // 값이 변경되면
+				if(window.FileReader){  // modern browser
+					var filename = $(this)[0].files[0].name;
+				} 
+				else {  // old IE
+					var filename = $(this).val().split('/').pop().split('\\').pop();  // 파일명만 추출
+				}
+
+				$("#imgShow").css("background-image", "url(../images/" + filename + ")");
+				
+			});
+			
+		});
 
         //적용하기 버튼 누르기
         $("#applybtn").click(function(){
-            if(confirm("적용하시겠습니까?")) {
-                alert("적용완료");
-                window.close();
-            }
+            //alert($("#color").val());
+            $("#imgback").css("background-color", $("#color").val());
         });
 
         // 삭제하기 버튼 누르기 
         $("#delbtn").click(function(){
-            if(confirm("삭제하시겠습니까?")) {
-                alert("삭제완료");
-                window.close();
-
-            }
+        	$("#imgback").css("background-color", "transparent");
         });
         
     </script>

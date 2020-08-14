@@ -349,156 +349,30 @@
 <!-------------------------------- 내용부분 -------------------------------->
         <p class="event-main-tit">이벤트</p>
         <div class="event-division">
-            <a href="#" class="on">"전체보기"::after</a>
-            
+            <a href="#" class="on">"전체보기"::after</a>            
 
         </div>
-        <div class="event-main-list">                
+        
+        
+        <div class="event-main-list">     
+       		 <c:forEach items="${list}" var="dto">        
+       		 <c:if test="${dto.delflag==0}">   
                     <div id="eventbox">
-                        <img src="./images/eventsmall1.jpg" alt="">
+                        <img src="./images/${dto.banner}" alt="">
                         <div class="eve-mlist-box">
-                            <p class="evemark">프로모션</p>
-                            <p class="evetit">컴백스테이지</p>
-                            <p class="evetxt">2020.07-15 ~ 2020.08.31</p>
+                            <p class="evemark">${dto.eindex}</p>
+                            <p class="evetit">${dto.title}</p>
+                            <p class="evetxt">${dto.startdate} ~ ${dto.enddate}</p>
                             <div class="evepc" data-percent="20">
                                 <progress value="20" max="100" class="pbar"></progress>                         
                             </div>
                             <p class="eve-mlist-dday">44일 남음</p>
-                        </div>                   
-                    </div>
-                    <div id="eventbox">
-                        <img src="./images/eventsmall2.jpg" alt="">
-                        <div class="eve-mlist-box">
-                            <p class="evemark">초대이벤트</p>
-                            <p class="evetit">뮤지컬 <베르테르> 기대평 이벤트</p>
-                            <p class="evetxt">2020.07-15 ~ 2020.08.31</p>
-                            <div class="evepc" data-percent="20">
-                                <progress value="20" max="100" class="pbar"></progress>                           
-                            </div>
-                            <p class="eve-mlist-dday">44일 남음</p>
-                        </div>                   
-                    </div>
-                    <div id="eventbox">
-                        <img src="./images/eventsmall3.png" alt="">
-                        <div class="eve-mlist-box">
-                            <p class="evemark">초대이벤트</p>
-                            <p class="evetit">연극 <가족사진> 기대평 이벤트</p>
-                            <p class="evetxt">2020.07-15 ~ 2020.08.31</p>
-                            <div class="evepc" data-percent="20">
-                                <progress value="40" max="100" class="pbar"></progress>                          
-                            </div>
-                            <p class="eve-mlist-dday">44일 남음</p>
-                        </div>                   
-                    </div>
-                    <div id="eventbox">
-                        <img src="./images/eventsmall4.png" alt="">
-                        <div class="eve-mlist-box">
-                            <p class="evemark">초대이벤트</p>
-                            <p class="evetit">뮤지컬 <오페라의 유령> - 대구 기대평 이벤트</p>
-                            <p class="evetxt">2020.07-15 ~ 2020.08.31</p>
-                            <div class="evepc" data-percent="20">
-                                <progress value="10" max="100" class="pbar"></progress>                            
-                            </div>
-                            <p class="eve-mlist-dday">64일 남음</p>
-                        </div>                   
-                    </div>
-                    <div id="eventbox">
-                        <img src="./images/eventsmall5.jpg" alt="">
-                        <div class="eve-mlist-box">
-                            <p class="evemark">초대이벤트</p>
-                            <p class="evetit">뮤지컬 <더 모먼트> 기대평 이벤트</p>
-                            <p class="evetxt">2020.07-15 ~ 2020.08.31</p>
-                            <div class="evepc" data-percent="20">
-                                <progress value="80" max="100" class="pbar"></progress>                            
-                            </div>
-                            <p class="eve-mlist-dday">8일 남음</p>
-                        </div>                   
-                    </div>
-                    <div id="eventbox">
-                        <img src="./images/eventsmall6.jpg" alt="">
-                        <div class="eve-mlist-box">
-                            <p class="evemark">초대이벤트</p>
-                            <p class="evetit">연극 <라스트 세션> 기대평 이벤트</p>
-                            <p class="evetxt">2020.07-15 ~ 2020.08.31</p>
-                            <div class="evepc" data-percent="20">
-                                <progress value="92" max="100" class="pbar"></progress>                           
-                            </div>
-                            <p class="eve-mlist-dday">2일 남음</p>
-                        </div>                   
-                    </div> 
-                    <div id="eventbox">
-                        <img src="./images/eventsmall7.jpg" alt="">
-                        <div class="eve-mlist-box">
-                            <p class="evemark">초대이벤트</p>
-                            <p class="evetit">뮤지컬 <펀홈> 기대평 이벤트</p>
-                            <p class="evetxt">2020.07-15 ~ 2020.08.31</p>
-                            <div class="evepc" data-percent="20">
-                                <progress value="20" max="100" class="pbar"></progress>                        
-                            </div>
-                            <p class="eve-mlist-dday">44일 남음</p>
-                        </div>                   
-                    </div>
-                    <div id="eventbox">
-                        <img src="./images/eventsmall8.png" alt="">
-                        <div class="eve-mlist-box">
-                            <p class="evemark">초대이벤트</p>
-                            <p class="evetit">락뮤지컬 <프리즌> 기대평 이벤트</p>
-                            <p class="evetxt">2020.07-15 ~ 2020.08.31</p>
-                            <div class="evepc" data-percent="20">
-                                <progress value="40" max="100" class="pbar"></progress>                         
-                            </div>
-                            <p class="eve-mlist-dday">34일 남음</p>
-                        </div>                   
-                    </div>
-                    <div id="eventbox">
-                        <img src="./images/eventsmall9.jpg" alt="">
-                        <div class="eve-mlist-box">
-                            <p class="evemark">초대이벤트</p>
-                            <p class="evetit">연극 <그남자 그여자> 기대평 이벤트</p>
-                            <p class="evetxt">2020.07-15 ~ 2020.08.31</p>
-                            <div class="evepc" data-percent="20">
-                                <progress value="60" max="100" class="pbar"></progress>                           
-                            </div>
-                            <p class="eve-mlist-dday">24일 남음</p>
-                        </div>                   
-                    </div>
-                    <div id="eventbox">
-                        <img src="./images/eventsmall10.png" alt="">
-                        <div class="eve-mlist-box">
-                            <p class="evemark">초대이벤트</p>
-                            <p class="evetit">Super Junior Beyond Live</p>
-                            <p class="evetxt">2020.07-15 ~ 2020.08.31</p>
-                            <div class="evepc" data-percent="20">
-                                <progress value="20" max="100" class="pbar"></progress>                             
-                            </div>
-                            <p class="eve-mlist-dday">44일 남음</p>
-                        </div>                   
-                    </div>
-                    <div id="eventbox">
-                        <img src="./images/eventsmall11.jpg" alt="">
-                        <div class="eve-mlist-box">
-                            <p class="evemark">초대이벤트</p>
-                            <p class="evetit"> 뮤지컬 <6시퇴근> 기대평 이벤트</6></p>
-                            <p class="evetxt">2020.07-15 ~ 2020.08.31</p>
-                            <div class="evepc" data-percent="20">
-                                <progress value="60" max="100" class="pbar"></progress>                             
-                            </div>
-                            <p class="eve-mlist-dday">34일 남음</p>
-                        </div>                   
-                    </div>
-                    <div id="eventbox">
-                        <img src="./images/eventsmall12.jpg" alt="">
-                        <div class="eve-mlist-box">
-                            <p class="evemark">초대이벤트</p>
-                            <p class="evetit">연극 <나의 PS파트너> 기대평 이벤트</p>
-                            <p class="evetxt">2020.07-15 ~ 2020.08.31</p>
-                            <div class="evepc" data-percent="20">
-                                <progress value="40" max="100" class="pbar"></progress>                           
-                            </div>
-                            <p class="eve-mlist-dday">44일 남음</p>
-                        </div>                   
-                    </div>  
+                        </div>           
+                    </div>      
+             </c:if>
+             </c:forEach>               
         </div>
+        
 <!-------------------------------- 화면 하단부 -------------------------------->
         <div id="bottom">
                 <div>

@@ -16,8 +16,38 @@ public class BannerDTO {
 	
 	private String region;
 	
+	private String intro1;
+	private String intro2;
+	private String intro3;
+	
+	private String fontcolor;
 	
 	
+	
+	public String getFontcolor() {
+		return fontcolor;
+	}
+	public void setFontcolor(String fontcolor) {
+		this.fontcolor = fontcolor;
+	}
+	public String getIntro1() {
+		return intro1;
+	}
+	public void setIntro1(String intro1) {
+		this.intro1 = intro1;
+	}
+	public String getIntro2() {
+		return intro2;
+	}
+	public void setIntro2(String intro2) {
+		this.intro2 = intro2;
+	}
+	public String getIntro3() {
+		return intro3;
+	}
+	public void setIntro3(String intro3) {
+		this.intro3 = intro3;
+	}
 	public String getStartdate() {
 		return startdate;
 	}

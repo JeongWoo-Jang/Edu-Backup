@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>	
 <!DOCTYPE html>
 <html>
 <head>
@@ -90,63 +91,38 @@
         <table style="width: 850px;" class="table table-striped table-bordered table-condensed" id="tbl">
             <tbody id="tbody1">
                 <tr>
-                    <th style="text-align: center;"><input type="checkbox" name="cbAll"></th>
+                    
                     <th class="title" style="width: 100px;text-align: center;">번호</th>
-                    <th class="title" style="width: 150px;text-align: center;">제목</th>
-                    <th class="title" style="width: 400px;text-align: center;">기간</th>
-                    <th class="title" style="width: 200px;text-align: center;">구분</th>
-                  
-                <tr value="1">
-                    <td><input type="checkbox" class="cb" name="checkRow" value="1"></td>
-                    <td class="data" id="index">1</td>
-                    <td class="data">출석이벤트</td>
-                    <td class="data">2020.01.01-2020.12.31</td>
-                    <td class="data">프로모션</td>
+                    <th class="title" style="width: 400px;text-align: center;">제목</th>
+                    <th class="title" style="width: 200px;text-align: center;">기간</th>
+                    <th class="title" style="width: 150px;text-align: center;">구분</th>
+                    <th class="title" style="width: 200px;text-align: center;">배너</th>
+                    <th class="title" style="width: 200px;text-align: center;">배너</th>
+                   </tr>
+                    
+                <c:forEach items="${list}" var="dto">
+                <c:if test="${dto.delflag==0}">
+                <tr >
+                 
+                    <td class="data" id="index">${dto.seq}</td>
+                    <td class="data" ><a id="edit" href="/AtTicketProject/event/eventedit.do?seq=${dto.seq}" onclick="window.open(this.href, '_blanck', 'width= 700, height = 500'); return false">${dto.title}</a></td>
+                    <td class="data">${dto.startdate}-${dto.enddate}</td>
+                    <td class="data">${dto.eindex}</td>
+                    <td class="data">${dto.banner}</td>
+                    <td class="data">${dto.content}</td>
                 </tr>
-                <tr value="2">
-                    <td><input type="checkbox" class="cb" name="checkRow" value="2"></td>
-                    <td class="data" id="index">2</td>
-                    <td class="data">출석이벤트</td>
-                    <td class="data">2020.01.01-2020.12.31</td>
-                    <td class="data">프로모션</td>
-                </tr>
-                <tr value="3">
-                    <td><input type="checkbox" class="cb" name="checkRow" value="3"></td>
-                    <td class="data" id="index">3</td>
-                    <td class="data">출석이벤트</td>
-                    <td class="data">2020.01.01-2020.12.31</td>
-                    <td class="data">프로모션</td>
-                </tr>
-                <tr value="4">
-                    <td><input type="checkbox" class="cb" name="checkRow" value="4"></td>
-                    <td class="data" id="index">4</td>
-                    <td class="data">출석이벤트</td>
-                    <td class="data">2020.01.01-2020.12.31</td>
-                    <td class="data">프로모션</td>
-                </tr>
-                <tr value="5">
-                    <td><input type="checkbox" class="cb" name="checkRow" value="1"></td>
-                    <td class="data" id="index">5</td>
-                    <td class="data">출석이벤트</td>
-                    <td class="data">2020.01.01-2020.12.31</td>
-                    <td class="data">프로모션</td>
-                </tr>
-                <tr value="6">
-                    <td><input type="checkbox" class="cb" name="checkRow" value="6"></td>
-                    <td class="data" id="index">6</td>
-                    <td class="data">출석이벤트</td>
-                    <td class="data">2020.01.01-2020.12.31</td>
-                    <td class="data">프로모션</td>
-                </tr>
+                </c:if>
+                </c:forEach>
+                
         	</tbody>
         </table>
        
         <div style="margin-left: 700px; width: 150px;">
             <button class = "modified" id = "makebtn"><i class="glyphicon glyphicon-plus"></i>추가</button>
             <button class="modified" id="viewbtn">보기</button>
-            <button class = "modified" id = "delbtn"><i class="glyphicon glyphicon-trash"></i>삭제</button>
+            <button class = "modified" id = "delbtn"><i class="glyphicon glyphicon-trash"></i>수정</button>
         </div>
-        <nav style="margin-left: 230px;" class = "pagebar">
+        <!-- <nav style="margin-left: 230px;" class = "pagebar">
             <ul class="pagination">
               <li>
                 <a href="#" aria-label="Previous">
@@ -169,58 +145,31 @@
                 </a>
               </li>
             </ul>
-          </nav>
+          </nav> -->
     </div>
-  
+  <div style="margin-top:-50px; margin-left:950px;">${pagebar}</div>
 	<%@include file="/WEB-INF/views/inc/menu.jsp"%>
 	<script>
 	<%@include file="/WEB-INF/views/inc/adminScript.jsp" %>	
-	var cbAll = document.all.cbAll; // 일괄 체크박스
-    var child;
-    var cb = document.getElementsByClassName("cb");
+	
 
-    // 모두 선택 기능, 페이지 이동 
-    cbAll.onchange = function () {
-        for (var i = 0; i < cb.length; i++) {
-            cb[i].checked = cbAll.checked;
-        }
-    }
-
-    $("#viewbtn").click(function () {
-            if ($('input').is(':checked') == true) {
-                location.href = "/AtTicketProject/event/eventinfo.do";
-            } else {
-                alert("하나 이상을 체크하시오.");
-            }
-        });
-
-        //추가
-     $("#makebtn").click(function () {
-        window.open("/AtTicketProject/event/eventinsert.do", "추가", "width=500, height=330");
+	$("#makebtn").click(function () {        
+            window.open("/AtTicketProject/event/eventinsert.do", "추가", "width=700, height=500");
+        
     });
+	
+	$("#delbtn").click(function () {        
+        window.open("/AtTicketProject/event/eventedit.do", "수정", "width=700, height=500");
+    
+});
+	
+   
+   function movePage() {
+		//alert(event.srcElement.value);
+		location.href = "/AtTicketProject/adminworking.do?page=" + event.srcElement.value;
+	}
 
-     //삭제
-     $("#delbtn").click(function () {
-            if ($('input').is(':checked') == true) {
-                if (confirm("정말로 삭제하시겠습니까?")) {
-                    $("input[name=checkRow]:checked").each(function () {
-                        var tr_value = $(this).val();
-                        var tr = $("tr[value='" + tr_value + "']");
-                        tr.remove();
-                    });
-                }
-            } else {
-                alert("하나 이상을 체크하시오.");
-            }
-
-        });
-
-   document.getElementsByTagName("a").onclick=function(){
-            console.log(1);
-            event.srcElement.location.href="event.html";
-   };
-
-
+   $("#pagebar").val(${page});
 	</script>
 </body>
 </html>

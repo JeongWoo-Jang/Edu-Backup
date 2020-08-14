@@ -102,21 +102,20 @@
         }
         .slide li{
             display: block;
-            /* margin-bottom: 130px; */
-            /* position: absolute; */
 
         }
-        .slide > li > img{
+        .slide li img{
             width:200px; 
-            /* position: absolute; */
-            margin-left: -5px; 
+            height: 280px;
+            margin-left: 5px;     
         }
+
 
         .slide > li > span {font-size: 18px; margin-top:120px;}
 
         .slide > li > span:nth-child(1) { margin-left: -20px;}
-        .slide > li > span:nth-child(2) { margin-left: 30px; display:inline-block; width: 70px;}
-        .slide > li > span:nth-child(3) { margin-left: 27px; display:inline-block; width: 100px;}
+        .slide > li > span:nth-child(2) { margin-left: 30px; display:inline-block; width: 50px;}
+        .slide > li > span:nth-child(3) { margin-left: 27px; display:inline-block; width: 120px; font-size: 14px;}
         .slide > li > span:last-child { margin-left: 65px; display:inline-block; width: 65px;}
 
         #aa {
@@ -192,12 +191,12 @@
         <div class="wrapper">
             <div class="item1" style="border-radius: 10px; background-color: rgb(244, 244, 244);">
                 <h4 style="margin-right: 140px; color: #666;">방문자</h4>
-                <span style="color: #555; font-size: 25px;">11.2k</span><span style="color:red"> ▲ 2.1k</span>
+                <span style="color: #555; font-size: 25px;" id="visitorNow"></span><span style="color:red"id="visitorPluse"></span>
                 <span class="glyphicon glyphicon-stats" style="font-size: 35px; margin-left: 100px; color: #e09b9b;"></span>
             </div>
             <div class="item2" style="border-radius: 10px; background-color: rgb(244, 244, 244);">
                 <h4 style="margin-right: 140px; color: #666;">예매율</h4>
-                <span style="color: #555; font-size: 25px;">11.1%</span><span style="color: blue"> ▼ 1.6%</span>
+                <span style="color: #555; font-size: 25px;" id="rateNow"></span><span style="color: blue" id="ratePluse"></span>
                 <span class="glyphicon glyphicon-stats" style="font-size: 35px; margin-left: 100px; color: #e09b9b;"></span>
 
             </div>
@@ -219,46 +218,6 @@
 
                 <div id="slideItem">
                     <ul class="slide">
-                        <li>
-                            <span>1</span>
-                            <span>뮤지컬</span> 
-                            <span>cats</span> 
-                            <img src="../images/notice3.jpg">
-                            <span>3.8%</span>
-                        </li>
-
-                        <li>
-                            <span>2</span> 
-                            <span>뮤지컬</span> 
-                            <span>베르테르</span> 
-                            <img src="../images/notice1.jpg" alt="">
-                            <span>2.6%</span>
-
-                        </li>
-                        <li>
-                            <span>3</span> 
-                            <span>뮤지컬</span> 
-                            <span>레베카</span> 
-                            <img src="../images/music11.jpeg" alt="">
-                            <span>1.8%</span>
-
-                        </li>
-                        <li>
-                            <span>4</span> 
-                            <span>콘서트</span> 
-                            <span>팬텀싱어</span> 
-                            <img src="../images/consert6.jpeg">
-                            <span>1.3%</span>
-
-                        </li>
-                        <li>
-                            <span>5</span> 
-                            <span>뮤지컬</span> 
-                            <span>머더발라드</span> 
-                            <img src="../images/music10.jpeg" alt="">
-                            <span>1.2%</span>
-
-                        </li>
                     </ul>
                 </div>
 
@@ -300,17 +259,253 @@
 <script>
 	<%@include file="/WEB-INF/views/inc/adminScript.jsp" %>
 
+    $("#tabs").tabs({
+            active: 0 //기본으로 선택할 것 고르기
+    });
+    
+    
+function callAjax(url, method, params, sCallback, eCallback) {
+	$.ajax({
+		type: method,
+		url: url,
+		dataType: "json",
+		success: sCallback,
+		error: eCallback		
+	});
+}
 
-    //실시간 공연 예매 랭킹
-    var idx = 0; // 함수 호출 횟수
+$(document).ready(function (){
+	fn_dailyVisitor(); // 일일방문자 Tran
+	fn_dailyBookRate(); //일일예매율 Tran
+	fn_realTimeBookRank(); //실시간예매순위 Tran
+	fn_ageBookRate(); //성별연령별예매율 Tran
+	fn_genreBookRate(); // 장르별예매율 Tran
+});
+
+// 일일방문자 Tran
+function fn_dailyVisitor() {
+	//jin var url = '/AtTicketProject/customer/adminViewOk1.do';
+	var url = '/AtTicketProject/customer/adminviewok.do';
+	var method = 'GET';
+	var s_Callback = fn_callback_dailyVisitor;
+	var e_Callback = fn_err_callback_dailyVisitor;
+	
+	callAjax(url, method, '' , s_Callback, e_Callback);
+}
+
+//일일예매율 Tran
+function fn_dailyBookRate(){
+	var url = '/AtTicketProject/customer/dailyBookRateOk.do';
+	var method = 'GET';
+	var s_Callback = fn_callback_dailyBookRate;
+	var e_Callback = fn_err_callback_dailyBookRate;
+	
+	
+	callAjax(url, method, '' , s_Callback, e_Callback);
+}
+
+//실시간예매순위 Tran
+function fn_realTimeBookRank(){
+	var url = '/AtTicketProject/customer/realTimeBookRankOk.do';
+	var method = 'GET';
+	var s_Callback = fn_callback_realTimeBookRank;
+	var e_Callback = fn_err_callback_realTimeBookRank;
+	
+	callAjax(url, method, '' , s_Callback, e_Callback);
+}
+
+//성별연령별예매율 Tran
+function fn_ageBookRate(){
+	var url = '/AtTicketProject/customer/ageBookRateOk.do';
+	var method = 'GET';
+	var s_Callback = fn_callback_ageBookRate;
+	var e_Callback = fn_err_callback_ageBookRate;
+	
+	callAjax(url, method, '' , s_Callback, e_Callback);
+}
+
+// 장르별예매율 Tran
+function fn_genreBookRate(){
+	var url = '/AtTicketProject/customer/genreBookRateOk.do';
+	var method = 'GET';
+	var s_Callback = fn_callback_genreBookRate;
+	var e_Callback = fn_err_callback_genreBookRate;
+	
+	callAjax(url, method, '' , s_Callback, e_Callback);
+}
+
+
+//일일방문자 콜백
+function fn_callback_dailyVisitor(response){
+	var vData = [];
+	var vCnt = [];
+	$(response[1]).each(function (index, item){
+		vData.push(item.vdate);
+		vCnt.push(parseFloat(item.vcnt, 10));
+	});
+	
+	console.log(vData);
+	console.log(vCnt);
+	
+	
+	$("#visitorNow").html(vCnt[6]+'k');
+	
+	if( vCnt[6]-vCnt[5] > 0 ){
+		$("#visitorPluse").html('▲ ' +(vCnt[6]-vCnt[5]).toFixed(1)+'k')
+		$("#visitorPluse").css({
+			"color" : "red",
+			"margin-left": "10px"
+		});
+	} else {
+		$("#visitorPluse").html('▼ ' +(vCnt[6]-vCnt[5]).toFixed(1)+'k')
+		$("#visitorPluse").css({
+			"color" : "blue",
+			"margin-left": "10px"
+		});
+	}
+	
+	Highcharts.chart('container2', {
+        colors: [
+            "#8389E0"
+        ],
+        chart: {
+            type: 'line'
+        },
+        title: {
+            text: vData[0] +' ~ '+ vData[6]
+        },
+        subtitle: {
+            text: 'At-Ticket.com'
+        },
+        xAxis: {
+            categories: vData
+        },
+        yAxis: {
+            title: {
+                text: '방문자수(k)'
+            }
+        },
+        plotOptions: {
+            line: {
+                dataLabels: {
+                    enabled: true
+                },
+                enableMouseTracking: false
+            }
+        },
+        series: [{
+            name: '일별 방문자(천)',
+            // data: [12.7, 15.0, 25.6, 27.8, 22.2, 23.8, 25.9]
+            data: vCnt
+        }]
+    });
+}
+
+//일일예매율 콜백
+function fn_callback_dailyBookRate(response){
+	//alert("일일예매율 콜백");
+	
+	var dbData = [];
+	var dbRate = [];
+	$(response).each(function (index, item){
+		dbData.push(item.dbdate);
+		dbRate.push(parseFloat(item.dbrate, 10));
+	});
+	//alert("일일예매율 콜백 성공");
+	
+	$("#rateNow").html(dbRate[2]+'%');
+	
+	if( dbRate[2]-dbRate[1] > 0 ){
+		$("#ratePluse").html('▲ ' +(dbRate[2]-dbRate[1]).toFixed(1)+'%')
+		$("#ratePluse").css({
+			"color" : "red",
+			"margin-left": "10px"
+		});
+	} else {
+		$("#ratePluse").html('▼ ' +(dbRate[2]-dbRate[1]).toFixed(1)+'%')
+		$("#ratePluse").css({
+			"color" : "blue",
+			"margin-left": "10px"
+		});
+	};
+	
+	
+	console.log("일일예애: "+dbData);
+	console.log(dbRate);
+	
+
+	
+    Highcharts.chart('container1', {
+        colors: [
+            "#92D050"
+        ],
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: dbData[0] +' ~ '+ dbData[2]
+        },
+        subtitle: {
+            text: 'At-Ticket.com'
+        },
+        xAxis: {
+            categories: dbData,
+            crosshair: true
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: '예매율(%)'
+            }
+        },
+        tooltip: {
+            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                '<td style="padding:0"><b>{point.y:.1f}%</b></td></tr>',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
+        },
+        plotOptions: {
+            column: {
+                pointPadding: 0.2,
+                borderWidth: 0
+            }
+        },
+        series: [{
+            name: '일별 예매율(%)',
+            data: dbRate
+
+        }]
+    });
+}
+
+//실시간예매순위 콜백
+function fn_callback_realTimeBookRank(response){
+ 	var imgs = [];
+	var category = [];
+	var titles = [];
+	var booking = [];
+	
+	//alert("실시간예매순위 콜백");
+	$(response).each(function (index, item){
+		imgs.push(item.poster);
+		category.push('<span>'+item.genre+'</span>');
+		titles.push('<span>'+item.title+'</span>');
+		booking.push('<span>'+parseFloat(item.rate, 10+'</span>'));
+	});
+	
+	var idx = 0; // 함수 호출 횟수
     var i=0; // 이미지 인덱스
     var imgNum=5; // 이미지 개수
     var imgSize=280; // 이미지 크기
-
-    var imgs = ["notice3.jpg","notice1.jpg","music11.jpeg", "consert6.jpeg","music10.jpeg"];
-    var category = ["<span>뮤지컬</span>","<span>뮤지컬</span>","<span>뮤지컬</span>","<span>콘서트</span>","<span>뮤지컬</span>"];
-    var titles = ["<span>cats</span>","<span>베르테르</span>","<span>레베카</span>","<span>팬텀싱어</span>","<span>머더발라드</span>"];
-    var booking = ["<span>3.8%</span>","<span>2.6%</span>","<span>1.8%</span>","<span>1.3%</span>","<span>1.2%</span>"];
+    
+    for(var j =0; j<5; j++ ){
+    $('.slide').append('<li><span>' + (j+1) +'</span>'+ category[j] + titles[j] +
+    	    '<img src="../images/'+imgs[j]+'" alt="">' + booking[j] + '</li>');
+    	    //j++;
+    }
+    
 
     function imgSlide() {
         idx++;
@@ -332,122 +527,29 @@
         
     }
 
-    setInterval(function() { imgSlide() }, 4000);
+    setInterval(function() { imgSlide() }, 4000); 
+	
+}
 
-    //장르별 예매율
-    Highcharts.chart("container4", {
-        colors: [
-            "cornflowerblue",
-            "orange",
-            "#8389E0",
-            "#92D050",
-            "#555"
-        ],
-        chart: {
-            plotBackgroundColor: null,
-            plotBorderWidth: null,
-            plotShadow: false,
-            type: "pie",
-        },
-        title: {
-            text: "장르별 예매율",
-        },
-        tooltip: {
-            pointFormat:
-                "{series.name}: <b>{point.percentage:.1f}%</b>",
-        },
-        accessibility: {
-            point: {
-                valueSuffix: "%",
-            },
-        },
-        plotOptions: {
-            pie: {
-                allowPointSelect: true,
-                cursor: "pointer",
-                dataLabels: {
-                    enabled: true,
-                    format:
-                        "<b>{point.name}</b>: {point.percentage:.1f} %",
-                },
-            },
-        },
-        series: [
-            {
-                name: "Brands",
-                colorByPoint: true,
-                data: [
-                    {
-                        name: "콘서트",
-                        y: 41.41,
-                        sliced: true,
-                        selected: true,
-                    },
-                    {
-                        name: "뮤지컬",
-                        y: 33.48,
-                    },
-                    {
-                        name: "전시",
-                        y: 12.45,
-                    },
-                    {
-                        name: "클래식",
-                        y: 5.87,
-                    },
-                    {
-                        name: "연극",
-                        y: 6.79,
-                    },
-                ],
-            },
-        ],
-    });
-
-    
-    //일별 방문자수
-    Highcharts.chart('container2', {
-        colors: [
-            "#8389E0"
-        ],
-        chart: {
-            type: 'line'
-        },
-        title: {
-            text: '2020-07-15 ~ 2020-07-21'
-        },
-        subtitle: {
-            text: 'At-Ticket.com'
-        },
-        xAxis: {
-            categories: ['15', '16', '17', '18', '19', '20', '21']
-        },
-        yAxis: {
-            title: {
-                text: '방문자수(k)'
-            }
-        },
-        plotOptions: {
-            line: {
-                dataLabels: {
-                    enabled: true
-                },
-                enableMouseTracking: false
-            }
-        },
-        series: [{
-            name: '일별 방문자(천)',
-            data: [12.7, 15.0, 25.6, 27.8, 22.2, 23.8, 25.9]
-        }]
-    });
-
+//성별연령별예매율 콜백
+function fn_callback_ageBookRate(response){
+	alert("성별연령별예매율 콜백");
     //성별/연령별
-    var categories = [
-        '10-14', '15-19',
+    var abAge = [];
+	var abMan = [];
+	var abWoman = [];
+	$(response).each(function (index, item){
+		abAge.push(item.age);
+		abMan.push(parseFloat(-item.man, 10));
+		abWoman.push(parseFloat(item.woman, 10));
+	});
+    
+        /* '10-14', '15-19',
         '20-24', '25-29', '30-34', '35-39', '40-44',
         '45-49', '50-54', '55-59', '60-64', '65-69',
-        '70-74', '75-79', '80-84', '85-89'
-    ];
+        '70-74', '75-79', '80-84', '85-89' */
+    var categories = abAge;
+    
 
     Highcharts.chart('container3', {
         colors: [
@@ -518,84 +620,123 @@
 
         series: [{
             name: '남',
-            data: [
-                 -2.2, -2.4,
-                -2.7, -3.0, -3.3, -3.2,
-                -2.9, -3.5, -4.4, -4.1,
-                -3.4, -2.7, -2.3, -2.2,
-                -1.6, -0.6
-            ]
+            data: abMan
+            
         }, {
             name: '여',
-            data: [
-                2.1, 2.3, 2.6,
-                2.9, 3.2, 3.1, 2.9, 3.4,
-                4.3, 4.0, 3.5, 2.9, 2.5,
-                2.7, 2.2, 1.1
-            ]
+            data: abWoman
+            
         }]
     });
+}
 
-    // 예매율
-    Highcharts.chart('container1', {
-    colors: [
-        "#92D050"
-    ],
-    chart: {
-        type: 'column'
-    },
-    title: {
-        text: '2020-07-15 ~ 2020-07-21'
-    },
-    subtitle: {
-        text: 'At-Ticket.com'
-    },
-    xAxis: {
-        categories: [
-            '15',
-            '16',
-            '17',
-            '18',
-            '19',
-            '20',
-            '21',
+// 장르별예매율 콜백
+function fn_callback_genreBookRate(response){
+	//alert("장르별예매율 콜백");
+	
+	var gGenre = [];
+	var gRate = [];
+	$(response).each(function (index, item){
+		gGenre.push(item.ggenre);
+		gRate.push(parseFloat(item.grate, 10));
+	});
+	
+    Highcharts.chart("container4", {
+        colors: [
+            "cornflowerblue",
+            "orange",
+            "#8389E0",
+            "#92D050",
+            "#555"
         ],
-        crosshair: true
-    },
-    yAxis: {
-        min: 0,
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: "pie",
+        },
         title: {
-            text: '예매율(%)'
-        }
-    },
-    tooltip: {
-        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-            '<td style="padding:0"><b>{point.y:.1f}%</b></td></tr>',
-        footerFormat: '</table>',
-        shared: true,
-        useHTML: true
-    },
-    plotOptions: {
-        column: {
-            pointPadding: 0.2,
-            borderWidth: 0
-        }
-    },
-    series: [{
-        name: '일별 예매율(%)',
-        data: [26.0, 35.6, 18.5, 16.4, 14.1, 35.6, 26.9]
-
-    }]
-});
-
-
-
-    $("#tabs").tabs({
-            active: 0 //기본으로 선택할 것 고르기
+            text: "장르별 예매율",
+        },
+        tooltip: {
+            pointFormat:
+                "{series.name}: <b>{point.percentage:.1f}%</b>",
+        },
+        accessibility: {
+            point: {
+                valueSuffix: "%",
+            },
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: "pointer",
+                dataLabels: {
+                    enabled: true,
+                    format:
+                        "<b>{point.name}</b>: {point.percentage:.1f} %",
+                },
+            },
+        },
+        series: [
+            {
+                name: "Brands",
+                colorByPoint: true,
+                data: [
+                    {
+                        name: gGenre[0],
+                        y: gRate[0],
+                        sliced: true,
+                        selected: true,
+                    },
+                    {
+                        name: gGenre[1],
+                        y: gRate[1],
+                    },
+                    {
+                        name: gGenre[2],
+                        y: gRate[2],
+                    },
+                    {
+                        name: gGenre[3],
+                        y: gRate[3],
+                    },
+                    {
+                        name: gGenre[4],
+                        y: gRate[4],
+                    },
+                ],
+            },
+        ],
     });
-    
-    
+}
+
+
+
+//일일방문자 에러콜백
+function fn_err_callback_dailyVisitor(){
+	alert("일일방문자 에러콜백");
+}
+
+//일일예매율 에러콜백
+function fn_err_callback_dailyBookRate(){
+	alert("일일예매율 에러콜백");
+}
+
+//실시간예매순위 에러콜백
+function fn_err_callback_realTimeBookRank(){
+	alert("실시간예매순위 에러콜백");
+}
+
+//성별연령별예매율 에러콜백
+function fn_err_callback_ageBookRate(){
+	alert("성별연령별예매율 에러콜백");
+}
+
+//장르별예매율 에러콜백
+function fn_err_callback_genreBookRate(){
+	alert("장르별예매율 에러콜백");
+}
 
 </script>
 

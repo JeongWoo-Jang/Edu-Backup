@@ -81,19 +81,55 @@ public class AdminEmployee extends HttpServlet{
 		map.put("begin", begin + "");
 		map.put("end", end + "");
 		
+		
+		
 		//총 페이지 수 계산하기
 		//총 페이지 수 = 총 게시물 수 / 한 페이지당 출력 게시물 수
 		totalCount =  dao.getTotalCount(map);//총 게시물수!
 		
+		
+		
 		//테스트 시작
-		System.out.println(totalCount);//-> 200개가 정상적으로 나오게 된다.
+		//System.out.println(totalCount);//-> 200개가 정상적으로 나오게 된다.
 		//테스트 끝
 		
 		totalPage = (int)Math.ceil((double)totalCount / pageSize);//페이징 처리 몇 페이지 까지 있는지...처리를 해준다.
 		//System.out.println(dao.getList(map).get(0).getName());
 		list = dao.getList(map);
 		
-		
+		//여기가 검색된 내용 빨간색으로 표시해주는 영역
+		for(AdminEmployeeDTO dto : list) {
+			
+			      if (search != null && search != "") {
+			          
+			          String tname = dto.getName();
+			          tname = tname.replace(search, "<span style='font-weight:bold; color:tomato;'>"+ search + "</span>");
+			          dto.setName(tname);
+			          
+			          String tbuseo = dto.getBuseo();
+			          tbuseo= tbuseo.replace(search, "<span style='font-weight:bold; color:tomato;'>"+ search + "</span>");
+			          dto.setBuseo(tbuseo);
+			          
+			          String tjikwi = dto.getJikwi();
+			          tjikwi = tjikwi.replace(search, "<span style='font-weight:bold; color:tomato;'>"+ search + "</span>");
+			          dto.setJikwi(tjikwi);
+			          
+			          String tsalary = dto.getSalary();
+			          tsalary = tsalary.replace(search, "<span style='font-weight:bold; color:tomato;'>"+ search + "</span>");
+			          dto.setSalary(tsalary);
+			          
+			          String tssn = dto.getSsn();
+			          tssn = tssn.replace(search, "<span style='font-weight:bold; color:tomato;'>"+ search + "</span>");
+			          dto.setSsn(tssn);
+			          
+			          
+			          String ttel = dto.getTel();
+			          ttel= ttel.replace(search, "<span style='font-weight:bold; color:tomato;'>"+ search + "</span>");
+			          dto.setTel(ttel);
+			          
+			       }
+		}
+
 		//페이지바 제작
 		loop = 1;//페이지바가 몇번 루프로 도냐는 말인듯.
 		
@@ -173,6 +209,7 @@ public class AdminEmployee extends HttpServlet{
 		req.setAttribute("totalPage", totalPage);
 		
 		req.setAttribute("pagebar", pagebar);
+		
 		
 		
 		//3. 결과 반환 + jsp 호출하기

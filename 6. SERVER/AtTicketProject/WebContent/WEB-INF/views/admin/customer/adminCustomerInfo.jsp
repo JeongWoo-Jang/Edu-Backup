@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -96,33 +97,36 @@ th {
 
 		<div id="box1" style="width: 1000px;">
 			<table class="table table-bordered" style="width: 800px">
-				<tr>
-					<th style="text-align: center; width: 50px;"><input
-						type="checkbox" name="cbAll1"></th>
-					<th style="width: 100px; vertical-align: middle;">예매일</th>
-					<th style="vertical-align: middle; width: 150px;">예매번호</th>
-					<th style="vertical-align: middle;">공연명</th>
-					<th style="vertical-align: middle; width: 100px;">관람일시</th>
-					<th style="vertical-align: middle; width: 100px;">예매상태</th>
+				<tbody id="tbody1">
+				
+				<thead>
+					<tr>
+						<th style="text-align: center; width: 50px;"><input
+							type="checkbox" name="cbAll1"></th>
+						<th style="width: 100px; vertical-align: middle;">예매일</th>
+						<th style="vertical-align: middle; width: 150px;">예매번호</th>
+						<th style="vertical-align: middle;">공연명</th>
+						<th style="vertical-align: middle; width: 100px;">관람일시</th>
+						<th style="vertical-align: middle; width: 100px;">예매상태</th>
 
-				</tr>
-				<tr>
-					<td><input type="checkbox" class="cb1"></td>
-					<td>2020-05-01</td>
-					<td>A10001</td>
-					<td>오페라의 유령</td>
-					<td>2020-05-01</td>
-					<td>만료</td>
-				</tr>
-				<tr>
-					<td><input type="checkbox" class="cb1"></td>
-					<td>2020-05-01</td>
-					<td>A10001</td>
-					<td>오페라의 유령</td>
-					<td>2020-05-01</td>
-					<td>만료</td>
-				</tr>
-
+					</tr>
+				</thead>
+				 <c:if test="${empty search and list.size() == 0}">
+                    <tr>
+                        <td colspan="6">검색 결과가 없습니다.</td>
+                    </tr>
+                </c:if>
+				<c:forEach items="${list}" var="dto">
+					<tr>
+						<td><input type="checkbox" class="cb1"></td>
+						<td>${dto.bookdate}</td>
+						<td>${dto.bookseq}</td>
+						<td>${dto.showtitle}</td>
+						<td>${dto.bdate}</td>
+						<td>${dto.bookstate}</td>
+					</tr>
+				</c:forEach>
+				</tbody>
 			</table>
 			<div class="btnAll" id="manipulate1">
 				<button class="modified" id="makebtn1">
@@ -294,7 +298,7 @@ th {
 					<i class="glyphicon glyphicon-trash"></i>삭제
 				</button>
 			</div>
-			<h2 class="customertitle">프로필 사진</h2>
+			<!-- <h2 class="customertitle">프로필 사진</h2>
 
 			<div id="box1" style="width: 1000px;">
 				<table class="table table-bordered" style="width: 800px">
@@ -313,25 +317,48 @@ th {
 
 					</tr>
 				</table>
-			</div>
+			</div> -->
 
-			<div class="btnAll" id="manipulate6">
-				<!-- <button class="modified" id="makebtn6">
-					<i class="glyphicon glyphicon-plus"></i>추가
-				</button> -->
+			<!-- <div class="btnAll" id="manipulate6">
+				
 				<button class="modified" id="modifybtn6">
 					<i class="glyphicon glyphicon-pencil"></i>수정
 				</button>
-				<!-- <button class="modified" id="delbtn">
-					<i class="glyphicon glyphicon-trash"></i>삭제
-				</button> -->
-			</div>
+				
+			</div> -->
 		</div>
 	</div>
 
 	<%@include file="/WEB-INF/views/inc/menu.jsp"%>
 	<script>
 	<%@include file="/WEB-INF/views/inc/adminScript.jsp" %>	
+	 /* var sel_file;
+
+	    $(document).ready(function () {
+	        $("#txtphoto").on("change", handleImgFileSelect1);
+	    });
+
+	    function handleImgFileSelect1(e) {
+	        var files = e.target.files;
+	        var filesArr = Array.prototype.slice.call(files);
+
+	        filesArr.forEach(function (f) {
+	            if (!f.type.match("image.*")) {
+	                alert("확장자는 이미지 확장자만 가능합니다.");
+	                return;
+	            }
+
+	            sel_file = f;
+
+	            var reader = new FileReader();
+	            reader.onload = function (e) {
+	                $("#img1").attr("src", e.target.result);
+	            }
+	            reader.readAsDataURL(f);
+
+	        });
+	    } */
+	    
 	var cbAll1 = document.all.cbAll1; // 일괄 체크박스
     var cb1 = document.getElementsByClassName("cb1");
 

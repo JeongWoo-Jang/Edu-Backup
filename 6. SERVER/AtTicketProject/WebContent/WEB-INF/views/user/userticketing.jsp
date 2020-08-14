@@ -1916,9 +1916,10 @@
             window.open("/AtTicketProject/userticketpage.do", "PopupWin", "width=1000,height=672");
         });
         
-        $("#ranking input")click(function(){
-        	$(location).attr('href','/AtTicketProject/userranking.do');
-        });
+        // 랭킹 링
+        // $("#ranking input")click(function(){
+        //	$(location).attr('href','/AtTicketProject/userranking.do');
+        // }); 
 
     </script>
 

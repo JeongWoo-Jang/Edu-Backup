@@ -38,6 +38,7 @@ public class UserConcert extends HttpServlet{
 		ArrayList<BannerDTO> region1 = dao.concertregion(region01);
 		ArrayList<BannerDTO> region2 = dao.concertregion(region02);
 		ArrayList<BannerDTO> region3 = dao.concertregion(region03);
+		dao.close();
 		
 		req.setAttribute("map", map);
 		req.setAttribute("banner", dto);

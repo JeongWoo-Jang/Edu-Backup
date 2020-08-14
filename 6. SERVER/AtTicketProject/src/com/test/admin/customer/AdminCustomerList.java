@@ -58,9 +58,9 @@ public class AdminCustomerList extends HttpServlet {
 			if(search != null && search != "") {
 				//d. 검색어 부각시키기 
 				// - 제목
-				String addr = dto.getAddr();
-				addr = addr.replace(search,"<span style = 'font-weight:bold;color:tomato;'>"+search+"</span>");
-				dto.setAddr(addr);
+//				String addr = dto.getAddr();
+//				addr = addr.replace(search,"<span style = 'font-weight:bold;color:tomato;'>"+search+"</span>");
+//				dto.setAddr(addr);
 				
 				String name = dto.getName();
 				name = name.replace(search,"<span style = 'font-weight:bold;color:tomato;'>"+search+"</span>");
@@ -83,11 +83,16 @@ public class AdminCustomerList extends HttpServlet {
 		
 		loop = 1;
 		n = ((nowPage-1)/blockSize)*blockSize + 1;
+		if(search==null) {
+			search = "";
+			
+		}
 		
 		String pagebar = "";
 		
 		pagebar+="<nav class = \"pagebar\">";
 		pagebar+="<ul class =\"pagination\">";
+		
 		if(n==1) {
 			pagebar+="<li class = 'disabled'>";
 			pagebar+="<a href=\"#!\" aria-label=\"Previous\">";
@@ -96,7 +101,7 @@ public class AdminCustomerList extends HttpServlet {
 			pagebar+="</li>";
 		} else {
 			pagebar+="<li>";
-			pagebar+=String.format("<a href=\"/AtTicketProject/customer/admincustomerlist.do?page=%d\" aria-label=\"Previous\">",n-1);
+			pagebar+=String.format("<a href=\"/AtTicketProject/customer/admincustomerlist.do?page=%d&search=%s\" aria-label=\"Previous\">",n-1,search);
 			pagebar+="<span aria-hidden=\"true\">&laquo;</span>";
 			pagebar+="</a>";
 			pagebar+="</li>";
@@ -109,7 +114,7 @@ public class AdminCustomerList extends HttpServlet {
 				pagebar+="</li>";
 			} else {
 				pagebar+="<li>";
-				pagebar+=String.format("<a href=\"/AtTicketProject/customer/admincustomerlist.do?page=%d\">%d</a>",n,n);
+				pagebar+=String.format("<a href=\"/AtTicketProject/customer/admincustomerlist.do?page=%d&search=%s\">%d</a>",n,search,n);
 				pagebar+="</li>";
 			}
 			loop++;
@@ -124,7 +129,7 @@ public class AdminCustomerList extends HttpServlet {
 			pagebar+="</li>";
 		} else {
 			pagebar+="<li>";
-			pagebar+=String.format(" <a href=\"/AtTicketProject/customer/admincustomerlist.do?page=%d\" aria-label=\"Next\">",n);
+			pagebar+=String.format(" <a href=\"/AtTicketProject/customer/admincustomerlist.do?page=%d&search=%s\" aria-label=\"Next\">",n,search);
 			pagebar+="<span aria-hidden=\"true\">&raquo;</span>";
 			pagebar+="</a>";
 			pagebar+="</li>";

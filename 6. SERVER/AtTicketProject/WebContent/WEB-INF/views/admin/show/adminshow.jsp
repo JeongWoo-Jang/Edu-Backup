@@ -65,19 +65,15 @@
             text-align: center;
         }
         #tbl th:nth-child(2), #tbl td:nth-child(2) {
-            width: 70px;
-            text-align: center;
-        }
-        #tbl th:nth-child(3), #tbl td:nth-child(3) {
             width: 100px;
             text-align: center;
         }
-        #tbl th:nth-child(4), #tbl td:nth-child(4) {
+        #tbl th:nth-child(3), #tbl td:nth-child(3) {
             width: 350px;
             padding-left: 10px;
             text-align: center;
         }
-        #tbl th:nth-child(5), #tbl td:nth-child(5) {
+        #tbl th:nth-child(4), #tbl td:nth-child(4) {
             width: 250px;
             text-align: center;
         }
@@ -85,7 +81,7 @@
         #btns {
             width: 600px;
             position: relative;
-            margin-left: 1040px;
+            margin-left: 1190px;
             outline: none;
             font-weight: border;
             height : 35px;
@@ -194,7 +190,6 @@
         <table id="tbl" class="table table-striped table-bordered table-condensed">
             <tbody id="tbody">
                 <tr>
-                    <th>선택</th>
                     <th>번호</th>
                     <th>장르</th>
                     <th>제목</th>
@@ -204,10 +199,11 @@
                 
                 <c:forEach items="${list}" var="dto">
                 <tr>
-                    <td><input type="checkbox" class="cb" name="is_check"></td>
                     <td>${dto.seq}</td>
                     <td>${dto.genre}</td>
-                    <td>${dto.title}</td>
+                    <td><a href="/AtTicketProject/adminshowview.do?seq=${dto.seq}&page=${page}&search=${search}">
+                    ${dto.title}
+                    </a></td>
                     <td>${dto.startDate} ~ ${dto.endDate}</td>
                 </tr>
                 </c:forEach>
@@ -217,8 +213,8 @@
         
         <div id="btns">
             <a class="btn btn-primary" id="btnadd"><i class="glyphicon glyphicon-plus"></i> 추가</a>
-            <a class="btn btn-primary" id="btnmodify"><i class="glyphicon glyphicon-pencil"></i> 수정</a>
-            <a class="btn btn-primary" id="btndelete"><i class="glyphicon glyphicon-trash"></i> 삭제</a>
+    <!--         <a class="btn btn-primary" id="btnmodify"><i class="glyphicon glyphicon-pencil"></i> 수정</a>
+            <a class="btn btn-primary" id="btndelete"><i class="glyphicon glyphicon-trash"></i> 삭제</a> -->
         </div>
  
  		<div id="pbar">

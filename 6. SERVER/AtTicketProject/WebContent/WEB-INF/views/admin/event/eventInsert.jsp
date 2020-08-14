@@ -34,63 +34,100 @@
 </head>
 <body>
 	 <legend style="width: 200px; margin:20px 25px; font-weight: bold;">이벤트 추가</legend>
-    <div id="box">
-    <span>구분 : </span>
-        <span id="sel">
-            <select name="sel1" size="1" style="height: 25px;">
-                <optgroup label="구분">
-                    <option value="1">프로</option>
-                    <option value="2">초대</option>
-                    <option value="3">기획</option>
-                    </optgroup>
-            </select>
- 
-     <div style="margin-top:10px;"><span>제목 : </span><input style="position: relative; top: -2px;" type="text" placeholder="제목을 입력하세요." name="txt" id="txt"
-                autofocus></div>
-          
-      
-      <div style="margin-top: 10px;">
-			<label for="txtname">기간 : </label> <input style="width: 100px; text-align: center;"
-				type="text" name="date" value=" /      /" id="date"><label
-				for="date"><span style="font-size: 1em; margin-left: 10px;"
-				class="glyphicon glyphicon-calendar" id="cal"></span></label> ~ <input
-				style="width: 100px; text-align: center;" type="text" name="date"
-				value=" /      /" id="date1"><label for="date1"><span
-				style="font-size: 1em; margin-left: 10px;"
-				class="glyphicon glyphicon-calendar" id="cal1"></span></label>
-		</div>
-       
-            <div id = "manipulate" style="margin-left: 255px; margin-top:20px;">
-                <button class = "modified" id = "makebtn"><i class="glyphicon glyphicon-plus"></i>추가</button>
-                <button class = "modified" id = "closebtn">닫기</button>
-            </div>
+    <div id = "right">
+	<form method="POST" action = "/AtTicketProject/event/eventinsertok.do">
+        <table id="tbl" class="table table-bordered" style="width: 600px;">
+            <!-- <tr>
+                <th style="width: 150px;">부서</th>
+                <td style="width: 450px;">
+                    <select class="form-control">
+                        <option>개발부</option>
+                        <option>영업부</option>
+                        <option>마케팅부</option>
+                        <option>인사부</option>
+                        <option>디자인부</option>
+                        <option>총무부</option>
+                    </select>
+                </td>
+            </tr> -->
+            <tr>
+                <th style="width: 150px">제목</th>
+                <td style="width: 450px;">
+                    <!-- block태그로 바뀜 -->
+                    <input name = "title" type="text" class="form-control"> 
+                </td>
+            </tr>
+            <tr>
+            	<th>
+            		<label for="startDate">공연 기간 : </label>
+            	</th>
+            	<td>
+	                <input style="width: 100px;" type="text" name="startdate" id="startdate" class="date" value="" required>
+	                <label for="date1"><span style="font-size: 1em;" class="glyphicon glyphicon-calendar" id = "cal1"></span></label>
+	                <span> - </span>
+	                <input style="width: 100px;" type="text" name="enddate" id="enddate" class="date" value="" required>
+	                <label for="date1"><span style="font-size: 1em;" class="glyphicon glyphicon-calendar" id = "cal2"></span></label>
+                </td>
+            </tr>
+            <tr>
+                <th style="width: 150px;">종류</th>
+                <td style="width: 450px;">
+                    <select name="eindex">
+                    	<option value="">종류선택</option>
+                    	<option value="리뷰이벤트">리뷰이벤트</option>
+                    	<option value="프로모션">프로모션</option>
+                    	<option value="쿠폰">쿠폰</option>
+                    	<option value="초대이벤트">초대이벤트</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th style="width: 150px; " >배너</th>
+                <td style="width: 450px;">
+                    <input name ="banner" type="file" class="form-control" style = "padding-bottom: 30px;">
+                </td>
+            </tr>
+            <tr>
+                <th style="width: 150px; " >컨텐츠</th>
+                <td style="width: 450px;">
+                    <input name ="content" type="file" class="form-control" style = "padding-bottom: 30px;">
+                </td>
+            </tr>
+            <tr>
+                <th style="width: 150px">공연번호</th>
+                <td style="width: 450px;">
+                    <!-- block태그로 바뀜 -->
+                    <input name = "showseq" type="text" class="form-control"> 
+                </td>
+            </tr>
+            
+            
+        </table>
+		
+		<input type="button" class="btn btn-default" value="뒤로" onclick="location.href='/AtTicketProject/event/eventinsert.do'"
+                style="margin-left: 300px; box-shadow: none; outline: none;">
+	
+        <input type="submit" class="btn btn-default" value="글쓰기"
+                style="box-shadow: none; outline: none;">
+                
+         </form>
+
+
+        
     </div>
  
     <script>
 
         var now = new Date();
-
-        $("#date").datepicker({
-            dateFormat: "yy-mm-dd",
-            minDate: now.getFullYear() + "-1-1",
-            maxDate: now.getFullYear() + "-12-" + "31"
+        $("#startdate").datepicker({
+            dateFormat: "yy-mm-dd"
         });
 
-        $("#date1").datepicker({
-            dateFormat: "yy-mm-dd",
-            minDate: now.getFullYear() + "-1-1",
-            maxDate: now.getFullYear() + "-12-" + "31"
-        });
 
-        $("#makebtn").click(function(){
-            if (confirm("추가하시겠습니까?")){
-
-            }
+        $("#enddate").datepicker({
+            dateFormat: "yy-mm-dd"
         });
-
-        $("#closebtn").click(function(){
-           window.close();
-        });
+       
      </script>
 </body>
 </html>

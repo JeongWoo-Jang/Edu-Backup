@@ -228,7 +228,6 @@
         </table>
         <!-- <hr style="width: 940px;"> -->
         
-        
         <div id="btns">
 	        <a class="btn" id="btnadd"><i class="glyphicon glyphicon-plus"></i> 추가</a>
 	        <a class="btn" id="btnmodify"><i class="glyphicon glyphicon-pencil"></i> 수정</a>
@@ -239,8 +238,27 @@
  		<div id="pbar" style = "padding-left : 500px; margin-top : 30px;">
 	       	${pagebar}
  		</div>
-		
-		
+ 		
+ 		<!-- 삭제 -->
+ 		<form method = "POST" action = "/AtTicketProject/employee/adminemployeedelete.do" id = "delnumform" style = " visibility : hidden;">
+ 			<input type = "text" name = "delNum" id = "delNum">
+ 			<input type="submit" id = "delsubmit">
+ 		</form>
+ 		
+ 		<!-- 수정 (바꿔야한다) 하나만 넘어가므로 get방식을 취하자.-->
+ 		<form method = "GET" id = "editnumform" style = "visibility : hidden;">
+ 			<input type = "text" name = "editNum" id = "editNum">
+ 			<input type="submit" id = "editsubmit">
+ 		</form>
+ 		
+ 		
+ 		<!-- <form method = "POST" action = "/AtTicketProject/employee/adminemployeeedit.do" id = "editnumform" style = " visibility : hidden;">
+ 			<input type = "text" name = "editNum" id = "editNum">
+ 			<input type="submit" id = "editsubmit">
+ 		</form> -->
+ 		
+ 		
+ 		
     </div>
     
 
@@ -248,37 +266,109 @@
 <script>
 <%@include file="/WEB-INF/views/inc/adminScript.jsp" %>	
 	
-	//로봇이 아님을 증명할 것이다.
+	/* 	//로봇이 아님을 증명할 것이다.
 	$("#robotTest").click(function(){
 		 popupCenter("/AtTicketProject/adminsecure.do", 1000, 1000); 
-	});
+	}); */
 	
 	
-    // 추가
+    // 추가 -> 완료
     $("#btnadd").click(function(){
         //window.open("/AtTicketProject/employee/adminemployeeadd.do","EmployeeAdd","width=600, height=600");
         popupCenter("/AtTicketProject/employee/adminemployeeadd.do", 600, 600);
     });
+    
+    
+    
     // 수정
+    var innerlist = $(".cb");
+    var count = 0;
+    var edithref = "/AtTicketProject/adminemployeeedit.do?editnum="
+    
     $("#btnmodify").click(function(){
-        // console.log($("input:checkbox[name=is_check]:checked").length);
-        if ($("input:checkbox[name=is_check]:checked").length > 1 || $("input:checkbox[name=is_check]:checked").length < 1){
-            alert("하나만 선택하세요.");
-        }else {
-            //선택된 체크박스의 내용 불러오기
-            window.open("adminEmploModify.html","EmployeeModify","width=600, height=600");
-        }
-    });
-    // 삭제
-    $("#btndelete").click(function(){
-        var result = confirm("정말 삭제하시겠습니까?");
-        console.log(result);
-        if(result) {
-            alert("삭제되었습니다.")
-        }else {
+    	count = 0;
+    	
+    	//여기서는 몇개의 체크박스에 체크를 걸었는지 확인해줄것이다.
+    	for (var i = 0; i < innerlist.length; i++) {
+    		
+            if($(innerlist[i]).is(":checked")) {
+            	count++;
+            } 
+    	}
+    	
+    	//하나도 체크안하면 삭제가 불가능하게 만들어 줄것이다.
+    	if(count != 1) {
+    		alert("하나만 선택해주세요");
+    	} else {//딱 하나만 선택한 경우 
+    		
+			var throwNum = "";//넘겨줄 번호
+			for (var i = 0; i < innerlist.length; i++) {
+        		
+                if($(innerlist[i]).is(":checked")) {
+              	  
+                	throwNum = $(innerlist[i]).parent().parent().children().eq(1).text() + "";
+            		    	
+                } 
+        	}//for
+        	
+        	//edithref += throwNum;
+        	
+			popupCenter(edithref + throwNum,600,600);
+    			
+    	}
 
-        }
     });
+    
+    
+    
+    
+    // 삭제 
+/*     var innerlist = $(".cb");
+    	var count = 0; */
+    
+    $("#btndelete").click(function(){
+    	count = 0;
+    	//alert(innerlist.length);
+    	
+    	//여기서는 몇개의 체크박스에 체크를 걸었는지 확인해줄것이다.
+    	for (var i = 0; i < innerlist.length; i++) {
+    		
+            if($(innerlist[i]).is(":checked")) {
+            	count++;
+            } 
+    	}
+    	
+    	//하나도 체크안하면 삭제가 불가능하게 만들어 줄것이다.
+    	if(count == 0) {
+    		alert("적어도 하나이상 체크해주세요.");
+    	} else {
+    		
+    		if (confirm("정말 삭제하시겠습니까?")) {
+    			
+    			alert("삭제되었습니다.");
+             	
+    			var throwNum = "";//넘겨줄 번호
+    			for (var i = 0; i < innerlist.length; i++) {
+            		
+                    if($(innerlist[i]).is(":checked")) {
+                  	  
+                    	throwNum += $(innerlist[i]).parent().parent().children().eq(1).text() + ",";
+                    	
+                    } 
+            	}//for
+            	
+            	//alert(throwNum);
+            	
+            	$("#delNum").val(throwNum);//값을 변경해준다. 
+            	
+            	//alert($("#delNum").val());
+            	console.log($("#delNum").val());
+            	$("#delsubmit").trigger("click");
+            	
+             	
+            }//삭제하는 곳. 
+    	}
+    });//삭제 버튼 눌렀을때 행동.
     
     
 
@@ -292,6 +382,9 @@
 
     	window.open(href, "pop_name", "width="+w+", height="+h+", left="+xPos+", top="+yPos+", menubar=yes, status=yes, titlebar=yes, resizable=yes");
     }
+    
+    
+    
     
     
 

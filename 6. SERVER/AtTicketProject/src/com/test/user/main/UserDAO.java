@@ -3,6 +3,7 @@ package com.test.user.main;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
@@ -22,6 +23,14 @@ public class UserDAO {
 		conn = util.open();//연결 완료
 	}
 	
+	public void close() {
+		try {
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	//로그인 하기 위한 작업 -> 삭제된 회원에 대한 처리도 해줘야하는데?
 	public int userLogin(UserDTO dto) {
 		try {
@@ -39,6 +48,9 @@ public class UserDAO {
 			if (rs.next()) {
 				return rs.getInt("cnt");//1아니면 0이 반환될것이다. -> 위의 cnt 를 말하는 것이다! alias
 			}
+			
+			rs.close();
+			pstat.close();
 			
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -74,12 +86,12 @@ public class UserDAO {
 				dto.setEmail(rs.getString("email"));
 				dto.setGrade(rs.getString("grade"));
 				
-				
 				return dto;
 				
 			}//if
 			
-			
+			rs.close();
+			pstat.close();
 			
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -105,8 +117,10 @@ public class UserDAO {
 			pstat.setString(5, dto.getAddr());
 			pstat.setString(6, dto.getTel());
 			pstat.setString(7, dto.getEmail());
+			pstat.close();
 			
 			return pstat.executeUpdate();
+			
 			
 		} catch (Exception e) {
 			System.out.println(e);
@@ -131,6 +145,8 @@ public class UserDAO {
 			
 			pstat.executeUpdate();
 			
+			pstat.close();
+			
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -148,6 +164,8 @@ public class UserDAO {
 			pstat.setInt(1, seq);
 			
 			pstat.executeUpdate();
+			
+			pstat.close();
 			
 		} catch (Exception e) {
 			System.out.println(e);
@@ -172,6 +190,9 @@ public class UserDAO {
 				return rs.getInt("cnt"); //1,0
 			}
 			
+			rs.close();
+			pstat.close();
+			
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -195,6 +216,9 @@ public class UserDAO {
 			if (rs.next()) {
 				return rs.getInt("cnt"); //1,0
 			}
+			
+			rs.close();
+			pstat.close();
 			
 		} catch (Exception e) {
 			System.out.println(e);
@@ -228,6 +252,9 @@ public class UserDAO {
 				
 				clist.add(dto);
 			}
+			
+			rs.close();
+			pstat.close();
 			
 			return clist;
 			
@@ -265,6 +292,9 @@ public class UserDAO {
 				
 				elist.add(dto);
 			}
+			
+			rs.close();
+			stat.close();
 			
 			return elist;
 			

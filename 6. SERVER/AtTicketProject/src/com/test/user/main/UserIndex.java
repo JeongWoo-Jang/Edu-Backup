@@ -28,14 +28,17 @@ public class UserIndex extends HttpServlet{
 		
 		BannerDAO dao = new BannerDAO();
 		HashMap<String,String> map = dao.mainlist(slider);
+		ArrayList<BannerDTO> slide = dao.getslider(slider);
 		BannerDTO dto = dao.banner(page);
 		ArrayList<BannerDTO> hot = dao.mainhot(whatshot);
 		ArrayList<BannerDTO> rank = dao.mainrank();
 		ArrayList<BannerDTO> musical = dao.mainmusical();
 		ArrayList<BannerDTO> concert = dao.mainconcert();
 		ArrayList<BannerDTO> exhibition = dao.mainexhibition();
+		dao.close();
 		
 		req.setAttribute("map", map);
+		req.setAttribute("slide", slide);
 		req.setAttribute("banner", dto);
 		req.setAttribute("hot", hot);
 		req.setAttribute("rank", rank);

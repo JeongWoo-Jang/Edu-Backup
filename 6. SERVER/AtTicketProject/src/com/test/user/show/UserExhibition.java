@@ -33,6 +33,7 @@ public class UserExhibition extends HttpServlet{
 		BannerDTO dto = dao.banner(page);
 		BannerDTO dto2 = dao.banner(page2);
 		ArrayList<BannerDTO> hot = dao.mainhot(whatshot);
+		dao.close();
 		
 		req.setAttribute("map", map);
 		req.setAttribute("banner", dto);

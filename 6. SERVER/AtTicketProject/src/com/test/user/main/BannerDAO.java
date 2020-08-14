@@ -3,10 +3,12 @@ package com.test.user.main;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.test.admin.banner.LogoDTO;
 import com.test.atticket.DBUtil;
 import com.test.user.show.RankDTO;
 
@@ -22,7 +24,15 @@ public class BannerDAO {
 		DBUtil util = new DBUtil();
 		conn = util.open();//연결 완료
 	}
-
+	
+	public void close() {
+		try {
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public HashMap<String,String> mainlist(String slider) {
 		
 		try {
@@ -42,6 +52,9 @@ public class BannerDAO {
 				map.put(rs.getString("name"), rs.getString("img"));
 				
 			}
+			
+			rs.close();
+			pstat.close();
 			
 			return map;
 			
@@ -78,6 +91,9 @@ public class BannerDAO {
 				
 			}
 			
+			rs.close();
+			stat.close();
+			
 			return rank;
 			
 		} catch (Exception e) {
@@ -112,6 +128,9 @@ public class BannerDAO {
 				musical.add(dto);
 				
 			}
+			
+			rs.close();
+			stat.close();
 			
 			return musical;
 			
@@ -148,6 +167,9 @@ public class BannerDAO {
 				
 			}
 			
+			rs.close();
+			stat.close();
+			
 			return concert;
 			
 		} catch (Exception e) {
@@ -183,6 +205,9 @@ public class BannerDAO {
 				
 			}
 			
+			rs.close();
+			stat.close();
+			
 			return exhibition;
 			
 		} catch (Exception e) {
@@ -216,6 +241,9 @@ public class BannerDAO {
 				return dto;
 				
 			}
+			
+			rs.close();
+			pstat.close();
 			
 		} catch (Exception e) {
 			System.out.println(e);
@@ -255,6 +283,9 @@ public class BannerDAO {
 				
 			}
 			
+			rs.close();
+			stat.close();
+			
 			return rank;
 			
 		} catch (Exception e) {
@@ -290,6 +321,9 @@ public class BannerDAO {
 				region.add(dto);
 				
 			}
+			
+			rs.close();
+			pstat.close();
 			
 			return region;
 			
@@ -334,6 +368,47 @@ public class BannerDAO {
 				
 			}
 			
+			rs.close();
+			stat.close();
+			
+			return list;
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		
+		return null;
+	}
+	
+	public ArrayList<BannerDTO> getslider(String page) {
+		
+		try {
+			
+			String sql = "SELECT * FROM TBLBANNER WHERE NAME LIKE '%' || ? || '%'";
+			
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, page);
+			
+			rs = pstat.executeQuery();
+			
+			ArrayList<BannerDTO> list = new ArrayList<BannerDTO>();
+			
+			while (rs.next()) {
+				BannerDTO dto = new BannerDTO();
+				dto.setSeq(rs.getString("seq"));
+				dto.setName(rs.getString("name"));
+				dto.setImg(rs.getString("img"));
+				dto.setIntro1(rs.getString("intro1"));
+				dto.setIntro2(rs.getString("intro2"));
+				dto.setIntro3(rs.getString("intro3"));
+				dto.setFontcolor(rs.getString("fontcolor"));
+				
+				list.add(dto);
+			}
+			
+			rs.close();
+			pstat.close();
+			
 			return list;
 			
 		} catch (Exception e) {
@@ -343,7 +418,7 @@ public class BannerDAO {
 		return null;
 	}
 
-	public BannerDTO getlist(String page) {
+	public BannerDTO getbanner(String page) {
 		
 		try {
 			
@@ -356,12 +431,53 @@ public class BannerDAO {
 			
 			if (rs.next()) {
 				BannerDTO dto = new BannerDTO();
+				dto.setSeq(rs.getString("seq"));
+				dto.setName(rs.getString("name"));
 				dto.setImg(rs.getString("img"));
 				dto.setLink(rs.getString("link"));
 				dto.setBackcolor(rs.getString("backcolor"));
 				
 				return dto;
 			}
+			
+			rs.close();
+			pstat.close();
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		
+		return null;
+	}
+
+	public LogoDTO getlogo() {
+		
+		try {
+			
+			String sql = "SELECT * FROM TBLLOGO";
+			
+			stat = conn.createStatement();
+			
+			rs = stat.executeQuery(sql);
+			
+			if (rs.next()) {
+				
+				LogoDTO dto = new LogoDTO();
+				
+				dto.setCompany(rs.getString("company"));
+				dto.setAddress(rs.getString("address"));
+				dto.setOwner(rs.getString("owner"));
+				dto.setManager(rs.getString("manager"));
+				dto.setEmail(rs.getString("email"));
+				dto.setLicense(rs.getString("license"));
+				dto.setSimg(rs.getString("simg"));
+				dto.setImg(rs.getString("img"));
+				
+				return dto;
+			}
+			
+			rs.close();
+			stat.close();
 			
 		} catch (Exception e) {
 			System.out.println(e);

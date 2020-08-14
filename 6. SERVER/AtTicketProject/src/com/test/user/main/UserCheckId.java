@@ -25,6 +25,7 @@ public class UserCheckId extends HttpServlet {
 		UserDAO dao = new UserDAO();
 		int result = dao.checkid(id); //1, 0
 		int result2 = dao.checkssn(ssn); //1, 0
+		dao.close();
 		System.out.println(result);
 		System.out.println(result2);
 		

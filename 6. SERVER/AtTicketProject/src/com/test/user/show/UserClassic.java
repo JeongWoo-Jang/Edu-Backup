@@ -32,6 +32,7 @@ public class UserClassic extends HttpServlet{
 		HashMap<String,String> map = dao.mainlist(slider);
 		BannerDTO dto = dao.banner(page);
 		ArrayList<BannerDTO> hot = dao.mainhot(whatshot);
+		dao.close();
 		
 		req.setAttribute("map", map);
 		req.setAttribute("banner", dto);

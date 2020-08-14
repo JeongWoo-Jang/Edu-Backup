@@ -54,7 +54,7 @@ public class MemberInfoDeleteEnd extends HttpServlet {
 		} else {
 			dao.userDelete((int)session.getAttribute("userseq"));
 			session.invalidate();
-			
+			dao.close();
 			PrintWriter writer = resp.getWriter();
 			writer.print("<html>");
 			writer.print("<body>");

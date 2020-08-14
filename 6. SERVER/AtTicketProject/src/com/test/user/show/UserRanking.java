@@ -27,6 +27,7 @@ public class UserRanking extends HttpServlet{
 		}
 		
 		ArrayList<RankDTO> rank = dao.getRank(sort);
+		dao.close();
 		
 		int count = 0;
 		

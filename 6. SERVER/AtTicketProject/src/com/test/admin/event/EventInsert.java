@@ -13,7 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 public class EventInsert extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-			RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/admin/event/eventInsert.jsp");
+			
+		
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/admin/event/eventInsert.jsp");
 			dispatcher.forward(req, resp);
 	}
 }

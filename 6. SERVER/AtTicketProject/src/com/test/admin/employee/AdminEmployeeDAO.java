@@ -54,6 +54,8 @@ public class AdminEmployeeDAO {
 			
 			ArrayList<AdminEmployeeDTO> list = new ArrayList<AdminEmployeeDTO>();
 			
+			System.out.println(map.get("sort"));
+			
 			//쿼리 날린것을 기반으로 돌아온 데이터를 처리할 것이다.
 			while (rs.next()) {
 				
@@ -74,6 +76,8 @@ public class AdminEmployeeDAO {
 			
 			return list;
 			
+
+
 			
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -143,6 +147,105 @@ public class AdminEmployeeDAO {
 		}
 	}
 	
+	
+	
+	public void empdel(String[] list) {
+		
+		
+		try {
+			
+			for (int i = 0; i < list.length; i++) {
+				String sql = "delete from tblEmployee where seq = ?";
+				
+				pstat = conn.prepareStatement(sql);
+				pstat.setString(1, list[i]);
+				
+				pstat.executeUpdate();
+				
+			}
+			
+			pstat.close();
+			conn.close();
+			
+			
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+	}
+
+	public AdminEmployeeDTO editObj(String editnumber) {
+		
+		try {
+			
+			AdminEmployeeDTO dto = new AdminEmployeeDTO();//dto 객체 새롭게 생성.
+			
+			String sql = "select * from tblEmployee where seq=?";
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, editnumber);
+			
+			rs = pstat.executeQuery();
+			
+			if(rs.next()) {
+				dto.setSeq(rs.getString("seq"));
+				dto.setName(rs.getString("name"));
+				dto.setJikwi(rs.getString("jikwi"));
+				dto.setSalary(rs.getString("salary"));
+				dto.setSsn(rs.getString("ssn"));
+				dto.setTel(rs.getString("tel"));
+				dto.setBuseo(rs.getString("buseoseq"));
+			}
+			
+			rs.close();
+			pstat.close();
+			conn.close();
+			
+			return dto;
+			
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		
+		return null;
+	}
+
+	public void empedit(AdminEmployeeDTO dto) {
+		
+		//여기서 수정 처리를 시켜준다.
+		try {
+			
+			String sql = "update tblEmployee set name = ?,jikwi = ?,salary = ?,ssn = ?,tel = ?,buseoseq = ? where seq = ?";
+			
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(7, dto.getSeq());
+			pstat.setString(1, dto.getName());
+			pstat.setString(2, dto.getJikwi());
+			pstat.setString(3, dto.getSalary());
+			pstat.setString(4, dto.getSsn());
+			pstat.setString(5, dto.getTel());
+			pstat.setString(6, dto.getBuseo());
+			
+			
+			rs = pstat.executeQuery();
+			
+			
+			rs.close();
+			pstat.close();
+			conn.close();
+			
+		} catch(Exception e) {
+			
+			e.printStackTrace();
+			
+		}
+		
+		
+	}
 	
 	
 	

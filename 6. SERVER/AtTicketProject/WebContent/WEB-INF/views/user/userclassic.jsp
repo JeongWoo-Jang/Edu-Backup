@@ -373,7 +373,7 @@
                 
                 <!-- 메인화면 슬라이더 -->
                 <div class="slider">
-                  <c:forEach items="${map}" var="map">
+                <c:forEach items="${map}" var="map">
                   <div><img src="./images/${map.value}" /></div>
               	</c:forEach>
               </div>

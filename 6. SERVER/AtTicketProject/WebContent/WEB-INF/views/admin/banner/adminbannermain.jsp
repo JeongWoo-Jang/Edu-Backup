@@ -18,8 +18,7 @@
            left: 0px;
            top: 0px;
            width: 250px;
-           height: 6500px;
-           /* border: 1px solid black; */
+           height: 3000px;
            background-color: #444;
            text-align: center;
            z-index: 10;
@@ -85,7 +84,6 @@
             background-repeat: no-repeat;
             background-size: 100% 100%;
         }
-
         
         /* 상단배너 prev */
         #mainprev {
@@ -117,22 +115,23 @@
 
         }
         /* 상단배너 그림 url 가져오기 */
-        #topBannerSelect {
-            border: 1px solid blue;
+        .topBannerSelect {
             width : 1000px;
             margin : 0px auto;
-            
-
+            display: none;
         }
-        #topBannerSelect td {
+        .topBannerSelect1 {
+        	display: table;
+        }
+        .topBannerSelect td {
             border: 2px solid #ddd;
             height : 55px;
         }
-        #topBannerSelect td:nth-child(1) {
+        .topBannerSelect td:nth-child(1) {
             padding-left : 20px;
             background-color: #f0f0f0;
         }
-        #topBannerSelect td:nth-child(2) {
+        .topBannerSelect td:nth-child(2) {
             padding-left : 20px;
         }
         /* 상단배너 이미지 이름 prev next 할때마다 바뀔것이다. */
@@ -148,6 +147,7 @@
             border: 0px;
             
         }
+        
         /* --------------------상단배너 끝----------------------- */
 
 
@@ -171,18 +171,14 @@
     <div id = "topbanner">
         <div id = "topcover">
             <div id = "topbaby">
-                <div class = "topsetting" style = "background-image: url(../images/bg1.jpg);"></div>
-                <div class = "topsetting" style = "background-image: url(../images/bg2.jpg);"></div>
-                <div class = "topsetting" style = "background-image: url(../images/bg3.jpg);"></div>
-                <div class = "topsetting" style = "background-image: url(../images/bg4.jpg);"></div>
-                <div class = "topsetting" style = "background-image: url(../images/bg5.jpg);"></div>
-                <div class = "topsetting" style = "background-image: url(../images/bg6.jpg);"></div>
-                <div class = "topsetting" style = "background-image: url(../images/bg7.jpg);"></div>
-                <div class = "topsetting" style = "background-image: url(../images/bg8.jpg);"></div>
-                <div class = "topsetting" style = "background-image: url(../images/bg9.jpg);"></div>
+            <c:set var="i" value="1" />
+            <c:forEach items="${slide}" var="slide">
+                <div class = "topsetting" id="topsetting${i}" style = "background-image: url(../images/${slide.img});"></div>
+			<c:set var="i" value="${i + 1}" />
+            </c:forEach>
             </div>
-        </div>
         <div id = "topImgName">상단배너 1 번째 사진</div>
+        </div>
     </div>
     
     <div><img src="../images/slide-dir-prev.png" alt="" id = "mainprev"></div>
@@ -206,7 +202,8 @@
                     var one = clickCountTop + 2
                    	var sta2 = " 번째 사진";
                     $("#topImgName").text(sta1 + one + sta2);
-                    $("#nthPicNum").text(clickCountTop + 2);
+                    $(".topBannerSelect").css("display", "none");
+                    $(".topBannerSelect" + one).css("display", "table");
                     clickCountTop++;
                 }
         });
@@ -220,110 +217,64 @@
                     var one = clickCountTop;
                    	var sta2 = " 번째 사진";
                    	$("#topImgName").text(sta1 + one + sta2);
-                    $("#nthPicNum").text(clickCountTop);
+                   	$(".topBannerSelect").css("display", "none");
+                   	$(".topBannerSelect" + one).css("display", "table");
                     clickCountTop--;
                 }
         });
         
+        $(document).ready(function(){
+        		
+			$(".topBannerInputType").on('change', function(){  // 값이 변경되면
+				
+				var id = $(this).attr("id").replace("pic", "");
+				if(window.FileReader){  // modern browser
+					var filename = $(this)[0].files[0].name;
+				} 
+				else {  // old IE
+					var filename = $(this).val().split('/').pop().split('\\').pop();  // 파일명만 추출
+				}
+
+				$("#topsetting" + id).css("background-image", "url(../images/" + filename + ")");
+				
+			});
+				
+		});
+        
+        
     </script>
+    
     <!-- 상단배너 그림을 고르기 -->
     <div class = "bannerTool" style = "margin-left: 330px; width : 1400px">
-        <table id = "topBannerSelect">
+    	<c:set var="i" value="1" />
+        <c:forEach items="${slide}" var="slide">
+        <table class="topBannerSelect topBannerSelect${i}">
             <tr>
-                <td>상단배너 <span id = "nthPicNum">1</span>번째 사진 선택</td>
-                <td style = "padding-top : 5px;"><input type="file" class = "topBannerInputType"></td>
+                <td>상단배너 <span>${i}</span>번째 사진 선택</td>
+                <td style = "padding-top : 5px;"><input type="file" class = "topBannerInputType" id="pic${i}" name="pic${i}"></td>
             </tr>
             <tr>
                 <td>상단 기입 내용</td>
-                <td><input type="text" class = "topBannerInputType"></td>
+                <td><input type="text" class = "topBannerInputType" id="top${i}" name="top${i}" value="${slide.intro1}"></td>
             </tr>
             <tr>
                 <td>중간 기입 내용</td>
-                <td style = "height: 100px; padding-top : 5px;"><textarea name="" id="" cols="30" rows="3" style = "resize : none; width : 97%; height : 80%; border : 0px;"></textarea></td>
+                <td style = "height: 100px; padding-top : 5px;"><textarea id="middle${i}" name="middle${i}" 
+                cols="30" rows="3" style = "resize : none; width : 97%; height : 80%; border : 0px;">${slide.intro2}</textarea></td>
             </tr>
             <tr>
                 <td>하단 기입 내용</td>
-                <td><input type="text" class = "topBannerInputType"></td>
+                <td><input type="text" class="topBannerInputType" id="bottom${i}" name="bottom${i}" value="${slide.intro3}"></td>
             </tr>
             <tr>
                 <td>기입 내용 글자색 지정</td>
-                <td><input type="color" style = "width : 300px;" ></td>
+                <td><input type="color" style="width: 300px;" id="color${i}" name="color${i}" value="${slide.fontcolor}"></td>
             </tr>
-          
         </table>
+        <c:set var="i" value="${i + 1}" />
+        </c:forEach>
+          
     </div>
-
-    <style>
-
-        #topImgContent {
-            border: 1px solid red;
-            margin-top : 20px;
-
-        }
-        
-                /* 상단배너 prev */
-        #mainprev {
-            position : absolute;
-            top : 430px;
-            left : 280px;
-        }
-        #mainprev:hover {
-            cursor : pointer;
-        }
-        
-        /* 상단배너 next */
-        #mainnext {
-            position : absolute;
-            top : 430px;
-            left : 1730px;
-        }
-        #mainnext:hover {
-            cursor:pointer;
-        }
-        
-        /* 전체 배너 선택들의 길이조정 너비조정 */
-        .bannerTool {
-            /* border : 1px solid red; */
-            margin-top : 20px;
-            margin-left : 280px;
-            width : 1500px;
-            height : 330px;
-
-        }
-        /* 상단배너 그림 url 가져오기 */
-        #topBannerSelect {
-            border: 1px solid blue;
-            width : 1000px;
-            margin : 0px auto;
-            
-
-        }
-        #topBannerSelect td {
-            border: 2px solid #ddd;
-            height : 55px;
-        }
-        #topBannerSelect td:nth-child(1) {
-            padding-left : 20px;
-            background-color: #f0f0f0;
-        }
-        #topBannerSelect td:nth-child(2) {
-            padding-left : 20px;
-        }
-        /* 상단배너 이미지 이름 prev next 할때마다 바뀔것이다. */
-        #topImgName {
-            margin:10px;
-            margin-left : 600px;
-            font-size: 1.2em;
-            font-weight: bold;
-        }
-        .topBannerInputType {
-            width : 98%;
-            height : 60%;
-            border: 0px;
-            
-        }
-        
-    </style>
 
     <hr class = "splitHr">
 
@@ -352,7 +303,6 @@
             width: 1400px;
             height : 320px;
             margin-top : 10px;
-            background-color: black;
         }
 
         #middleImg img {
@@ -382,15 +332,25 @@
     
     <div class = "titlebanner"> MIDDLE 배너 관리</div>  
     <div id = "middleBanner">
-        <div id = "middleImg">
-            <img src="<%= request.getContextPath() %>/images/middleBanner.png" alt="" id = "middlePic">
+        <div id = "middleImg" style="background-color: ${banner.backcolor}">
+            <img src="<%= request.getContextPath() %>/images/${banner.img}" alt="" id = "middlePic">
             <div id = "mdEditBtn"><button id = "mdBtn">수정하기</button></div>  
         </div>
     </div>
 
 
     <script>
-
+    
+    	console.log("${filename}");
+    	console.log("${bgcolor}");
+    	
+    	<c:if test="${filename != null}">
+    		$("#middlePic").attr("src", "<%= request.getContextPath() %>/images/${filename}");
+		</c:if>
+		<c:if test="${bgcolor != null}">
+    		$("#middleImg").css("background-color", "${bgcolor}");
+    	</c:if>
+    	
         //이미지 box 내에 마우스를 넣었을때 수정버튼이 보여야한다 -> 배경색도 어둡게 처리
         $("#middleImg").mouseenter(function(){
             $("#mdBtn").css("visibility","visible");
@@ -407,7 +367,9 @@
 
         // 마우스 클릭 했을 때 -> 나중에 서버때문에 일단 만들어둠
         $("#mdBtn").click(function(){
-            console.log("클릭함");
+            //console.log("클릭함");
+            window.name = "parentPage";
+            window.open("/AtTicketProject/admin/adminbannermodify.do", "adminbanner", "width=1250,height=950");
         }); 
     </script>
 
@@ -525,7 +487,7 @@
         <!-- 회사 로고 수정 -->
         <div class = "subtitlebanner">회사로고 수정</div>
         <div id = "logoModify" class = "intBtmBanner" style = "margin-left : 30px;">
-            <div id = "innerLogo"><img src="<%= request.getContextPath() %>/images/title2.png" alt="" id = "innerLogoImg"></div>
+            <div id = "innerLogo"><img src="<%= request.getContextPath() %>/images/${logo.img}" alt="" id = "innerLogoImg"></div>
             <div id = "compLogoBtns"><input type="button" value = "수정하기" id = "compLogoBtn"></div>
         </div>
         
@@ -535,27 +497,27 @@
             <table id = "compDetailTbl" >
                 <tr>
                     <td>회사명</td>
-                    <td><input type="text" id = "compName" value = "AT-Ticket(주)"></td>
+                    <td><input type="text" id = "compName" name="compName" value = "${logo.company}"></td>
                 </tr>
                 <tr>
                     <td>회사 주소</td>
-                    <td><input type="text" id = "compAddress" value = "서울시 강남구 역삼동 한독빌딩 8층"></td>
+                    <td><input type="text" id = "compAddress" name="compAddress" value = "${logo.address}"></td>
                 </tr>
                 <tr>
                     <td>대표자</td>
-                    <td><input type="text" id = "compCeo" value = "한시연"></td>
+                    <td><input type="text" id = "compCeo" name="compCeo" value = "${logo.owner}"></td>
                 </tr>
                 <tr>
                     <td>개인정보 보호 책임자</td>
-                    <td><input type="text" id = "compResp" value = "한시연"></td>
+                    <td><input type="text" id = "compResp" name="compResp" value = "${logo.manager}"></td>
                 </tr>
                 <tr>
                     <td>회사 이메일</td>
-                    <td><input type="text" id = "compEmail" value = "it1234@atticket.com"></td>
+                    <td><input type="text" id = "compEmail" name="compEmail" value = "${logo.email}"></td>
                 </tr>
                 <tr>
                     <td>사업자 등록번호</td>
-                    <td><input type="text" id = "compCode" value = "229-81-37000"></td>
+                    <td><input type="text" id = "compCode" name="compCode" value = "${logo.license}"></td>
                 </tr>
             </table>
         </div>
@@ -578,8 +540,6 @@
             $("#compLogoBtn").css("visibility","hidden");
         });
 
-
-        
     </script>
     <hr class = "splitHr"> 
 
@@ -610,9 +570,14 @@
         //저장하기 눌렀을때 이벤트
         $("#saveBtn").click(function(){
             if (confirm("해당 내용을 저장하시겠습니까?")) {
+            	alert($("#pic1", "#top1", "#middle1", "#bottom1", "#color1"));
+                alert($("#middleImg").css("background-color"));
+                alert($("#middlePic").attr("src").substring($("#middlePic").attr("src").lastIndexOf('/')).substring(1));
+                alert($("#innerLogoImg").attr("src").substring($("#innerLogoImg").attr("src").lastIndexOf('/')).substring(1));
+                alert($("#compName"));
                 alert("저장 완료.");
-
-                location.href = "./adminMain.html";
+                
+                location.href = "/AtTicketProject/admin/adminbannermain.do";
             }    
         });
 

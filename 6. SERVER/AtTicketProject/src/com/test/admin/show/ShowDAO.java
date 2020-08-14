@@ -43,7 +43,7 @@ public class ShowDAO {
 				where = String.format("and v.title like '%%%s%%' or v.genre like '%%%s%%'",map.get("search"),map.get("search"));
 			}
 			
-			String sql = String.format("select a.* from (select rownum as rnum, v.* from vwShow v where v.delflag = 0 %s) a where rnum >= %s and rnum <= %s order by %s"
+			String sql = String.format("select a.* from (select rownum as rnum, v.* from tblShow v where v.delflag = 0 %s order by seq) a where rnum >= %s and rnum <= %s order by %s"
 					,where ,map.get("begin"), map.get("end"),map.get("sort"));
 			
 			stat = conn.createStatement();
@@ -249,6 +249,191 @@ public class ShowDAO {
 		
 		return 0;
 	}
+
+	//AdminShowView 서블릿
+	public ShowDTO loadview(String seq) {
+		
+		try {
+			String sql = "select s.seq, s.title, to_char(s.startdate,'yyyy-mm-dd') as startdate,to_char(s.enddate,'yyyy-mm-dd') as enddate,s.poster, s.content, to_char(s.opendate,'yyyy-mm-dd') as opendate, s.age, s.genre,s.price, s.delflag " + 
+					",a.host, t.name as tname, h.name as hname, h.addr as addr, r.seq as rseq, r.startDate as rstart, r.endDate as rend, h.region " + 
+					"from tblShow s left outer join tblAgency a on s.agencySeq = a.seq " + 
+					"inner join tbltheater t on s.theaterSeq = t.seq " + 
+					"inner join tblHall h on t.hallSeq = h.seq " + 
+					"inner join tblRoundInfo r on s.seq = r.showSeq " + 
+					"where r.delflag = 0 and s.delflag = 0 and s.seq = ?";
+			
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, seq);
+			rs = pstat.executeQuery();
+			
+			ShowDTO dto = new ShowDTO();
+			
+			if(rs.next()) {
+				
+				//소요시간 계산하기
+				String start = rs.getString("rstart");
+				String end = rs.getString("rend");
+				
+				String[] str = start.split(":");
+				int shour = Integer.parseInt(str[0]);
+				int smin = Integer.parseInt(str[1]);
+				String[] str2 = end.split(":");
+				int ehour = Integer.parseInt(str2[0]);
+				int emin = Integer.parseInt(str2[1]);
+				
+				int thour = 0;
+				int tmin = 0;
+				
+				if(emin > smin) {
+					tmin = emin-smin;
+				}else {
+					ehour--;
+					emin += 60;
+					tmin = emin-smin;
+				}
+				thour = ehour-shour;
+				
+				if(thour >= 1) {
+					tmin += thour * 60;
+				}
+				
+				dto.setAge(rs.getString("age"));
+				dto.setAddr(rs.getString("addr"));
+				dto.setAgencyName(rs.getString("host"));
+				dto.setContent(rs.getString("content"));
+				dto.setEndDate(rs.getString("enddate"));
+				dto.setGenre(rs.getString("genre"));
+				dto.setHallName(rs.getString("hname"));
+				dto.setOpenDate(rs.getString("opendate"));
+				dto.setPoster(rs.getString("poster"));
+				dto.setPrice(rs.getString("price"));
+				dto.setRound(rs.getString("rseq"));
+				dto.setSeq(rs.getString("seq"));
+				dto.setStartDate(rs.getString("startdate"));
+				dto.setTheaterName(rs.getString("tname"));
+				dto.setTime(rs.getString("rstart"));
+				dto.setTitle(rs.getString("title"));
+				dto.setPlace(rs.getString("region"));
+				dto.setMin(tmin);
+			}
+			
+			return dto;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public int editShow(ShowDTO dto) {
+		try {
+			
+			String aseq = loadAgency(dto);
+			String sql = "update tblShow set title=?,startdate = to_date(?,'yyyy-mm-dd'),enddate = to_date(?,'yyyy-mm-dd'),price=?, poster=?, content=?, opendate = to_date(?,'yyyy-mm-dd'), "
+					+ "age=?, genre=?, agencyseq=?, theaterSeq=? where seq=?";
+			
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, dto.getTitle());
+			pstat.setString(2, dto.getStartDate());
+			pstat.setString(3, dto.getEndDate());
+			pstat.setString(4, dto.getPrice());
+			pstat.setString(5, dto.getPoster());
+			pstat.setString(6, dto.getContent());
+			pstat.setString(7, dto.getOpenDate());
+			pstat.setString(8, dto.getAge());
+			pstat.setString(9, dto.getGenre());
+			pstat.setString(10, aseq);
+			pstat.setString(11, dto.getPlace());
+			pstat.setString(12, dto.getSeq());
+			
+			return pstat.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return 0;
+	}
+
+	private String loadAgency(ShowDTO dto) {
+		try {
+			
+			String sql = "select seq from tblAgency where host = ?";
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, dto.getAgencyName());
+			
+			rs = pstat.executeQuery();
+			
+			if(rs.next()) {
+				return rs.getString("seq");
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+
+	public int editRound(ShowDTO dto) {
+		try {
+			
+			int showmin = dto.getMin();
+			String[] times = dto.getTime().split(":");
+			int hour = Integer.parseInt(times[0]);
+			int min = Integer.parseInt(times[1]);
+			
+			min += showmin;
+			if(min >= 60) {
+				hour++;
+				min = min - 60;
+			}
+			
+			String endTime = hour+":"+min;
+			
+			String sql = "update tblRoundInfo set startdate = ?, enddate=? where showseq = ?";
+			
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, dto.getTime());
+			pstat.setString(2, endTime);
+			pstat.setString(3, dto.getSeq());
+			
+			return pstat.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+
+	public int deleteShow(String seq) {
+		
+		try {
+			String sql = "update tblShow set delflag = 1 where seq=?";
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, seq);
+			return pstat.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+
+	public int deleteRound(String seq) {
+		try {
+			
+			String sql = "update tblRoundInfo set delflag = 1 where showSeq=?";
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, seq);
+			return pstat.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+
+
 
 
 	

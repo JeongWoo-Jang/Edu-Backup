@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -30,48 +30,18 @@
                     <img src="./images/slide-dir-prev.png" class="prev" />
                     <img src="./images/slide-dir-next.png" class="after" />
                 </div>
-                <div class="rect" id="rect1">
-                    <h2>아름다운 가을의 서울숲에서 즐기는</h2>
-                    <h1>서울숲<br />재즈페스티벌</h1>
-                    <h3>2020.10.09 ~ 2020.10.11 서울숲공원 일대</h3>
-                </div>
-                <div class="rect" id="rect2">
-                    <h2>4년 만에 돌아온</h2>
-                    <h1>뮤지컬<br />머더 발라드</h1>
-                    <h3>2020.08.11 ~ 2020.10.25 세종문화회관 S씨어터</h3>
-                </div>
-                <div class="rect" id="rect3" style="color: black;">
-                    <h2>5년의 기다림, 그리고 20주년!</h2>
-                    <h1>뮤지컬<br />베르테르</h1>
-                    <h3>7월23일(목) 오후 2시 2차 티켓오픈</h3>
-                </div>
-                <div class="rect" id="rect6" style="color: black;">
-                    <h2>서로에게 빛이 되어준 위로의 이야기</h2>
-                    <h1>뮤지컬<br />라 루미에르</h1>
-                    <h3>2020.09.11 ~ 2020.10.25 대학로 유니플렉스 2관</h3>
-                </div>
-                <div class="rect" id="rect7" style="color: black;">
-                    <h2>Ah, ah, ah, ah What can I do?</h2>
-                    <h1>SURL (설)<br />concert</h1>
-                    <h3>2020.08.15 ~ 2020.08.16 노들섬 라이브하우스</h3>
-                </div>
-                <div class="rect" id="rect8">
-                    <h2>비지정석 최대 50% 할인</h2>
-                    <h1 style="letter-spacing: -6px;">
-                        오페라의 유령<br />월드투어
-                    </h1>
-                    <h3>
-                        2020.08.19 ~ 2020.09.27 대구 계명아트센터<br />2020.03.14
-                        ~ 2020.08.07 블루스퀘어 인터파크홀
-                    </h3>
-                </div>
-                <div class="rect" id="rect9">
-                    <h2>3천원 할인쿠폰 증정</h2>
-                    <h1 style="font-size: 5em;">
-                        그랜드 민트<br />페스티벌 2020
-                    </h1>
-                    <h3>2020.10.24 ~ 2020.10.25 올림픽공원 내</h3>
-                </div>
+                
+                <c:set var="i" value="1" />
+                <c:forEach items="${slide}" var="slide">
+                <c:set var="middle" value="${fn:split(slide.intro2,',')}" />
+	                <div class="rect" id="rect${i}" style="color: ${slide.fontcolor}">
+	                    <h2>${slide.intro1}</h2>
+	                    <h1>${middle[0]}<br />${middle[1]}</h1>
+	                    <h3>${slide.intro3}</h3>
+	                </div>
+                <c:set var="i" value="${i + 1}" />
+                </c:forEach>
+                
             </div>
             <!-------------------------------- 내용부분 -------------------------------->
             <div id="middle1">

@@ -196,7 +196,7 @@
                 <tr>
                     <td><input type="checkbox" class = "t5"></td>
                     <td>구매자</td>
-                    <td id = "t1input">아니 이 사이트는 관리자는 노는겁니까?</td>
+                    <td class = "inputcont">아니 이 사이트는 관리자는 노는겁니까?</td>
                     <td> 2020.02.17(월) 15:00</td>
                     <td>반품/환불/교환</td>
                     <td>확인</td>
@@ -205,7 +205,7 @@
                 <tr>
                     <td><input type="checkbox" class = "t5"></td>
                     <td>구매자</td>
-                    <td>아니 이 사이트는 관리자는 노는겁니까?</td>
+                    <td class = "inputcont">아니 이 사이트는 관리자는 노는겁니까?</td>
                     <td> 2020.02.17(월) 15:00</td>
                     <td>반품/환불/교환</td>
                     <td>확인</td>
@@ -214,7 +214,7 @@
                 <tr>
                     <td><input type="checkbox" class = "t5"></td>
                     <td>구매자</td>
-                    <td>아니 이 사이트는 관리자는 노는겁니까?</td>
+                    <td class = "inputcont">아니 이 사이트는 관리자는 노는겁니까?</td>
                     <td> 2020.02.17(월) 15:00</td>
                     <td>반품/환불/교환</td>
                     <td>확인</td>
@@ -223,7 +223,7 @@
                 <tr>
                     <td><input type="checkbox" class = "t5"></td>
                     <td>구매자</td>
-                    <td>아니 이 사이트는 관리자는 노는겁니까?</td>
+                    <td class = "inputcont">아니 이 사이트는 관리자는 노는겁니까?</td>
                     <td> 2020.02.17(월) 15:00</td>
                     <td>반품/환불/교환</td>
                     <td>확인</td>
@@ -232,7 +232,7 @@
                 <tr>
                     <td><input type="checkbox" class = "t5"></td>
                     <td>구매자</td>
-                    <td>아니 이 사이트는 관리자는 노는겁니까?</td>
+                    <td class = "inputcont">아니 이 사이트는 관리자는 노는겁니까?</td>
                     <td> 2020.02.17(월) 15:00</td>
                     <td>반품/환불/교환</td>
                     <td>확인</td>
@@ -241,7 +241,7 @@
                 <tr>
                     <td><input type="checkbox" class = "t5"></td>
                     <td>구매자</td>
-                    <td><span class = "secret">비밀글</span>&nbsp;&nbsp;아니 이 사이트는 관리자는 노는겁니까?</td>
+                    <td class = "inputcont"><span class = "secret">비밀글</span>&nbsp;&nbsp;아니 이 사이트는 관리자는 노는겁니까?</td>
                     <td> 2020.02.17(월) 15:00</td>
                     <td>반품/환불/교환</td>
                     <td>확인</td>
@@ -250,7 +250,7 @@
                 <tr>
                     <td><input type="checkbox" class = "t5"></td>
                     <td>구매자</td>
-                    <td><span class = "secret">비밀글</span>&nbsp;&nbsp;아니 이 사이트는 관리자는 노는겁니까?</td>
+                    <td class = "inputcont"><span class = "secret">비밀글</span>&nbsp;&nbsp;아니 이 사이트는 관리자는 노는겁니까?</td>
                     <td> 2020.02.17(월) 15:00</td>
                     <td>반품/환불/교환</td>
                     <td>확인</td>
@@ -259,7 +259,7 @@
                 <tr>
                     <td><input type="checkbox" class = "t5"></td>
                     <td>구매자</td>
-                    <td>아니 이 사이트는 관리자는 노는겁니까?</td>
+                    <td class = "inputcont">아니 이 사이트는 관리자는 노는겁니까?</td>
                     <td> 2020.02.17(월) 15:00</td>
                     <td>반품/환불/교환</td>
                     <td>확인</td>
@@ -268,7 +268,7 @@
                 <tr>
                     <td><input type="checkbox" class = "t5"></td>
                     <td>구매자</td>
-                    <td>아니 이 사이트는 관리자는 노는겁니까?</td>
+                    <td class = "inputcont">아니 이 사이트는 관리자는 노는겁니까?</td>
                     <td> 2020.02.17(월) 15:00</td>
                     <td>반품/환불/교환</td>
                     <td>확인</td>
@@ -277,7 +277,7 @@
                 <tr>
                     <td><input type="checkbox" class = "t5"></td>
                     <td>구매자</td>
-                    <td>아니 이 사이트는 관리자는 노는겁니까?</td>
+                    <td class = "inputcont">아니 이 사이트는 관리자는 노는겁니까?</td>
                     <td> 2020.02.17(월) 15:00</td>
                     <td>반품/환불/교환</td>
                     <td>확인</td>
@@ -286,7 +286,7 @@
                 <tr>
                     <td><input type="checkbox" class = "t5"></td>
                     <td>구매자</td>
-                    <td><span class = "secret">비밀글</span>&nbsp;&nbsp;아니 이 사이트는 관리자는 노는겁니까?</td>
+                    <td class = "inputcont"><span class = "secret">비밀글</span>&nbsp;&nbsp;아니 이 사이트는 관리자는 노는겁니까?</td>
                     <td> 2020.02.17(월) 15:00</td>
                     <td>반품/환불/교환</td>
                     <td>확인</td>
@@ -295,7 +295,7 @@
                 <tr>
                     <td><input type="checkbox" class = "t5"></td>
                     <td>구매자</td>
-                    <td>아니 이 사이트는 관리자는 노는겁니까?</td>
+                    <td class = "inputcont">아니 이 사이트는 관리자는 노는겁니까?</td>
                     <td> 2020.02.17(월) 15:00</td>
                     <td>반품/환불/교환</td>
                     <td>미확인</td>
@@ -304,7 +304,7 @@
                 <tr>
                     <td><input type="checkbox" class = "t5"></td>
                     <td>구매자</td>
-                    <td>아니 이 사이트는 관리자는 노는겁니까?</td>
+                    <td class = "inputcont">아니 이 사이트는 관리자는 노는겁니까?</td>
                     <td> 2020.02.17(월) 15:00</td>
                     <td>반품/환불/교환</td>
                     <td>확인</td>
@@ -313,7 +313,7 @@
                 <tr>
                     <td><input type="checkbox" class = "t5"></td>
                     <td>구매자</td>
-                    <td>아니 이 사이트는 관리자는 노는겁니까?</td>
+                    <td class = "inputcont">아니 이 사이트는 관리자는 노는겁니까?</td>
                     <td> 2020.02.17(월) 15:00</td>
                     <td>반품/환불/교환</td>
                     <td>확인</td>
@@ -322,7 +322,7 @@
                 <tr>
                     <td><input type="checkbox" class = "t5"></td>
                     <td>구매자</td>
-                    <td>아니 이 사이트는 관리자는 노는겁니까?</td>
+                    <td class = "inputcont">아니 이 사이트는 관리자는 노는겁니까?</td>
                     <td> 2020.02.17(월) 15:00</td>
                     <td>반품/환불/교환</td>
                     <td>확인</td>
@@ -331,7 +331,7 @@
                 <tr>
                     <td><input type="checkbox" class = "t5"></td>
                     <td>구매자</td>
-                    <td><span class = "secret">비밀글</span>&nbsp;&nbsp;아니 이 사이트는 관리자는 노는겁니까?</td>
+                    <td class = "inputcont"><span class = "secret">비밀글</span>&nbsp;&nbsp;아니 이 사이트는 관리자는 노는겁니까?</td>
                     <td> 2020.02.17(월) 15:00</td>
                     <td>반품/환불/교환</td>
                     <td>미확인</td>
@@ -340,7 +340,7 @@
                 <tr>
                     <td><input type="checkbox" class = "t5"></td>
                     <td>구매자</td>
-                    <td>아니 이 사이트는 관리자는 노는겁니까?</td>
+                    <td class = "inputcont">아니 이 사이트는 관리자는 노는겁니까?</td>
                     <td> 2020.02.17(월) 15:00</td>
                     <td>반품/환불/교환</td>
                     <td>미확인</td>
@@ -349,7 +349,7 @@
                 <tr>
                     <td><input type="checkbox" class = "t5"></td>
                     <td>구매자</td>
-                    <td>아니 이 사이트는 관리자는 노는겁니까?</td>
+                    <td class = "inputcont">아니 이 사이트는 관리자는 노는겁니까?</td>
                     <td> 2020.02.17(월) 15:00</td>
                     <td>반품/환불/교환</td>
                     <td>미확인</td>
@@ -358,7 +358,7 @@
                 <tr>
                     <td><input type="checkbox" class = "t5"></td>
                     <td>구매자</td>
-                    <td>아니 이 사이트는 관리자는 노는겁니까?</td>
+                    <td class = "inputcont">아니 이 사이트는 관리자는 노는겁니까?</td>
                     <td> 2020.02.17(월) 15:00</td>
                     <td>반품/환불/교환</td>
                     <td>미확인</td>
@@ -367,7 +367,7 @@
                 <tr>
                     <td><input type="checkbox" class = "t5"></td>
                     <td>구매자</td>
-                    <td>아니 이 사이트는 관리자는 노는겁니까?</td>
+                    <td class = "inputcont">아니 이 사이트는 관리자는 노는겁니까?</td>
                     <td> 2020.02.17(월) 15:00</td>
                     <td>반품/환불/교환</td>
                     <td>확인</td>
@@ -376,7 +376,7 @@
                 <tr>
                     <td><input type="checkbox" class = "t5"></td>
                     <td>구매자</td>
-                    <td><span class = "secret">삭제대기</span>&nbsp;&nbsp;아니 이 사이트는 관리자는 노는겁니까?</td>
+                    <td class = "inputcont"><span class = "secret">삭제대기</span>&nbsp;&nbsp;아니 이 사이트는 관리자는 노는겁니까?</td>
                     <td> 2020.02.17(월) 15:00</td>
                     <td>반품/환불/교환</td>
                     <td>확인</td>
@@ -385,7 +385,7 @@
                 <tr>
                     <td><input type="checkbox" class = "t5"></td>
                     <td>구매자</td>
-                    <td>아니 이 사이트는 관리자는 노는겁니까?</td>
+                    <td class = "inputcont">아니 이 사이트는 관리자는 노는겁니까?</td>
                     <td> 2020.02.17(월) 15:00</td>
                     <td>반품/환불/교환</td>
                     <td>확인</td>
@@ -394,7 +394,7 @@
                 <tr>
                     <td><input type="checkbox" class = "t5"></td>
                     <td>구매자</td>
-                    <td>아니 이 사이트는 관리자는 노는겁니까?</td>
+                    <td class = "inputcont">아니 이 사이트는 관리자는 노는겁니까?</td>
                     <td> 2020.02.17(월) 15:00</td>
                     <td>반품/환불/교환</td>
                     <td>미확인</td>
@@ -403,7 +403,7 @@
                 <tr>
                     <td><input type="checkbox" class = "t5"></td>
                     <td>구매자</td>
-                    <td>아니 이 사이트는 관리자는 노는겁니까?</td>
+                    <td class = "inputcont">아니 이 사이트는 관리자는 노는겁니까?</td>
                     <td> 2020.02.17(월) 15:00</td>
                     <td>반품/환불/교환</td>
                     <td>미확인</td>
@@ -411,43 +411,7 @@
                 <tr>
                     <td><input type="checkbox" class = "t5"></td>
                     <td>구매자</td>
-                    <td><span class = "secret">삭제대기</span>&nbsp;&nbsp;아니 이 사이트는 관리자는 노는겁니까?</td>
-                    <td> 2020.02.17(월) 15:00</td>
-                    <td>반품/환불/교환</td>
-                    <td>미확인</td>
-                    
-                </tr>
-                <tr>
-                    <td><input type="checkbox" class = "t5"></td>
-                    <td>구매자</td>
-                    <td>아니 이 사이트는 관리자는 노는겁니까?</td>
-                    <td> 2020.02.17(월) 15:00</td>
-                    <td>반품/환불/교환</td>
-                    <td>확인</td>
-                    
-                </tr>
-                <tr>
-                    <td><input type="checkbox" class = "t5"></td>
-                    <td>구매자</td>
-                    <td>아니 이 사이트는 관리자는 노는겁니까?</td>
-                    <td> 2020.02.17(월) 15:00</td>
-                    <td>반품/환불/교환</td>
-                    <td>확인</td>
-                    
-                </tr>
-                <tr>
-                    <td><input type="checkbox" class = "t5"></td>
-                    <td>구매자</td>
-                    <td>아니 이 사이트는 관리자는 노는겁니까?</td>
-                    <td> 2020.02.17(월) 15:00</td>
-                    <td>반품/환불/교환</td>
-                    <td>확인</td>
-                    
-                </tr>
-                <tr>
-                    <td><input type="checkbox" class = "t5"></td>
-                    <td>구매자</td>
-                    <td>아니 이 사이트는 관리자는 노는겁니까?</td>
+                    <td class = "inputcont"><span class = "secret">삭제대기</span>&nbsp;&nbsp;아니 이 사이트는 관리자는 노는겁니까?</td>
                     <td> 2020.02.17(월) 15:00</td>
                     <td>반품/환불/교환</td>
                     <td>미확인</td>
@@ -456,7 +420,7 @@
                 <tr>
                     <td><input type="checkbox" class = "t5"></td>
                     <td>구매자</td>
-                    <td>아니 이 사이트는 관리자는 노는겁니까?</td>
+                    <td class = "inputcont">아니 이 사이트는 관리자는 노는겁니까?</td>
                     <td> 2020.02.17(월) 15:00</td>
                     <td>반품/환불/교환</td>
                     <td>확인</td>
@@ -465,7 +429,25 @@
                 <tr>
                     <td><input type="checkbox" class = "t5"></td>
                     <td>구매자</td>
-                    <td>아니 이 사이트는 관리자는 노는겁니까?</td>
+                    <td class = "inputcont">아니 이 사이트는 관리자는 노는겁니까?</td>
+                    <td> 2020.02.17(월) 15:00</td>
+                    <td>반품/환불/교환</td>
+                    <td>확인</td>
+                    
+                </tr>
+                <tr>
+                    <td><input type="checkbox" class = "t5"></td>
+                    <td>구매자</td>
+                    <td class = "inputcont">아니 이 사이트는 관리자는 노는겁니까?</td>
+                    <td> 2020.02.17(월) 15:00</td>
+                    <td>반품/환불/교환</td>
+                    <td>확인</td>
+                    
+                </tr>
+                <tr>
+                    <td><input type="checkbox" class = "t5"></td>
+                    <td>구매자</td>
+                    <td class = "inputcont">아니 이 사이트는 관리자는 노는겁니까?</td>
                     <td> 2020.02.17(월) 15:00</td>
                     <td>반품/환불/교환</td>
                     <td>미확인</td>
@@ -474,7 +456,25 @@
                 <tr>
                     <td><input type="checkbox" class = "t5"></td>
                     <td>구매자</td>
-                    <td>아니 이 사이트는 관리자는 노는겁니까?</td>
+                    <td class = "inputcont">아니 이 사이트는 관리자는 노는겁니까?</td>
+                    <td> 2020.02.17(월) 15:00</td>
+                    <td>반품/환불/교환</td>
+                    <td>확인</td>
+                    
+                </tr>
+                <tr>
+                    <td><input type="checkbox" class = "t5"></td>
+                    <td>구매자</td>
+                    <td class = "inputcont">아니 이 사이트는 관리자는 노는겁니까?</td>
+                    <td> 2020.02.17(월) 15:00</td>
+                    <td>반품/환불/교환</td>
+                    <td>미확인</td>
+                    
+                </tr>
+                <tr>
+                    <td><input type="checkbox" class = "t5"></td>
+                    <td>구매자</td>
+                    <td class = "inputcont">아니 이 사이트는 관리자는 노는겁니까?</td>
                     <td> 2020.02.17(월) 15:00</td>
                     <td>반품/환불/교환</td>
                     <td>확인</td>
@@ -522,7 +522,29 @@
     </div><!-- selectable -->
     
     <script>
+    	// 관리자 질문 답해주는 링크로 가기
+				
+	    $(".inputcont").click(function(){
+	        // 새로운 링크를 띄워야 한다.
+	
+	        //adminChild = window.open("./adminQuestionAnswer.html","QA","width=900,height=900");
+	        // 질문에 대한 답을 해주는 페이지로 이동한다. 
+	    	
+	    	popupCenter("/AtTicketProject/customerqna/admincustomerqnaview.do",1000,1000);
+	        
+	        
+	    });
     	
+    	
+	    //팝업 중앙정렬 알고리즘
+	    function popupCenter(href, w, h) {
+	    	var xPos = (document.body.offsetWidth/2) - (w/2); // 가운데 정렬
+	    	xPos += window.screenLeft; 
+	    	var yPos = (document.body.offsetHeight/2) - (h/2);
+
+	    	window.open(href, "pop_name", "width="+w+", height="+h+", left="+xPos+", top="+yPos+", menubar=yes, status=yes, titlebar=yes, resizable=yes");
+	    }
+	    
     
     
     </script>	

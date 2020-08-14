@@ -96,38 +96,38 @@
         <fieldset id="add" class="form-control" style="border: 0px;">
             <!-- <legend class="form-control">공연 정보 추가하기</legend> -->
             
-			<form method="POST" action="/AtTicketProject/adminshowaddok.do">
+			<form method="POST" enctype="multipart/form-data" action="/AtTicketProject/adminshowaddok.do">
 			
             <div>
                 <label>공연 장르 : </label>
                 <select name="genre" style="height: 25px;">
-                    <option value="뮤지컬">뮤지컬</option>
-                    <option value="콘서트">콘서트</option>
-                    <option value="연극">연극</option>
-                    <option value="클래식">클래식</option>
-                    <option value="전시">전시</option>
+                    <option value="musical">뮤지컬</option>
+                    <option value="concert">콘서트</option>
+                    <option value="theater">연극</option>
+                    <option value="classic">클래식</option>
+                    <option value="exhibition">전시</option>
                 </select>
             </div>
 
-            <div><label for="name">공연 제목 : </label><input type="text" id="name" name="name" autofocus></div>
+            <div><label for="name">공연 제목 : </label><input type="text" id="name" name="name" autofocus required></div>
             <div>
                 <label for="openDate">오픈 일시 : </label>
-                <input style="width: 100px;" type="text" name="openDate" id="openDate" class="date" value="">
-                <label for "date3"><span style="font-size: 1em;" class="glyphicon glyphicon-calendar" id = "cal3"></span></label>
+                <input style="width: 100px;" type="text" name="openDate" id="openDate" class="date" value="" required>
+                <label for="date3"><span style="font-size: 1em;" class="glyphicon glyphicon-calendar" id = "cal3"></span></label>
             </div>
             <div><label for="startDate">공연 기간 : </label>
-                <input style="width: 100px;" type="text" name="startDate" id="startDate" class="date" value="">
-                <label for "date1"><span style="font-size: 1em;" class="glyphicon glyphicon-calendar" id = "cal1"></span></label>
+                <input style="width: 100px;" type="text" name="startDate" id="startDate" class="date" value="" required>
+                <label for="date1"><span style="font-size: 1em;" class="glyphicon glyphicon-calendar" id = "cal1"></span></label>
                 <span> - </span>
-                <input style="width: 100px;" type="text" name="endDate" id="endDate" class="date" value="">
-                <label for "date1"><span style="font-size: 1em;" class="glyphicon glyphicon-calendar" id = "cal2"></span></label>
+                <input style="width: 100px;" type="text" name="endDate" id="endDate" class="date" value="" required>
+                <label for="date1"><span style="font-size: 1em;" class="glyphicon glyphicon-calendar" id = "cal2"></span></label>
             </div>
-            <div><label for="price">공연 가격 : </label><input type="text" name="price" id="price" style="width: 100px;" autofocus>원</div>
-            <div><label for="min">소요 시간 : </label><input type="text" name="min" id="min" style="width: 100px;" autofocus>분</div>
-            <div><label for="age">연령 제한 : </label><input type="text" name="age" id="age" style="width: 100px;" autofocus>세</div>
+            <div><label for="price">공연 가격 : </label><input type="text" name="price" id="price" style="width: 100px;" autofocus required>원</div>
+            <div><label for="min">소요 시간 : </label><input type="text" name="min" id="min" style="width: 100px;" autofocus required>분</div>
+            <div><label for="age">연령 제한 : </label><input type="text" name="age" id="age" style="width: 100px;" autofocus required>세</div>
             <div id="round">
-                <label for="round">공연 회차 : </label><input type="text" name="round" id="round" style="width: 100px;" autofocus>
-                <label for="time">시작 시간 : </label><input type="text" name="time" id="time"  style="width: 100px;" autofocus>
+                <label for="round">공연 회차 : </label><input type="text" name="round" id="round" style="width: 100px;" autofocus required>
+                <label for="time">시작 시간 : </label><input type="text" name="time" id="time"  style="width: 100px;" autofocus required>
                 <button id="addbtn" class="btn btn-default" style="height: 30px; outline: none;">회차 추가</button>
             </div>
             
@@ -147,7 +147,7 @@
                	</select>
                	
                	<select name="theater" id="theater">
-               	<!-- <option value="0" selected disabled hidden>상영관</option> -->
+               <option value="0" selected disabled hidden>상영관</option>
                	</select>
             </div>
 
@@ -170,12 +170,12 @@
                 </select>
             </div>
 
-            <div><label for="poster">포스터  : </label><input type="file" id="poster" name="poster" style="display: inline;" autofocus></div>
+            <div><label for="poster">포스터  : </label><input type="file" id="poster" name="poster" style="display: inline;" autofocus required></div>
             <div class="img_wrap">
                 <img id="img1" />
             </div>
 
-            <div><label for="showcontent">공연 내용 : </label><input type="file" id="showcontent" name="showcontent" style="display: inline;" autofocus></div>
+            <div><label for="showcontent">공연 내용 : </label><input type="file" id="showcontent" name="showcontent" style="display: inline;" autofocus required></div>
             <div class="img_wrap">
                 <img id="img2" />
             </div>
@@ -194,6 +194,10 @@
 </body>
 <script>
 	<%@include file="/WEB-INF/views/inc/adminScript.jsp" %>
+	
+	$(document).on('input', '#min', function(){
+	    alert($(this).val());
+	});
 	
 	//ajax 공연장 목록
 	$("#region").change(function(){

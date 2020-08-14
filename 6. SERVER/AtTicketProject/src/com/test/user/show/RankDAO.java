@@ -66,6 +66,9 @@ public class RankDAO {
 				list.add(dto);
 			}
 			
+			rs.close();
+			stat.close();
+			
 			return list;
 			
 		} catch (Exception e) {

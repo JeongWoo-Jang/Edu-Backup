@@ -79,16 +79,18 @@
         #rightbox{
             position: relative;
             float:right;
-            top: -600px;
-            right: 200px;
+            top: -430px;
         }
         #btns {
-	        float: right;
-	        position: relative;
-	        left: 100px;
+	       position: relative;
+	       top: 70px;
+	       left: -50px;
         }
         #btns > button { outline: none; }
-
+		#img1{
+			height: 450px;
+		}
+		
     </style>
 
     <meta charset="UTF-8">
@@ -107,55 +109,60 @@
 	
     <div id="content">
     
-    	<div id="btns">
-            <button id="btnEdit" class="btn btn-default">수정</button>
-            <button id="btnDel" class="btn btn-default">삭제</button>
 
-        </div>
-        <div style="clear: both;"></div>
+        
+      	<div style="clear: both;"></div>
     
 
         <fieldset id="add" class="form-control" style="border: 0px;">
 
-            <div><img id="img1" src="<%= request.getContextPath() %>/images/consertPoster.jpg"/></div>
+            <%-- <div><img id="img1" src="<%= request.getContextPath() %>/images/${dto.poster}"/></div> --%>
+            <div><img id="img1" src="<%= request.getContextPath() %>/images/consert1.jpeg"/></div>
 
     
             <div id="rightbox">
-                <div><label for="txtname">공연 제목 : </label><span>공연테스트</span></div>
+                <div><label for="txtname">공연 제목 : </label><span>${dto.title}</span></div>
 
                 <div>
-                <label>공연 장르 : </label><span>뮤지컬</span>
+                <label>공연 장르 : </label><span>${dto.genre}</span>
                 </div>
 
                 <div>
-                    <label for="txtopen">오픈 일시 : </label>
-                    <span>2020.08.11</span>
+                    <label for="txtopen">오픈 일시 :</label>
+                    <span> ${dto.openDate}</span>
                     
                 </div>
                 <div><label for="txtdate">공연 기간 : </label>
-                    <span>2020.08.11~2020.09.01</span>
+                    <span>${dto.startDate} ~ ${dto.endDate}</span>
                 </div>
-                <div><label for="txtprice">공연 가격 : </label><span>56000</span>원</div>
-                <div><label for="txtmin">소요 시간 : </label><span>100</span>분</div>
-                <div><label for="txtage">연령 제한 : </label><span>15</span>세</div>
+                <div><label for="txtprice">공연 가격 : </label><span>${dto.price}</span>원</div>
+                <div><label for="txtmin">소요 시간 : </label><span>${dto.min}</span>분</div>
+                <div><label for="txtage">연령 제한 : </label><span>${dto.age}</span>세</div>
                 <div id="round">
                     <label for="txtround1">공연 회차 : </label><span>1</span>
-                    <label for="txttime1">시작 시간 : </label><span>13:00</span>
+                    <label for="txttime1">시작 시간 : </label><span>${dto.time}</span>
                 </div>
                 
                 <div>
                     <label for="txtplace">공연 장소 : </label>
-                    <span>공연장 상영관 주소</span>
+                    <span>${dto.hallName} ${dto.theaterName} - ${dto.addr}</span>
                 </div>
 
                 <div>
-                    <label for="txtagen">기획사 : </label><span>롸롸기획</span>
+                    <label for="txtagen">기획사 : </label><span>${dto.agencyName}</span>
                 </div>
-            </div>
+
+				<div id="btns">
+					<button id="btnEdit" class="btn btn-default" onclick="location.href='/AtTicketProject/adminshow.do?&sort=write&page=${page}&search=${search}';">목록</button>
+					<button id="btnEdit" class="btn btn-default" onclick="location.href='/AtTicketProject/adminshowedit.do?seq=${dto.seq}';">수정</button>
+					<button id="btnDel" class="btn btn-default" >삭제</button>
+				</div>
+			</div>
             <div style="clear :both;"></div>
 
             <div id="imgcontent" style="position: relative; top: -350px; font-size: 16px;">
             <label for="txtcontent">공연 내용 </label><br>
+            <%-- <img id="img2" src="<%= request.getContextPath() %>/images/${dto.content}" /> --%>
             <img id="img2" src="<%= request.getContextPath() %>/images/공연정보1.jpg" />
             <img id="img3" src="<%= request.getContextPath() %>/images/공연정보.jpg" />
             </div>
@@ -169,7 +176,14 @@
 <script>
 	<%@include file="/WEB-INF/views/inc/adminScript.jsp" %>
 
-
+	$("#btnDel").click(function() {
+		var result = confirm("정말 삭제하시겠습니까?");
+        console.log(result);
+        if(result) {
+        	location.href='/AtTicketProject/adminshowdeleteok.do?seq=${dto.seq}';
+            alert("삭제되었습니다.");
+        }
+	});
    
 </script>
 

@@ -64,10 +64,10 @@ public class AjaxDAO {
 	}
 
 	public ArrayList<BoardDTO> list() {
-
+		
 		try {
-			
-			String sql = "select seq, subject, regdate from tblBoard where rownum < 20";
+
+			String sql = "select seq, subject, regdate from tblBoard where rownum <= 20";
 			
 			stat = conn.createStatement();
 			rs = stat.executeQuery(sql);
@@ -77,19 +77,21 @@ public class AjaxDAO {
 			while (rs.next()) {
 				//레코드 1줄 -> DTO 1개
 				BoardDTO dto = new BoardDTO();
+				
 				dto.setSeq(rs.getString("seq"));
 				dto.setSubject(rs.getString("subject"));
 				dto.setRegdate(rs.getString("regdate"));
 				
-				list.add(dto);
+				list.add(dto);//
 			}
 			
-			return list;
+			return list;//
 			
+
 		} catch (Exception e) {
-			System.out.println(e);
+			System.out.println("AjaxDAO.list()");
+			e.printStackTrace();
 		}
-		
 		
 		return null;
 	}
@@ -97,35 +99,34 @@ public class AjaxDAO {
 	public int check(String id) {
 		
 		try {
-			
+
 			String sql = "select count(*) as cnt from tblMember where id = ?";
-			
 			pstat = conn.prepareStatement(sql);
-			
 			pstat.setString(1, id);
 			
 			rs = pstat.executeQuery();
 			
 			if (rs.next()) {
-				return rs.getInt("cnt"); //1,0
+				return rs.getInt("cnt"); //1, 0
 			}
-			
+
 		} catch (Exception e) {
-			System.out.println(e);
+			System.out.println("AjaxDAO.check()");
+			e.printStackTrace();
 		}
 		
 		return 0;
 	}
 
-	
 	public ArrayList<ZipcodeDTO> ziplist(String search) {
 		
 		try {
-			
+
+			//dong like '%?%'
+			//dong like '%' || ? || '%'
 			String sql = "select * from zipcode where dong like '%' || ? || '%' order by seq asc";
 			
 			pstat = conn.prepareStatement(sql);
-			
 			pstat.setString(1, search);
 			
 			rs = pstat.executeQuery();
@@ -133,23 +134,21 @@ public class AjaxDAO {
 			ArrayList<ZipcodeDTO> list = new ArrayList<ZipcodeDTO>();
 			
 			while (rs.next()) {
-				
-				ZipcodeDTO dto = new ZipcodeDTO();
-				
+				ZipcodeDTO dto = new ZipcodeDTO();				
 				dto.setSeq(rs.getString("seq"));
 				dto.setZipcode(rs.getString("zipcode"));
 				dto.setSido(rs.getString("sido"));
 				dto.setGugun(rs.getString("gugun"));
 				dto.setDong(rs.getString("dong"));
-				dto.setBunji(rs.getString("bunji"));
-				
-				list.add(dto);
-			}
+				dto.setBunji(rs.getString("bunji"));				
+				list.add(dto);//
+			}			
+			return list;//
 			
-			return list;
-			
+
 		} catch (Exception e) {
-			System.out.println(e);
+			System.out.println("AjaxDAO.ziplist()");
+			e.printStackTrace();
 		}
 		
 		return null;
@@ -158,8 +157,8 @@ public class AjaxDAO {
 	public ArrayList<CatDTO> catlist() {
 		
 		try {
-			
-			String sql = "select * from tblcat";
+
+			String sql = "select * from tblCat";
 			
 			pstat = conn.prepareStatement(sql);
 			
@@ -168,21 +167,19 @@ public class AjaxDAO {
 			ArrayList<CatDTO> list = new ArrayList<CatDTO>();
 			
 			while (rs.next()) {
-				
-				CatDTO dto = new CatDTO();
-				
+				CatDTO dto = new CatDTO();	
 				dto.setSeq(rs.getString("seq"));
 				dto.setCatid(rs.getString("catid"));
 				dto.setX(rs.getString("x"));
 				dto.setY(rs.getString("y"));
-				
-				list.add(dto);
-			}
+				list.add(dto);//
+			}			
+			return list;//
 			
-			return list;
-			
+
 		} catch (Exception e) {
-			System.out.println(e);
+			System.out.println("AjaxDAO.ziplist()");
+			e.printStackTrace();
 		}
 		
 		return null;
@@ -191,22 +188,51 @@ public class AjaxDAO {
 	public int editCat(CatDTO dto) {
 		
 		try {
-			
+
 			String sql = "update tblCat set x = ?, y = ? where catid = ?";
 			
 			pstat = conn.prepareStatement(sql);
-			
 			pstat.setString(1, dto.getX());
 			pstat.setString(2, dto.getY());
 			pstat.setString(3, dto.getCatid());
 			
-			return pstat.executeUpdate();
-			
+			return pstat.executeUpdate();			
+
 		} catch (Exception e) {
-			System.out.println(e);
+			System.out.println("AjaxDAO.editCat()");
+			e.printStackTrace();
 		}
 		
 		return 0;
+	}
+
+	public ArrayList<String> searchlist(String word) {
+		
+		try {
+
+			String sql = "select word from tblSearch"
+					+ " where word like ? || '%' order by word asc";
+			
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, word);
+			
+			rs = pstat.executeQuery();
+			
+			ArrayList<String> list = new ArrayList<String>();
+			
+			while (rs.next()) {
+				//레코드 1줄 -> DTO 1개
+				list.add(rs.getString("word"));
+			}
+			
+			return list;			
+
+		} catch (Exception e) {
+			System.out.println("AjaxDAO.searchlist()");
+			e.printStackTrace();
+		}
+		
+		return null;
 	}
 
 }

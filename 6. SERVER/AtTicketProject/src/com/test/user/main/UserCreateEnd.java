@@ -46,7 +46,7 @@ public class UserCreateEnd extends HttpServlet{
 		
 		
 		int result = dao.userCreate(dto);
-		
+		dao.close();
 		System.out.println(result);
 		
 		if (result == 1) {

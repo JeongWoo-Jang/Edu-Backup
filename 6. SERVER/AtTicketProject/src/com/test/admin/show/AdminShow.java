@@ -65,9 +65,6 @@ public class AdminShow extends HttpServlet{
 		// list.do -> list.do?page=1 변경
 		// list.do?page=3
 		String page = req.getParameter("page");
-
-		System.out.println(page);
-		
 		
 		if (page == null || page == "")
 			nowPage = 1; // default
@@ -95,10 +92,8 @@ public class AdminShow extends HttpServlet{
 		// 페이지바 제작
 		loop = 1;
 		
-		
 		n = ((nowPage - 1) / blockSize) * blockSize + 1;
 
-		
 		String pagebar = "";
 
 		pagebar += "<nav class=\"pagebar\">";

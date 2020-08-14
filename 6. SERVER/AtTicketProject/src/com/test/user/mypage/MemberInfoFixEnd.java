@@ -46,6 +46,7 @@ public class MemberInfoFixEnd extends HttpServlet {
 		dto.setEmail(email);
 		
 		dao.userUpdate(dto);
+		dao.close();
 		
 		session.setAttribute("username", name);//회원 이름
 		session.setAttribute("useraddr", address);//회원 주소
