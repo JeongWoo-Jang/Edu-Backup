@@ -113,14 +113,14 @@
             <div>
                 <label for="openDate">오픈 일시 : </label>
                 <input style="width: 100px;" type="text" name="openDate" id="openDate" class="date" value="${dto.openDate}" required>
-                <label for "date3"><span style="font-size: 1em;" class="glyphicon glyphicon-calendar" id = "cal3" ></span></label>
+                <label for ="date3"><span style="font-size: 1em;" class="glyphicon glyphicon-calendar" id = "cal3" ></span></label>
             </div>
             <div><label for="startDate">공연 기간 : </label>
                 <input style="width: 100px;" type="text" name="startDate" id="startDate" class="date" value="${dto.startDate}" required>
-                <label for "date1"><span style="font-size: 1em;" class="glyphicon glyphicon-calendar" id = "cal1"></span></label>
+                <label for ="date1"><span style="font-size: 1em;" class="glyphicon glyphicon-calendar" id = "cal1"></span></label>
                 <span> - </span>
                 <input style="width: 100px;" type="text" name="endDate" id="endDate" class="date" value="${dto.endDate}" required>
-                <label for "date1"><span style="font-size: 1em;" class="glyphicon glyphicon-calendar" id = "cal2"></span></label>
+                <label for ="date1"><span style="font-size: 1em;" class="glyphicon glyphicon-calendar" id = "cal2"></span></label>
             </div>
             <div><label for="price">공연 가격 : </label><input type="text" name="price" id="price" style="width: 100px;" value="${dto.price}" autofocus required>원</div>
             <div><label for="min">소요 시간 : </label><input type="text" name="min" id="min" style="width: 100px;" value="${dto.min}" autofocus required>분</div>
@@ -130,10 +130,23 @@
                 <label for="time">시작 시간 : </label><input type="text" name="time" id="time"  style="width: 100px;" value="${dto.time}" autofocus required>
                 <button id="addbtn" class="btn btn-default" style="height: 30px; outline: none;">회차 추가</button>
             </div>
+            <c:if test="${! empty dto.round2}">
+            <div>
+                <label for="round">공연 회차 : </label><input type="text" name="round2" id="round2" style="width: 100px;" value="2" autofocus required>
+                <label for="time">시작 시간 : </label><input type="text" name="time2" id="time2"  style="width: 100px;" value="${dto.time2}" autofocus required>
+            </div>
+            </c:if>
+            <c:if test="${! empty dto.round3}">
+            <div id>
+                <label for="round">공연 회차 : </label><input type="text" name="round3" id="round3" style="width: 100px;" value="3" autofocus required>
+                <label for="time">시작 시간 : </label><input type="text" name="time3" id="time3"  style="width: 100px;" value="${dto.time3}" autofocus required>
+            </div>
+            </c:if>
             
             <div>
                 <label for="place">공연 장소 : </label>
                 <select name="region" id="region">
+                <option value="0" selected disabled hidden>지역</option>
                	<option value="서울" <c:if test="${dto.place=='서울'}">selected</c:if>>서울</option>
                	<option value="인천" <c:if test="${dto.place=='인천'}">selected</c:if>>인천</option>
                	<option value="부산" <c:if test="${dto.place=='부산'}">selected</c:if>>부산</option>
@@ -147,7 +160,7 @@
                	</select>
                	
                	<select name="theater" id="theater">
-               	<!-- <option value="0" selected disabled hidden>상영관</option> -->
+               	<option value="0" selected disabled hidden>상영관</option>
                	</select>
             </div>
 
@@ -169,21 +182,26 @@
                 </select>
             </div>
 
-			
-            <div><label for="poster">포스터  : </label><input type="file" id="poster" name="poster" style="display: inline;" autofocus required></div>
+			<div>
+				<label for="tag">태그 : </label><span>#태그명 #태그명 #태그명.. 형식으로작성하세요.</span>
+				<textarea id="tag" name="tag" style="width: 480px; height: 100px; resize:none;"><c:forEach items="${tdto.tags}" var="tag">${tag} </c:forEach></textarea>
+			</div>
+
+				<div><label for="poster">포스터  : </label><input type="file" id="poster" name="poster" style="display: inline;" autofocus required><br>prev : ${dto.poster}</div>
             <div class="img_wrap">
                 <img id="img1" />
             </div>
 
-            <div><label for="showcontent">공연 내용 : </label><input type="file" id="showcontent" name="showcontent" style="display: inline;" autofocus required></div>
+            <div><label for="showcontent">공연 내용 : </label><input type="file" id="showcontent" name="showcontent" style="display: inline;" autofocus required><br>prev : ${dto.content}</div>
             <div class="img_wrap">
+            
                 <img id="img2" />
             </div>
 
             <div><input type="submit" id="btnadd" value="수정하기" class="btn btn-default"></div>
             
             <input type="hidden" name="seq" value="${dto.seq}">
-            
+            <input type="hidden" name="tags" value="${tdto.tags}">
 			</form>
 			
         </fieldset>
@@ -242,12 +260,18 @@
 	}
 
     var n = 2;
+    
+    if(${! empty dto.round2}){
+    	n = 3;
+    }else if(${! empty dto.round3}){
+    	n = 4;
+    }
 
     $("#addbtn").mousedown(function() {
 
         
-        $("#round").append("<div class='addshow'><label for='round"+ n +"'>공연 회차 : </label><input type='text' class='rtxt' name='round"+ n +"' id='round"+ n +"' style='width: 100px;' autofocus>"+
-                "<label for='time"+ n +"'> 시작 시간 : </label><input type='text' class='rtxt' id='time"+ n +"'name='time"+ n +"' style='width: 100px;' autofocus></div>");
+    	$("#round").append("<div class='addshow'><label for='round"+ n +"'>공연 회차 : </label><input type='text' name='round"+ n +"' id='round"+ n +"' style='width: 100px;' autofocus>"+
+                "<label for='time"+ n +"'> 시작 시간 : </label><input type='text' id='time"+ n +"'name='time"+ n +"' style='width: 100px;' autofocus></div>");
 
         n++;
 

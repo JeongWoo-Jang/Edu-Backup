@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -44,25 +45,34 @@
 <body>
  <legend style="width: 200px; margin:20px 25px; font-weight: bold;">고객정보 추가</legend>
 
- <form method = "POST" action = "/AtTicketProject/customer/cusinsertok.do" enctype = "multipart/form-data">
+ <form method = "POST" action = "/AtTicketProject/customer/cuslistinsertok.do" enctype = "multipart/form-data">
     <ul id="list">
         <li>이름 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <input type="text" name="name"
-                id="name" class="data"></li>
-        <li>아이디 &nbsp;&nbsp;&nbsp;&nbsp;: <input type="text" name="id" id="id" class="data"></li>
-        <li>주민번호 : <input type="text" name="ssn" id="ssn" class="data"></li>
+                id="name" class="data" required></li>
+        <li>아이디 &nbsp;&nbsp;&nbsp;&nbsp;: <input type="text" name="id" id="id" class="data" required></li>
+        <li>주민번호 : <input type="text" name="ssn" id="ssn" class="data" required></li>
         </li>
-        <li>고객등급 : <input type = "text" name = "grade" class = "data"></li>
-        <li>이메일 &nbsp;&nbsp;&nbsp;&nbsp;: <input type="text" name="email" id="email" class="data">
-        <li>전화번호 : <input type="text" name="tel" id="tel" class="data"></li>
+       <!--  <li>고객등급 : <input type = "text" name = "grade" class = "data"></li> -->
+       <li>고객등급 : <div style="margin-top:-25px; margin-left:70px;">
+       			<select name="grade" style="width:100px;" class = "form-control">
+        				<optgroup label="고객등급">
+        					<c:forEach items = "${list1}" var = "grade">
+        						<option value = "${grade}" class = "data">${grade}</option>
+        					</c:forEach>
+        				</optgroup>
+        			</select>
+        			</div>
+        <li>이메일 &nbsp;&nbsp;&nbsp;&nbsp;: <input type="text" name="email" id="email" class="data" required>
+        <li>전화번호 : <input type="text" name="tel" id="tel" class="data" required></li>
         <li>비번 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <input type="text" name="pw"
-                id="pw" class="data"></li>
-        <li>에그머니 : <input type="text" name="egg" id="egg" class="data"></li>
+                id="pw" class="data" required></li>
+        <li>에그머니 : <input type="text" name="egg" id="egg" class="data" required></li>
 		<li>주소 :
 			<div style="display: inline-block; margin-left: 30px;">
 				<div style="display: inline-block;">
 					<input type="text" id="postcode" placeholder="우편번호">
 					<input id="addr" type="button" onclick="execDaumPostcode()" value="우편번호 찾기"><br>
-					<input name="address" type="text" id="address" placeholder="도로명주소"> 
+					<input name="address" type="text" id="address" placeholder="도로명주소" required> 
 					
 					<%@include file="/WEB-INF/views/inc/adminaddress.jsp"%>
 				</div>
@@ -114,7 +124,7 @@
 
     $("#makebtn").click(function () {
         if (confirm("추가하시겠습니까?")) {
-        	location.href="/AtTicketProject/customer/cusinsertok.do";
+        	location.href="/AtTicketProject/customer/cuslistinsertok.do?cussseq=${cusseq}";
         }
     });
 

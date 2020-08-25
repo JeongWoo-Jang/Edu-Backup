@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,6 +24,17 @@
             padding-right: 5px;
             /* font-size: 1.5em; */
         }
+        
+        #left {
+           position: absolute;
+           left: 0px;
+           top: 0px;
+           width: 250px;
+           height: 1500px;
+           background-color: #444;
+           text-align: center;
+           z-index: 10;
+       }
 
         .selectNotice:last-child {
             border-right: 0px;
@@ -241,10 +253,6 @@
             	margin-left:-150px;
             }
             
-            .eventcb{
-            	margin-left:115px;
-            }
-            
              
 </style>
 
@@ -271,7 +279,6 @@
 
                             <p class="eve-mlist-dday">1000 포인트 지급</p>
                         </div>
-                            <span class = "eventcb"><input class = "eventch" type = "checkbox"></span>
                     </div>
                     <div id="eventbox">
                         <img
@@ -287,7 +294,6 @@
                             <p class="evetxt">2020.07-15 ~ 2020.08.31</p>
 
                             <p class="eve-mlist-dday">1000 포인트 지급</p>
-                             <span class = "eventcb"><input class = "eventch" type = "checkbox"></span>
                         </div>
                     </div>
                     <div id="eventbox">
@@ -302,7 +308,6 @@
                             <p class="evetxt">2020.07-15 ~ 2020.08.31</p>
 
                             <p class="eve-mlist-dday">1000 포인트 지급</p>
-                             <span class = "eventcb"><input class = "eventch" type = "checkbox"></span>
                         </div>
                     </div>
                     <div id="eventbox">
@@ -317,7 +322,6 @@
                             <p class="evetxt">2020.07-15 ~ 2020.08.31</p>
 
                             <p class="eve-mlist-dday">1000 포인트 지급</p>
-                             <span class = "eventcb"><input class = "eventch" type = "checkbox"></span>
                         </div>
                     </div>
                     <div id="eventbox">
@@ -332,16 +336,10 @@
                             <p class="evetxt">2020.07-15 ~ 2020.08.31</p>
 
                             <p class="eve-mlist-dday">1000 포인트 지급</p>
-                             <span class = "eventcb"><input class = "eventch" type = "checkbox"></span>
                         </div>
                     </div>
                 </div>
                 
-        <div id = "manipulate2">
-            <button class = "modified" id = "makebtn2"><i class="glyphicon glyphicon-plus"></i>추가</button>
-            <button class = "modified" id = "modifybtn2"><i class="glyphicon glyphicon-pencil"></i>수정</button>
-            <button class = "modified" id = "delbtn2"><i class="glyphicon glyphicon-trash"></i>삭제</button>
-        </div>
       <!-- 그림 끝 부분 -->
   <div id = "boxtable">
     <div id="selectable">
@@ -359,7 +357,7 @@
         </div>
         <div id="slctp2">
             <div class="input-group">
-                <input type="text" class="form-control" placeholder="검색어를 입력하세요.">
+                <input type="text" class="form-control" name="search" id="search" placeholder="검색어를 입력하세요." value="${search}">
                 <span class="input-group-addon" id="searchlogo"><i class="glyphicon glyphicon-search"></i></span>
             </div>
         </div>
@@ -376,192 +374,45 @@
                 <th style="width: 70px;">읽음</th>
                 <th style="width: 80px;">좋아요</th>
             </tr>
-            <tr>
-                <td><input type="checkbox" class = "cb">
-                <td>15</td>
-                <td>후기</td>
-                <td>뮤지컬 [베르테르] 후기</td>
-                <td>홍길동</td>
-                <td>2020-07-15</td>
-                <td>11</td>
-                <td>11</td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" class = "cb">
-                <td>14</td>
-                <td>후기</td>
-                <td>그랜드 민트 페스티벌 후기.</td>
-                <td>아무개</td>
-                <td>2020-07-14</td>
-                <td>65</td>
-                <td>65</td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" class = "cb">
-                <td>13</td>
-                <td>후기</td>
-                <td>님들 오페라의 유령 봄?</td>
-                <td>호호호</td>
-                <td>2020-07-11</td>
-                <td>7</td>
-                <td>7</td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" class = "cb">
-                <td>12</td>
-                <td>잡담</td>
-                <td>티켓팅 실패 ㅠㅠ 방탄소년단 티켓 삽니다~</td>
-                <td>홍길동</td>
-                <td>2020-07-15</td>
-                <td>11</td>
-                <td>11</td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" class = "cb">
-                <td>11</td>
-                <td>잡담</td>
-                <td>싸이 흠뻑쇼 가보신분들 어떤가요?</td>
-                <td>아무개</td>
-                <td>2020-07-14</td>
-                <td>65</td>
-                <td>65</td>
-            </tr>
-           
-            <tr>
-                <td><input type="checkbox" class = "cb">
-                <td>10</td>
-                <td>잡담</td>
-                <td>서울 볼만한 전시회 추천좀 해주세요</td>
-                <td>호호호</td>
-                <td>2020-07-11</td>
-                <td>7</td>
-                <td>7</td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" class = "cb">
-                <td>9</td>
-                <td>잡담</td>
-                <td>디디피에서 요즘 전시회 안하나요?</td>
-                <td>홍길동</td>
-                <td>2020-07-15</td>
-                <td>11</td>
-                <td>11</td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" class = "cb">
-                <td>8</td>
-                <td>잡담</td>
-                <td>
-                    뮤지컬 [캣츠] 40주년 오리지널 내한공연 후기!!!
-                </td>
-                <td>아무개</td>
-                <td>2020-07-14</td>
-                <td>65</td>
-                <td>65</td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" class = "cb">
-                <td>7</td>
-                <td>잡담</td>
-                <td>뮤지컬 [머더 발라드] 후기!!!</td>
-                <td>호호호</td>
-                <td>2020-07-11</td>
-                <td>7</td>
-                <td>7</td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" class = "cb">
-                <td>6</td>
-                <td>잡담</td>
-                <td>에미넴 콘서트 보고싶다</td>
-                <td>홍길동</td>
-                <td>2020-07-15</td>
-                <td>11</td>
-                <td>11</td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" class = "cb">
-                <td>5</td>
-                <td>잡담</td>
-                <td>손열음 공연 어떤가요?</td>
-                <td>아무개</td>
-                <td>2020-07-14</td>
-                <td>65</td>
-                <td>65</td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" class = "cb">
-                <td>4</td>
-                <td>잡담</td>
-                <td>마마미아 내한 계획 아시는분></td>
-                <td>호호호</td>
-                <td>2020-07-11</td>
-                <td>7</td>
-                <td>7</td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" class = "cb">
-                <td>3</td>
-                <td>잡담</td>
-                <td>뮤지컬 [머더 발라드] 후기</td>
-                <td>홍길동</td>
-                <td>2020-07-15</td>
-                <td>11</td>
-                <td>11</td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" class = "cb">
-                <td>2</td>
-                <td>잡담</td>
-                <td>뮤지컬 [무인도 탈출기] 후기.</td>
-                <td>아무개</td>
-                <td>2020-07-14</td>
-                <td>65</td>
-                <td>65</td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" class = "cb">
-                <td>1</td>
-                <td>잡담</td>
-                <td>레미제라블 재밌습니다 ^^</td>
-                <td>호호호</td>
-                <td>2020-07-11</td>
-                <td>7</td>
-                <td>7</td>
-            </tr>
+            
+            <c:if test="${not empty search and list.size() == 0}">
+              	<tr>
+              		<td colspan="8">검색 결과가 없습니다.</td>
+              	</tr>                    	
+            </c:if>
+            
+            <c:if test="${empty search and list.size() == 0}">
+              	<tr>
+              		<td colspan="8">게시물이 없습니다.</td>
+              	</tr>                    	
+            </c:if>
+            
+            <c:forEach items="${list}" var="list">
+				<tr>
+				    <td><input type="checkbox" class="cb" name="cb" value="${list.seq}">
+				    <td>${list.seq}</td>
+				    <td>후기</td>
+				    <td data-seq="${list.seq}">${list.title}</td>
+				    <td>${list.cname}</td>
+				    <td>${list.regdate}</td>
+				    <td>${list.rview}</td>
+				    <td>0</td>
+				</tr>
+            </c:forEach>
+            
         </table>
 
         <!-- 내용물 수정/삭제 페이지 -->
         <div id="manipulate">
-            <button class="modified" id="delbtn"><i class="glyphicon glyphicon-trash"></i> 삭제</button>
+            <button class="modified" id="delbtn" onclick="deleteReview();"><i class="glyphicon glyphicon-trash"></i> 삭제</button>
         </div>
 
         <!-- 하단 페이지 선택 바 -->
-        <nav class="pagebar">
-            <ul class="pagination">
-                <li>
-                    <a href="#" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-                </li>
-                <li><a href="">1</a></li>
-                <li><a href="">2</a></li>
-                <li class="active"><a href="">3</a></li>
-                <li><a href="">4</a></li>
-                <li><a href="">5</a></li>
-                <li><a href="">6</a></li>
-                <li><a href="">7</a></li>
-                <li><a href="">8</a></li>
-                <li><a href="">9</a></li>
-                <li><a href="">10</a></li>
-                <li>
-                    <a href="#" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
+		${pagebar}
+
 		</div>
+		
+		
 	<%@include file="/WEB-INF/views/inc/menu.jsp"%>
 	<script>
 	<%@include file="/WEB-INF/views/inc/adminScript.jsp" %>	
@@ -576,20 +427,17 @@
             }
     }
 
-
-    // $("#modifybtn").click(function(){
-    //     location.href = "freeBoardModify.html"
-    // });
-
-    $("#delbtn").click(function(){
-        if($('.cb').is(':checked') == true) {
-            if(confirm("정말로 삭제하시겠습니까?")){
-
-            }
-        } else {
-            alert("하나 이상을 체크하시오.");
-        }
-    });
+    function deleteReview() {
+        
+        if ($(".cb:checked").length > 0) {
+        	//alert($(".cb").serialize());
+        	location.href="/AtTicketProject/review/adminreviewdelete.do?" + $(".cb").serialize();
+		} else {
+			alert("삭제할 리뷰를 선택하세요.");
+		}
+        
+    };
+    
     
     $("#delbtn2").click(function(){
         if($('.eventch').is(':checked') == true) {
@@ -601,9 +449,10 @@
         }
     });
 
-    for (var i = 2; i < tr.length; i++) {
+    for (var i = 0; i < tr.length; i++) {
         tr[i].children[3].onclick = function () {
-        	 location.href = "/AtTicketProject/review/reviewupdate.do";
+        	 //alert($(this).data("seq"));
+        	 location.href = "/AtTicketProject/review/reviewupdate.do?seq=" + $(this).data("seq");
         };
     }
 	
@@ -618,6 +467,18 @@
     		  alert("하나 이상을 체크하시오.");
     	}
  	});
+    
+    
+    
+    $("#search").keydown(function() {
+    	if (event.keyCode == 13) {
+    		location.href = "/AtTicketProject/review/adminreview.do?search=" + $("#search").val();
+    	}
+    });
+    
+    $("#searchlogo").click(function() {
+    	location.href = "/AtTicketProject/review/adminreview.do?search=" + $("#search").val();
+    });
   
 
     </script>

@@ -42,19 +42,21 @@ public class AdminEmployeeDAO {
 			if (map.get("search") != null && map.get("search") != "") {
 				//즉 search한게 무엇이라도 있을 경우에 이 구문에 들어오는 것이다 해당 구문에 들어있는걸 찾아주는 역할을 수행한다
 				//해당 검색어에 있는것을 필터링 걸어서 찾아주면 된다.
-				where = String.format("where (name like '%%%s%%' or jikwi like '%%%s%%' or salary like '%%%s%%' or ssn like '%%%s%%' or tel like '%%%s%%' or tn like '%%%s%%')",map.get("search"),map.get("search"),map.get("search"),map.get("search"),map.get("search"),map.get("search"));	
+				where = String.format("where (delflag = 0 and name like '%%%s%%' or jikwi like '%%%s%%' or salary like '%%%s%%' or ssn like '%%%s%%' or tel like '%%%s%%' or tn like '%%%s%%')",map.get("search"),map.get("search"),map.get("search"),map.get("search"),map.get("search"),map.get("search"));	
+			} else {
+				where = "where delflag = 0";
 			}
 			
 			//페이징 조건이 여기서 들어가게 된다.
-			String sql = String.format("select a.* from (select rownum as rnum, v.* from vwemployeeinfo v  %s) a where rnum >= %s and rnum <= %s order by %s"
+			String sql = String.format("select a.* from (select rownum as rnum, v.* from vwCempInfoJam v  %s) a where rnum >= %s and rnum <= %s order by %s"
 					, where,map.get("begin"), map.get("end"),map.get("sort"));
 			
 			stat = conn.createStatement();
 			rs = stat.executeQuery(sql);
 			
-			ArrayList<AdminEmployeeDTO> list = new ArrayList<AdminEmployeeDTO>();
+			ArrayList<AdminEmployeeDTO> list = new ArrayList<AdminEmployeeDTO>();//여기서 위에 해당하는 조건을 만족하는 직원들의 정보를 모두 리스트에 담을것이다.
 			
-			System.out.println(map.get("sort"));
+			//System.out.println(map.get("sort"));
 			
 			//쿼리 날린것을 기반으로 돌아온 데이터를 처리할 것이다.
 			while (rs.next()) {
@@ -96,7 +98,11 @@ public class AdminEmployeeDAO {
 			if (map.get("search") != null) {
 				//즉 search한게 무엇이라도 있을 경우에 이 구문에 들어오는 것이다. 해당 구문에 들어있는걸 찾아주는 역할을 수행한다
 				//해당 검색어에 있는것을 필터링 걸어서 찾아주면 된다.
-				where = String.format("where name like '%%%s%%' or jikwi like '%%%s%%' or salary like '%%%s%%' or ssn like '%%%s%%' or tel like '%%%s%%' or tn like '%%%s%%'",map.get("search"),map.get("search"),map.get("search"),map.get("search"),map.get("search"),map.get("search"));	
+				//where = String.format("where name like '%%%s%%' or jikwi like '%%%s%%' or salary like '%%%s%%' or ssn like '%%%s%%' or tel like '%%%s%%' or tn like '%%%s%%'",map.get("search"),map.get("search"),map.get("search"),map.get("search"),map.get("search"),map.get("search"));	
+				where = String.format("where delflag = 0 and name like '%%%s%%' or jikwi like '%%%s%%' or salary like '%%%s%%' or ssn like '%%%s%%' or tel like '%%%s%%' or tn like '%%%s%%'",map.get("search"),map.get("search"),map.get("search"),map.get("search"),map.get("search"),map.get("search"));	
+				
+			} else {
+				where = "where delflag = 0";
 			}
 			
 			String sql = String.format("select count(*) as cnt from vwemployeeinfo %s",where);//현재 해당 조건을 만족하는 데이터의 행이 몇개인지 받아오는 작업을 수행함.
@@ -155,7 +161,8 @@ public class AdminEmployeeDAO {
 		try {
 			
 			for (int i = 0; i < list.length; i++) {
-				String sql = "delete from tblEmployee where seq = ?";
+				//String sql = "delete from tblEmployee where seq = ?";//delete 하면 안된다.
+				String sql = "update tblEmployee set delflag = 1 where seq = ?";//delflag 를 1로만들어서 퇴사처리를 하면 된다!.
 				
 				pstat = conn.prepareStatement(sql);
 				pstat.setString(1, list[i]);

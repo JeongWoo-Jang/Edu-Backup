@@ -27,12 +27,10 @@ public class AdminShow extends HttpServlet{
 		String search = req.getParameter("search");
 		String sort = req.getParameter("sort");
 		
-		String temp = "";
 		
 		if(sort == null || sort == "") {
 			sort = "seq asc"; //기본값
 		}
-		
 		
 		ShowDAO dao = new ShowDAO();
 		

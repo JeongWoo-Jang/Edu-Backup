@@ -15,7 +15,7 @@ public class AdminEmployeeDelete extends HttpServlet{
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		
-		System.out.println(req.getParameter("delNum"));
+		//System.out.println(req.getParameter("delNum"));
 		
 		String[] delnum = req.getParameter("delNum").split(",");//삭제할 글 번호 넘김.
 		

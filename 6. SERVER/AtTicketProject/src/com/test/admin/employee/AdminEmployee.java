@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @WebServlet("/adminemployee.do")
 public class AdminEmployee extends HttpServlet{
@@ -20,13 +21,14 @@ public class AdminEmployee extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		
+		
 		String search = req.getParameter("search");//검색창에 뭘 적었는
 		String sort = req.getParameter("sort");//차순정렬을 시행하고 있는지
 		
 		String temp = "";
 		
 		if(sort == null || sort == "") {//차순정렬값이 없는경우 -> 그냥 보고 있는경우 -> seq 오름차순으로 정렬할것이다
-			sort = "seq asc"; //기본값
+			sort = "seq desc"; //기본값
 		}
 		
 		AdminEmployeeDAO dao = new AdminEmployeeDAO();
@@ -139,7 +141,8 @@ public class AdminEmployee extends HttpServlet{
 
 		pagebar += "<nav class=\"pagebar\">";
 		pagebar += "<ul class=\"pagination\">";
-
+		
+		
 		// 이전 10페이지
 		if (n == 1) {
 			pagebar += "<li class='disabled'>";

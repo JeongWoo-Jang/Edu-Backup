@@ -268,6 +268,12 @@
             </div>
 
             <!-------------------------------- 내용부분 -------------------------------->
+            <style>
+             	#coupon:hover {
+             		cursor : pointer;
+             	}
+            
+            </style>
             <div id="middle">
                 <div id="safety">
                     <img
@@ -285,8 +291,9 @@
             <div id="middle3">
                 <div id="coupon">
                     <img class="backimage" src="./images/coupon1.jpg" alt="" />
-                    <img
+                    <img 
                         class="backimage"
+                        
                         src="./images/couponmenu1.jpg"
                         alt=""
                     />
@@ -331,7 +338,10 @@
             $("#coupon").click(function(){
             	
             	alert("쿠폰이 발급되었습니다.");
-            });
+            	//쿠폰을 주는 서블릿으로 이동.
+            	location.href = "/AtTicketProject/userpromotionadd.do"
+            	
+            }); 
 
             //마이페이지 클릭시 이동
             $("#mypage").click(function () {

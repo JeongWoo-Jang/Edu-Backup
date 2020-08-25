@@ -19,8 +19,10 @@ public class AdminShowEdit extends HttpServlet{
 		
 		ShowDAO dao = new ShowDAO();	
 		ShowDTO dto = dao.loadview(seq);
-		
+		TagDTO tdto = dao.loadTag(seq);
+
 		req.setAttribute("dto", dto);
+		req.setAttribute("tdto", tdto);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/admin/show/adminshowedit.jsp");
 		dispatcher.forward(req, resp);

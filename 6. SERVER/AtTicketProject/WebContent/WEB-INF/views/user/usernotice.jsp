@@ -12,9 +12,9 @@
             href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap"
             rel="stylesheet"
         />
-        <link rel="stylesheet" href="css/slick-theme.css" />
-        <link rel="stylesheet" href="css/slick.css" />
-        <link rel="shortcut icon" href="./images/favicon.ico" />
+        <link rel="stylesheet" href="/AtTicketProject/css/slick-theme.css" />
+        <link rel="stylesheet" href="/AtTicketProject/css/slick.css"/>
+        <link rel="shortcut icon" href="/AtTicketProject/images/favicon.ico" />
         
         <style>
             * {
@@ -34,7 +34,7 @@
                 /* border: 1px solid black; */
                 min-width: 1600px;
                 height: 650px;
-                margin: 0 auto;
+                margin: 0 auto;  
             }
             #middle {
                 /* border: 1px solid black; */
@@ -70,7 +70,7 @@
                 /* border: 1px solid white; */
                 width: 100px;
                 height: 65px;
-                background-image: url("./images//title.png");
+                background-image: url("/AtTicketProject/images/title.png");
                 background-repeat: no-repeat;
                 background-position: center center;
                 position: absolute;
@@ -196,6 +196,7 @@
                 font-family: "Noto Sans KR", "NanumBarunGothic", "맑은 고딕",
                     "Malgun Gothic", sans-serif;
                 margin-bottom: 38px;
+       
             }
 
             .event-division {
@@ -211,7 +212,7 @@
                 /* display: inline-block; */
                 width: 1900px;
                 margin: 0px auto;
-                margin-left: 185px;
+              margin-left: 300px;
             }
 
             .eve-mlist-dday {
@@ -256,34 +257,41 @@
             }
 
             #tblList {
-                width: 1400px;
+                width: 1350px; 
                 margin: 15px auto;
             }
 
             #tblList th:nth-child(1) {
-                width: 60px;
+                width: 100px;
             }
             #tblList th:nth-child(2) {
-                width: 480px;
+                width: 100px;
             }
             #tblList th:nth-child(3) {
-                width: 90px;
+                width: 800px;
             }
             #tblList th:nth-child(4) {
-                width: 110px;
+                width: 150px;
             }
             #tblList th:nth-child(5) {
-                width: 60px;
+                width: 150px;
             }
 
             tblList th,
             #tblList td {
                 text-align: center;
             }
-            #tblList td:nth-child(2) {
+            
+            #tblList td:nth-child(3) {
                 text-align: left;
             }
-
+            
+             #tblList tr td:nth-child(3):hover{
+                cursor:pointer;
+                text-decoration:underline;
+                color:red;
+            }
+            
             .btns {
                 /* border: 1px solid black; */
                 width: 750px;
@@ -357,6 +365,15 @@
                 margin-bottom: -2px;
                 padding-left: 20px;
             }
+            
+            .noticemenu.active {
+			font-weight: bold;
+			}
+			
+			a {
+    			color: black;
+			}
+			
         </style>
     </head>
     <body>
@@ -407,7 +424,7 @@
                     <div id="eventbox">
                         <img
                             class="noticeimg"
-                            src="./images/notice1.jpg"
+                            src="/AtTicketProject/images/notice1.jpg"
                             alt=""
                         />
                         <div class="eve-mlist-box">
@@ -421,7 +438,7 @@
                     <div id="eventbox">
                         <img
                             class="noticeimg"
-                            src="./images/notice2.jpg"
+                            src="/AtTicketProject/images/notice2.jpg"
                             alt=""
                         />
                         <div class="eve-mlist-box">
@@ -437,7 +454,7 @@
                     <div id="eventbox">
                         <img
                             class="noticeimg"
-                            src="./images/notice3.jpg"
+                            src="/AtTicketProject/images/notice3.jpg"
                             alt=""
                         />
                         <div class="eve-mlist-box">
@@ -451,7 +468,7 @@
                     <div id="eventbox">
                         <img
                             class="noticeimg"
-                            src="./images/notice4.jpg"
+                            src="/AtTicketProject/images/notice4.jpg"
                             alt=""
                         />
                         <div class="eve-mlist-box">
@@ -465,7 +482,7 @@
                     <div id="eventbox">
                         <img
                             class="noticeimg"
-                            src="./images/notice4.jpg"
+                            src="/AtTicketProject/images/notice4.jpg"
                             alt=""
                         />
                         <div class="eve-mlist-box">
@@ -479,224 +496,61 @@
                 </div>
                 <!-- 검색창 -->
                 <div class="searchbox">
-                    <span
-                        style="position: relative; top: 50px; right: 380px;"
-                        class="noticemenu"
-                        >등록순</span
-                    >
-                    <span
-                        style="position: relative; top: 50px; right: 380px;"
-                        class="noticemenu"
-                        >오픈일순</span
-                    >
-                    <span
-                        style="position: relative; top: 50px; right: 380px;"
-                        class="noticemenu"
-                        >조회순</span
-                    >
+                    <span  style="position: relative; top: 50px; right: 380px;" class="noticemenu" onclick="location.href='/AtTicketProject/show/usernotice.do?page=${page}&search=${search}&sort=regdate';">등록순</span>
+                    <span  style="position: relative; top: 50px; right: 380px;" class="noticemenu" onclick="location.href='/AtTicketProject/show/usernotice.do?page=${page}&search=${search}&sort=opendate';">오픈일순</span>
+                    <span  style="position: relative; top: 50px; right: 380px;" class="noticemenu" onclick="location.href='/AtTicketProject/show/usernotice.do?page=${page}&search=${search}&sort=nview';">조회순</span>
+                   	<form method="GET" action="/AtTicketProject/show/usernotice.do" id="searchForm" autocomplete="off">
                     <div class="search">
                         <div class="form-group">
                             <div class="input-group">
-                                <input
-                                    type="text"
-                                    class="form-control"
-                                    placeholder="궁금하신 내용을 입력세요"
-                                />
+                                <input type="text" class="form-control" placeholder="궁금하신 내용을 입력세요" name = "search" required value="${search}"/>
                                 <span class="input-group-addon"
-                                    ><i class="glyphicon glyphicon-search"></i
+                                    ><i class="glyphicon glyphicon-search" style="cursor: pointer;"
+							onclick="$('#searchForm').submit();"></i
                                 ></span>
                             </div>
                         </div>
                     </div>
+                    </form>
                 </div>
                 <table id="tblList" class="table table-striped">
                     <thead>
                         <tr>
                             <th>번호</th>
+                            <th>구분</th>
                             <th>제목</th>
-                            <th>이름</th>
-                            <th>날짜</th>
-                            <th>읽음</th>
+                            <th>티켓오픈 일시</th>
+                            <th>조회수</th>
                         </tr>
                     </thead>
                     <tbody>
+                       <c:forEach items="${list}" var="dto">
                         <tr>
-                            <td>티켓오픈</td>
-                            <td>뮤지컬 [베르테르] 1차 티켓오픈 안내</td>
-                            <td>홍길동</td>
-                            <td>2020-07-15</td>
-                            <td>11</td>
+                        	<td>${dto.seq}</td>
+                            <td>${dto.nindex}</td>
+                            <td><a href="/AtTicketProject/show/usernoticetemp.do?noticeseq=${dto.seq}&page=${page}&search=${search}">${dto.title}</td>     
+                            <td>${dto.opendate}</td>
+                            <td>${dto.nview}</td>
                         </tr>
-                        <tr>
-                            <td>티켓오픈</td>
-                            <td>
-                                그랜드 민트 페스티벌 2020 - 공식 티켓오픈 안내.
-                            </td>
-                            <td>아무개</td>
-                            <td>2020-07-14</td>
-                            <td>65</td>
-                        </tr>
-                        <tr>
-                            <td>티켓오픈</td>
-                            <td>
-                                뮤지컬 [오페라의 유령] 월드투어-서울 마지막
-                                오픈! 6/30(화) 2시
-                            </td>
-                            <td>호호호</td>
-                            <td>2020-07-11</td>
-                            <td>7</td>
-                        </tr>
-                        <tr>
-                            <td>티켓오픈</td>
-                            <td>
-                                <span style="color: red; border: 1px solid red;"
-                                    >단독판매</span
-                                >
-                                팬타스틱 팬미팅 콘서트 - 서울 티켓오픈안내
-                            </td>
-                            <td>홍길동</td>
-                            <td>2020-07-15</td>
-                            <td>11</td>
-                        </tr>
-                        <tr>
-                            <td>티켓오픈</td>
-                            <td>
-                                <span style="color: red; border: 1px solid red;"
-                                    >단독판매</span
-                                >
-                                유승현 콘서트 Voice & Story vol.2 티켓오픈 안내.
-                            </td>
-                            <td>아무개</td>
-                            <td>2020-07-14</td>
-                            <td>65</td>
-                        </tr>
-                        <tr>
-                            <td>티켓오픈</td>
-                            <td>
-                                [오픈일변경]뮤지컬 [어쩌면 해피엔딩] 3차
-                                티켓오픈 안내
-                            </td>
-                            <td>호호호</td>
-                            <td>2020-07-11</td>
-                            <td>7</td>
-                        </tr>
-                        <tr>
-                            <td>티켓오픈</td>
-                            <td>
-                                <span style="color: red; border: 1px solid red;"
-                                    >단독판매</span
-                                >
-                                2020 WILD KARD IN SEOUL 티켓 오픈안내
-                            </td>
-                            <td>홍길동</td>
-                            <td>2020-07-15</td>
-                            <td>11</td>
-                        </tr>
-                        <tr>
-                            <td>티켓오픈</td>
-                            <td>
-                                뮤지컬 [캣츠] 40주년 오리지널 내한공연 (Musical
-                                CATS) 첫 티켓오픈! 7/23(목) 2시
-                            </td>
-                            <td>아무개</td>
-                            <td>2020-07-14</td>
-                            <td>65</td>
-                        </tr>
-                        <tr>
-                            <td>티켓오픈</td>
-                            <td>
-                                뮤지컬 [머더 발라드] 2020 프리뷰 티켓 오픈 안내
-                            </td>
-                            <td>호호호</td>
-                            <td>2020-07-11</td>
-                            <td>7</td>
-                        </tr>
-                        <tr>
-                            <td>티켓오픈</td>
-                            <td>
-                                알앤디웍스 두번째 콘서트 [R&D works UNIVERSE]
-                                티켓오픈 안내
-                            </td>
-                            <td>홍길동</td>
-                            <td>2020-07-15</td>
-                            <td>11</td>
-                        </tr>
-                        <tr>
-                            <td>티켓오픈</td>
-                            <td>
-                                <span style="color: red; border: 1px solid red;"
-                                    >단독판매</span
-                                >
-                                SURL（설）concert ‘Ah, ah, ah, ah What can I
-                                do?’ - 티켓오픈안내.
-                            </td>
-                            <td>아무개</td>
-                            <td>2020-07-14</td>
-                            <td>65</td>
-                        </tr>
-                        <tr>
-                            <td>티켓오픈</td>
-                            <td>뮤지컬 [미아 파밀리아] 4차 티켓오픈 안내</td>
-                            <td>호호호</td>
-                            <td>2020-07-11</td>
-                            <td>7</td>
-                        </tr>
-                        <tr>
-                            <td>티켓오픈</td>
-                            <td>
-                                뮤지컬 [머더 발라드] 2020 1차 티켓 오픈 안내
-                            </td>
-                            <td>홍길동</td>
-                            <td>2020-07-15</td>
-                            <td>11</td>
-                        </tr>
-                        <tr>
-                            <td>티켓오픈</td>
-                            <td>뮤지컬 [무인도 탈출기] 1차 티켓오픈 안내.</td>
-                            <td>아무개</td>
-                            <td>2020-07-14</td>
-                            <td>65</td>
-                        </tr>
-                        <tr>
-                            <td>티켓오픈</td>
-                            <td>레미제라블 티켓오픈 안내</td>
-                            <td>호호호</td>
-                            <td>2020-07-11</td>
-                            <td>7</td>
-                        </tr>
+                        </c:forEach>
                     </tbody>
                 </table>
-
-                <nav class="pagebar">
-                    <ul class="pagination">
-                        <li>
-                            <a href="#" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                            </a>
-                        </li>
-                        <li><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">5</a></li>
-                        <li><a href="#">6</a></li>
-                        <li><a href="#">7</a></li>
-                        <li><a href="#">8</a></li>
-                        <li><a href="#">9</a></li>
-                        <li><a href="#">10</a></li>
-                        <li>
-                            <a href="#" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
+				
+				<table style="width:100%;">
+					<tr style="text-align:center;">
+						<td>
+							${pagebar}
+						</td>
+					</tr>
+				</table>
+			
+               
 
                 <!-------------------------------- 화면 하단부 -------------------------------->
                 <div id="bottom">
                     <div>
                     <!-- 회사 마크 -->
-                    <img src="./images/title2.png" />
+                    <img src="/AtTicketProject/images/title2.png" />
                 </div>
                 <div class="txt">
                     <p class="black">At-Ticket (주)</p>
@@ -745,10 +599,24 @@
                     </div>
                 
             </div>
-        </div>
+       <!--  </div> -->
 
-        <script src="js/slick.min.js"></script>
+        <script src="/AtTicketProject/js/slick.min.js"></script>
         <script>
+        
+	        var index = 0;
+	     	
+	     	if("${sort}" == "regdate"){
+	    		index = 0;
+	    	} else if("${sort}" == "opendate") {
+	    		index = 1;
+	    	}  else if("${sort}" == "nview") {
+	    		index = 2;
+	    	}
+	     	
+	     	
+	     	$(".noticemenu").children().eq(index).addClass("active");
+     	
             //상단 메뉴 css
             $(".menubar").mouseover(function () {
                 $(this).css("border-bottom", "5px solid orange");

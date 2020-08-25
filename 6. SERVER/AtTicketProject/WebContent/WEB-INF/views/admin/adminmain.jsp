@@ -909,6 +909,8 @@
     
     });
 	
+    
+    
 	</script>   	
    		
      
@@ -916,8 +918,12 @@
      
     
     
-	<%@include file="/WEB-INF/views/inc/menu.jsp" %><!-- 왼쪽 메뉴 페이지 -->
-
+	 <%@include file="/WEB-INF/views/inc/menu.jsp" %> <!-- 왼쪽 메뉴 페이지 왜 세션유지가 안되는거지?... -->
+<%-- 				<% out.flush();
+			    RequestDispatcher dmenu = request.getRequestDispatcher("/WEB-INF/views/inc/menu.jsp");
+				dmenu.include(request, response);
+				%> --%>
+					
 
 <script>
 	<%@include file="/WEB-INF/views/inc/adminScript.jsp" %>	/* 기본적인 자바스크립트 */

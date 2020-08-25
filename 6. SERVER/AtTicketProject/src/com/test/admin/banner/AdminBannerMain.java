@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.test.user.main.BannerDAO;
 import com.test.user.main.BannerDTO;
 
-@WebServlet("/admin/adminbannermain.do")
+@WebServlet("/adimn/adminbannermain.do")
 public class AdminBannerMain extends HttpServlet{
 	
 	@Override

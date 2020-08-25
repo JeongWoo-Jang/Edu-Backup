@@ -61,7 +61,7 @@ public class cusListUpdateOk extends HttpServlet {
 			tel = multi.getParameter("tel");
 			seq = multi.getParameter("seq");
 			pw = multi.getParameter("pw");
-			photo = orgfilename;
+			photo = filename;
 			addr = multi.getParameter("address");
 			page = multi.getParameter("page");
 			search = multi.getParameter("search");

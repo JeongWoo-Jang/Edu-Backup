@@ -178,7 +178,7 @@ public class UserDAO {
 		
 		try {
 			
-			String sql = "SELECT COUNT(*) AS CNT FROM TBLCUSTOMER WHERE ID = ?";
+			String sql = "SELECT COUNT(*) AS CNT FROM TBLCUSTOMER WHERE DELFLAG = 0 AND ID = ?";
 			
 			pstat = conn.prepareStatement(sql);
 			
@@ -205,7 +205,7 @@ public class UserDAO {
 		
 		try {
 			
-			String sql = "SELECT COUNT(*) AS CNT FROM TBLCUSTOMER WHERE SSN = ?";
+			String sql = "SELECT COUNT(*) AS CNT FROM TBLCUSTOMER WHERE DELFLAG = 0 AND SSN = ?";
 			
 			pstat = conn.prepareStatement(sql);
 			
@@ -232,7 +232,7 @@ public class UserDAO {
 		
 		try {
 			
-			String sql = "SELECT * FROM TBLCUSCOUPON WHERE CUSSEQ = ?";
+			String sql = "SELECT * FROM TBLCUSCOUPON WHERE DELFLAG = 0 AND CUSSEQ = ?";
 			
 			pstat = conn.prepareStatement(sql);
 			
@@ -270,7 +270,7 @@ public class UserDAO {
 		
 		try {
 			
-			String sql = "SELECT * FROM TBLEVENT WHERE STARTDATE < SYSDATE AND ENDDATE > SYSDATE ORDER BY STARTDATE";
+			String sql = "SELECT * FROM TBLEVENT WHERE DELFLAG = 0 AND STARTDATE < SYSDATE AND ENDDATE > SYSDATE ORDER BY STARTDATE";
 			
 			stat = conn.createStatement();
 			

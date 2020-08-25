@@ -83,6 +83,34 @@ public class AdminMemberDAO {
 		
 	}
 	
+	//관리자의 seq 를 가져온다.
+	public int getAdminSeq(String id, String pw) {
+		
+		try {
+			
+			String sql = "select seq from tblAdmin where id = ? and pw = ?";
+			
+			pstat = conn.prepareStatement(sql);
+			
+			pstat.setString(1, id);
+			pstat.setString(2, pw);
+			
+			rs = pstat.executeQuery();
+			
+			if (rs.next()) {
+				return rs.getInt("seq");
+			}
+			
+			
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	
+		
+		return -1;
+	}
+	
 	
 	
 }

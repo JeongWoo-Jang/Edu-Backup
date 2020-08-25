@@ -22,8 +22,15 @@ public class BannerDTO {
 	
 	private String fontcolor;
 	
+	private String opendate;
 	
 	
+	public String getOpendate() {
+		return opendate;
+	}
+	public void setOpendate(String opendate) {
+		this.opendate = opendate;
+	}
 	public String getFontcolor() {
 		return fontcolor;
 	}

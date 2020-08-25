@@ -2,11 +2,14 @@
 	pageEncoding="UTF-8"%>
   <div id="left">
         
+        
         <img src="<%= request.getContextPath() %>/images/man.png" 
             style="margin-top: 40px; width: 80px; border: 1px solid #333; border-radius:50%; background-color: #999;">
         <div class="info" style="color:white">
             <span><br>Welcome,</span></br></span>
-            <span>${id}</span>
+            <span>
+            	${sessionScope.id} 
+            </span>
         </div>
         <!-- <div class="b">
             <input style="font-weight: bold; background-color: #C27BA0; margin : 80px;" type="button" value="Logout" id="btn2"
@@ -15,12 +18,18 @@
         <!-- 로그아웃 버튼 관련 -->
         <div id = "logout">
         	<%
-        		session.invalidate();//해당 세션을 비워준다. -> 로그아웃을 진행해야 하므로
-        	
+        		//session.invalidate();//해당 세션을 비워준다. -> 로그아웃을 진행해야 하므로
+        		
         	%>
             <input style="font-weight: bold; background-color: #999; margin-top : 30px; margin-bottom : 50px; color: #D5D5D5; width: 70px; height: 30px; outline: none;"
-                     type="button" value="Logout" id="btn2" class="btn" onclick = "location.href = '/AtTicketProject/index.do';">
+                     type="button" value="Logout" id="btn2" class="btn" onclick = "location.href = '/AtTicketProject/adminlogout.do';">
         </div>
+        <!-- 로그아웃버튼을 눌렀을때 취할 행동 -->
+        <script>
+        	
+        
+        </script>
+        
         <!-- 왼쪽 바 메뉴 -->
         <div class="accomenu">
             <h3>공연</h3>
@@ -37,12 +46,12 @@
             </div>
             <h3>직원 정보</h3>
             <div>
-            <div style="margin-left:-30px; padding-left: 30px; width: 231px; height: 25px;"><a href="adminEmployee.html"><span>▶</span> 직원 조회</a></div>
+            <div style="margin-left:-30px; padding-left: 30px; width: 231px; height: 25px;"><a href="/AtTicketProject/adminemployee.do"><span>▶</span> 직원 조회</a></div>
             </div>
             <h3>이벤트</h3>
             <div>
             <div style="margin-left:-30px; padding-left: 30px; width: 231px; height: 25px;"><a href="event.html"><span>▶</span> 이벤트 조회</a></div>
-            <div style="margin-left:-30px; padding-left: 30px; width: 231px; height: 25px;"><a href="coupon.html"><span>▶</span> 쿠폰 조회</a></div>
+            <div style="margin-left:-30px; padding-left: 30px; width: 231px; height: 25px;"><a href="/AtTicketProject/coupon/admincoupon.do"><span>▶</span> 쿠폰 조회</a></div>
             </div>
             <h3>1:1 문의</h3>
             <div>

@@ -85,7 +85,7 @@
             font-size: 15px;
             padding: 40px 0;
             position: absolute;
-            /* margin-top: -120px; */
+            margin-top: -120px;
         }
         .menubar {
             margin: 0 5px;
@@ -242,36 +242,6 @@
             font-weight: bold;
         }
 
-        #board {
-            /* border: 1px solid #ccc; */
-            border-collapse: collapse;
-            width: 1200px;
-        }
-
-        #board th {
-            background-color: #7E9CB6;
-            border-right: 1px solid #ffffff;
-            text-align: center;
-            height: 40px;
-            color: white;
-        }
-        #board td {
-            border-bottom: 1px solid #ccc;
-            border-right: 1px solid #ccc;
-            height: 35px;
-            text-align: center;
-            color: rgb(68, 68, 68);
-        }
-
-        #board th:nth-child(1) {width: 60px;}
-        #board th:nth-child(2) {width: 120px;}
-        #board th:nth-child(4) {width: 110px;}
-        #board th:nth-child(5) {width: 110px;}
-        #board th:nth-child(6) {width: 60px;}
-        /* #board tr:nth-child(even) {background-color: #e3e8f1;} */
-
-        #board td:nth-child(3) {text-align: left; padding: 0px 10px;}
-        #board td:last-child {border-right: none;}
 
         /* 탭 */
         #tabMenu {
@@ -298,8 +268,9 @@
             margin-top: 50px;
         }
 
-        .tabMenu:first-child{
-            /* background-color: orange; */
+/*         .tabMenu:first-child{*/
+
+        .active{
             color: #7E9CB6;
             border-bottom: 2px solid #7E9CB6;
         }
@@ -342,7 +313,6 @@
 
         .pagebar {
             text-align: center;
-            margin-top: 80px;
         }
 
         .pagination > .active > a {
@@ -364,12 +334,17 @@
             outline: none;
             margin-top: 30px;
         }
-
-        #write::after {
-            content: ' ';
-            display: block;
-            clear: both;
+        #list {
+            outline: none;
+            width: 100px;
+            height: 40px;
+            float: right;
+            outline: none;
+            margin-top: 30px;
+            font-size: 14px;
+            margin-left: 10px;
         }
+
 
         .move {
             width: 150px;
@@ -393,105 +368,6 @@
         }
 
 
-        #grid1 {
-            width: 1200px;
-            /* text-align: center; */
-            display: grid;
-            grid-column: 600px 600px;
-            grid-row: 200px;
-            margin-top: 100px;
-            margin-bottom: -100px;
-        }
-
-        #grid1 h2 {
-            font-size: 15px;
-        }
-
-        #ratio4 {
-            grid-column: 1/2;
-            
-            /* grid-row: 1/2; */
-        }
-
-        #ratio5{
-            grid-column: 2/3;
-            /* grid-row: 2/5; */
-        }
-
-        /* 문의 분류별 */
-         #ratio4 .highcharts-figure, .highcharts-data-table table {
-            min-width: 320px; 
-            max-width: 500px;
-            /* margin: 1em auto; */
-        }
-
-        #container4 {
-            height: 400px;
-        }
-
-        #ratio4 .highcharts-data-table table {
-            font-family: Verdana, sans-serif;
-            border-collapse: collapse;
-            border: 1px solid #EBEBEB;
-            margin: 10px auto;
-            text-align: center;
-            width: 100%;
-            max-width: 500px;
-        }
-        #ratio4 .highcharts-data-table caption {
-            padding: 1em 0;
-            font-size: 1.2em;
-            color: #555;
-        }
-        #ratio4 .highcharts-data-table th {
-            font-weight: 600;
-            padding: 0.5em;
-        }
-        #ratio4 .highcharts-data-table td, #ratio4 .highcharts-data-table th, .highcharts-data-table caption {
-            padding: 0.5em;
-        }
-        #ratio4 .highcharts-data-table thead tr,#ratio4  .highcharts-data-table tr:nth-child(even) {
-            background: #f8f8f8;
-        }
-        #ratio4 .highcharts-data-table tr:hover {
-            background: #f1f7ff;
-        }
-
-        /* 월별 문의 */
-        #ratio5 .highcharts-figure, #ratio5 .highcharts-data-table table {
-            min-width: 360px; 
-            max-width: 800px;
-            /* margin: 1em auto; */
-        }
-
-        #ratio5 .highcharts-data-table table {
-            font-family: Verdana, sans-serif;
-            border-collapse: collapse;
-            border: 1px solid #EBEBEB;
-            margin: 10px auto;
-            text-align: center;
-            width: 100%;
-            max-width: 500px;
-        }
-        #ratio5 .highcharts-data-table caption {
-            padding: 1em 0;
-            font-size: 1.2em;
-            color: #555;
-        }
-        #ratio5 .highcharts-data-table th {
-            font-weight: 600;
-            padding: 0.5em;
-        }
-        #ratio5 .highcharts-data-table td, #ratio5 .highcharts-data-table th, #ratio5 .highcharts-data-table caption {
-            padding: 0.5em;
-        }
-        #ratio5 .highcharts-data-table thead tr, .highcharts-data-table tr:nth-child(even) {
-            background: #f8f8f8;
-        }
-        #ratio5 .highcharts-data-table tr:hover {
-            background: #f1f7ff;
-        }
-
         .searchbox {
             width: 600px;
             margin: 0 auto;
@@ -501,7 +377,25 @@
             /* top: -30px; */
             left: -298px;
         }
-
+        
+        
+        #tblList th {text-align: center;}
+        #tblList td {text-align: center;}
+        
+        #tblList tbody tr:hover {
+        	background-color:#ddd; 
+        }
+		
+		#tblList th:nth-child(1) {width : 50px;}
+        #tblList th:nth-child(2) {width : 80px;}
+        #tblList th:nth-child(3) {width : auto;}
+        #tblList th:nth-child(4) {width : 100px;}
+        #tblList th:nth-child(5) {width : 200px;}
+        #tblList th:nth-child(6) {width : 100px;}
+		#tblList th:nth-child(7) {width : 60px}
+		
+		#tblList td:nth-child(3) {text-align: left;}
+		#tblList td:nth-child(3) a {color: #333; text-decoration: none;}
 
     </style>
 
@@ -547,10 +441,13 @@
         <div id="mainBox">
             <h1>Q&A</h1>
 
+		<form method="GET" action="/AtTicketProject/userqna.do" id="searchForm">
             <div id="searchFAQ">
-                <input type="text" placeholder="궁금하신 내용을 입력해주세요" id="searchFAQBox">
-                <div><span class="glyphicon glyphicon-search"></span></div>
+                <input type="text" placeholder="궁금하신 내용을 입력해주세요" id="searchFAQBox" name="search" required value="${search}">
+                <div id = "searchlogo" onclick="$('#searchForm').submit();"><span class="glyphicon glyphicon-search"></span></div>
             </div>
+        </form> 
+
 
             <button id="myQna" class="move">
                 <span class="
@@ -565,406 +462,91 @@
             <div style="clear:both;"></div>
 
             <div id="tabMenu">
-                <div class="tabMenu" data-tab="tab1">전체</div>
-                <div class="tabMenu" data-tab="tab2">예매방법</div>
-                <div class="tabMenu" data-tab="tab3">결제방법</div>
-                <div class="tabMenu" data-tab="tab4">수수료</div>
-                <div class="tabMenu" data-tab="tab5">취소/환불</div>
-                <div class="tabMenu" data-tab="tab6">티켓수령</div>
-                <div class="tabMenu" data-tab="tab7">티켓반매/재휴문의</div>
-                <div class="tabMenu" data-tab="tab8">기타</div>
+                <div class="tabMenu" data-tab="tab1" onclick="location.href='/AtTicketProject/userqna.do?';">전체</div>
+                <div class="tabMenu" data-tab="tab2" onclick="location.href='/AtTicketProject/userqna.do?sort=예매방법';">예매방법</div>
+                <div class="tabMenu" data-tab="tab3" onclick="location.href='/AtTicketProject/userqna.do?sort=결제방법';">결제방법</div>
+                <div class="tabMenu" data-tab="tab4" onclick="location.href='/AtTicketProject/userqna.do?sort=수수료';">수수료</div>
+                <div class="tabMenu" data-tab="tab5" onclick="location.href='/AtTicketProject/userqna.do?sort=취소/환불';">취소/환불</div>
+                <div class="tabMenu" data-tab="tab6" onclick="location.href='/AtTicketProject/userqna.do?sort=티켓수령';">티켓수령</div>
+                <div class="tabMenu" data-tab="tab7" onclick="location.href='/AtTicketProject/userqna.do?sort=티켓판매/제휴문의';">티켓반매/재휴문의</div>
+                <div class="tabMenu" data-tab="tab8" onclick="location.href='/AtTicketProject/userqna.do?sort=기타';">기타</div>
             </div>
 
 
-            <!-- <table id="board">
-                <thead>
-                    <tr>
-                        <th>번호</th>
-                        <th>문의유형</th>
-                        <th>제목</th>
-                        <th>날짜</th>
-                        <th>답변완료</th>
-                        <th>조회수</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>6</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>7</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>8</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>9</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>10</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>11</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>12</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>13</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>14</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>15</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>16</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>17</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>18</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>19</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>20</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                </tbody>
-            </table> -->
-                        <!-- 검색창 -->
-                        <div class="searchbox">
-                            <span class="noticemenu">등록순</span>
-                            <span class="noticemenu">인기순</span>
-                            <span class="noticemenu">조회순</span>
-                            <!-- <div class="search">
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <input
-                                            type="text"
-                                            class="form-control"
-                                            placeholder="검색"
-                                        />
-                                        <span class="input-group-addon"
-                                            ><i class="glyphicon glyphicon-search"></i
-                                        ></span>
-                                    </div>
-                                </div>
-                            </div> -->
-                        </div>
-                        <table id="tblList" class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>번호</th>
-                                    <th>태그</th>
-                                    <th>제목</th>
-                                    <th>이름</th>
-                                    <th>날짜</th>
-                                    <th>읽음</th>
-                                    <th>좋아요</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>15</td>
-                                    <td>후기</td>
-                                    <td>뮤지컬 [베르테르] 후기</td>
-                                    <td>홍길동</td>
-                                    <td>2020-07-15</td>
-                                    <td>11</td>
-                                    <td>11</td>
-                                </tr>
-                                <tr>
-                                    <td>14</td>
-                                    <td>후기</td>
-                                    <td>그랜드 민트 페스티벌 후기.</td>
-                                    <td>아무개</td>
-                                    <td>2020-07-14</td>
-                                    <td>65</td>
-                                    <td>65</td>
-                                </tr>
-                                <tr>
-                                    <td>13</td>
-                                    <td>후기</td>
-                                    <td>님들 오페라의 유령 봄?</td>
-                                    <td>호호호</td>
-                                    <td>2020-07-11</td>
-                                    <td>7</td>
-                                    <td>7</td>
-                                </tr>
-                                <tr>
-                                    <td>12</td>
-                                    <td>잡담</td>
-                                    <td>티켓팅 실패 ㅠㅠ 방탄소년단 티켓 삽니다~</td>
-                                    <td>홍길동</td>
-                                    <td>2020-07-15</td>
-                                    <td>11</td>
-                                    <td>11</td>
-                                </tr>
-                                <tr>
-                                    <td>11</td>
-                                    <td>잡담</td>
-                                    <td>싸이 흠뻑쇼 가보신분들 어떤가요?</td>
-                                    <td>아무개</td>
-                                    <td>2020-07-14</td>
-                                    <td>65</td>
-                                    <td>65</td>
-                                </tr>
-                                <tr>
-                                    <td>10</td>
-                                    <td>잡담</td>
-                                    <td>서울 볼만한 전시회 추천좀 해주세요</td>
-                                    <td>호호호</td>
-                                    <td>2020-07-11</td>
-                                    <td>7</td>
-                                    <td>7</td>
-                                </tr>
-                                <tr>
-                                    <td>9</td>
-                                    <td>잡담</td>
-                                    <td>디디피에서 요즘 전시회 안하나요?</td>
-                                    <td>홍길동</td>
-                                    <td>2020-07-15</td>
-                                    <td>11</td>
-                                    <td>11</td>
-                                </tr>
-                                <tr>
-                                    <td>8</td>
-                                    <td>잡담</td>
-                                    <td>뮤지컬 [캣츠] 40주년 오리지널 내한공연 후기!!!</td>
-                                    <td>아무개</td>
-                                    <td>2020-07-14</td>
-                                    <td>65</td>
-                                    <td>65</td>
-                                </tr>
-                                <tr>
-                                    <td>7</td>
-                                    <td>잡담</td>
-                                    <td>뮤지컬 [머더 발라드] 후기!!!</td>
-                                    <td>호호호</td>
-                                    <td>2020-07-11</td>
-                                    <td>7</td>
-                                    <td>7</td>
-                                </tr>
-                                <tr>
-                                    <td>6</td>
-                                    <td>잡담</td>
-                                    <td>에미넴 콘서트 보고싶다</td>
-                                    <td>홍길동</td>
-                                    <td>2020-07-15</td>
-                                    <td>11</td>
-                                    <td>11</td>
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                    <td>잡담</td>
-                                    <td>손열음 공연 어떤가요?</td>
-                                    <td>아무개</td>
-                                    <td>2020-07-14</td>
-                                    <td>65</td>
-                                    <td>65</td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>잡담</td>
-                                    <td>마마미아 내한 계획 아시는분></td>
-                                    <td>호호호</td>
-                                    <td>2020-07-11</td>
-                                    <td>7</td>
-                                    <td>7</td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>잡담</td>
-                                    <td>뮤지컬 [머더 발라드] 후기</td>
-                                    <td>홍길동</td>
-                                    <td>2020-07-15</td>
-                                    <td>11</td>
-                                    <td>11</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>잡담</td>
-                                    <td>뮤지컬 [무인도 탈출기] 후기.</td>
-                                    <td>아무개</td>
-                                    <td>2020-07-14</td>
-                                    <td>65</td>
-                                    <td>65</td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>잡담</td>
-                                    <td>레미제라블 재밌습니다 ^^</td>
-                                    <td>호호호</td>
-                                    <td>2020-07-11</td>
-                                    <td>7</td>
-                                    <td>7</td>
-                                </tr>
+         <!-- 검색창 -->
+         <div class="searchbox">
+             <span class="noticemenu">등록순</span>
+             <span class="noticemenu">인기순</span>
+             <span class="noticemenu">조회순</span>
+             <!-- <div class="search">
+                 <div class="form-group">
+                     <div class="input-group">
+                         <input
+                             type="text"
+                             class="form-control"
+                             placeholder="검색"
+                         />
+                         <span class="input-group-addon"
+                             ><i class="glyphicon glyphicon-search"></i
+                         ></span>
+                     </div>
+                 </div>
+             </div> -->
+         </div>
+         <table id="tblList" class="table table-striped">
+             <thead>
+                 <tr>
+                     <th>번호</th>
+                     <th>태그</th>
+                     <th>제목</th>
+                     <th>이름</th>
+                     <th>날짜</th>
+                     <th>답변</th>
+                     <th>조회수</th>
+                 </tr>
+             </thead>
+             <tbody>
+                 
+          	     <c:forEach items="${list}" var="dto">
+		            <tr>	            	
+		            	<td>${dto.seq}</td>
+		                <td style="width: 200px">${dto.tag}</td>
+		                <td class = "inputcont">
+		                	<a href="/AtTicketProject//userqnacontent.do?seq=${dto.seq}&search=${search}&sort=${sort}">
+		                		${dto.subject}
+		                	</a> 
+		                </td>
+		                <td>${dto.name}</td>
+		                <td>${dto.regdate} </td>
+		                <td>
+			                <c:if test="${dto.ansSeq ne 0}">
+			                <%-- ${dto.ansSeq} --%>
+			                	<span class="complete ok">완료</span>
+			                </c:if> 
+			                
+			                <c:if test="${dto.ansSeq eq 0}">
+			                	<span class="complete no">미완료</span>
+			                </c:if> 
+		                </td>
+		                <td>${dto.qview }</td>
+		            </tr>
+		           </c:forEach>
                             </tbody>
                         </table>
 
             <!-- 글쓰기 -->
-
+			
+            <button class="btn btn-default" id="list" onclick="location.href='/AtTicketProject/userqna.do';">
+            <span class="glyphicon glyphicon-pencil"></span>
+            list
+            </button>
             <button class="btn btn-primary" id="write">
             <span class="glyphicon glyphicon-pencil"></span>
             Write
             </button>
+			<div style="clear: both;"></div>
 
-            <!-- 페이징바 -->
-            <nav class="pagebar">
-                <ul class="pagination">
-                    <li>
-                      <a href="#" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;&laquo;</span>
-                      </a>
-                    </li>
-                  <li>
-                    <a href="#" aria-label="Previous">
-                      <span aria-hidden="true">&laquo;</span>
-                    </a>
-                  </li>
-                  <li><a href="#">1</a></li>
-                  <li><a href="#">2</a></li>
-                  <li><a href="#">3</a></li>
-                  <li><a href="#">4</a></li>
-                  <li><a href="#">5</a></li>
-                  <li><a href="#">6</a></li>
-                  <li><a href="#">7</a></li>
-                  <li><a href="#">8</a></li>
-                  <li><a href="#">9</a></li>
-                  <li><a href="#">10</a></li>
-                  <li>
-                    <a href="#" aria-label="Next">
-                      <span aria-hidden="true">&raquo;</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#" aria-label="Next">
-                      <span aria-hidden="true">&raquo;&raquo;</span>
-                    </a>
-                  </li>
-                </ul>
-              </nav>
-
-
+			${pagebar}
 
 
         </div>
@@ -1099,6 +681,32 @@
             $(this).css("font-weight", "none");
         });
 
+    	var index = 0;
+    	
+    	if ("${sort}" == "전체") {
+    		index = 0;	
+    	} else if ("${sort}" == "예매방법") {
+    		index = 1;
+    	} else if ("${sort}" == "결제방법") {
+    		index = 2;
+    	} else if ("${sort}" == "수수료") {
+    		index = 3;
+    	} else if ("${sort}" == "취소/환불") {
+    		index = 4;
+    	} else if ("${sort}" == "티켓수령") {
+    		index = 5;
+    	} else if ("${sort}" == "티켓반매/재휴문의") {
+    		index = 6;
+    	} else if ("${sort}" == "기타") {
+    		index = 7;
+    	}
+    	
+    	//alert("${sort}");
+    	//alert(index);
+    	
+    	$("#tabMenu").children().eq(index).addClass("active");
+        
+        
     </script>
 
 

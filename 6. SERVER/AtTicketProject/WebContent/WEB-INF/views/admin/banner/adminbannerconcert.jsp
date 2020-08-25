@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ include file="/WEB-INF/views/inc/asset.jsp" %>
-
-
 
 <!DOCTYPE html>
 <html>
@@ -154,15 +153,19 @@
         
     </style>
     
+    <form method="POST" action="/AtTicketProject/admin/adminbannerconcertend.do">
     <div class = "titlebanner">상단배너 관리</div>
     <div id = "topbanner">
         <div id = "topcover">
             <div id = "topbaby">
-                <div class = "topsetting" style = "background-image: url(../images/consertSlide1.JPG);"></div>
-                <div class = "topsetting" style = "background-image: url(../images/consertSlide2.JPG);"></div>
-                <div class = "topsetting" style = "background-image: url(../images/consertSlide3.JPG);"></div>
-                <div class = "topsetting" style = "background-image: url(../images/consertSlide4.JPG);"></div>
-                <div class = "topsetting" style = "background-image: url(../images/consertSlide5.JPG);"></div>
+            
+            <c:set var="i" value="1" />
+            <c:forEach items="${slider}" var="slider">
+                <div class = "topsetting" id="slider${i}" style = "background-image: url(../images/${slider.img});"></div>
+                <input type="hidden" name="slider${i}" id="hiddenslider${i}" value="${slider.img}">
+            <c:set var="i" value="${i+1}"/>
+            </c:forEach>
+            
             </div>
         </div>
         <div id = "topImgName">상단배너 1 번째 사진</div>
@@ -178,7 +181,6 @@
         var clickCountTop = 0;//페이지가 계속 넘어가면 안되므로 제한을 걸어준다
         // 다음 페이지를 눌렀을 때
         $("#mainnext").click(function(){
-            console.log("asd");
                 if (clickCountTop < 4) {
                      positionTopX -= 450;
                     $("#topbaby").css("transform","translate(" + positionTopX + "px,0px)");
@@ -204,29 +206,66 @@
                 }
         });
         
+        function rgb2hex(rgb) {
+            rgb = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+            function hex(x) {
+                return ("0" + parseInt(x).toString(16)).slice(-2);
+            }
+            return "#" + hex(rgb[1]) + hex(rgb[2]) + hex(rgb[3]);
+        };
+        
+        
+        $(document).ready(function() {
+        	
+        	$(".sliderimg").on('change', function() {
+        		
+            	if(window.FileReader){  // modern browser
+					var filename = $(this)[0].files[0].name;
+				} 
+				else {  // old IE
+					var filename = $(this).val().split('/').pop().split('\\').pop();  // 파일명만 추출
+				}
+            	//alert(filename);
+            	
+            	$("#" + $(this).data("num")).css("background-image", "url(../images/" + filename + ")");
+            	$("input[name=" + $(this).data("num") + "]").val(filename);
+            });
+        	
+        	$("#backcolor").val(rgb2hex($("#middlebanner").css("background-color")));
+        	
+        	var index = $("#bannerimg").css("background-image").lastIndexOf("/");
+        	var isrc = $("#bannerimg").css("background-image").substring(index + 1);
+        	var result = isrc.replace("\")", "");
+        	
+        	$("#backimg").val(result);
+        	$("#videosrc").val($("#iframe").attr("src"));
+        	
+        });
+        
+        	
     </script>
     <!-- 상단배너 그림을 고르기 -->
     <div class = "bannerTool" style = "margin-left: 330px; width : 1400px">
         <table id = "topBannerSelect">
             <tr>
                 <td>상단배너 1번째 사진</td>
-                <td><input type="file"></td>
+                <td><input type="file" class="sliderimg" data-num="slider1"></td>
             </tr>
             <tr>
                 <td>상단배너 2번째 사진</td>
-                <td><input type="file"></td>
+                <td><input type="file" class="sliderimg" data-num="slider2"></td>
             </tr>
             <tr>
                 <td>상단배너 3번째 사진</td>
-                <td><input type="file"></td>
+                <td><input type="file" class="sliderimg" data-num="slider3"></td>
             </tr>
             <tr>
                 <td>상단배너 4번째 사진</td>
-                <td><input type="file"></td>
+                <td><input type="file" class="sliderimg" data-num="slider4"></td>
             </tr>
             <tr>
                 <td>상단배너 5번째 사진</td>
-                <td><input type="file"></td>
+                <td><input type="file" class="sliderimg" data-num="slider5"></td>
             </tr>
         </table>
     </div>
@@ -250,8 +289,9 @@
         #bannerimg {
                 width: 286px;
                 height: 400px;
-                background-image: url("../images/bannerimg.jpg");
                 display: inline-block;
+                background-repeat: no-repeat;
+                background-size: contain;
                 margin-right: 160px;
         }
         #mbtn {
@@ -271,18 +311,41 @@
     
     <div class = "titlebanner">Middle 배너 관리<button id="mbtn" class="btn btndefault">수정하기</button></div>
 
-    <div id="middleBanner">
+    <div id="middlebanner"
+    <c:if test="${empty color}">
+    	<c:set var="color" value="${banner.backcolor}" />
+            <c:choose>
+            <c:when test="${fn:length(color) > 8}">
+            	style="background-image: linear-gradient(
+					120deg,
+                    ${fn:substring(color,0,7)} 0%,
+                    ${fn:substring(color,8,15)} 100%
+                    );" 
+            </c:when>
+            <c:when test="${fn:length(color) <= 8}">
+            	style="background-color: color"; 
+            </c:when>
+            </c:choose></c:if>
+    <c:if test="${not empty color}">style="background-color: ${color}"</c:if>
+    >
+    <input type="hidden" name="backcolor" id="backcolor">
 
-        <div id="bannerimg"></div>
+        <div id="bannerimg" 
+        <c:if test="${empty filename}">style="background-image: url(../images/${banner.img})"</c:if>
+        <c:if test="${not empty filename}">style="background-image: url(../images/${filename})"</c:if>
+        ></div>
+        <input type="hidden" name="backimg" id="backimg">
                 <iframe
                    width="711"
                     height="400"
-                    src="https://www.youtube.com/embed/o_nxIQTM_B0"
+                    <c:if test="${empty url}">src="${banner.link}"</c:if>
+                    <c:if test="${not empty url}">src="${url}"</c:if>
                     frameborder="0"
                     allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                     allowfullscreen
+                    id="iframe"
                 ></iframe>
-        
+        <input type="hidden" name="videosrc" id="videosrc">
 
     </div>
 	
@@ -308,16 +371,24 @@
     </style>
     
     
-    <div><input type="button" value = "저장하기" id = "saveBtn"></div>
+    <div><input type="submit" value = "저장하기" id = "saveBtn"></div>
+	</form>
+
 
     <script>
+    	
+    	//수정 눌렀을때
+	    $("#mbtn").click(function(){
+	        //console.log("클릭함");
+	        window.name = "parentPage";
+	        window.open("/AtTicketProject/admin/adminbannervideo.do", "concertbanner", "width=1250,height=950");
+	    });
+    	
         //저장하기 눌렀을때 이벤트
         $("#saveBtn").click(function(){
             if (confirm("해당 내용을 저장하시겠습니까?")) {
                 alert("저장 완료.");
-
-                location.href = "./adminMain.html";
-            }    
+            }
         });
 
     </script>

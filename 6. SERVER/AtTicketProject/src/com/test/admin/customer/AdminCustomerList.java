@@ -53,6 +53,8 @@ public class AdminCustomerList extends HttpServlet {
 		
 		ArrayList<CustomerDTO> list = dao.list(map);	
 		req.setAttribute("list",list);
+		
+		
 //		System.out.println(list.size());
 		for(CustomerDTO dto : list) {
 			if(search != null && search != "") {
@@ -140,7 +142,6 @@ public class AdminCustomerList extends HttpServlet {
 		
 		req.setAttribute("list",list);
 		req.setAttribute("search", search);
-		
 		req.setAttribute("page", page);
 		req.setAttribute("totalCount", totalCount);
 		req.setAttribute("totalPage", totalPage);

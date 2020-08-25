@@ -33,12 +33,14 @@ public class UserExhibition extends HttpServlet{
 		BannerDTO dto = dao.banner(page);
 		BannerDTO dto2 = dao.banner(page2);
 		ArrayList<BannerDTO> hot = dao.mainhot(whatshot);
+		ArrayList<BannerDTO> atspick = dao.atspick(whatshot);
 		dao.close();
 		
 		req.setAttribute("map", map);
 		req.setAttribute("banner", dto);
 		req.setAttribute("banner2", dto2);
 		req.setAttribute("hot", hot);
+		req.setAttribute("atspick", atspick);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/user/userexhibition.jsp");
 		dispatcher.forward(req, resp);

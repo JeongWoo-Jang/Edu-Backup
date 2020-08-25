@@ -22,7 +22,8 @@ public class Index extends HttpServlet{
 		dispatcher.forward(req, resp);
 		
 		HttpSession session = req.getSession();
-		System.out.println(session.getAttribute("id"));
+		System.out.println(session.getAttribute("id"));//처음에는 세션내부에 값이 없어지는게 정상이다.
+		
 		
 
 	}	

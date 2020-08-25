@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix = "c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,34 +44,18 @@
         <div id="box1" style="width: 1000px;">
             <table class="table table-bordered" style="width: 450px">
                 <tr>
-                    <th style="width: 100px; vertical-align: middle;">할인금액</th>
+                    <th style="width: 100px; vertical-align: middle;">쿠폰</th>
                     <td style="width: 350px;">
-                        <input id="row1" type="text" style="width: 150px;" type="text" class="form-control">
-                    </td>
-    
-                </tr>
-                
-
-                <tr>
-                    <th style="vertical-align: middle;">사용조건</th>
-                    <td>
-                        <input id="row2" style="width: 300px;" type="text" class="form-control" class="line">
+                    <c:if test = "${list.size()!=0}">
+                    	<select style="width:300px;" class = "form-control" name = "couponseq" id = "couponseq">     
+                    		<optgroup label="쿠폰">
+                    		<c:forEach items="${list}" var="dto">
+                    			<option value = "${dto.seq}">${dto.title}</option>
+                    		</c:forEach>
+                    		</optgroup>
+                    	</select>
+                    </c:if>
                       
-                    </td>
-                </tr>
-
-                <tr>
-                    <th style="vertical-align: middle;">사용기간</th>
-                    <td>
-                        <input id="row3" style="width: 160px;" type="date" class="form-control" class="line">
-                      
-                    </td>
-                </tr>
-    
-                <tr>
-                    <th style="vertical-align: middle;">등록일</th>
-                    <td>
-                        <input type = "date" id="row4" class="form-control" style="width: 160px;"></input>
                     </td>
                 </tr>
 
@@ -116,8 +102,8 @@
 
             //추가
             $("#modifybtn").click(function () {
-                if(confirm("정말로 수정하시겠습니까?")){
-                    location.href = "adminCustomer.html";
+                if(confirm("정말로 추가하시겠습니까?")){
+                    location.href = "/AtTicketProject/customer/cuscouponinsertok.do?cusseq=${cusseq}&couponseq="+$('#couponseq').val();
                 }
             });
         </script>

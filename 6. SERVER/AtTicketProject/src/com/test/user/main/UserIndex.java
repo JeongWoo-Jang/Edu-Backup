@@ -35,6 +35,7 @@ public class UserIndex extends HttpServlet{
 		ArrayList<BannerDTO> musical = dao.mainmusical();
 		ArrayList<BannerDTO> concert = dao.mainconcert();
 		ArrayList<BannerDTO> exhibition = dao.mainexhibition();
+		ArrayList<BannerDTO> open = dao.mainopen();
 		dao.close();
 		
 		req.setAttribute("map", map);
@@ -45,6 +46,7 @@ public class UserIndex extends HttpServlet{
 		req.setAttribute("musical", musical);
 		req.setAttribute("concert", concert);
 		req.setAttribute("exhibition", exhibition);
+		req.setAttribute("open", open);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/userindex.jsp");
 		dispatcher.forward(req, resp);

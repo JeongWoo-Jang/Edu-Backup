@@ -17,7 +17,7 @@
              class="glyphicon glyphicon-pencil"
          ></span>
          <br />
-         <a class="subfont" href="user_localboard.html"
+         <a class="subfont" href="/AtTicketProject/userreview.do"
              >커뮤니티</a
          >
      </li>

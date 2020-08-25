@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @WebServlet("/adminmain.do")
 public class AdminMain extends HttpServlet{
@@ -19,6 +20,11 @@ public class AdminMain extends HttpServlet{
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/admin/adminmain.jsp");
 		dispatcher.forward(req, resp);
+		
+		//HttpSession session = req.getSession();//세션을 불러오는 작업 수행.
+		
+		//System.out.println("세션값은");
+		//System.out.println(session.getAttribute("id"));
 		
 		
 	}

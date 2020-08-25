@@ -1661,7 +1661,7 @@
         //위
         var T = 308;
         // 구역
-        var G = "";
+        var G = ""; 
         // 번호
         var GN = 1;
 
@@ -1733,6 +1733,9 @@
                 ticketNum = false;
                 $("#tickectPice").text("");
                 $("#finull").text("");
+                //배열 지우기
+                checkList2.length = 0;
+                sitFinul2.length = 0;
             });
         });
         
@@ -1843,6 +1846,9 @@
                 $("#tickectPice").text("");
                 $("#totalPrice").text("");
                 $("#finull").text("");
+                //배열 지우기
+                checkList2.length = 0;
+                sitFinul2.length = 0;
             });
         });
         

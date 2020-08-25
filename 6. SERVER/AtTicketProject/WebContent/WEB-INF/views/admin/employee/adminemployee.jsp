@@ -201,6 +201,9 @@
 				</div>
 	        </div>
         </form>
+       	
+       	
+       	
         
         <table id="tbl" class="table table-striped table-bordered table-condensed">
             <tbody id="tbody">
@@ -299,7 +302,10 @@
     	//하나도 체크안하면 삭제가 불가능하게 만들어 줄것이다.
     	if(count != 1) {
     		alert("하나만 선택해주세요");
-    	} else {//딱 하나만 선택한 경우 
+    	} else if (count == 0) {
+    		alert("하나만 선택해주세요");
+    	}
+    	else {//딱 하나만 선택한 경우 
     		
 			var throwNum = "";//넘겨줄 번호
 			for (var i = 0; i < innerlist.length; i++) {
@@ -323,9 +329,7 @@
     
     
     // 삭제 
-/*     var innerlist = $(".cb");
-    	var count = 0; */
-    
+
     $("#btndelete").click(function(){
     	count = 0;
     	//alert(innerlist.length);

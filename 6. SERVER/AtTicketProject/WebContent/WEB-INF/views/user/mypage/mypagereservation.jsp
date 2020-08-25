@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>AtTicket</title>
     <link rel="shortcut icon" href="./images/favicon.ico">
     <link rel="stylesheet" href="css/usermypage.css" />
     <style>
@@ -119,6 +119,11 @@
             text-indent: 2em;
         }
         
+        .month.active {
+			background-color:"#777";
+		}
+        
+        
     </style>
 </head>
 <body>
@@ -146,17 +151,19 @@
                         </li>
                         <li>
                             ▶ 주문일자별 조회
-                            <input type="text" id="from">
+                            <input type="text" id="from" name = "from">
                             ~
-                            <input type="text" id="to">
+                            <input type="text" id="to" name = "to">
                             <input type="button" value="조회" class="btn btn-default btn-sm" id="btnsearch">
                         </li>
                     </ul>
                 </div>
                 <div class="mycount">
                     <p><i class="glyphicon glyphicon-ok-sign"></i>최근 예매내역</p>
+                    <form method = "POST" action="/AtTikcetProject/mypage/mypagereservationdelete.do" id = "deleteForm">
                     <table id="tbl1">
                         <thead>
+                        	<th><input type = "checkbox" id = "cbAll"></th>
                             <th>예매일</th>
                             <th>예매번호</th>
                             <th>공연명</th>
@@ -165,17 +172,35 @@
                             <th>에매상태</th>
                         </thead>
                         <tbody>
+                        	<c:if test="${rlist.size() == 0}">
                             <tr>
-                                <td colspan="6">검색된 예매내역이 없습니다.</td>
+                                <td colspan="7">검색된 예매내역이 없습니다.</td>
                             </tr>
+                            </c:if>
+                             <c:forEach items="${rlist}" var="dto">
+                             	 <tr>	
+                             	 	 <td><input type = "checkbox" class = "cb1" name = "cb1"></td>
+	                             	 <td id = "bookdate">${dto.bookdate}</td>
+	                             	 <td id = "bookseq">${dto.bookseq}</td>
+	                             	 <td id = "showtitle">${dto.showtitle}</td>
+	                             	 <td id = "bdate">${dto.bdate}</td>
+	                             	 <td id = cnt>${dto.cnt}</td>
+	                             	 <td id = "bookstate">${dto.bookstate}</td>
+                             	 </tr>
+                             </c:forEach>
                         </tbody>
+                          <input type = "hidden" value = "${nowPage}" name = "nowPage">
                     </table>
                     <div id="paging">
-                        <button class="glyphicon glyphicon-menu-left left"></button>
+                        <button type = "button" id = "leftbtn" class="glyphicon glyphicon-menu-left left"></button>
                         <span>1</span>
-                        <span>(<span>1</span>/1)</span>
-                        <button class="glyphicon glyphicon-menu-right right"></button>
+                        <span>(<span id = "nowPage">${nowPage}</span>/${totalPage})</span>
+                        <button type = "button" class="glyphicon glyphicon-menu-right right" id = "btnright"></button>
                     </div>
+                    <div style="text-align: right; margin:10px 0px;">
+                    <button id = "delbtn" type = "button" class = "btn btn-default">예매취소</button> 
+                    </div>
+                    </form>
                     <div style="text-align: right;">
                         <p style="font-size: 11px;">▶ 패키지 상품은 결제완료 후 해당공연의 예매권이 회원님 계정으로 자동등록됩니다.</p>
                         <p style="font-size: 11px; margin-top: -10px;">▶ 패키지는 구성상품별로 반드시 회차와 좌석지정을 하셔야 공연 관람이 가능합니다.</p>
@@ -216,6 +241,139 @@
 
 
     <script>
+    	
+    var begin = ${map.begin+3};
+	var end = ${map.end+3};
+	
+	var nowPage = $("#nowPage").val();
+	
+	var index = 0;
+ 	
+ 	if($(".month").data("index") == "1"){
+		index = 0;
+	} else if($(".month").data("index") == "3") {
+		index = 1;
+	}  else if($(".month").data("index") == "6") {
+		index = 2;
+	}
+ 	
+ 	$(".month").children().eq(index).addClass("active");
+	
+	$("#cbAll").click(function () {
+		if($("#cbAll").prop("checked")) { //해당화면에 전체 checkbox들을 체크해준다 
+			$("input[name=cb1]:checkbox").prop("checked",true); // 전체선택 체크박스가 해제된 경우
+			} else { //해당화면에 모든 checkbox들의 체크를해제시킨다. 
+				$("input[name=cb1]:checkbox").prop("checked",false); }
+	});
+	
+	
+	 $("#delbtn").click(function () {
+         if ($('input').is(':checked') == true) {
+             if (confirm("정말로 삭제하시겠습니까?")) {
+             	
+             	$("#deleteForm").submit();	
+             }
+         } else {
+             alert("하나 이상을 체크하시오.");
+         }
+     });
+
+	$("#btnright").click(function() {
+		var from = $("#from").val();
+		var to = $("#to").val();
+		alert(from);
+		$.ajax({
+			type: "GET",
+			url: "/mypage/mypagereservationok.do",
+			data: "begin=" + begin + "&end=" + end +"&from=" + from + "$to=" + to,
+			dataType: "json",
+			success: function(result) {
+				
+				if (result.length == 0) {
+					return;
+				}
+				
+				//alert(result.length);
+				$(result).each(function(index, item) {
+					//게시물 1개
+					$("tbody").empty();
+					var temp = "";
+					temp += "<tr>";
+					temp += "<td><input type = 'checkbox' class = 'cb1' name = 'cb1'></td>";
+					temp += "<td>" + item.bookdate + "</td>";
+					temp += "<td>" + item.seq + "</td>";
+					temp += "<td>" + item.showtile + "</td>";
+					temp += "<td>" + item.bdate + "</td>";
+					temp += "<td>" + item.cnt + "</td>";
+					temp += "<td>" + item.bookstate + "</td>";
+					temp += "</tr>";
+					temp+= "<input type = 'hidden' value =" + item.nowPage + "name = 'nowPage' id = 'nowPage'>";
+
+					$("table > tbody").append(temp); 
+					var nowPage = item.nowPage;
+					$("#nowPage").text(nowPage);
+				});
+				
+			},
+			error: function(a,b,c) {
+				console.log(a,b,c);
+			}
+			
+		}); //ajax
+		
+		begin += 3;
+		end += 3;
+		
+		});
+	 
+
+	$("#btnSearch").click(function() {
+		var from = $("#from").val();
+		var to = $("#to").val();
+		alert(from);
+		$.ajax({
+			type: "GET",
+			url: "/AtTicketProject/mypage/mypagereservationok.do",
+			data: "begin=" + begin + "&end=" + end +"&from=" + from + "$to=" + to,
+			dataType: "json",
+			success: function(result) {
+				
+				if (result.length == 0) {
+					alert("더 이상 가져올 게시물이 없습니다.");
+					$("#btnMore").attr("disabled", true);
+					return;
+				}
+				
+				//alert(result.length);
+				$(result).each(function(index, item) {
+					//게시물 1개
+					$("tbody").empty();
+					var temp = "";
+					temp += "<tr>";
+					temp += "<td><input type = 'checkbox' class = 'cb1' name = 'cb1'></td>";
+					temp += "<td>" + item.bookdate + "</td>";
+					temp += "<td>" + item.seq + "</td>";
+					temp += "<td>" + item.showtile + "</td>";
+					temp += "<td>" + item.bdate + "</td>";
+					temp += "<td>" + item.cnt + "</td>";
+					temp += "<td>" + item.bookstate + "</td>";
+					temp += "</tr>";
+					temp+= "<input type = 'hidden' value =" + item.nowPage + "name = 'nowPage' id = 'nowPage'>";
+
+					$("table > tbody").append(temp); 
+					var nowPage = item.nowPage;
+					$("#nowPage").text(nowPage);
+				});
+				
+			},
+			error: function(a,b,c) {
+				alert("가져올 데이터가 없습니다.");
+				console.log(a,b,c);
+			}
+			
+		}); //ajax
+		
+		});
 
         //주문일자 텍스트창 css
         $("#from, #to").css("width", "90px");
@@ -240,12 +398,6 @@
             $("#from").datepicker("setDate", "-" + $(this).data("month") + "M");
         });
 
-        //조회 클릭시
-        $("#btnsearch").click(function() {
-            console.log($("#from").val());
-            console.log($("#to").val());
-        });
-
         //movetop
         $("#movetop").click(function() {
             event.preventDefault();
@@ -253,7 +405,7 @@
                 scrollTop: 0
             }, 500);
         });
-
+		
     </script>
 
 </body>

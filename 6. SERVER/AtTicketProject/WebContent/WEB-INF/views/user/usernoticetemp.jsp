@@ -12,9 +12,9 @@
             href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap"
             rel="stylesheet"
         />
-        <link rel="stylesheet" href="css/slick-theme.css" />
-        <link rel="stylesheet" href="css/slick.css" />
-        <link rel="shortcut icon" href="./images/favicon.ico" />
+        <link rel="stylesheet" href="/AtTicketProject/css/slick-theme.css" />
+        <link rel="stylesheet" href="/AtTicketProject/css/slick.css" />
+        <link rel="shortcut icon" href="/AtTicketProject/images/favicon.ico" />
         
         <style>
 
@@ -64,7 +64,7 @@
             /* border: 1px solid white; */
             width: 100px;
             height: 65px;
-            background-image: url("./images//title.png");
+            background-image: url("/AtTicketProject/images/title.png");
             background-repeat: no-repeat;
             background-position: center center;
             position: absolute;
@@ -209,17 +209,17 @@
 <!-------------------------------- 내용부분 -------------------------------->
         <h2 style="text-align: center; margin-top: 200px; margin-bottom: 50px; font-size: 4em; font-weight: bold;">공지사항</h2>
         <div class="noticebar">
-            <div style="display: inline-block; width:90px; border: 1px solid orange; color: orange; text-align: center;">티켓오픈</div>
-            <span>Good Bye! 오페라의 유령! 뮤지컬 [오페라의 유령] 월드투어-서울 7/21(화) 2시 티켓오픈!</span>
+            <div style="display: inline-block; width:90px; border: 1px solid orange; color: orange; text-align: center;">${dto.nindex}</div>
+            <span>${dto.title}</span>
         </div>
-        <p style="text-align: center; margin-left: 1000px; padding-top: 10px; color: gray;">등록일 : 2020-07-20 조회수: 25</p>
+        <p style="text-align: center; margin-left: 1000px; padding-top: 10px; color: gray;">등록일 : ${dto.regdate} 조회수: ${dto.nview}</p>
 
         <div style="width: 1200px; height: 370px; background-color: #eeeeee; margin: 0px auto;" >
-            <div style="width: 180px; height: 252px; margin-left: 50px; "><img style="margin-top: 50px; width: 180px; height: 252px;" src="./images/noticeimage.jpg" alt=""></div>
-            <span style="font-size: 18px; margin-left: 300px; position: relative; bottom: 180px; left: 0px;">Good Bye! 오페라의 유령! 뮤지컬 [오페라의 유령] 월드투어-서울 7/21(화) 2시 티켓오픈!</span>
+            <div style="width: 180px; height: 252px; margin-left: 50px; "><img style="margin-top: 50px; width: 180px; height: 252px;" src="/AtTicketProject/images/${showdto.poster}" alt=""></div>
+            <span style="font-size: 18px; margin-left: 300px; position: relative; bottom: 180px; left: 0px;">${showdto.title}</span>
             <div style=" padding-left: 30px; padding-top: 18px; background-color: rgb(253, 221, 190); position: relative; bottom: 120px; margin-left: 300px; margin-bottom: 500px; border: 1px solid gray; width: 840px; height: 60px;">
-                <span class="glyphicon glyphicon-time" style= "color: orange; font-weight: bold;" ;>&nbsp;티켓오픈</span><span style="padding-left: 30px;">|</span>
-                <span style="padding-left: 30px; font-weight: bold; font-size: 17px;">2020.07.21(화) 오후 2:00</span>                
+                <span class="glyphicon glyphicon-time" style= "color: orange; font-weight: bold;">&nbsp;${dto.nindex}</span><span style="padding-left: 30px;">|</span>
+                <span style="padding-left: 30px; font-weight: bold; font-size: 17px;">${dto.opendate}(${dto.dy})</span>                
                 <div style=" width: 236px; height: 46px; border: 3px solid orange; margin-top: 80px; position: relative; left: -30px; padding-top: 10px; text-align: center; background-color: white; color: orange; font-weight: bold; font-size: 18px;">티켓오픈 알림<span class="glyphicon glyphicon-bell"></span></div>
             </div>
             
@@ -374,7 +374,7 @@ Special 2. 지정석 20% <br>
         <div id="bottom">
             <div>
                     <!-- 회사 마크 -->
-                    <img src="./images/title2.png" />
+                    <img src="/AtTicketProject/images/title2.png" />
                 </div>
                 <div class="txt">
                     <p class="black">At-Ticket (주)</p>
@@ -397,15 +397,15 @@ Special 2. 지정석 20% <br>
             </div>
         </div>
                 <!-- 챗봇 : 단비봇 -->
-                        <div
+                        <!-- <div
                             id="frogue-container"
                             class="position-right-bottom"
                             data-chatbot="e4957de9-dad9-448d-a709-e43eeb644f63"
                             data-user="사용자ID"
                             data-init-key="value"
-                        ></div>
+                        ></div> -->
                         <!-- data-init-식별키=값 으로 셋팅하면 챗플로우에 파라미터와 연동가능. 식별키는 소문자만 가능 -->
-                        <script>
+                        <!-- <script>
                             (function (d, s, id) {
                                 var js,
                                     fjs = d.getElementsByTagName(s)[0];
@@ -418,20 +418,15 @@ Special 2. 지정석 20% <br>
                                     "https:\/\/danbee.ai/js/plugins/frogue-embed/frogue-embed.min.js";
                                 fjs.parentNode.insertBefore(js, fjs);
                             })(document, "script", "frogue-embed");
-                        </script>
+                        </script> -->
                         <!-- 제일 위로 돌아가기 버튼 -->
-                        <div id="movetop">↑</div>
-                    </div>
-                
-            </div>
-        </div>
-            </div>
-        </div>
-    </div>
+                       <!--  <div id="movetop">↑</div>
+                    </div> -->
+       <%@include file="/WEB-INF/views/inc/userchat.jsp"%>
 
 
 
-    <script src="js/slick.min.js"></script>
+    <script src="/AtTicketProject/js/slick.min.js"></script>
     <script>
 
         //상단 메뉴 css
@@ -453,7 +448,9 @@ Special 2. 지정석 20% <br>
             });
       
 
-       
+       $(".golist").click(function(){
+    	  	location.href="/AtTicketProject/show/usernotice.do?page=${page}&search=${search}&sort=${sort}"; 
+       });
 
         
 

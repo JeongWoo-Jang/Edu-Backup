@@ -50,6 +50,7 @@
 	<script>
 		
 	$("#ckbtn").click(function(){
+		opener.location.reload();
 		window.close();
 	});
 	

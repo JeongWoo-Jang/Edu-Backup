@@ -1,6 +1,8 @@
 package com.test.user.mypage;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,15 +10,51 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @WebServlet("/mypagereservation.do")
 public class MypageReservation extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		MyPageHDAO dao = new MyPageHDAO();
+		HttpSession session =  req.getSession();	
+		HashMap<String,String> map = new HashMap<String,String>();
+		
+		String cusseq = String.valueOf(session.getAttribute("userseq"));
+		String page = req.getParameter("page");
+		String from = req.getParameter("from");
+		String to = req.getParameter("to");
 
+		int nowPage = 0;
+		int totalPage = 0;
+		int pageSize = 3;
+		int totalCount = 0;
+		
+		if(page == null || page == "") nowPage = 1; //default
+		else nowPage = Integer.parseInt(page);
+		
+		totalCount = dao.getTotalCount(cusseq);
+		totalPage = (int)Math.ceil((double)totalCount/pageSize);
+		map.put("begin", "1");
+		map.put("end", "3");
+		map.put("from", from);
+		map.put("to", to);
+		
+		map.put("cusseq", cusseq);
+		
+		ArrayList<MyReDTO> rlist = dao.getlist(map);
+		
+		req.setAttribute("rlist", rlist);
+		req.setAttribute("map", map);
+		req.setAttribute("totalCount", totalCount);
+		req.setAttribute("totalPage", totalPage);
+		req.setAttribute("nowPage", nowPage);
+		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/user/mypage/mypagereservation.jsp");
 		dispatcher.forward(req, resp);
+		
 		
 	}
 

@@ -61,6 +61,7 @@
             margin-left: 200px;
         }
         .addshow { margin-left: 5px; }
+        .addshow *{ margin: 5px; }
         .rtxt { margin: 5px ;}
 
         .img_wrap {
@@ -169,6 +170,11 @@
                     <option value="12">페이지터너</option>
                 </select>
             </div>
+            
+            <div>
+            	<label for="tag">태그 : </label><span>#태그명,#태그명,#태그명.. 형식으로 작성하세요.</span>
+            	<textarea id="tag" name="tag" style="width: 480px; height: 100px; resize:none;"></textarea>
+            </div>
 
             <div><label for="poster">포스터  : </label><input type="file" id="poster" name="poster" style="display: inline;" autofocus required></div>
             <div class="img_wrap">
@@ -195,9 +201,6 @@
 <script>
 	<%@include file="/WEB-INF/views/inc/adminScript.jsp" %>
 	
-	$(document).on('input', '#min', function(){
-	    alert($(this).val());
-	});
 	
 	//ajax 공연장 목록
 	$("#region").change(function(){
@@ -244,12 +247,12 @@
     var n = 2;
 
     $("#addbtn").mousedown(function() {
-
-        
-        $("#round").append("<div class='addshow'><label for='round"+ n +"'>공연 회차 : </label><input type='text' class='rtxt' name='round"+ n +"' id='round"+ n +"' style='width: 100px;' autofocus>"+
-                "<label for='time"+ n +"'> 시작 시간 : </label><input type='text' class='rtxt' id='time"+ n +"'name='time"+ n +"' style='width: 100px;' autofocus></div>");
+    	
+        $("#round").append("<div class='addshow'><label for='round"+ n +"'>공연 회차 : </label><input type='text' name='round"+ n +"' id='round"+ n +"' style='width: 100px;' autofocus>"+
+                "<label for='time"+ n +"'> 시작 시간 : </label><input type='text' id='time"+ n +"'name='time"+ n +"' style='width: 100px;' autofocus></div>");
 
         n++;
+        
 
     });
 

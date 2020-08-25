@@ -395,7 +395,8 @@
             width: 430px; 
             height: 602px; 
             /* background-color: rgb(184, 201, 233); */
-            background-image: url(./images/consertPoster.jpg);
+            /* background-image: url(./images/consertPoster.jpg); */
+            background-image : url(./images/${dto.poster});
             background-size: 430px;
         }
 
@@ -492,12 +493,15 @@
         }
         #like {
             position: relative;
-            top: 15px;
+            top: 8px;
         }
         #like img {
-            width: 20px; height: 20px;
+            width: 40px; height: 40px;
             position: relative;
             /* top: 4px; */
+        }
+        #like img:hover {
+        	cursor:pointer;
         }
         #like span:nth-child(2){
             color: #FECA52;
@@ -1061,14 +1065,14 @@
             <!-- 타이틀 -->
             <div id="mainTitle">
                     <div id="mainTitleTop">
-                        <div><a href="./main.html" target="_self">콘서트</a></div>
+                        <div><a href="./main.html" target="_self">${dto.genre}</a></div>
                         <div>단독판매</div>
                     </div>
-                    <div id="mainTitleName"><h1>크리스토퍼 내한공연（CHRISTOPHER LIVE IN SEOUL)</h1></div>
+                    <div id="mainTitleName"><h1>${dto.title}</h1></div>
                     <div id="mainTitleBottom">
-                        <div id="titledate">2020.08.29 ~ 2020.08.30</div>
+                        <div id="titledate">${dto.startDate} ~ ${dto.endDate}</div><!-- 여기서 정보를 받아와야 한다. -->
                         <div id="place">
-                            <a href="./main.html"></a>YES24 LIVE HALL(구,악스홀)
+                            <a href="./main.html"></a>${splaceName}
                         </div>
                     </div>
                 </div>
@@ -1078,32 +1082,98 @@
             <div id="contentsBox">
                 <div class="content" id="postrtbox">
                 <div class="content" id="poster"></div>
+                
+                <c:if test = "${not empty userid}">
                 <div id="like">
-                    <img src="./images/heart.png">
-                    <span>1732</span> <span>Likes</span>
+                	<c:if test = "${likePush == 1}">
+                    	<img src="./images/heart.png">
+                    </c:if>
+                    
+                    <c:if test = "${likePush == 0}">
+                    	<img src="./images/heart2.png">
+                    </c:if>
+                    <span id = "showLikeCount">${likeCount}</span> <span id = "likesWrite">Likes</span>
                 </div>
+                
+                </c:if>
+                
                 </div>
+                
+                <style>
+                	#showLikeCount {
+                		font-size : 1.3em;	
+                	}
+                	
+                	#likesWrite {
+                		font-size : 1.3em;
+                	}
+                
+                </style>
+                
+                <script>
+	                //관심목록 -> 추가 하거나
+	                $("#like img").click(function(){
+	                	
+	                	$.ajax({
+	                		type : "GET",
+	                		url : "/AtTicketProject/userheart.do",
+	                		data : "showseq=" + ${dto.seq} + "&likeCount=" + $("#showLikeCount").text(),
+	                		async: true,
+	                		dataType: "json",
+	                		success : function(result) {
+								//서블릿에서 해결하고 다시 와야함.
+								//alert("왜 안되는걸까?");
+								//alert(result);
+								//alert(result.img);
+								$("#showLikeCount").text(result.likeCount);
+								
+								$("#like img").attr("src",result.img);
+								
+								
+	                			
+	                		},
+	                		error : function(a,b,c) {
+	                			console.log(a,b,c);
+	                		}
+	                	});
+	                	
+		
+	                /* if($("#like img").attr("src") == "./images/heart2.png"){
+	                    alert("이미 관심목록에 등록되어있습니다.");
+	                } */
+					
+	                /* $("#like img").attr("src","./images/heart2.png"); */
+	
+	                });
+	                
+                </script>
+                
+                
                 <div class="content" id="contents" >
                     <dl id="basic">
                         <dt>등급</dt>
-                            <dd>미취학 아동 입장불가</dd>
+                            <dd>${dto.age}세 이상 관람 가능</dd>
                         <div style="clear:both;"></div>
                         <dt>관람시간</dt>
-                            <dd>총 70 분</dd>
+                            <dd>총 ${showDuration} 분</dd>
                         <div style="clear:both;"></div>
-                        <dt>출연</dt>
-                            <dd> 크리스토퍼</dd>
+                        <!-- <dt>출연</dt>
+                            <dd> 크리스토퍼</dd> -->
                         <div style="clear:both;"></div>
                         <dt>가격</dt>
                             <dd id="price">
                                 <ul>
-                                    <li>스탠딩석 <span>77,000</span>원</li>
-                                    <li>지정석 <span>77,000</span>원 </li>
+                                    <li>지정석 type-A : <span>${ticketPc}</span>원</li>
+                                    <li>지정석 type-B : <span>${ticketPc}</span>원 </li>
                                 </ul>
                             </dd>
                         <div style="clear:both;"></div>
+                        
+                        <!-- 쿠폰 혜택 부분 -->
+                        <c:if test="${not empty userid}">
                         <dt>혜택</dt>
-                            <dd id="cupon">사용가능 쿠폰 (<span>1</span>)</dd>
+                            <dd id="cupon">사용가능 쿠폰 (<span>${couponListLen}</span>)</dd>
+                        </c:if>
                             <div id="dialog1">
                                 <table>
                                     <thead>
@@ -1111,22 +1181,62 @@
                                         <td>할인</td>
                                         <td>다운</td>
                                     </thead>
+                                    <c:forEach items = "${couponList}" var ="cdto">
                                     <tr>
-                                        <td>[YES마니아] 예매수수료 면제쿠폰</td>
-                                        <td>0원</td>
-                                        <td><div>다운</div></td>
+                                        <td>${cdto.title}</td>
+                                        <td>${cdto.discount} 원</td>
+                                        <td><div class = "downCoupon" id = "${cdto.seq}">다운<span></span></div></td>
                                     </tr>
+                                    </c:forEach>
                                 </table>
                             </div>
                     </dl>
+                    <style>
+						.downCoupon:hover {
+							cursor : pointer;
+							background-color : red;
+							color : white
+						}
+                    </style>
+                    
+                    <script>
+                    	//쿠폰다운을 눌렀을때 처리해줄것이다.
+                    	$(".downCoupon").click(function(){
+                    		//alert($(this).attr("id"));
+                    		var couponSeq = $(this).attr("id");
+    	                	
+                    		$.ajax({
+    	                		type : "GET",
+    	                		url : "/AtTicketProject/userdowncoupon.do",
+    	                		data : "showseq=" + ${dto.seq} + "&couponseq=" + couponSeq,
+    	                		async: true,
+    	                		dataType: "json",
+    	                		success : function(result) {
+    								//서블릿에서 해결하고 다시 와야함.
+    								if (result.pass == "success") {
+    									alert("쿠폰이 발급되었습니다.");
+    								} else {
+    									alert("해당쿠폰을 이미 발급받으셨습니다.");
+    								}
+
+    	                		},
+    	                		error : function(a,b,c) {
+    	                			console.log(a,b,c);
+    	                		}
+    	                	});
+                    	})
+                    	
+                    	
+                    </script>
+                    
                     <!-- 공연정보 -->
                     <dl id="basic2">
-                        <dt>공연시간 안내</dt>
+<!--                         <dt>공연시간 안내</dt>
                             <dd>2020년 8월 29일 (토) 오후 7시</dd>
-                            <dd>2020년 8월 30일 (일) 오후 6시</dd>
+                            <dd>2020년 8월 30일 (일) 오후 6시</dd> -->
                         <div style="clear:both;"></div>
                         <dt>배송정보</dt>
-                            <dd>본 상품은 일괄배송 상품으로 2020년 08월 05일부터 순차 배송됩니다.</dd>
+                            <dd>본 상품은 일괄배송 상품으로 공연시작 5일전부터 순차 배송됩니다.</dd>
                     </dl>
                     <div id="benner"></div>
                 </div>
@@ -1139,7 +1249,7 @@
                     <div id="datatitle">
                         <div style="font-size: 20px; font-weight: bold;">날짜/시간 선택</div>
                         <div id="datasub" >
-                            관람<span>4시간전</span>예매가능
+                            관람<span>4시간전 까지</span>예매가능
                         </div>
                     </div>
                     <div id="datacontent">
@@ -1185,13 +1295,12 @@
                     <p>※ 장애인(본인) 50%할인: 고객센터 전화예매시 1544-6399<br>
                         티켓은 현장에서 예매자 본인이 직접 증빙자료 확인 후 수령가능 (미지참 시 차액지불)</p>
                     <h2>공연정보</h2>
-                    <img src="./images/공연정보1.jpg">
-                    <img src="./images/공연정보.jpg">
+                    <img src="./images/${dto.content}">                    
 
                     <table id="company">
                         <tr>
                             <td>기획사 정보</td>
-                            <td>주최: (주)프라이빗커브</td>
+                            <td>${agencyHost}</td>
                         </tr>
                     </table>
 
@@ -1199,21 +1308,21 @@
                     <table id="productInfo">
                         <tr>
                             <td class="tdGray">주최/기획</td>
-                            <td>㈜프라이빗커브</td>
+                            <td>${agencyManage}</td>
                             <td class="tdGray">소비자상담	</td>
-                            <td>02-563-0595</td>
+                            <td>${agencyTel}</td>
                         </tr>
                         <tr>
-                            <td class="tdGray">주연</td>
-                            <td>크리스토퍼</td>
+                            <td class="tdGray">장르</td>
+                            <td>${dto.genre}</td>
                             <td class="tdGray">관람등급</td>
-                            <td>미취학 아동 입장불가</td>
+                            <td>${dto.age}세 이상 관람 가능</td>
                         </tr>
                         <tr>
                             <td class="tdGray">공연시간</td>
-                            <td>총 70 분</td>
+                            <td>총 ${showDuration} 분</td>
                             <td class="tdGray">공연장소</td>
-                            <td>YES24 LIVE HALL(구,악스홀)</td>
+                            <td>${splaceName}<br>(${splace})</td>
                         </tr>
                         <tr>
                             <td class="tdGray">취소/환불방법</td>
@@ -1327,11 +1436,11 @@
                                     결제수단을 복수로 선택한 경우 인터넷으로 부분취소가 불가하오니, 고객센터로 문의해주시기 바랍니다.</p>
                             </table>
                         </div>
-                        <div class="tCLeft"><h2>취소수수료</h2></div>
+                        <!-- <div class="tCLeft"><h2>취소수수료</h2></div> -->
                         <div class="tCRight"> 
 
                         </div>
-                        <div class="tCLeft"><h2>환불</h2></div>
+                        <!-- <div class="tCLeft"><h2>환불</h2></div> -->
                         <div class="tCRight"> 
 
                         </div>
@@ -1344,10 +1453,10 @@
             <div id="container">
 
                 <span class="glyphicon glyphicon-map-marker"></span>
-                <h1>YES24 LIVE HALL(구,악스홀)</h1>
-                <small>서울특별시 광진구 구천면로 20</small>
-                <small>02-457-5114</small>
-                <small>http://yes24livehall.com</small>
+                <h1>${splaceName}</h1>
+                <small>${splace}</small>
+                <small>${agencyTel}</small>
+                <!-- <small>http://yes24livehall.com</small> -->
 
                 <div style="height: 600px;">
                     <div style="width: 1200px; height: 200px;  margin: 150px auto;">
@@ -1389,11 +1498,9 @@
             <div id="ranking">
                 <div id="rankingImg"></div>
                 <input type="button" value="더보기">
-                <div class="rank1"><img src="./images/consertRank1.jpg"></div>
-                <div class="rank1"><img src="./images/consertRank2.jpg"></div>
-                <div class="rank1"><img src="./images/consertRank3.jpg"></div>
-                <div class="rank1"><img src="./images/consertRank4.jpg"></div>
-                <div class="rank1"><img src="./images/consertRank5.jpg"></div>
+                <c:forEach items = "${bigFiveImgList}" var ="imgdto">
+                <div class="rank1" id = "${imgdto.seq}"><img src="./images/${imgdto.imgName}"></div>
+                </c:forEach>
                 <div style="clear:both;"></div>
                 <div class="num"><span>1위</span></div>
                 <div class="num"><span>2위</span></div>
@@ -1403,6 +1510,24 @@
                 <div style="clear:both;"></div>
             </div>
             <div style="clear:both;"></div>
+            
+            <style>
+				
+				.rank1:hover {
+				cursor : pointer;
+				}
+				
+            </style>
+            
+            <script>
+            	$(".rank1").click(function(){
+            		//alert($(this).attr("id"));
+            		location.href = "/AtTicketProject/usertickekting.do?seq=" + $(this).attr("id");
+            	})
+            	
+            
+            </script>
+            
             
             <!-- 챗봇 : 단비봇 --------------------------------------------------------------------------------------------------------------------------------->
             <%@include file="/WEB-INF/views/inc/userchat.jsp" %>
@@ -1544,11 +1669,12 @@
         // minDate : "2020-08-29",
         // maxDate : "2020-08-30"
         // });
-
+		
+        /* 날짜 */
         $( "#celender").datepicker({
                 dateFormat: "yy-mm-dd",
-                minDate: "2020-08-29",
-                maxDate: "2020-08-30",
+                minDate: "2020-08-29",/* 오늘날짜로 해야한다. */
+                maxDate: "2020-09-30",
                 altField: ".alternate",
                 altFormat: "yy.mm.dd(D)",
                 dayNamesShort: ["일","월","화","수","목","금","토"],
@@ -1590,16 +1716,7 @@
                 
             });
 
-        //관심목록
-        $("#like img").click(function(){
 
-        if($("#like img").attr("src") == "./images/heart2.png"){
-            alert("이미 관심목록에 등록되어있습니다.");
-        }
-
-        $("#like img").attr("src","./images/heart2.png");
-
-        });
 
         //탭
         // $("#tabs").tabs({
@@ -1652,7 +1769,7 @@
         
         
         // 주소로 좌표를 검색합니다
-        geocoder.addressSearch('서울특별시 광진구 구천면로 20', function(result, status) {
+        geocoder.addressSearch('${splace}', function(result, status) {
         
             // 정상적으로 검색이 완료됐으면 
             if (status === kakao.maps.services.Status.OK) {
@@ -1667,7 +1784,7 @@
         
                 // 인포윈도우로 장소에 대한 설명을 표시합니다
                 var infowindow = new kakao.maps.InfoWindow({
-                    content: '<div style="width:150px;text-align:center;padding:6px 0;">예스24 라이브홀</div>'
+                    content: '<div style="width:150px;text-align:center;padding:6px 0;">${splaceName}</div>'
                 });
                 infowindow.open(map, marker);
         
@@ -1920,10 +2037,11 @@
         // $("#ranking input")click(function(){
         //	$(location).attr('href','/AtTicketProject/userranking.do');
         // }); 
-
+		
+        
     </script>
 
-
+	
 
         </div>
     </div>

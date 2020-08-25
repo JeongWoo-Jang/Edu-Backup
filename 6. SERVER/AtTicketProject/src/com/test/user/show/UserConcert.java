@@ -38,6 +38,7 @@ public class UserConcert extends HttpServlet{
 		ArrayList<BannerDTO> region1 = dao.concertregion(region01);
 		ArrayList<BannerDTO> region2 = dao.concertregion(region02);
 		ArrayList<BannerDTO> region3 = dao.concertregion(region03);
+		ArrayList<BannerDTO> atspick = dao.atspick(whatshot);
 		dao.close();
 		
 		req.setAttribute("map", map);
@@ -47,6 +48,7 @@ public class UserConcert extends HttpServlet{
 		req.setAttribute("region1", region1);
 		req.setAttribute("region2", region2);
 		req.setAttribute("region3", region3);
+		req.setAttribute("atspick", atspick);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/user/userconcert.jsp");
 		dispatcher.forward(req, resp);

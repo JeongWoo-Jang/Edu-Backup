@@ -283,6 +283,10 @@
                 margin-bottom: 50px;                
             }
 
+			#btnBack {
+				position: relative;
+				left : 770px;
+			}
             .btns button {
                 position: relative;
                 left: 220px;
@@ -315,19 +319,21 @@
     </style>
 </head>
 <body>
-    
+    <form method="POST" enctype="multipart/form-data" action="/AtTicketProject/userreviewwriteok.do" >
     <div id="main">
 <!-------------------------------- 화면 상단부 -------------------------------->
         <div id="top">
             <div id="topmenu">
                 <!-- 상단메뉴 좌측(메인화면으로 돌아가기) -->
                 <a href="#" id="topleft"></a>
+                
                 <!-- 상단메뉴 센터(콘서트, 뮤지컬, 연극, 클래식, 전시) -->
                 <span data-item="item1" class="menubar">콘서트</span>
                 <span data-item="item2" class="menubar">뮤지컬</span>
                 <span data-item="item3" class="menubar">연극</span>
                 <span data-item="item4" class="menubar">클래식</span>
                 <span data-item="item5" class="menubar">전시</span>
+                
                 <!-- 상단메뉴 우측(랭킹, 이벤트, 검색창, 마이페이지) -->
                 <div id="topright">
                     <span data-item="item6" class="menubar">랭킹</span>
@@ -350,35 +356,35 @@
         <p class="event-main-tit" style="margin-top: 150px; font-size:2em;"></p>
         <h2 style="text-align: center;">리뷰 게시판</h2>
 
+			
+            
             <table class="table table-borderd" style="width: 1200px; margin: 0px auto;">
                 <tr>
                     <th style="width: 120px;">제목</th>
                     <th style="width: 650px;">
-                        <input type="text" class="form-control" />
+                        <input type="text" class="form-control" name="title" required/>
                     </th>
                 </tr>
                 <tr>
                     <th style="width: 150px;">장르</th>
                     <th style="width: 650px;">
-                        <select class="form-control">
-                            
-                            <option>콘서트</option>
-                            <option>연극</option>
-                            <option>클래식</option>
-                            
-                            
+                    
+                        <select id="genre" name="genre" class="form-control">
+                        	<option value="0" selected disabled hidden>장르를 고르세요.</option>
+                            <option value="concert">콘서트</option>
+                            <option value="musical">뮤지컬</option>
+                            <option value="theater">연극</option>
+                            <option value="classic">클래식</option>
+                            <option value="exhibition">전시</option>
                         </select>
+                        
                     </th>
                 </tr>
                 <tr>
                     <th style="width: 150px;">공연제목</th>
                     <th style="width: 650px;">
-                        <select class="form-control">
-                            
-                            <option>베르테르</option>
-                            <option>베르테르</option>
-                            <option>베르테르</option>
-                            
+                        <select class="form-control" id="showTitle" name="showTitle">
+                            <option value="0" selected disabled hidden>공연 제목을 선택하세요.</option>
                             
                         </select>
                     </th>
@@ -390,6 +396,8 @@
                         <textarea
                             class="form-control"
                             style="height: 200px;"
+                            name="content"
+                            required
                         ></textarea>
                     </th>
                 </tr>
@@ -397,11 +405,13 @@
                 <tr>
                     <th style="width: 150px;">파일</th>
                     <th style="width: 650px;">
-                        <input type="file" class="form-control" />
+                        <input type="file" name="rfile" class="form-control" />
                     </th>
                 </tr>
                
             </table>
+            
+            
             <div class="banner3">
                 <img style="margin-left: 40px; width: 200px; height: 600px;" src="./images/banner3.jpg" alt="">
             </div>
@@ -414,12 +424,14 @@
         </div>
         </div>
         <div class="event-main-list">                
-                    
-                    
                      
         </div>
-        <div class="btns">                
-                <button class="btn btn-primary">
+        
+        <div class="btns">      
+        		<button class="btn btn-default" id="btnBack">
+                    <span class="glyphicon glyphicon-repeat"></span>돌아가기
+                </button>          
+                <button class="btn btn-primary" type="submit">
                     <span class="glyphicon glyphicon-ok"></span>글쓰기
                 </button>
             </div>
@@ -427,6 +439,7 @@
             <img style="margin-bottom: 40px; width: 1200px;" src="./images/banner2.png" alt="">
             </div>
             
+        </form>
 
         
         
@@ -441,12 +454,40 @@
                 <img src="./images/title2.png" style="transform: translate(0, 40px);">
             </div>
         </div>
-    </div>
+
 
 
 
     <script src="js/slick.min.js"></script>
     <script>
+    
+    	$("#btnBack").click(function() {
+    		history.back();
+    	});
+    	
+    	//예매한 공연 목록
+    	
+    	var userseq = ${userseq};
+    	
+    	$("#genre").change(function(){
+    		$("#showTitle *").remove();
+			//alert($(this).find(":selected").val());
+			$.ajax({
+				type: "GET",
+				url: "/AtTicketProject/userreviewshow.do",
+				data: "genre=" + $(this).find(":selected").val() + "&cseq=" + userseq,
+				dataType: "json",
+				success: function(result) {
+					$(result).each(function(index, item){
+						$("#showTitle *").remove();
+						$("#showTitle").append("<option value = " + item.showseq + ">" + item.showname +"</option>");
+					});
+				},
+				error: function(a,b,c) {
+					console.log(a,b,c);
+				}
+			});
+		});
 
         //상단 메뉴 css
         $(".menubar").mouseover(function() {

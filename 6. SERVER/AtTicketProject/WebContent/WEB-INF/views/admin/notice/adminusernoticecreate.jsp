@@ -8,7 +8,7 @@
 <head>
 <link rel="stylesheet" href="/AtTicketProject/css/adminbanner.css">
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Admin</title>
 
 
 <style>
@@ -193,339 +193,102 @@
         .pagination > li > a, .pagination > li > span{
           color: black;
         } 
- 	
- 	
+ 		
+ 		
+ 		.img_wrap {
+ 			border:0px;
+ 		}
+ 		
  	</style>
  	
  	
- 	<!-- 게시판 -->
-    <div id = "selectable">
-        <div id = "slctp1">
-            <button class = "selectNotice" style = "outline : none;"><span><i class = "glyphicon glyphicon-sort"></i></span>등록순</button>
-            <button class = "selectNotice" style = "outline : none;"><span><i class = "glyphicon glyphicon-sort"></i>오름차순</button>
-            <button class = "selectNotice" style = "outline : none;"><span><i class = "glyphicon glyphicon-sort"></i>내림차순</button>
-        </div>
-       <div id = "slctp2">
-			<div class="input-group">
-				<input type="text" class="form-control" placeholder = "ex) 뮤지컬 모차르트">
-				<span class="input-group-addon" id = "searchlogo"><i class="glyphicon glyphicon-search"></i></span>
-			</div>
-        </div>
-        <table style = "width:1330px;" class = "table table-striped table-bordered table-condensed" id = "nttable">
-            <thead>
-                <tr>
-                    <th>선택</th>
-                    <th>번호</th>
-                    <th>이름</th>
-                    <th>날짜</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td class = "tdbox"><input type="checkbox" class = "t5"></td>
-                    <td>1</td>
-                    <td>가나다 콘서트</td>
-                    <td> 2020.02.17(월) 15:00</td>
-
-                </tr>
-                <tr>
-                    <td class = "tdbox"><input type="checkbox" class = "t5"></td>
-                    <td>1</td>
-                    <td>가나다 콘서트</td>
-                    <td> 2020.02.17(월) 15:00</td>
-                    
-                </tr>
-                <tr>
-                    <td class = "tdbox"><input type="checkbox" class = "t5"></td>
-                    <td>2</td>
-                    <td>가나다 콘서트</td>
-                    <td> 2020.02.17(월) 15:00</td>
-
-                </tr>
-                <tr>
-                    <td class = "tdbox"><input type="checkbox" class = "t5"></td>
-                    <td>3</td>
-                    <td>가나다 콘서트</td>
-                    <td> 2020.02.17(월) 15:00</td>
-
-                </tr>
-                <tr>
-                    <td class = "tdbox"><input type="checkbox" class = "t5"></td>
-                    <td>4</td>
-                    <td>가나다 콘서트</td>
-                    <td> 2020.02.17(월) 15:00</td>
-
-                </tr>
-                <tr>
-                    <td class = "tdbox"><input type="checkbox" class = "t5"></td>
-                    <td>5</td>
-                    <td>가나다 콘서트</td>
-                    <td> 2020.02.17(월) 15:00</td>
-
-                </tr>
-                <tr>
-                    <td class = "tdbox"><input type="checkbox" class = "t5"></td>
-                    <td>6</td>
-                    <td>가나다 콘서트</td>
-                    <td> 2020.02.17(월) 15:00</td>
-
-                </tr>
-                <tr>
-                    <td class = "tdbox"><input type="checkbox" class = "t5"></td>
-                    <td>7</td>
-                    <td>가나다 콘서트</td>
-                    <td> 2020.02.17(월) 15:00</td>
-
-                </tr>
-                <tr>
-                    <td class = "tdbox"><input type="checkbox" class = "t5"></td>
-                    <td>8</td>
-                    <td>가나다 콘서트</td>
-                    <td> 2020.02.17(월) 15:00</td>
-
-                </tr>
-                <tr>
-                    <td class = "tdbox"><input type="checkbox" class = "t5"></td>
-                    <td>9</td>
-                    <td>가나다 콘서트</td>
-                    <td> 2020.02.17(월) 15:00</td>
-
-                </tr>
-                <tr>
-                    <td class = "tdbox"><input type="checkbox" class = "t5"></td>
-                    <td>10</td>
-                    <td>가나다 콘서트</td>
-                    <td> 2020.02.17(월) 15:00</td>
-                </tr>
-            </tbody>
-        </table>
-
-
-        <!-- 하단 페이지 선택 바 -->
-            <nav class = "pagebar">
-              <ul class="pagination">
-                <li>
-                  <a href="#" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                  </a>
-                </li>
-                <li><a href="">1</a></li>
-                <li><a href="">2</a></li>
-                <li class = "active"><a href="">3</a></li>
-                <li><a href="">4</a></li>
-                <li><a href="">5</a></li>
-                <li><a href="">6</a></li>
-                <li><a href="">7</a></li>
-                <li><a href="">8</a></li>
-                <li><a href="">9</a></li>
-                <li><a href="">10</a></li>
-                <li>
-                  <a href="#" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                  </a>
-                </li>
-              </ul>
-            </nav>
-        
-    </div><!-- selectable -->
-    
     <!-- -----------------------------게시판 양식 끝------------------------------- --> 
 	
 	
 	<!-- -----------------------------뮤지컬 정보 공지등록 시작------------------------------- --> 
+	
+	<form method = "POST" id = "createForm" action="/AtTicketProject/usernotice/adminusernoticecreateok.do?page=${page}&search=${search}&sort=${sort}" enctype = "multipart/form-data">
     <div class = "inputTitle">
-        현재화면 상태
     </div>
-    <div class = "inputInfo" style = "height : 840px;">
+    <div class = "inputInfo" style = "height : 1000px;">
         <table  style = "height : 800px;">
             <tr>
-                <td colspan="2"><iframe src="" frameborder="0" style = "width : 1300px; height : 720px;" id = "picframe"></iframe></td>
+                <td colspan="2"><!-- <iframe src="" frameborder="0" style = "width : 1300px; height : 720px;" id = "picframe"></iframe> -->
+                	<div class="img_wrap"><img id="img1" /></div>
+            	</td>
             </tr>  
             <tr style = "height : 70px;">
                 <td class = title>&nbsp;&nbsp;파일첨부</td>
-                <td><input type="file" id = "fileinputer"></td>
+                <!-- <td><input type="file" id = "fileinputer" name = "content"></td>
+             	<td><label for="txtphoto">파일첨부 </label></td> -->
+             	<td><input type="file" id="txtphoto" style="display: inline;"></td>
+            </tr>       
+            
+            <tr  style = "height : 70px;">
+            	<td class = "title">&nbsp;&nbsp;구분</td>
+            	<td><select style="width:150px" name = "nindex" class = "form-control">
+            				<c:forEach items = "${list}" var = "nindex">
+        						<option value = "${nindex}" class = "data">${nindex}</option>
+        					</c:forEach>
+            		</select>
+            	</td>
+            </tr> 
+             <tr  style = "height : 70px;">
+            	<td class = "title">&nbsp;&nbsp;제목</td>
+            	<td>
+            		<input style="width:500px;" name = "title" type = "text" class = "form-control">
+            	</td>
+            </tr>  
+             <tr  style = "height : 70px;">
+            	<td class = "title">&nbsp;&nbsp;티켓오픈일시</td>
+            	<td>
+            		<input style="width:200px;" name = "opendate" type = "date" class = "form-control">
+            	</td>
+            </tr>   
             </table>
-            </tr>          
     </div> 
+    <div style = "margin-left : 100px; margin-top:0px;">
+        <input id = "confirmation" type="submit" value = "작성" style = "width : 120px; height : 40px; font-size: 1.3em; font-weight: bold;">
+    </div>
+    
+	</form>
+   <script>
+   
+   var sel_file;
 
-    <script>
+   $(document).ready(function() {
+       $("#txtphoto").on("change", handleImgFileSelect1);
+   }); 
+
+   function handleImgFileSelect1(e) {
+       var files = e.target.files;
+       var filesArr = Array.prototype.slice.call(files);
+
+       filesArr.forEach(function(f) {
+           if(!f.type.match("image.*")) {
+               alert("확장자는 이미지 확장자만 가능합니다.");
+               return;
+           }
+
+           sel_file = f;
+
+           var reader = new FileReader();
+           reader.onload = function(e) {
+               $("#img1").attr("src", e.target.result);
+               $("#img1").attr("width","1500px");
+               $("#img1").attr("height","500px");
+           }
+           reader.readAsDataURL(f);
+           
+       });
+   }
+
         //파일선택을 하면  현재화면상태에 변화를 준다 -> 서버 구현할떄 바뀌어야 하는 코드이다.
-        var fileTimer = 0;
-        $("#fileinputer").click(function(){
-            fileTimer = setTimeout(function(){
-                $("#picframe").attr("src","adminNtcCheck(fix).html");
-            },3000);    
-        });
+   
+        /* $("#fileinputer").click(function(){
+              $("#picframe").attr("src","/")
+        }); */
     </script>
-
-    <div class = "inputTitle">
-        티켓정보
-    </div>
-    <div class = "inputInfo">
-        <table>
-            <tr>
-                <td class = title>&nbsp;&nbsp;*제목</td>
-                <td colspan="3"><input type="text" style = "width : 480px;" class = "inputBox"></td>
-            </tr>
-            <tr>
-                <td class = title>&nbsp;&nbsp;*이미지</td>
-                <td colspan="3"><input type="file" id = "fileSelect" style = "background-color: white;"></td>
-            </tr>
-            <tr>
-                <td class = title>&nbsp;&nbsp;*티켓 오픈 시작 일시</td>
-                <td> 
-                    <div class = "inputCalendar">       
-                        <input type="text" id = "cal1" style = "text-align: center; font-size:1.2em;">
-                        <label for="cal1" class = "calIng"><span style="font-size: 3em;" class="glyphicon glyphicon-calendar"></span></label>
-                     </div>    
-                </td>
-                <td class = title>&nbsp;&nbsp;*티켓 오픈 마감 일시</td>
-                <td>
-                    <div class = "inputCalendar">
-                        <input type="text" id = "cal2" style = "text-align: center; font-size:1.2em;">
-                        <label for="cal2" class = "calIng"><span style="font-size: 3em;" class="glyphicon glyphicon-calendar"></span></label>
-                     </div>
-                </td>
-            </tr>
-        </table>
-        
-    </div>
-    <div class = "inputTitle">
-        공연개요
-    </div>
-    <div class = "inputInfo" style = "height : 300px;">
-        <table style = "height : 260px;">
-            <tr>
-                <td class = "title">&nbsp;&nbsp;공연제목</td>
-                <td colspan = "3" ><input type="text" style = "width : 480px;" class = "inputBox"></td>
-            </tr>
-            <tr>
-                <td class = "title">&nbsp;&nbsp;공연 시작일</td>
-                <td>
-                    <div class = "consted">
-                        <input type="text" id = "cal3" style = "text-align: center; font-size:1.2em;">
-                        <label for="cal3" class = "calIng"><span style="font-size: 3em;" class="glyphicon glyphicon-calendar"></span></label>
-                    </div>
-                </td>
-                <td class = "title">&nbsp;&nbsp;공연 종료일</td>
-                <td>
-                    <div class = "consted">
-                        <input type="text" id = "cal4" style = "text-align: center; font-size:1.2em;">
-                        <label for="cal4" class = "calIng"><span style="font-size: 3em;" class="glyphicon glyphicon-calendar"></span></label>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td class = "title">&nbsp;&nbsp;공연 시작시간</td>
-                <td>
-                    <select name="" id="" class = "inputBox">
-                        <option>PM</option>
-                        <option>AM</option>
-                    </select>
-                    <select name="" id="" class = "inputBox">
-                        <option>00</option>
-                        <option>01</option>
-                        <option>02</option>
-                        <option>03</option>
-                        <option>04</option>
-                        <option>05</option>
-                        <option>06</option>
-                        <option>07</option>
-                        <option>08</option>
-                        <option>09</option>
-                        <option>10</option>
-                        <option>11</option>
-                    </select>
-                     <span class = "hm">시</span>
-                    <select name="" id="" class = "inputBox">
-                        <option>00</option>
-                        <option>10</option>
-                        <option>20</option>
-                        <option>30</option>
-                        <option>40</option>
-                        <option>50</option>
-                    </select>
-                     <span class = "hm">분</span>
-                </td>
-                <td class = "title">&nbsp;&nbsp;공연 종료시간</td>
-                <td>
-                    <select name="" id="" class = "inputBox">
-                        <option>PM</option>
-                        <option>AM</option>
-                    </select>
-                    <select name="" id="" class = "inputBox">
-                        <option>00</option>
-                        <option>01</option>
-                        <option>02</option>
-                        <option>03</option>
-                        <option>04</option>
-                        <option>05</option>
-                        <option>06</option>
-                        <option>07</option>
-                        <option>08</option>
-                        <option>09</option>
-                        <option>10</option>
-                        <option>11</option>
-                    </select>
-                    <span class = "hm">시</span>
-                    <select name="" id="" class = "inputBox">
-                        <option>00</option>
-                        <option>10</option>
-                        <option>20</option>
-                        <option>30</option>
-                        <option>40</option>
-                        <option>50</option>
-                    </select>
-                    <span class = "hm">분</span>
-                </td>
-            </tr>
-            <tr>
-                <td class = "title">&nbsp;&nbsp;공연 장소</td>
-                <td colspan = "3"><input type="text" style = "width : 480px; height : 30px;"></td>
-            </tr>
-            <tr>
-                <td class = "title">&nbsp;&nbsp;티켓 가격</td><!-- 가격은 나중에 더 생각해보자 -->
-                <td><input type="text" class = "inputBox"> 원</td>
-                <td class = "title">&nbsp;&nbsp;관람연령</td>
-                <td>
-                    <select name="" id="" class = "inputBox">
-                        <option value="">전체 관람가</option>
-                        <option value="">15세 이상 관람가</option>
-                        <option value="">청소년 불가</option>
-                    </select>
-                </td>
-            </tr>
-        </table>
-    </div>
-
-    <div class = "inputTitle">
-        공연소개
-    </div>
-    <div class = "inputInfo">
-        <!-- 공연소개 내용 입력하는 칸 -->
-        <textarea name="" id="" cols="30" rows="10" placeholder = "공연소개 내용을 입력하세요" style = " border : 2px solid #D2D2D2; resize : none; width : 1290px; height : 210px; margin-top : 20px; margin-left:20px"></textarea>
-
-    </div>
-
-    <div class = "inputTitle">
-        기획사 정보
-    </div>
-    <div class = "inputInfo"  style = "height : 180px;">
-        <table style = "height : 140px;">
-            <tr>
-                <td class = "title">&nbsp;&nbsp;주최</td>
-                <td><input type="text" style = "width: 700px; height :30px;"></td>
-            </tr>
-            <tr>
-                <td class = "title">&nbsp;&nbsp;주관</td>
-                <td><input type="text" style = "width: 700px; height :30px;"></td>
-            </tr>
-            <tr>
-                <td class = "title">&nbsp;&nbsp;문의</td>
-                <td><input type="text" style = "width: 700px; height :30px;"></td>
-            </tr>
-        </table>
-    </div>	
 
 	<!-------------------------------뮤지컬 정보 공지등록 끝---------------------------------> 
 
@@ -534,7 +297,7 @@
 
 
 	
-<script>
+	<script>
 		var date = document.getElementById("date");
 		var now = new Date();
 		var sw = document.images["sw"];
@@ -552,41 +315,7 @@
 		        maxDate: now.getFullYear() + "-12-" + "31"
 		    });
 		
-		var cal1 = document.getElementById("cal1");
-		cal1.value = now.getFullYear() + "-" + parseInt(now.getMonth()+1) + "-" + now.getDate();
 		
-		$("#cal1").datepicker({
-		    dateFormat: "yy-mm-dd",
-		    minDate: now.getFullYear() + "-1-1",
-		    maxDate: now.getFullYear() + "-12-" + "31"
-		});
-		    
-		var cal2 = document.getElementById("cal2");
-		cal2.value = now.getFullYear() + "-" + parseInt(now.getMonth()+1) + "-" + now.getDate();
-		
-		$("#cal2").datepicker({
-		    dateFormat: "yy-mm-dd",
-		    minDate: now.getFullYear() + "-1-1",
-		    maxDate: now.getFullYear() + "-12-" + "31"
-		});
-		
-		var cal3 = document.getElementById("cal3");
-		cal3.value = now.getFullYear() + "-" + parseInt(now.getMonth()+1) + "-" + now.getDate();
-		
-		$("#cal3").datepicker({
-		    dateFormat: "yy-mm-dd",
-		    minDate: now.getFullYear() + "-1-1",
-		    maxDate: now.getFullYear() + "-12-" + "31"
-		});
-		
-		var cal4 = document.getElementById("cal4");
-		cal4.value = now.getFullYear() + "-" + parseInt(now.getMonth()+1) + "-" + now.getDate();
-		
-		$("#cal4").datepicker({
-		    dateFormat: "yy-mm-dd",
-		    minDate: now.getFullYear() + "-1-1",
-		    maxDate: now.getFullYear() + "-12-" + "31"
-		});  
 	<%@include file="/WEB-INF/views/inc/adminScript.jsp" %>
 	
 </script>

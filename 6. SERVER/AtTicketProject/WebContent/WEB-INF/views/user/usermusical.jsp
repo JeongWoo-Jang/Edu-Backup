@@ -208,31 +208,8 @@
                 opacity: 0;
             }
 
-            .img1, .img2, .img3, .img4, .img5, .img6 {
-                background-size: contain;
-            }
-            .atimg1 {
-                background-image: url("./images/music2.jpeg");
-                background-size: contain;
-            }
-            .atimg2 {
-                background-image: url("./images/music3.jpeg");
-                background-size: contain;
-            }
-            .atimg3 {
-                background-image: url("./images/music4.jpeg");
-                background-size: contain;
-            }
-            .atimg4 {
-                background-image: url("./images/music10.jpeg");
-                background-size: contain;
-            }
-            .atimg5 {
-                background-image: url("./images/music11.jpeg");
-                background-size: contain;
-            }
-            .atimg6 {
-                background-image: url("./images/music1.jpeg");
+            .img1, .img2, .img3, .img4, .img5, .img6
+            , .atimg1, .atimg2, .atimg3, .atimg4, .atimg5, .atimg6 {
                 background-size: contain;
             }
 
@@ -461,54 +438,20 @@
                 <div style="text-align: center; margin-bottom: 50px;">
                     <h1>AT'S PICKS</h1>
                     <div>
-                        <div class="img atimg1" value="temp7">
-                            <div class="img-cover1 cover7" value="cover7">
-                                <div class="text1 temp7">
-                                    <h4>select shop</h4>
-                                    <span>10cm X 데이브레이크</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="img atimg2" value="temp8">
-                            <div class="img-cover1 cover8" value="cover8">
-                                <div class="text1 temp8">
-                                    <h4>select shop</h4>
-                                    <span>10cm X 데이브레이크</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="img atimg3" value="temp9">
-                            <div class="img-cover1 cover9" value="cover9">
-                                <div class="text1 temp9">
-                                    <h4>select shop</h4>
-                                    <span>10cm X 데이브레이크</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="img atimg4" value="temp10">
-                            <div class="img-cover1 cover10" value="cover10">
-                                <div class="text1 temp10">
-                                    <h4>select shop</h4>
-                                    <span>10cm X 데이브레이크</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="img atimg5" value="temp11">
-                            <div class="img-cover1 cover11" value="cover11">
-                                <div class="text1 temp11">
-                                    <h4>select shop</h4>
-                                    <span>10cm X 데이브레이크</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="img atimg6" value="temp12">
-                            <div class="img-cover1 cover12" value="cover12">
-                                <div class="text1 temp12">
-                                    <h4>select shop</h4>
-                                    <span>10cm X 데이브레이크</span>
-                                </div>
-                            </div>
-                        </div>
+                        
+						<c:set var="i" value="1" />
+                            <c:forEach items="${atspick}" var="atspick">
+                            	<div class="img atimg${i}" value="temp${i+6}" style="background-image: url(./images/${atspick.img})">
+		                            <div class="img-cover1 cover${i+6}" value="cover${i+6}">
+		                                <div class="text1 temp${i+6}">
+		                                    <h4>${atspick.genre}</h4>
+		                                    <span>${atspick.name}</span>
+		                                </div>
+		                            </div>
+		                        </div>
+                            <c:set var="i" value="${i + 1}" />
+                        </c:forEach>
+
                     </div>
                 </div>
                 <hr />

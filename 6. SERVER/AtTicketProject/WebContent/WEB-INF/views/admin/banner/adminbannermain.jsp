@@ -148,6 +148,13 @@
             
         }
         
+        .btn-sm {
+        	float: right;
+        	margin-right: 20px;
+        	box-shadow: none;
+        	font-weight: bold;
+        }
+        
         /* --------------------상단배너 끝----------------------- */
 
 
@@ -248,32 +255,37 @@
     <div class = "bannerTool" style = "margin-left: 330px; width : 1400px">
     	<c:set var="i" value="1" />
         <c:forEach items="${slide}" var="slide">
-        <table class="topBannerSelect topBannerSelect${i}">
-            <tr>
-                <td>상단배너 <span>${i}</span>번째 사진 선택</td>
-                <td style = "padding-top : 5px;"><input type="file" class = "topBannerInputType" id="pic${i}" name="pic${i}"></td>
-            </tr>
-            <tr>
-                <td>상단 기입 내용</td>
-                <td><input type="text" class = "topBannerInputType" id="top${i}" name="top${i}" value="${slide.intro1}"></td>
-            </tr>
-            <tr>
-                <td>중간 기입 내용</td>
-                <td style = "height: 100px; padding-top : 5px;"><textarea id="middle${i}" name="middle${i}" 
-                cols="30" rows="3" style = "resize : none; width : 97%; height : 80%; border : 0px;">${slide.intro2}</textarea></td>
-            </tr>
-            <tr>
-                <td>하단 기입 내용</td>
-                <td><input type="text" class="topBannerInputType" id="bottom${i}" name="bottom${i}" value="${slide.intro3}"></td>
-            </tr>
-            <tr>
-                <td>기입 내용 글자색 지정</td>
-                <td><input type="color" style="width: 300px;" id="color${i}" name="color${i}" value="${slide.fontcolor}"></td>
-            </tr>
-        </table>
+    	<form method="POST" action="/AtTicketProject/admin/adminbannermainend.do" id="form${i}">
+	        <table class="topBannerSelect topBannerSelect${i}">
+	            <tr>
+	                <td>상단배너 <span>${i}</span>번째 사진 선택</td>
+	                <td style = "padding-top : 5px;"><input type="file" class = "topBannerInputType" id="pic${i}" name="pic"></td>
+	            </tr>
+	            <tr>
+	                <td>상단 기입 내용</td>
+	                <td><input type="text" class = "topBannerInputType" id="top${i}" name="top" value="${slide.intro1}"></td>
+	            </tr>
+	            <tr>
+	                <td>중간 기입 내용</td>
+	                <td style = "height: 100px; padding-top : 5px;"><textarea id="middle${i}" name="middle" 
+	                cols="30" rows="3" style = "resize : none; width : 97%; height : 80%; border : 0px;">${slide.intro2}</textarea></td>
+	            </tr>
+	            <tr>
+	                <td>하단 기입 내용</td>
+	                <td><input type="text" class="topBannerInputType" id="bottom${i}" name="bottom" value="${slide.intro3}"></td>
+	            </tr>
+	            <tr>
+	                <td>기입 내용 글자색 지정</td>
+	                <td>
+	                <input type="color" style="width: 300px;" id="color${i}" name="color" value="${slide.fontcolor}">
+	                <input type="hidden" name="num" value="${i}">
+	                <input type="submit" class="btn btn-default btn-sm" value="저장" style="outline: none;">
+	                </td>
+	            </tr>
+	        </table>
+		</form>          
         <c:set var="i" value="${i + 1}" />
         </c:forEach>
-          
     </div>
 
     <hr class = "splitHr">
@@ -330,12 +342,15 @@
         
     </style>
     
+    <form method="POST" action="/AtTicketProject/admin/adminbannermainend.do">
     <div class = "titlebanner"> MIDDLE 배너 관리</div>  
     <div id = "middleBanner">
         <div id = "middleImg" style="background-color: ${banner.backcolor}">
             <img src="<%= request.getContextPath() %>/images/${banner.img}" alt="" id = "middlePic">
-            <div id = "mdEditBtn"><button id = "mdBtn">수정하기</button></div>  
+            <div id = "mdEditBtn"><button type="button" id = "mdBtn">수정하기</button></div>  
         </div>
+        <input type="hidden" name="middleBackcolor" id="middleBackcolor">
+        <input type="hidden" name="middleSrc" id="middleSrc">
     </div>
 
 
@@ -370,7 +385,19 @@
             //console.log("클릭함");
             window.name = "parentPage";
             window.open("/AtTicketProject/admin/adminbannermodify.do", "adminbanner", "width=1250,height=950");
-        }); 
+        });
+        
+        function rgb2hex(rgb) {
+            rgb = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+            function hex(x) {
+                return ("0" + parseInt(x).toString(16)).slice(-2);
+            }
+            return "#" + hex(rgb[1]) + hex(rgb[2]) + hex(rgb[3]);
+        };
+        
+        $("#middleBackcolor").val(rgb2hex($("#middleImg").css("background-color")));
+        $("#middleSrc").val($("#middlePic").attr("src").substring($("#middlePic").attr("src").lastIndexOf('/')).substring(1));
+        
     </script>
 
     <hr class = "splitHr">
@@ -489,6 +516,7 @@
         <div id = "logoModify" class = "intBtmBanner" style = "margin-left : 30px;">
             <div id = "innerLogo"><img src="<%= request.getContextPath() %>/images/${logo.img}" alt="" id = "innerLogoImg"></div>
             <div id = "compLogoBtns"><input type="button" value = "수정하기" id = "compLogoBtn"></div>
+            <input type="hidden" name="logoImg" id="logoImg">
         </div>
         
         <!-- 세부내용 -->
@@ -505,11 +533,11 @@
                 </tr>
                 <tr>
                     <td>대표자</td>
-                    <td><input type="text" id = "compCeo" name="compCeo" value = "${logo.owner}"></td>
+                    <td><input type="text" id = "compOwner" name="compOwner" value = "${logo.owner}"></td>
                 </tr>
                 <tr>
                     <td>개인정보 보호 책임자</td>
-                    <td><input type="text" id = "compResp" name="compResp" value = "${logo.manager}"></td>
+                    <td><input type="text" id = "compManager" name="compManager" value = "${logo.manager}"></td>
                 </tr>
                 <tr>
                     <td>회사 이메일</td>
@@ -517,7 +545,7 @@
                 </tr>
                 <tr>
                     <td>사업자 등록번호</td>
-                    <td><input type="text" id = "compCode" name="compCode" value = "${logo.license}"></td>
+                    <td><input type="text" id = "compLicense" name="compLicense" value = "${logo.license}"></td>
                 </tr>
             </table>
         </div>
@@ -564,20 +592,21 @@
     </style>
     
     
-    <div><input type="button" value = "저장하기" id = "saveBtn"></div>
-
+    <div><input type="submit" value = "저장하기" id = "saveBtn"></div>
+	</form>
+	
     <script>
+    
+    	$("#logoImg").val($("#innerLogoImg").attr("src").substring($("#innerLogoImg").attr("src").lastIndexOf('/')).substring(1));
+    	
         //저장하기 눌렀을때 이벤트
         $("#saveBtn").click(function(){
             if (confirm("해당 내용을 저장하시겠습니까?")) {
-            	alert($("#pic1", "#top1", "#middle1", "#bottom1", "#color1"));
-                alert($("#middleImg").css("background-color"));
-                alert($("#middlePic").attr("src").substring($("#middlePic").attr("src").lastIndexOf('/')).substring(1));
-                alert($("#innerLogoImg").attr("src").substring($("#innerLogoImg").attr("src").lastIndexOf('/')).substring(1));
-                alert($("#compName"));
+                alert($("#middleBackcolor").val());
+                alert($("#middleSrc").val());
+                alert($("#logoImg").val());
+                alert($("#compName").val());
                 alert("저장 완료.");
-                
-                location.href = "/AtTicketProject/admin/adminbannermain.do";
             }    
         });
 

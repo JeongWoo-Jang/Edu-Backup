@@ -21,12 +21,20 @@ public class AdminShowDeleteOk extends HttpServlet{
 		int sresult = dao.deleteShow(seq);
 		int rresult = dao.deleteRound(seq);
 		
-		if (sresult == 1 && rresult == 1) {
+		TagDTO tdto = dao.loadTag(seq);
+		
+		int tresult = dao.deleteTag(tdto);
+		
+		
+		
+		if (sresult == 1 && rresult == 1 && tresult == 1) {
 			//삭제 성공 -> view(X) -> list(O)
-			resp.sendRedirect("/AtTicketProject/adminshow.do");
+			resp.sendRedirect("/AtTicketProject/adminshow.do");	
 			
  		} else{			
  			//삭제 실패
+ 			System.out.println(sresult + " " + rresult + " " + tresult);
+ 			
  			PrintWriter writer = resp.getWriter();
 			writer.print("<html>");
 			writer.print("<body>");

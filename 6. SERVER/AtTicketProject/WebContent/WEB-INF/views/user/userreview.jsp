@@ -360,6 +360,12 @@
                 margin-bottom: -2px;
                 padding-left: 20px;
             }
+            
+            #btnWrite{
+            	position: relative;
+            	left: 1550px;
+            	outline: none;
+            }
         </style>
     </head>
     <body>
@@ -405,6 +411,7 @@
                 >
                     리뷰게시판
                 </p>
+                
                 <div class="event-division"></div>
                 <div class="event-main-list">
                     <div id="eventbox">
@@ -482,235 +489,90 @@
                 </div>
                 <!-- 검색창 -->
                 <div class="searchbox">
+                    <button class = "selectSort" style = "outline : none; background-color: white; border:white;" onclick="location.href='/AtTicketProject/userreview.do?sort=regdate&page=${page}&search=${search}';">
+                    <span 
+                        style="position: relative; top: 50px; right: 380px;"
+                        class="noticemenu" 
+                        >등록순</span>
+                    </button>
+                    <button class = "selectSort" style = "outline : none; background-color: white; border:white;" onclick="location.href='/AtTicketProject/userreview.do?sort=heart&page=${page}&search=${search}';">
                     <span
                         style="position: relative; top: 50px; right: 380px;"
                         class="noticemenu"
-                        >등록순</span
-                    >
+                        >추천순</span>
+                     </button>
+                    <button class = "selectSort" style = "outline : none; background-color: white; border:white;" onclick="location.href='/AtTicketProject/userreview.do?sort=rview&page=${page}&search=${search}';">
                     <span
                         style="position: relative; top: 50px; right: 380px;"
                         class="noticemenu"
-                        >추천순</span
-                    >
-                    <span
-                        style="position: relative; top: 50px; right: 380px;"
-                        class="noticemenu"
-                        >조회순</span
-                    >
+                        >조회순</span>
+                    </button>
+                    
+                   	<form method="GET" action="/AtTicketProject/userreview.do" id="searchForm">
                     <div class="search">
                         <div class="form-group">
                             <div class="input-group">
                                 <input
                                     type="text"
                                     class="form-control"
-                                    placeholder="궁금하신 내용을 입력세요"
+                                    placeholder="궁금하신 내용을 입력하세요"
+                                    name="search"
                                 />
+                                
                                 <span class="input-group-addon"
+                                	   style="cursor: pointer;" onclick="$('#searchForm').submit();"
                                     ><i class="glyphicon glyphicon-search"></i
                                 ></span>
                             </div>
                         </div>
                     </div>
+	                </form>
+	                
                 </div>
+                
                 <table id="tblList" class="table table-striped">
                     <thead>
                         <tr>
                             <th>번호</th>
                             <th>제목</th>
-                            <th>이름</th>
+                            <th>ID</th>
                             <th>날짜</th>
                             <th>읽음</th>
                             <th>추천</th>
                         </tr>
                     </thead>
                     <tbody>
+                    
+                    	<c:forEach items="${list}" var="dto">
                         <tr>
-                            <td>1</td>
-                            <td>뮤지컬 [베르테르] 1차 1 안내</td>
-                            <td>홍길동</td>
-                            <td>2020-07-15</td>
-                            <td>11</td>
-                            <td>11</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
+                            <td>${dto.rseq}</td>
                             <td>
-                                그랜드 민트 페스티벌 2020 - 공식 1 안내.
+                            <a href="/AtTicketProject/userreviewread.do?rseq=${dto.rseq}">
+                            ${dto.title}
+                            </a>
                             </td>
-                            <td>아무개</td>
-                            <td>2020-07-14</td>
-                            <td>65</td>
-                            <td>11</td>
+                            <td>${dto.id}</td>
+                            <td>${dto.regdate}</td>
+                            <td>${dto.rview}</td>
+                            <td>${dto.heart}</td>
                         </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>
-                                뮤지컬 [오페라의 유령] 월드투어-서울 마지막
-                                오픈! 6/30(화) 2시
-                            </td>
-                            <td>호호호</td>
-                            <td>2020-07-11</td>
-                            <td>7</td>
-                            <td>11</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>
-                                <span style="color: red; border: 1px solid red;"
-                                    >이벤트판매</span
-                                >
-                                팬타스틱 팬미팅 콘서트 - 서울 1안내
-                            </td>
-                            <td>홍길동</td>
-                            <td>2020-07-15</td>
-                            <td>11</td>
-                            <td>11</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>
-                                <span style="color: red; border: 1px solid red;"
-                                    >이벤트판매</span
-                                >
-                                유승현 콘서트 Voice & Story vol.2 1 안내.
-                            </td>
-                            <td>아무개</td>
-                            <td>2020-07-14</td>
-                            <td>65</td>
-                            <td>11</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>
-                                [오픈일변경]뮤지컬 [어쩌면 해피엔딩] 3차
-                                1 안내
-                            </td>
-                            <td>호호호</td>
-                            <td>2020-07-11</td>
-                            <td>7</td>
-                            <td>11</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>
-                                <span style="color: red; border: 1px solid red;"
-                                    >이벤트판매</span
-                                >
-                                2020 WILD KARD IN SEOUL 티켓 오픈안내
-                            </td>
-                            <td>홍길동</td>
-                            <td>2020-07-15</td>
-                            <td>11</td>
-                            <td>11</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>
-                                뮤지컬 [캣츠] 40주년 오리지널 내한공연 (Musical
-                                CATS) 첫 1! 7/23(목) 2시
-                            </td>
-                            <td>아무개</td>
-                            <td>2020-07-14</td>
-                            <td>65</td>
-                            <td>11</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>
-                                뮤지컬 [머더 발라드] 2020 프리뷰 티켓 오픈 안내
-                            </td>
-                            <td>호호호</td>
-                            <td>2020-07-11</td>
-                            <td>7</td>
-                            <td>11</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>
-                                알앤디웍스 두번째 콘서트 [R&D works UNIVERSE]
-                                1 안내
-                            </td>
-                            <td>홍길동</td>
-                            <td>2020-07-15</td>
-                            <td>11</td>
-                            <td>11</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>
-                                <span style="color: red; border: 1px solid red;"
-                                    >이벤트판매</span
-                                >
-                                SURL（설）concert ‘Ah, ah, ah, ah What can I
-                                do?’ - 1안내.
-                            </td>
-                            <td>아무개</td>
-                            <td>2020-07-14</td>
-                            <td>65</td>
-                            <td>11</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>뮤지컬 [미아 파밀리아] 4차 1 안내</td>
-                            <td>호호호</td>
-                            <td>2020-07-11</td>
-                            <td>7</td>
-                            <td>11</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>
-                                뮤지컬 [머더 발라드] 2020 1차 티켓 오픈 안내
-                            </td>
-                            <td>홍길동</td>
-                            <td>2020-07-15</td>
-                            <td>11</td>
-                            <td>11</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>뮤지컬 [무인도 탈출기] 1차 1 안내.</td>
-                            <td>아무개</td>
-                            <td>2020-07-14</td>
-                            <td>65</td>
-                            <td>11</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>레미제라블 1 안내</td>
-                            <td>호호호</td>
-                            <td>2020-07-11</td>
-                            <td>7</td>
-                            <td>11</td>
-                        </tr>
+                    	</c:forEach>
+                    	
                     </tbody>
                 </table>
+                
+                <c:if test="${not empty userseq}">
+              		<button id="btnWrite" class="btn btn-default" onclick="location.href='/AtTicketProject/userreviewwrite.do?userseq=${userseq}';">
+              		<span class="glyphicon glyphicon-pencil"></span>
+              		리뷰쓰기</button>
+              	</c:if>
 
-                <nav class="pagebar">
-                    <ul class="pagination">
-                        <li>
-                            <a href="#" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                            </a>
-                        </li>
-                        <li><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">5</a></li>
-                        <li><a href="#">6</a></li>
-                        <li><a href="#">7</a></li>
-                        <li><a href="#">8</a></li>
-                        <li><a href="#">9</a></li>
-                        <li><a href="#">10</a></li>
-                        <li>
-                            <a href="#" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-
+                ${pagebar}
+                
+                
+                
+                
+                
                 <!-------------------------------- 화면 하단부 -------------------------------->
                 <div id="bottom">
                     <div>
@@ -764,10 +626,13 @@
                     </div>
                 
             </div>
-        </div>
+ 
 
         <script src="js/slick.min.js"></script>
         <script>
+        	
+
+        
             //상단 메뉴 css
             $(".menubar").mouseover(function () {
                 $(this).css("border-bottom", "5px solid orange");

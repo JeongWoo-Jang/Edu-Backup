@@ -2,14 +2,12 @@
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="/WEB-INF/views/inc/asset.jsp" %>
 
-
-
 <!DOCTYPE html>
 <html>
 <head>
 	<link rel="stylesheet" href="/AtTicketProject/css/adminbanner.css">
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Admin</title>
 
 <style>
         /* 매인배너 타이틀 */
@@ -63,7 +61,16 @@
           margin-left : 280px;
           width : 1500px;
       }
-
+	
+	 tr td:nth-child(4) a{
+           text-decoration:none;
+           color:black;
+      } 
+        
+     tr td:nth-child(4) a:hover{
+           color:red;
+           
+     } 
 
 </style>
 
@@ -93,21 +100,21 @@
         
         
         #slctp1, #slctp2 {
-            float : left;
+          /*   float : left; */
             /* margin-left : 100px; */
             margin-bottom: 0px;
         }
         #slctp1 {
-            margin-left : -10px;
+             margin-left : -10px; 
             /* margin-bottom:-10px; */
         }
 
         #slctp2 {
             margin-top : 10px;
-            margin : 10px auto;
+           /*  margin : 10px auto; */
             margin-bottom: 10px;
             width : 300px;
-            margin-left: 792px;
+            /* margin-left: 792px; */
         }
         #searchlogo:hover {
             cursor: pointer;
@@ -452,10 +459,10 @@
     
 
     <!-------------------------------------------- 회원대상 공지사항  게시판 시작 ------------------------------------------->	
+
     <style>
         #selectable {
-            /* border : 1px solid blue; */
-            width : 1330px;
+            width : 1330px; 
             margin-left : 350px;
             height : 1100px;
         }
@@ -493,10 +500,12 @@
             /* color : white; */
         }
         #nttable th:nth-child(1) {width : 25px;}
-        #nttable th:nth-child(2) {width : 130px;}
-        #nttable th:nth-child(3) {width : 775px;}
-        #nttable th:nth-child(4) {width : 300px;}
-        #nttable th:nth-child(5) {width : 100px;}
+        #nttable th:nth-child(2) {width : 50px;}
+        #nttable th:nth-child(3) {width : 130px;}
+        #nttable th:nth-child(4) {width : 775px;}
+        #nttable th:nth-child(5) {width : 200px;}
+        #nttable th:nth-child(6) {width : 300px;}
+        #nttable th:nth-child(7) {width : 100px;}
 
 
         #nttable tbody td {
@@ -510,7 +519,7 @@
         }
 
 
-        #nttable > tbody > tr > td:nth-child(3):hover {
+        #nttable > tbody > tr > td:nth-child(4):hover {
             cursor : pointer;
             text-decoration: underline;
         }
@@ -528,9 +537,9 @@
         .modified:hover {
             color : white;
         }
-        .pagebar {
+        /* .pagebar {
             margin-left : 400px;
-        }
+        } */
         
         /* 게시판 th 관리 */
         .tableth {
@@ -546,184 +555,115 @@
           color: black;
       }
 
-
+	
+		.selectNotice.active {
+			font-weight: bold;
+		}
+		
+		/* #tt{
+			border:1px solid black;
+		}
+		
+		#tt td{
+			border:1px solid black;
+		}  */
 
     </style>
 
-	
-
     <!-- 등록순 오름차순 조회순 -->
-    <div id = "selectable">
-        <div class = "tableInnerTitle">회원 대상 공지</div>
-        <div id = "slctp1">
-            <button class = "selectNotice" style = "outline : none;"><span><i class = "glyphicon glyphicon-sort"></i></span>등록순</button>
-            <button class = "selectNotice" style = "outline : none;"><span><i class = "glyphicon glyphicon-sort"></i>오름차순</button>
-            <button class = "selectNotice" style = "outline : none;"><span><i class = "glyphicon glyphicon-sort"></i>내림차순</button>
-            <!-- <input type="button" class = "selectNotice" value = "등록순">
-            <input type="button" class = "selectNotice" value = "오름차순">
-            <input type="button" class = "selectNotice" value = "내림차순"> -->
-        </div>
-
-        <div id = "slctp2">
-			<div class="input-group">
-				<input type="text" class="form-control" placeholder="검색어를 입력하세요.">
-				<span class="input-group-addon" id = "searchlogo"><i class="glyphicon glyphicon-search"></i></span>
-			</div>
-        </div>
-        
-        <table style = "width:1330px;" class = "table table-striped table-bordered table-condensed" id = "nttable">
+	<div id="selectable">
+    <table style="margin:15px 0px;width:100%;" id = "tt">
+    <tr>
+		<td style="width:250px;">
+				<div class="tableInnerTitle">회원 대상 공지</div>
+				<div style="width:300px;" id="slctp1">
+					<button class="selectNotice" style="outline: none;"
+						onclick="location.href='/AtTicketProject/usernotice/adminusernotice.do?page=${page}&search=${search}&sort=regdate';">등록순</button>
+					<button class="selectNotice" style="outline: none;"
+						onclick="location.href='/AtTicketProject/usernotice/adminusernotice.do?page=${page}&search=${search}&sort=seq1';">오름차순</button>
+					<button class="selectNotice" style="outline: none;"
+						onclick="location.href='/AtTicketProject/usernotice/adminusernotice.do?page=${page}&search=${search}&sort=seq';">내림차순</button>
+				</div>
+		</td>
+		<td style="text-align:center;width=500px;">
+			<c:if test="${not empty search}">
+				<div style="width: 300px;margin:20px auto;"
+					class="message well well-sm">'${search}'(으)로 ${totalCount}건의
+					게시물을 검색했습니다.</div>
+			</c:if>
+				
+		</td>
+		<td style="text-align:right;width:300px;">
+			<form method="GET" action="/AtTicketProject/usernotice/adminusernotice.do" id="searchForm">
+				<div id="slctp2">
+					<div class="input-group">
+						<input type="text" id="search" name="search"
+							aria-describedby="basic-addon2" class="form-control"
+							placeholder="검색어를 입력하세요." required value="${search}"
+							autocomplete="off"> <span class="input-group-addon"
+							id="searchlogo" style="cursor: pointer;"
+							onclick="$('#searchForm').submit();"><i
+							class="glyphicon glyphicon-search"></i></span>
+					</div>
+				</div>
+			</form>
+		</td>
+	</tr>
+	</table>
+        <%-- <form method="GET" action="/AtTicketProjcet/usernotice/adminusernotice.do" id="searchForm">
+	                 <div id = "slctp2">
+	                    <input type="text" class="form-control" placeholder="" aria-describedby="basic-addon2" name="search" id="search" required value = "${search}">
+	                    <span class="input-group-addon" id = "searchlogo" style="cursor:pointer;" onclick="$('#searchForm').submit();"><span class="glyphicon glyphicon-search"></span></span>
+	                </div>
+       </form> --%>
+        <form method = "POST" action = "/AtTicketProject/usernotice/adminusernoticedelete.do?page=${page}&search=${search}&sort=${sort}" id = "deleteForm">
+        <table class = "table table-striped table-bordered table-condensed" id = "nttable">
             <thead>
                 <tr>
                     <th><input type="checkbox" id = "total5"></th>
+              		<th class = "tableth">번호</th>
                     <th class = "tableth">구분</th>
                     <th class = "tableth">제목</th>
+                    <th class = "tableth">등록일</th>
                     <th class = "tableth">티켓오픈일시</th>
                     <th class = "tableth">조회수</th>
                    
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td><input type="checkbox" class = "t5"></td>
-                    <td>티켓오픈</td>
-                    <td id = "remi">레미제라블 - 박효신 출현 서울시 강남구 상섬동 코엑스</td>
-                    <td> 2020.02.17(월) 15:00</td>
-                    <td>2016</td>
+              
+                <c:if test = "${not empty search and list.size() == 0}">
+                    <tr>
+                    	<td colspan = "7">검색 결과가 없습니다.</td>
+                    </tr>
+                    </c:if>
                     
-                </tr>
-                <tr>
-                    <td><input type="checkbox" class = "t5"></td>
-                    <td>티켓오픈</td>
-                    <td id = "morning">아침을여는 클래식</td>
-                    <td> 2020.03.17(월) 15:00</td>
-                    <td>2016</td>
-                    
-
-                </tr>
-                <tr>
-                    <td><input type="checkbox" class = "t5"></td>
-                    <td>티켓오픈</td>
-                    <td>지킬 엔 하이드 - 박효신 출현 서울시 강남구 상섬동 코엑스</td>
-                    <td> 2020.02.17(월) 15:00</td>
-                    <td>2016</td>
-                    
-
-                </tr>
-                <tr>
-                    <td><input type="checkbox" class = "t5"></td>
-                    <td>티켓오픈</td>
-                    <td>지킬 엔 하이드 - 박효신 출현 서울시 강남구 상섬동 코엑스</td>
-                    <td> 2020.02.17(월) 15:00</td>
-                    <td>2016</td>
-                    
-
-                </tr>                
-                <tr>
-                    <td><input type="checkbox" class = "t5"></td>
-                    <td>티켓오픈</td>
-                    <td>지킬 엔 하이드 - 박효신 출현 서울시 강남구 상섬동 코엑스</td>
-                    <td> 2020.02.17(월) 15:00</td>
-                    <td>2016</td>
-
-                </tr>               
-                 <tr>
-                    <td><input type="checkbox" class = "t5"></td>
-                    <td>티켓오픈</td>
-                    <td>지킬 엔 하이드 - 박효신 출현 서울시 강남구 상섬동 코엑스</td>
-                    <td> 2020.02.17(월) 15:00</td>
-                    <td>2016</td>
-                    
-
-                </tr>               
-                <tr>
-                    <td><input type="checkbox" class = "t5"></td>
-                    <td>티켓오픈</td>
-                    <td>지킬 엔 하이드 - 박효신 출현 서울시 강남구 상섬동 코엑스</td>
-                    <td> 2020.02.17(월) 15:00</td>
-                    <td>2016</td>
-                    
-
-                </tr>                
-                <tr>
-                    <td><input type="checkbox" class = "t5"></td>
-                    <td>티켓오픈</td>
-                    <td>지킬 엔 하이드 - 박효신 출현 서울시 강남구 상섬동 코엑스</td>
-                    <td> 2020.02.17(월) 15:00</td>
-                    <td>2016</td>
-                    
-
-                </tr>                
-                <tr>
-                    <td><input type="checkbox" class = "t5"></td>
-                    <td>티켓오픈</td>
-                    <td>지킬 엔 하이드 - 박효신 출현 서울시 강남구 상섬동 코엑스</td>
-                    <td> 2020.02.17(월) 15:00</td>
-                    <td>2016</td>
-                    
-
-                </tr>               
-                 <tr>
-                     <td><input type="checkbox" class = "t5"></td>
-                    <td>티켓오픈</td>
-                    <td>지킬 엔 하이드 - 박효신 출현 서울시 강남구 상섬동 코엑스</td>
-                    <td> 2020.02.17(월) 15:00</td>
-                    <td>2016</td>
-                    
-
-                </tr>
-                <tr>
-                    <td><input type="checkbox" class = "t5"></td>
-                    <td>티켓오픈</td>
-                    <td>지킬 엔 하이드 - 박효신 출현 서울시 강남구 상섬동 코엑스</td>
-                    <td> 2020.02.17(월) 15:00</td>
-                    <td>2016</td>
-                    
-
-                </tr>                
-                <tr>
-                    <td><input type="checkbox" class = "t5"></td>
-                    <td>티켓오픈</td>
-                    <td>지킬 엔 하이드 - 박효신 출현 서울시 강남구 상섬동 코엑스</td>
-                    <td> 2020.02.17(월) 15:00</td>
-                    <td>2016</td>
-                    
-
-                </tr>                
-                <tr>
-                    <td><input type="checkbox" class = "t5"></td>
-                    <td>티켓오픈</td>
-                    <td>지킬 엔 하이드 - 박효신 출현 서울시 강남구 상섬동 코엑스</td>
-                    <td> 2020.02.17(월) 15:00</td>
-                    <td>2016</td>
-                    
-
-                </tr>                
-                <tr>
-                    <td><input type="checkbox" class = "t5"></td>
-                    <td>티켓오픈</td>
-                    <td>지킬 엔 하이드 - 박효신 출현 서울시 강남구 상섬동 코엑스</td>
-                    <td> 2020.02.17(월) 15:00</td>
-                    <td>2016</td>
-                    
-
-                </tr>                
-                <tr>
-                    <td><input type="checkbox" class = "t5"></td>
-                    <td>티켓오픈</td>
-                    <td>지킬 엔 하이드 - 박효신 출현 서울시 강남구 상섬동 코엑스</td>
-                    <td> 2020.02.17(월) 15:00</td>
-                    <td>2016</td>
-                    
-
-                </tr>
+                    <c:if test = "${empty search and list.size() == 0}">
+                    <tr>
+                    	<td colspan = "7">게시물이 없습니다.</td>
+                    </tr>
+                    </c:if>
+                    <c:forEach items="${list}" var="dto">
+	                    <tr>
+	                    		<td><input type="checkbox" name = "noticeseq" class = "t5" value = "${dto.seq}"></td>
+	                            <td>${dto.seq}</td>
+	                            <td>${dto.nindex}</td>
+	                            <td><a href="/AtTicketProject/usernotice/adminusernoticecontent.do?noticeseq=${dto.seq}&page=${page}&search=${search}&sort=${sort}">${dto.title}</td>
+	                            <td>${dto.regdate}</td> 
+	                            <td>${dto.opendate} (${dto.dy})</td>
+	                            <td>${dto.nview}</td>
+	                    </tr>
+                    </c:forEach>
             </tbody>
         </table>
-
+	</form>
         <!-- 내용물 수정/삭제 페이지 -->
         <div id = "manipulate">
-            <button class = "modified" id = "makebtn"><i class="glyphicon glyphicon-plus"></i> 공지작성</button>
-            <button class = "modified" id = "modifybtn"><i class="glyphicon glyphicon-pencil"></i> 공지수정</button>
-            <button class = "modified" id = "delbtn"><i class="glyphicon glyphicon-trash"></i> 공지삭제</button>
+          <div class="btn-group fbtns" role="group" aria-label="...">
+	            <button class = "modified" id = "makebtn"><i class="glyphicon glyphicon-plus"></i> 공지작성</button>
+	            <button class = "modified" id = "modifybtn"><i class="glyphicon glyphicon-pencil"></i> 공지수정</button>
+	            <button class = "modified" id = "delbtn" type = "submit" onclick="$('#deleteForm').submit()"><i class="glyphicon glyphicon-trash"></i> 공지삭제</button>
+            </div>
         </div>
             <!-- <input type="button" class = "modified" value = "공지삭제"> -->
         <!-- <input type="button" class = "modified" value = "공지작성"> -->
@@ -731,33 +671,22 @@
 
 
         <!-- 하단 페이지 선택 바 -->
-            <nav class = "pagebar">
-              <ul class="pagination">
-                <li>
-                  <a href="#" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                  </a>
-                </li>
-                <li><a href="">1</a></li>
-                <li><a href="">2</a></li>
-                <li class = "active"><a href="">3</a></li>
-                <li><a href="">4</a></li>
-                <li><a href="">5</a></li>
-                <li><a href="">6</a></li>
-                <li><a href="">7</a></li>
-                <li><a href="">8</a></li>
-                <li><a href="">9</a></li>
-                <li><a href="">10</a></li>
-                <li>
-                  <a href="#" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                  </a>
-                </li>
-              </ul>
-            </nav>
-
+            
+           <table style="width:100%;"><tr><td style="text-align:center">${pagebar}<td></tr></table> 
  
  	<script>
+ 	var index = 0;
+ 	
+ 	if("${sort}" == "regdate"){
+		index = 0;
+	} else if("${sort}" == "seq1") {
+		index = 1;
+	}  else if("${sort}" == "seq") {
+		index = 2;
+	}
+ 	
+ 	
+ 	$("#slctp1").children().eq(index).addClass("active");
     
  	// 게시판 맨 상단박스가 체크 되면 아래 박스 모두 체크 해준다. -> 고객공지 대상    
     var ck = document.getElementById("total5");
@@ -808,23 +737,38 @@
     //삭제
     $("#delbtn").click(function(){
         if(confirm("해당 공지를 삭제하시겠습니까?")) {
-            alert("삭제완료");
+           
         }
     });
 
     //작성
     // adminNctModify(fix).html
     $("#makebtn").click(function(){
-        location.href = "/AtTicketProject/usernotice/adminusernoticecreate.do";
+        location.href = "/AtTicketProject/usernotice/adminusernoticecreate.do?page=${page}&sort=${sort}&search=${search}";
     });
 
+    var cnt = 0;
     
-    //수정
-    $("#modifybtn").click(function(){
-        location.href = "/AtTicketProject/usernotice/adminusernoticemodify.do";
+    $("#modifybtn").click(function () {
+       
+        $(".t5").each(function(){  // .each()는 forEach를 뜻한다.
+ 			if($(this).is(":checked")) { // ":checked"를 이용하여 체크가 되어있는지 아닌지 확인한다.
+ 					cnt+=1;	
+ 			}
+ 		});
+         
+     	 if ($('.t5').is(':checked') == true && cnt == 1) {
+        	 location.href = "/AtTicketProject/usernotice/adminusernoticemodify.do?noticeseq="+$('.t5:checked').val();
+
+          } else {
+              alert("하나만 체크하시오.");
+          }
+         	 cnt=0;
     });
     
- 	
+    
+    
+    $("#pagebar").val(${page});
  	</script>    
  
 

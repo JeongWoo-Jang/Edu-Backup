@@ -213,8 +213,6 @@
         
         <div id="btns">
             <a class="btn btn-primary" id="btnadd"><i class="glyphicon glyphicon-plus"></i> 추가</a>
-    <!--         <a class="btn btn-primary" id="btnmodify"><i class="glyphicon glyphicon-pencil"></i> 수정</a>
-            <a class="btn btn-primary" id="btndelete"><i class="glyphicon glyphicon-trash"></i> 삭제</a> -->
         </div>
  
  		<div id="pbar">

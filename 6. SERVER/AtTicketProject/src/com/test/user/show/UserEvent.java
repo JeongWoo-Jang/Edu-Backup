@@ -60,9 +60,10 @@ public class UserEvent extends HttpServlet{
 		System.out.println(req.getContextPath());
 		
 		
-		System.out.println(session.getAttribute("userid"));
 		
-			}
+		System.out.println(session.getAttribute("userid"));
+			
+		}
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/user/userevent.jsp");
 		dispatcher.forward(req, resp);

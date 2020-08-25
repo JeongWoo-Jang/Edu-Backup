@@ -23,7 +23,7 @@ public class UserMypage extends HttpServlet{
 		UserDAO dao = new UserDAO();
 		ArrayList<CouponDTO> clist = dao.getCoupon((int)session.getAttribute("userseq"));
 		ArrayList<EventDTO> elist = dao.getEvent();
-		dao.close();
+
 		
 		req.setAttribute("clist", clist);
 		req.setAttribute("elist", elist);

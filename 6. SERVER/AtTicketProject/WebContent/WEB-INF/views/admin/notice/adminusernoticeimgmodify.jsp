@@ -9,7 +9,7 @@
 <head>
 <link rel="stylesheet" href="/AtTicketProject/css/adminbanner.css">
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Admin</title>
    <style>
         html {
             width : 600px;
@@ -80,8 +80,72 @@
             font-size: 1.2em;
             margin-left : 20px;
         }
-
         
+         .inputInfo {
+         
+            height : 250px;
+            width : 1330px;
+            margin-left : 350px;
+            margin-top : 0px;
+            margin-bottom : 10px;
+        }
+        
+        .inputTitle {
+           
+            width : 1330px;
+            margin-left : 350px;
+            height : 40px;
+            margin-bottom: 0px;
+            font-size: 1.5em;
+            font-weight: inherit;
+        }
+        .inputInfo table {
+           
+            border-collapse: collapse;
+            margin: 20px;
+            width : 1290px;
+            height : 200px;
+        }
+        .inputInfo table td{
+            border: 2px solid #D2D2D2;
+            
+        }
+        .inputInfo table input{
+           
+            margin-left : 10px;
+        }
+        .inputInfo table select {
+            margin-left : 10px;
+        }
+        .title {
+            
+            width : 150px;
+            background-color: #F0F0F0;
+           
+        }
+       
+        .inputCalendar {
+          
+            margin-bottom : 20px;
+        }
+        .calIng {
+           
+            position : relative;
+            left : 10px;
+            top : 10px;
+        }
+        .calIng:hover {
+            cursor: pointer;
+        }
+        .consted {
+
+            margin-bottom : 20px;
+        }
+        .inputBox {
+            height : 30px;
+        }      
+        
+	 
     </style>
 
 

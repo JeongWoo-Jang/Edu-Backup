@@ -81,7 +81,7 @@
             font-size: 15px;
             padding: 40px 0;
             position: absolute;
-            /* margin-top: -120px; */
+            margin-top: -120px;
         }
         .menubar {
             margin: 0 5px;
@@ -252,7 +252,7 @@
             background-color: gray;
         }
 
-        #tbl th:nth-child(1) {width: 110px; text-align: center; color: #d2e1ee;}
+        #tbl th:nth-child(1) {width: 135px; text-align: center; color: #d2e1ee;}
         #tbl th:nth-child(2) {width: 700px; text-align: left; color: white;}
         #tbl th:nth-child(3) {text-align: right; color: white; padding-right: 20px;}
 
@@ -260,24 +260,25 @@
             border-bottom: 1px solid #ddd;
         }
 
-        #tbl tr:first-child td:nth-child(1) a{
+        #tbl tr:first-child td:nth-child(1){
             padding-left: 25px;
-            color: #ccc;
+            color: #888;
             text-decoration: none;
         }
 
-        #tbl tr:first-child td:nth-child(2),#tbl tr:first-child td:nth-child(3) {text-align: right; width: 100px; height: 40px;}
+        #tbl tr:first-child td:nth-child(2),#tbl tr:first-child td:nth-child(3) {text-align: right; width: 120px; height: 40px;}
+        
 
         #tbl tr:first-child td:nth-child(2) span {
             color: #7E9CB6;
         }
         #tbl tr:first-child td:nth-child(3) span {
             color: #d18b78;
-            padding-right: 20px;
+            padding-right: 10px;
         }
 
         #tbl tr:nth-child(2) p{
-            min-height: 500px;
+            min-height: 300px;
             padding: 25px; 
         }
 
@@ -336,7 +337,7 @@
         #tbl2 th:nth-child(3) {text-align: right; color: white; padding-right: 20px;}
 
         #tbl2 tr:nth-child(1) p{
-            min-height: 500px;
+            min-height: 300px;
             padding: 25px; 
         }
 
@@ -364,20 +365,28 @@
                 <table id="tbl">
 
                     <thead>
-                        <th>예매방법</th>
-                        <th colspan="2">제목입니다.</th>
-                        <th colspan="2">2020-07-21 19:30</th>
+                        <th>${dto.tag}</th>
+                        <th colspan="2">${dto.subject}</th>
+                        <th colspan="2">${dto.regdate }</th>
                     </thead>
                     <tbody>
                         <tr>
-                            <td colspan="3"><a href="user_qna_content.html">페이지 새로고침</a></td>
+                            <td colspan="3">${dto.name} (${dto.id})</td>
                             <td>조회수 <span>10</span></td>
-                            <td>답변 <span>완료</span></td>
+                            <td>답변 <span>
+								<c:if test="${dto.ansSeq ne 0}">
+				                	<span class="complete ok">완료</span>
+				                </c:if> 
+				                
+				                <c:if test="${dto.ansSeq eq 0}">
+				                	<span class="complete no">미완료</span>
+				                </c:if> 
+							</span></td>
                         </tr>
                         <tr>
                             <td colspan="5" style="min-height: 600px;">
                                 <p>
-                                내용입니다.
+                                	${dto.content }
                                 </p>
                             </td>
                         </tr>
@@ -389,14 +398,14 @@
 
                     <thead>
                         <th>답변</th>
-                        <th colspan="2">[ <span>제목입니다.</span> ] 에 대한 답변입니다.</th>
-                        <th colspan="2">2020-07-21 19:30</th>
+                        <th colspan="2">[ <span>${dto.subject}</span> ] 에 대한 답변입니다.</th>
+                        <th colspan="2">${dto.anregdate }</th>
                     </thead>
                     <tbody>
                         <tr>
                             <td colspan="5" style="min-height: 600px;">
                                 <p>
-                                답변입니다.
+                                	${dto.ancontent }
                                 </p>
                             </td>
                         </tr>
@@ -509,7 +518,7 @@
         });
         // 목록 링크
         $("#list").click(function() {
-            $(location).attr('href','user_qna.html');
+            $(location).attr('href','/AtTicketProject/userqna.do');
         });
         // 삭제
         $("#delete").click(function() {

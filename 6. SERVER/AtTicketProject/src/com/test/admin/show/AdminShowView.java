@@ -26,9 +26,14 @@ public class AdminShowView extends HttpServlet{
 		
 		ShowDTO dto = dao.loadview(seq);
 		
+		TagDTO tdto = dao.loadTag(seq);
+		
+//		System.out.println(dto.toString());
+		
 		req.setAttribute("dto", dto);
 		req.setAttribute("search", search);
 		req.setAttribute("page", page);
+		req.setAttribute("tdto", tdto);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/admin/show/adminshowview.jsp");
 		dispatcher.forward(req, resp);

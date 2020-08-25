@@ -315,7 +315,7 @@
     </style>
 </head>
 <body>
-    
+     <form method="POST" enctype="multipart/form-data" action="/AtTicketProject/userrevieweditok.do" >
     <div id="main">
 <!-------------------------------- 화면 상단부 -------------------------------->
         <div id="top">
@@ -354,31 +354,28 @@
                 <tr>
                     <th style="width: 120px;">제목</th>
                     <th style="width: 650px;">
-                        <input type="text" class="form-control" />
+                        <input type="text" name="title" class="form-control" value="${dto.title}" required/>
                     </th>
                 </tr>
                 <tr>
                     <th style="width: 150px;">장르</th>
                     <th style="width: 650px;">
-                        <select class="form-control">
-                            
-                            <option>콘서트</option>
-                            <option>연극</option>
-                            <option>클래식</option>
-                            
-                            
+                       <select id="genre" name="genre" class="form-control" required>
+                        	<option value="0" selected disabled hidden>장르를 고르세요.</option>
+                            <option value="concert">콘서트</option>
+                            <option value="musical">뮤지컬</option>
+                            <option value="theater">연극</option>
+                            <option value="classic">클래식</option>
+                            <option value="exhibition">전시</option>
                         </select>
+
                     </th>
                 </tr>
                 <tr>
                     <th style="width: 150px;">공연제목</th>
                     <th style="width: 650px;">
-                        <select class="form-control">
-                            
-                            <option>베르테르</option>
-                            <option>베르테르</option>
-                            <option>베르테르</option>
-                            
+                        <select class="form-control" id="showTitle" name="showTitle" required>
+                            <option value="0" selected disabled hidden>공연 제목을 선택하세요.</option>
                             
                         </select>
                     </th>
@@ -388,16 +385,22 @@
                     <th style="width: 150px;">내용</th>
                     <th style="width: 650px;">
                         <textarea
+                        	name = "content"
                             class="form-control"
                             style="height: 200px;"
-                        ></textarea>
+                            required
+                        >${dto.content}</textarea>
                     </th>
                 </tr>
                
                 <tr>
                     <th style="width: 150px;">파일</th>
                     <th style="width: 650px;">
-                        <input type="file" class="form-control" />
+                    	
+                        <input type="file" class="form-control" name="rfile"/>
+                        <c:if test="${not empty dto.rfile}">
+                        <span>${dto.rfile}</span>
+                        </c:if>
                     </th>
                 </tr>
                
@@ -419,14 +422,17 @@
                      
         </div>
         <div class="btns">                
-                <button class="btn btn-primary">
-                    <span class="glyphicon glyphicon-ok"></span>글수정
-                </button>
-            </div>
-            <div class="banner2">
-            <img style="margin-bottom: 40px; width: 1200px;" src="./images/banner2.png" alt="">
-            </div>
-            
+            <button class="btn btn-primary">
+                <span class="glyphicon glyphicon-ok"></span>글수정
+            </button>
+        </div>
+        <div class="banner2">
+        <img style="margin-bottom: 40px; width: 1200px;" src="./images/banner2.png" alt="">
+        </div>
+        
+        <input type="hidden" value="${dto.rseq}" name="rseq">
+       	
+        </form>
 
         
         
@@ -441,12 +447,35 @@
                 <img src="./images/title2.png" style="transform: translate(0, 40px);">
             </div>
         </div>
-    </div>
 
 
 
     <script src="js/slick.min.js"></script>
     <script>
+    
+	  //예매한 공연 목록
+		
+		var userseq = ${userseq};
+		
+		$("#genre").change(function(){
+			$("#showTitle *").remove();
+			//alert($(this).find(":selected").val());
+			$.ajax({
+				type: "GET",
+				url: "/AtTicketProject/userreviewshow.do",
+				data: "genre=" + $(this).find(":selected").val() + "&cseq=" + userseq,
+				dataType: "json",
+				success: function(result) {
+					$(result).each(function(index, item){
+						$("#showTitle *").remove();
+						$("#showTitle").append("<option value = " + item.showseq + ">" + item.showname +"</option>");
+					});
+				},
+				error: function(a,b,c) {
+					console.log(a,b,c);
+				}
+			});
+		});
 
         //상단 메뉴 css
         $(".menubar").mouseover(function() {

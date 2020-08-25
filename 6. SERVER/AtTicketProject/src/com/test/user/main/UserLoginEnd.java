@@ -20,6 +20,7 @@ public class UserLoginEnd extends HttpServlet{
 		
 		//여기서 상대방이 입력한 id와 pw를 검증해준다
 		//System.out.println("asdasdasdasd???");
+		
 		//1. 데이터 가져오기
 		String id = req.getParameter("userid");
 		String pw = req.getParameter("userpw");
@@ -49,7 +50,8 @@ public class UserLoginEnd extends HttpServlet{
 			
 			//나머지 회원들의 정보들도 session에 넘겨줘야 한다.
 			UserDTO dto2 = dao.getMember(dto.getId());
-			dao.close();
+	
+			//dao.close();
 			session.setAttribute("userseq", dto2.getSeq());//회원 번호
 			session.setAttribute("username", dto2.getName());//회원 이름 
 			session.setAttribute("userssn", dto2.getSsn());//회원 주민번호

@@ -533,7 +533,7 @@ function fn_callback_realTimeBookRank(response){
 
 //성별연령별예매율 콜백
 function fn_callback_ageBookRate(response){
-	alert("성별연령별예매율 콜백");
+	//alert("성별연령별예매율 콜백");
     //성별/연령별
     var abAge = [];
 	var abMan = [];

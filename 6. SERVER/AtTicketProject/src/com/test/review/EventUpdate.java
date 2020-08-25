@@ -19,3 +19,4 @@ public class EventUpdate extends HttpServlet {
 			dispatcher.forward(req, resp);
 		}
 }
+

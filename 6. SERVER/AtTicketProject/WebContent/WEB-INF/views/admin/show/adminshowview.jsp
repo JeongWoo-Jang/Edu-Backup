@@ -84,7 +84,7 @@
         #btns {
 	       position: relative;
 	       top: 70px;
-	       left: -50px;
+	       left: -100px;
         }
         #btns > button { outline: none; }
 		#img1{
@@ -141,7 +141,22 @@
                 <div id="round">
                     <label for="txtround1">공연 회차 : </label><span>1</span>
                     <label for="txttime1">시작 시간 : </label><span>${dto.time}</span>
+
                 </div>
+                    
+                    <c:if test="${!empty dto.round2}">
+                    	<div>
+	                    <label for="txtround2">공연 회차 : </label><span>2</span>
+	                    <label for="txttime2">시작 시간 : </label><span>${dto.time2}</span>
+	                    </div>
+                    </c:if>
+                    
+                    <c:if test="${!empty dto.round3}">
+                    	<div>
+	                    <label for="txtround2">공연 회차 : </label><span>3</span>
+	                    <label for="txttime2">시작 시간 : </label><span>${dto.time3}</span>
+	                    </div>
+                    </c:if>
                 
                 <div>
                     <label for="txtplace">공연 장소 : </label>
@@ -151,9 +166,14 @@
                 <div>
                     <label for="txtagen">기획사 : </label><span>${dto.agencyName}</span>
                 </div>
+                
+                <div>
+				<label for="tag">태그 : </label>
+				<span><c:forEach items="${tdto.tags}" var="tag">${tag} </c:forEach></span>
+				</div>
 
 				<div id="btns">
-					<button id="btnEdit" class="btn btn-default" onclick="location.href='/AtTicketProject/adminshow.do?&sort=write&page=${page}&search=${search}';">목록</button>
+					<button id="btnEdit" class="btn btn-default" onclick="location.href='/AtTicketProject/adminshow.do?page=${page}&search=${search}';">목록</button>
 					<button id="btnEdit" class="btn btn-default" onclick="location.href='/AtTicketProject/adminshowedit.do?seq=${dto.seq}';">수정</button>
 					<button id="btnDel" class="btn btn-default" >삭제</button>
 				</div>

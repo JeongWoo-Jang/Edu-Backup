@@ -37,19 +37,20 @@
 <body>
 	 <div id="info" style="margin-left: 50px;">
         <legend style="width: 300px; margin:20px -1px; font-weight: bold;">Egg포인트 적립내역 수정</legend>
+            <form method="POST" action="/AtTicketProject/customer/cuspointupdateok.do">
             <div id="box1" style="width: 600px;">
                 <table class="table table-bordered" style="width: 450px">
                     <tr>
                         <th style="width: 140px; vertical-align: middle;">공연명(예매번호)</th>
                         <td style="width: 300px;">
-                            <input id="row1" type="text" style="width: 150px;" type="text" class="form-control">
+                            <input id="row1" name = "showtitle" type="text" style="width: 200px;" type="text" class="form-control" required value = "${dto.showtitle}" disabled>
                         </td>
         
                     </tr>
                     <tr>
                         <th style="vertical-align: middle;">적립일</th>
                         <td>
-                            <input id="row2" style="width: 200px;" type="text" class="form-control" class="line">
+                            <input id="row2" name = "pointdate" style="width: 100px;" type="text" class="form-control" class="line" required value = "${dto.pointdate}" disabled>
                           
                         </td>
                     </tr>
@@ -57,29 +58,32 @@
                     <tr>
                         <th style="vertical-align: middle;">Egg포인트</th>
                         <td>
-                            <input id="row3" class="form-control" style="width: 100px;"></input>
+                            <input id="row3" name = "egg" class="form-control" style="width: 100px;" required value = "${dto.egg}"></input>
                         </td>
                     </tr>
                     <tr>
                         <th style="vertical-align: middle;">적립상태</th>
                         <td>
-                        <input id="row4" style="width: 100px;" type="text" class="form-control">
+                        <input id="row4" name = "valid" style="width: 100px;" type="text" class="form-control" required value = "${dto.valid}" disabled>
                         </td>
                     </tr>
         
                     <tr>
                         <th style="vertical-align: middle;">적립유형</th>
                         <td>
-                            <input id="row5" style="width: 100px;" type="text" class="form-control">
+                            <input id="row5" name = "type" style="width: 100px;" type="text" class="form-control" required value = "${dto.type}">
                         </td>
                     </tr>
+                    <input type = "hidden" name = "bookseq" value = "${bookseq}">
+                    <input type = "hidden" name = "cusseq" value = "${cusseq}">
                 </table>
-        </div>
+        	</div>
             <div id = "manipulate">
                 <button class = "modified" id = "modifybtn"><i class="glyphicon glyphicon-pencil"></i>수정</button>
               
             </div>
-
+			</form>
+			</div>
         <script>
                     
             $("#row1").keyup(function () {

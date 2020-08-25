@@ -31,11 +31,13 @@ public class UserTheater extends HttpServlet{
 		HashMap<String,String> map = dao.mainlist(slider);
 		BannerDTO dto = dao.banner(page);
 		ArrayList<BannerDTO> hot = dao.mainhot(whatshot);
+		ArrayList<BannerDTO> atspick = dao.atspick(whatshot);
 		dao.close();
 		
 		req.setAttribute("map", map);
 		req.setAttribute("banner", dto);
 		req.setAttribute("hot", hot);
+		req.setAttribute("atspick", atspick);
 		
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/user/usertheater.jsp");

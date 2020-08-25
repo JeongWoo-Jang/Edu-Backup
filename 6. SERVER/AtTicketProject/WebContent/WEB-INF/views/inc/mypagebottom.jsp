@@ -3,7 +3,7 @@
 <div id="bottom">
 <div>
     <!-- 회사 마크 -->
-        <img src="./images/title2.png"/>
+        <img src="/AtTicketProject/images/title2.png"/>
     </div>
     <div class="txt">
         <p class="black">At-Ticket (주)</p>

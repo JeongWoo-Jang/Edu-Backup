@@ -43,7 +43,7 @@ public class ShowDAO {
 				where = String.format("and v.title like '%%%s%%' or v.genre like '%%%s%%'",map.get("search"),map.get("search"));
 			}
 			
-			String sql = String.format("select a.* from (select rownum as rnum, v.* from tblShow v where v.delflag = 0 %s order by seq) a where rnum >= %s and rnum <= %s order by %s"
+			String sql = String.format("select a.* from (select rownum as rnum, v.* from tblShow v where v.delflag = 0 %s order by v.seq) a where rnum >= %s and rnum <= %s order by %s"
 					,where ,map.get("begin"), map.get("end"),map.get("sort"));
 			
 			stat = conn.createStatement();
@@ -83,11 +83,11 @@ public class ShowDAO {
 
 			if (map.get("search") != null) {
 				// 이름 & 제목 & 내용 - 포괄 검색
-				where = String.format("where title like '%%%s%%' or genre like '%%%s%%'",
+				where = String.format("and title like '%%%s%%' or genre like '%%%s%%'",
 						map.get("search"), map.get("search"));
 			}
 
-			String sql = String.format("select count(*) as cnt from vwShow %s", where);
+			String sql = String.format("select count(*) as cnt from tblShow where delflag = 0 %s", where);
 			
 			stat = conn.createStatement();
 			rs = stat.executeQuery(sql);
@@ -221,6 +221,8 @@ public class ShowDAO {
 	public int addRound(ShowDTO dto) {
 		
 		try {
+			
+			
 			String sql = "insert into tblRoundInfo (seq, startDate, endDate, showSeq, delflag) values (roundInfoSeq.nextVal,?,?,?,default)";
 			
 			int showmin = dto.getMin();
@@ -241,7 +243,57 @@ public class ShowDAO {
 			pstat.setString(2, endTime);
 			pstat.setString(3, dto.getSeq());
 			
-			return pstat.executeUpdate();
+			int result = pstat.executeUpdate();
+			
+			if(dto.getRound2() != null || dto.getRound2().equals("")) {
+				sql = "insert into tblRoundInfo (seq, startDate, endDate, showSeq, delflag) values (roundInfoSeq.nextVal,?,?,?,default)";
+				
+				showmin = dto.getMin();
+				times = dto.getTime2().split(":");
+				hour = Integer.parseInt(times[0]);
+				min = Integer.parseInt(times[1]);
+				
+				min += showmin;
+				if(min >= 60) {
+					hour++;
+					min = min - 60;
+				}
+				
+				endTime = hour+":"+min;
+				
+				pstat = conn.prepareStatement(sql);
+				pstat.setString(1, dto.getTime2());
+				pstat.setString(2, endTime);
+				pstat.setString(3, dto.getSeq());
+				
+				pstat.executeUpdate();
+				
+			} else if (dto.getRound3() != null || dto.getRound3().equals("")) {
+				sql = "insert into tblRoundInfo (seq, startDate, endDate, showSeq, delflag) values (roundInfoSeq.nextVal,?,?,?,default)";
+
+				showmin = dto.getMin();
+				times = dto.getTime3().split(":");
+				hour = Integer.parseInt(times[0]);
+				min = Integer.parseInt(times[1]);
+
+				min += showmin;
+				if (min >= 60) {
+					hour++;
+					min = min - 60;
+				}
+
+				endTime = hour + ":" + min;
+
+				pstat = conn.prepareStatement(sql);
+				pstat.setString(1, dto.getTime3());
+				pstat.setString(2, endTime);
+				pstat.setString(3, dto.getSeq());
+				
+				pstat.executeUpdate();
+			}
+			
+			return result;
+			
 	
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -254,7 +306,52 @@ public class ShowDAO {
 	public ShowDTO loadview(String seq) {
 		
 		try {
-			String sql = "select s.seq, s.title, to_char(s.startdate,'yyyy-mm-dd') as startdate,to_char(s.enddate,'yyyy-mm-dd') as enddate,s.poster, s.content, to_char(s.opendate,'yyyy-mm-dd') as opendate, s.age, s.genre,s.price, s.delflag " + 
+			String sql = "select count(*) as cnt" + 
+					" from tblShow s left outer join tblAgency a on s.agencySeq = a.seq" + 
+					" inner join tbltheater t on s.theaterSeq = t.seq" + 
+					" inner join tblHall h on t.hallSeq = h.seq\r\n" + 
+					" inner join tblRoundInfo r on s.seq = r.showSeq" + 
+					" where r.delflag = 0 and s.delflag = 0 and s.seq=?";
+			
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, seq);
+			rs = pstat.executeQuery();
+			
+			int cnt = 0;
+			
+			if(rs.next()) {
+				cnt = rs.getInt("cnt");
+			}
+			
+			ShowDTO dto = new ShowDTO();
+			String[] rseqs = new String[10];
+			String[] startTimes = new String[10];
+			
+			if(cnt > 1) {
+				sql = "select r.seq, r.startdate " + 
+						"from tblShow s left outer join tblAgency a on s.agencySeq = a.seq " + 
+						"inner join tbltheater t on s.theaterSeq = t.seq " + 
+						"inner join tblHall h on t.hallSeq = h.seq " + 
+						"inner join tblRoundInfo r on s.seq = r.showSeq " + 
+						"where r.delflag = 0 and s.delflag = 0 and s.seq=? " + 
+						"order by seq desc";
+				
+				pstat = conn.prepareStatement(sql);
+				pstat.setString(1, seq);
+				rs = pstat.executeQuery();
+				
+				int i=0;
+				
+				while(rs.next()) {
+					rseqs[i] = rs.getString("seq");
+					startTimes[i] = rs.getString("startdate");
+					i++;
+				}
+				
+				
+			}
+			
+			sql = "select s.seq, s.title, to_char(s.startdate,'yyyy-mm-dd') as startdate,to_char(s.enddate,'yyyy-mm-dd') as enddate,s.poster, s.content, to_char(s.opendate,'yyyy-mm-dd') as opendate, s.age, s.genre,s.price, s.delflag " + 
 					",a.host, t.name as tname, h.name as hname, h.addr as addr, r.seq as rseq, r.startDate as rstart, r.endDate as rend, h.region " + 
 					"from tblShow s left outer join tblAgency a on s.agencySeq = a.seq " + 
 					"inner join tbltheater t on s.theaterSeq = t.seq " + 
@@ -266,10 +363,8 @@ public class ShowDAO {
 			pstat.setString(1, seq);
 			rs = pstat.executeQuery();
 			
-			ShowDTO dto = new ShowDTO();
 			
 			if(rs.next()) {
-				
 				//소요시간 계산하기
 				String start = rs.getString("rstart");
 				String end = rs.getString("rend");
@@ -315,19 +410,30 @@ public class ShowDAO {
 				dto.setTitle(rs.getString("title"));
 				dto.setPlace(rs.getString("region"));
 				dto.setMin(tmin);
+				
+				if(rseqs[1] != null) {
+					dto.setRound2(rseqs[0]);
+					dto.setTime2(startTimes[0]);
+				} else if(rseqs[2] != null) {
+					dto.setRound3(rseqs[2]);
+					dto.setTime3(startTimes[2]);
+				}
+				
 			}
 			
 			return dto;
+			
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
 
+	//공연 수정
 	public int editShow(ShowDTO dto) {
 		try {
 			
-			String aseq = loadAgency(dto);
 			String sql = "update tblShow set title=?,startdate = to_date(?,'yyyy-mm-dd'),enddate = to_date(?,'yyyy-mm-dd'),price=?, poster=?, content=?, opendate = to_date(?,'yyyy-mm-dd'), "
 					+ "age=?, genre=?, agencyseq=?, theaterSeq=? where seq=?";
 			
@@ -341,7 +447,7 @@ public class ShowDAO {
 			pstat.setString(7, dto.getOpenDate());
 			pstat.setString(8, dto.getAge());
 			pstat.setString(9, dto.getGenre());
-			pstat.setString(10, aseq);
+			pstat.setString(10, dto.getAgency());
 			pstat.setString(11, dto.getPlace());
 			pstat.setString(12, dto.getSeq());
 			
@@ -354,57 +460,25 @@ public class ShowDAO {
 		return 0;
 	}
 
-	private String loadAgency(ShowDTO dto) {
-		try {
-			
-			String sql = "select seq from tblAgency where host = ?";
-			pstat = conn.prepareStatement(sql);
-			pstat.setString(1, dto.getAgencyName());
-			
-			rs = pstat.executeQuery();
-			
-			if(rs.next()) {
-				return rs.getString("seq");
-			}
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		return null;
-	}
-
+	//회차 수정
 	public int editRound(ShowDTO dto) {
 		try {
 			
-			int showmin = dto.getMin();
-			String[] times = dto.getTime().split(":");
-			int hour = Integer.parseInt(times[0]);
-			int min = Integer.parseInt(times[1]);
-			
-			min += showmin;
-			if(min >= 60) {
-				hour++;
-				min = min - 60;
-			}
-			
-			String endTime = hour+":"+min;
-			
-			String sql = "update tblRoundInfo set startdate = ?, enddate=? where showseq = ?";
+			String sql = "update tblRoundInfo set delflag = 1 where showSeq = ?";
 			
 			pstat = conn.prepareStatement(sql);
-			pstat.setString(1, dto.getTime());
-			pstat.setString(2, endTime);
-			pstat.setString(3, dto.getSeq());
+			pstat.setString(1, dto.getSeq());
+			pstat.executeUpdate();
 			
-			return pstat.executeUpdate();
+			return addRound(dto);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return 0;
 	}
-
+	
+	//공연 삭제
 	public int deleteShow(String seq) {
 		
 		try {
@@ -419,6 +493,7 @@ public class ShowDAO {
 		return 0;
 	}
 
+	//회차 삭제
 	public int deleteRound(String seq) {
 		try {
 			
@@ -432,6 +507,110 @@ public class ShowDAO {
 		}
 		return 0;
 	}
+
+	//태그 추가
+	public int addTag(TagDTO tdto) {
+		
+		try {
+			int addcnt = 0;
+			
+			for(String tag: tdto.getTags()) {
+				String sql = "insert into tblTag (seq,name,showSeq,delflag) values (tagSeq.nextVal, ?,?,default)";
+				pstat = conn.prepareStatement(sql);
+				pstat.setString(1, tag);
+				pstat.setString(2, tdto.getShowSeq());
+				
+				addcnt += pstat.executeUpdate();
+			}
+			
+			if(addcnt == tdto.getTags().length) {
+				return 1;
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return 0;
+	}
+
+	public TagDTO loadTag(String seq) {
+		
+		try {
+			
+			TagDTO tdto = new TagDTO();
+			
+			int index = 0;
+			
+			String sql = "select count(*) as cnt from tblTag where showseq = ?";
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, seq);
+			rs = pstat.executeQuery();
+			
+			if(rs.next()) {
+				index = rs.getInt("cnt");
+			}
+						
+			String[] tags = new String[index];
+			
+			sql = "select * from tblTag where showseq = ? and delflag = 0";
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, seq);
+			rs = pstat.executeQuery();
+			
+			int i=0;
+			while(rs.next()) {
+				tags[i] = rs.getString("name"); 
+				i++;
+			}
+			tdto.setShowSeq(seq);
+			tdto.setTags(tags);
+			
+			return tdto;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+
+	public int editTag(TagDTO tdto) {
+		try {
+			
+			//삭제 -> 다시 추가
+			String sql = "delete from tblTag where showSeq = ?";
+			
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, tdto.getShowSeq());
+			pstat.executeUpdate();
+			
+			return addTag(tdto);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+
+	public int deleteTag(TagDTO tdto) {
+		try {
+
+			// 삭제 -> 다시 추가
+			String sql = "delete from tblTag where showSeq = ?";
+
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, tdto.getShowSeq());
+			
+			return pstat.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+
+
 
 
 
