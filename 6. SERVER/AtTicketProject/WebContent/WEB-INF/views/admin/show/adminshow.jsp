@@ -232,27 +232,6 @@
     $("#btnadd").click(function(){
         window.open("/AtTicketProject/adminshowadd.do","_self");
     });
-    // 수정
-    $("#btnmodify").click(function(){
-        if ($("input:checkbox[name=is_check]:checked").length > 1 || $("input:checkbox[name=is_check]:checked").length < 1){
-            alert("하나만 선택하세요.");
-        }else {
-            //선택된 체크박스의 내용 불러오기
-
-            // window.location.href="adminShowModify.html";
-            window.open("adminShowModify.html","_self");
-        }
-    });
-    // 삭제
-    $("#btndelete").click(function(){
-        var result = confirm("정말 삭제하시겠습니까?");
-        console.log(result);
-        if(result) {
-            alert("삭제되었습니다.")
-        }else {
-
-        }
-    });
     
     
     var index = 0;
@@ -265,13 +244,6 @@
 		index = 1;
 	} else if("${sort}" == "readcount") {
 		index = 2;
-	}
-		
-	$(".fbtns").children().eq(index).addClass("active");
-	
-	function movePage() {
-		//alert(event.srcElement.value);
-		location.href= "/codestudy/board/list.do?page="+event.srcElement.value;
 	}
 	
 	$("#pagebar").val(${page});

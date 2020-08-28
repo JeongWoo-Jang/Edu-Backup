@@ -26,6 +26,7 @@ public class DeleteComment extends HttpServlet {
 		//2.
 		BoardDAO dao = new BoardDAO();
 		int result = dao.deleteComment(seq);
+		dao.close();
 		
 		//3.
 		if (result == 1) {

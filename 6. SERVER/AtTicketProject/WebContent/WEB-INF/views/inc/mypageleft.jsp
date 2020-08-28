@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<div id="left">
+<div id="left" style="z-index:10;">
     <!-- 유저 정보 -->
     <div id="userinfo">
         <p id="infohead">MY공연<small style="color: #BBB"> | MYPAGE</small></p>
@@ -30,9 +30,9 @@
         <p><span class="glyphicon glyphicon-hand-up
             "></span> 맞춤별 예매</p>
         <p class="personaltitle">지역별예매</p>
-        └<a href="user_local.html">서울</a>,<a href="user_local.html">경기/인천</a>,<a href="user_local.html">대전/충청/강원</a>,<br><a href="user_local.html">부산/대구/울산/경상</a>,<a href="user_local.html">광주/전라</a>,<a href="user_local.html">제주</a>
+        └<a href="#!">서울</a>,<a href="#!">경기/인천</a>,<a href="#!">대전/충청/강원</a>,<br><a href="#!">부산/대구/울산/경상</a>,<a href="#!">광주/전라</a>,<a href="#!">제주</a>
         <p class="personaltitle" style="margin-top: 20px;">공연장별예매</p>
-        └<a href="user_local.html">세종문화회관</a>,<a href="user_local.html">광림아트센터</a>,<a href="user_local.html">예술의전당</a>,<br><a href="user_local.html">샤롯데씨어터</a>,<a href="user_local.html">한전아트센터</a>
+        └<a href="#!">세종문화회관</a>,<a href="#!">광림아트센터</a>,<a href="#!">예술의전당</a>,<br><a href="#!">샤롯데씨어터</a>,<a href="#!">한전아트센터</a>
         <p class="personaltitle" style="margin-top: 20px;">날짜별예매 <input type="button" value="달력보기" class="btn btn-default btn-xs" id="btncalendar"></p>
     </div>
     <!-- 고객센터 -->
@@ -73,7 +73,7 @@ $(".usermenu").click(function() {
 
 //포인트 안내 클릭시
 $("#btnpoint").click(function() {
-    location.href = "InfoUse.html";
+    location.href = "/AtTicketProject/userinfouse.do";
 });
 
 //회원정보 수정 클릭시
@@ -83,7 +83,7 @@ $("#btninfo").click(function() {
 
 //상세보기 클릭시
 $("#btndetail").click(function() {
-    location.href = "/AtTicketProject/mypagedensity.do";
+    location.href = "/AtTicketProject/mypage/mypagedensity.do";
 });
 
 //로그아웃 클릭시

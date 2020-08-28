@@ -63,7 +63,7 @@ public class View extends HttpServlet {
 		
 		//2.7 댓글 목록 가져오기
 		ArrayList<CommentDTO> clist = dao.listComment(seq);
-		
+		dao.close();
 				
 		//3. BoardDAO에게 반환받은 BoardDTO(게시글 1개)를 출력하기 위해서 JSP 페이지에게 전달하기
 		request.setAttribute("dto", dto);

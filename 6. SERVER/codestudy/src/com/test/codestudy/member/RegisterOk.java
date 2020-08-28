@@ -68,7 +68,8 @@ public class RegisterOk extends HttpServlet {
 			
 			//dao.add(id, name, email, pw, pic);
 			result = dao.add(dto);
-		
+			dao.close();
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -27,16 +27,16 @@ public class UserReview extends HttpServlet{
 		
 		HttpSession session = req.getSession();
 		
-		System.out.println("user : "+ (int)session.getAttribute("userseq"));
+//		System.out.println("user : "+ (int)session.getAttribute("userseq"));
 		
-		int userseq = (int)session.getAttribute("userseq");
+//		int userseq = (int)session.getAttribute("userseq");
 		String search = req.getParameter("search");
 		String sort = req.getParameter("sort");
 		
 		
 		ReviewDAO dao = new ReviewDAO();
 		ReviewDTO dto = new ReviewDTO();
-		dto.setCseq(userseq);
+//		dto.setCseq(userseq);
 		
 		ArrayList<ReviewDTO> list = new ArrayList<ReviewDTO>();
 		HashMap<String,String> map = new HashMap<String, String>();
@@ -166,7 +166,7 @@ public class UserReview extends HttpServlet{
 		
 		req.setAttribute("pagebar", pagebar);
 		
-		req.setAttribute("userseq", userseq);
+//		req.setAttribute("userseq", userseq);
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/user/userreview.jsp");
 		dispatcher.forward(req, resp);
 		

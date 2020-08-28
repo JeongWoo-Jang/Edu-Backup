@@ -26,6 +26,7 @@ public class Auth extends HttpServlet {
 		//1.
 		MemberDAO dao = new MemberDAO();
 		HashMap<String, Integer> map = dao.getCount((String)session.getAttribute("seq"));
+		dao.close();
 		
 		//2.
 		request.setAttribute("map", map);

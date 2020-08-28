@@ -13,8 +13,18 @@
 	<link rel="stylesheet" href="css/jquery-ui.css">
     <script src="js/jquery-1.12.4.js"></script>
    	<script src="js/jquery-ui.js"></script>
+   	<script src = "js/bootstrap.js"></script>
 	
    <style>
+                            	 	
+/*                             			.btncoupon {
+                            			border: 1px solid white; 
+                            			background-color: #7E9CB6; 
+                            			color: white; 
+                            			padding: 5px;
+                            			
+                            			} */
+                            		
 
         body {
             margin: 0px;
@@ -633,6 +643,8 @@
             height: 12px;
             width: 11px;
             z-index: 10;
+            /* disabled : true; */
+           	
          }
 
          /* stap3 */
@@ -819,10 +831,7 @@
              background: gray;
          }
 
-         .ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus, .ui-button:hover, .ui-button:focus {
-             background: gray;
-             border: 1px solid gray;
-         }
+
          .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default, .ui-button, html .ui-button.ui-state-disabled:hover, html .ui-button.ui-state-disabled:active {
              color: black;
          }
@@ -994,21 +1003,30 @@
             <!-- 사이드 -->
             <div id="side">
                 <div id="cosertInfo">
-                    <img src="./images/consertPoster.jpg">
+                    <img src="./images/${dto.poster}" id = "chcheckBtn">
+                    <!-- 여기서 해당 공연에 대한 사진등 정보를 바꿔줄 것이다. -->
                     <div id="InforContent">
-                        <h2>크리스토퍼 내한공연（CHRISTOPHER LIVE IN SEOUL)</h2>
-                        <div>2020-08-29 ~ 2020-08-30</div>
-                        <div>YES24 LIVE HALL</div>
+                        <h2>${dto.title}</h2>
+                        <div>${dto.startDate} ~ ${dto.endDate}</div>
+                        <div>${splaceName}</div>
                     </div>
                 </div>
+                
+            <script>
+            	
+            $("#chcheckBtn").click(function(){
+            	alert(seatResult[0].usedSeq);
+            });
+            
+            </script>
                 <div id="choicInfo">
                     <h2>선택내역</h2>
                     <dl>
                         <dt>날짜</dt>
-                            <dd><input type="text" class="alternate" size="30"></dd>
+                            <dd><input type="text" class="alternate" size="30" id = "inputDate"></dd>
                         <div style="clear: both;"></div>
                         <dt>시간</dt>
-                        <dd></dd>
+                        <dd id="ticketTime"></dd>
                         <div style="clear: both;"></div>
                         <dt>매수</dt>
                         <dd id="ticketNum"></dd>
@@ -1022,13 +1040,13 @@
                 <div id="payment1">
                     <h2>결제내역</h2>
                     <dl>
-                        <dt>티켓금액</dt>
+                        <dt>티켓금액(￦)</dt>
                         <dd id="tickectPice"></dd>
                         <div style="clear: both;"></div>
-                        <dt>예매수수료</dt>
+                        <dt>예매수수료(￦)</dt>
                         <dd id="susu"></dd>
                         <div style="clear: both;"></div>
-                        <dt>배송료</dt>
+                        <dt>배송료(￦)</dt>
                         <dd></dd>
                         <div style="clear: both;"></div>
                         <dt>총 금액(+)</dt>
@@ -1038,33 +1056,36 @@
                 </div>
                 <div id="sale">
                     <dl>
-                        <dt>할인금액</dt>
-                            <dd>0</dd>
+                        <dt>할인금액(￦)</dt>
+                            <dd id = "discountPrice">0</dd>
                         <div style="clear: both;"></div>
                         <dt>할인쿠폰</dt>
-                        <dd>0</dd>
+                        <dd>0</dd> 
                         <div style="clear: both;"></div>
                         <dt>Egg머니</dt>
                         <dd>0</dd>
-                        <div style="clear: both;"></div>
+                       <div style="clear: both;"></div>
                         <dt>Egg상품권</dt>
                         <dd>0</dd>
                         <div style="clear: both;"></div>
                         <dt>총 할인금액(-)</dt>
-                        <dd>0</dd>
+                        <dd id = "discountTotalPrice">0</dd>
                         <div style="clear: both;"></div>
                     </dl>
                 </div>
                 <div id="finalPay">
                     <dl>
-                        <dt>최종 결제금액</dt>
-                        <dd id="finull">원</dd>
+                        <dt>최종 결제금액(￦)</dt>
+                        <dd id="finull"></dd>
                     </dl>
                     <div style="clear: both;"></div>
                  </div>
                  <input type="button" value="이전" id="back">
                  <input type="button" value="다음단계" id="nextBtn">
+                 
             </div>
+            
+
 
             <div id="side2">
                 <div id="miniMap">
@@ -1142,6 +1163,7 @@
                     </tbody>
                 </table>
                 <table id="tbl2">
+                
                     <tr>
                         <td>유의사항</td>
                         <td>
@@ -1185,22 +1207,58 @@
                 </div>
                 <div id="cuponChoice">                
                     <h2>쿠폰선택</h2>
-                    <input type="button" value="쿠폰등록" id="cuponPlus">
+                    <!-- <input type="button" value="쿠폰등록" id="cuponPlus"> -->
                     <table>
                         <thead>
                             <th>쿠폰명</th>
-                            <th>등급</th>
+                            <th>만료일</th>
                             <th>할인금액</th>
                             <th>사용</th>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td colspan="4">보유하신 쿠폰이 없습니다.</td>
-                            </tr>
+                        	<!-- 여기에 쿠폰을 불러오면 된다. -->
+							   <c:if test = "${empty hasCouponList}">
+                            		<tr>
+                            			<td colspan="4">보유하신 쿠폰이 없습니다.</td>
+                            		</tr>
+                            	</c:if>
+                            	<c:if test = "${not empty hasCouponList}">
+                            		
+                            		<c:forEach items="${hasCouponList}" var="dto">
+                            		<tr id = "cou" + "${dto.seq}">
+                            			<td>${dto.title}</td>
+                            			<td>${dto.endDate}</td>
+                            			<td>${dto.discount}</td>
+                            			<td><button  id = "${dto.seq}" type= "button" class="btncoupon" value="${dto.discount}">사용</button></td>
+                            		</tr>
+                            		</c:forEach>
+                            	</c:if>
+                            	 
                         </tbody>
                     </table>
                 </div>
             </div>
+            
+            <script>
+            	
+            	var couponUserSeq;//쿠회번호
+            	//여기서 정산 처리를 해줄것이다.
+            	//쿠폰사용 선택했을 경우
+            	$(".btncoupon").click(function(){
+            		
+            		couponUserSeq = $(this).attr("id");	
+            		//alert(couponUserSeq);
+            		
+            		$("#finull").text($("#totalPrice").text());	
+            		$("#discountPrice").text($(this).val());
+            		$("#discountTotalPrice").text($(this).val());
+            		$("#finull").text(parseInt($("#finull").text()) - parseInt($(this).val()));
+            	});
+            	
+            </script>
+            
+            
+            
             <div id="step4">
                 <h2>수령방법</h2>
                 <div id="getChoice">
@@ -1212,19 +1270,19 @@
                     <div>
                         <dl>
                             <dt>이름</dt>
-                            <dd><input type="text" value="홍길동" disabled></dd>
+                            <dd><input type="text" value="${username}" disabled></dd>
                             <div style="clear: both;"></div>
                             <dt>긴급연락처</dt>
                             <dd>
-                                <input type="text" value="010" disabled> - 
-                                <input type="text" value="1111" disabled> - 
-                                <input type="text" value="2222" disabled>
+                                <input type="text" value="${userTelNum[0]}"> - 
+                                <input type="text" value="${userTelNum[1]}"> - 
+                                <input type="text" value="${userTelNum[2]}">
                             </dd>
                             <div style="clear: both;"></div>
                             <dt>e-mail</dt>
                             <dd>
-                                <input type="text" value="hong" disabled> @ 
-                                <input type="text" value="gmail.com" disabled>
+                                <input type="text" value="${userEmail[0]}"> @ 
+                                <input type="text" value="${userEmail[1]}">
                             </dd>
                             <div style="clear: both;"></div>
                         </dl>
@@ -1268,14 +1326,95 @@
                         </tbody>
                     </table>
                 </div>
+				
+				<style>
+					#eggUseBtn {
 
+						    color: tomato; 
+						    background-color: rgb(240, 237, 237); 
+				            outline: none; 
+				            border: 1px solid #ccc; 
+				            border-radius: 3px;
+					}
+					
+					#eggUseBtn:hover {
+						cursor : pointer; 
+					}
+				
+				</style>
 
                 <div id="payment1">
                     <h4>결제방법</h4>
 
                     <div id="egg" class="pay">
-                        <label for "eggpt">에그머니 </label><input type="text" id="eggpt" value="0" Style="width: 100px;">원<input type="checkbox" id="cbegg"><label for="cbegg">전액사용 (총 <span class="pspan">0</span>원)</label>
+                        <label for "eggpt">에그머니 </label><input type="text" id="eggpt" value="0" Style="width: 100px;">원<input type="checkbox" id="cbegg"><label for="cbegg">전액사용 (총 <span class="pspan" id = "myeggmoney">${userEggMoney}</span>원)</label>
+                    	<button id = "eggUseBtn">에그머니 적용</button>
+                    
                     </div>
+                    
+                    <script>
+                    
+                    	//$("#finull").text(parseInt($("#finull").text()) - parseInt($(this).val()));
+                    	var eggCheck = 0;
+                    	//에그 머니 적용하면 더 빼져야한다.
+                    	//에그머니 적용하는경우
+                    	//1. 내가 가지고 있는 에그머니보다 더 사용할 수 없게 만들어줘야한다.
+                    	//2. 값을 잘 빼야하고
+                    	//3. 숫자만 입력받아야 한다.
+                    	//아 왜 안되는걸까 고민을 해봐라 젭라...;ㅣㅣ
+                    	var pricetxt = document.getElementById("eggpt");
+                    	var pf = 0;
+                    	$("#eggUseBtn").click(function(){
+                    		pf = 0;
+                    		//3. 숫자만 입력받아야 한다.
+			        		for (var i = 0; i < pricetxt.value.length; i++) {
+			        			
+			        			var price = pricetxt.value.charAt(i);
+			        			
+			        			if (price < "0" || price > "9") {
+			        				alert("할인금액은 숫자로만 입력이 가능합니다.")
+			        				pricetxt.select();
+			        				pf++;
+			        				return;
+			        			}
+			        		} 
+                    		
+                    		//순수 숫자로만 적었을 경우에 적용.
+                    		if (pf == 0) {
+        		        		//1.내가 가지고 있는 에그머니보다 더 사용할 수 없게 만들어줘야한다.
+                        		if ($("#eggpt").val() > ${userEggMoney}) {
+                        			alert("보유하신 에그머니보다 많은 포인트를 사용할 수 없습니다.");
+                        		} else {
+                            		if (eggCheck % 2 == 0) {
+                            			//에그머니 적용하는 경우
+                                		$("#discountTotalPrice").text(parseInt($("#discountTotalPrice").text()) + parseInt($("#eggpt").val()));//총 할인액
+                                		$("#finull").text(parseInt($("#finull").text()) - parseInt($("#eggpt").val()));//결국 총 가격
+                                		eggCheck++;
+                                		$("#eggUseBtn").text("에그머니 적용 취소");
+                            		} else {
+                            			//에그머니 다시 한번 누르는 경우
+                            			$("#discountTotalPrice").text(parseInt($("#discountTotalPrice").text()) - parseInt($("#eggpt").val()));//총 할인액
+                            			$("#finull").text(parseInt($("#finull").text()) + parseInt($("#eggpt").val()));//결국 총 가격
+                            			eggCheck++;
+                            			$("#eggUseBtn").text("에그머니 적용");
+                            		}
+                        		}                    			
+                    		}
+                    		
+	
+ 
+                    	});
+                    	
+                    	$("#cbegg").click(function(){
+                    		if ($(this).is(":checked")) {
+                    			$("#eggpt").val("${userEggMoney}");	
+                    		} else {
+                    			$("#eggpt").val("0")
+                    		}
+                    	});
+                    
+                    </script>
+                    
                     <div id="freeticket" class="pay">
                         <label>공연예매권 <span id="freesp">사용가능 예매권 [총 <span class="pspan">0</span>장]</label> <input type="button" value="예매권 번호 등록/사용하기" id="pbtn"></span>
                     </div>
@@ -1351,29 +1490,84 @@
             <!-- <button>버튼</button> -->
         </div>
     </div>
-
+	
+	<style>
+		.timeRound:hover {
+			cursor : pointer;
+		}
+	
+	</style>
+	
     <script>
 
         var tabNum = [1,2,3,4];
         var clickNum = false;
         var ticketNum = false;
-
+        
+        var userSeatInfoList = new Array();
+        var userNum;
+        var resullt;
         // console.log(tabNum);
 
         $("#tabs").tabs({
             active: 0,
             disabled: tabNum
         });
-
-        var n = 0;
+		
+       	
+        
+        var n = 0;//탭번호
 
         var tabNumMinus = [];
-
+		
+        //여기서도 좌석선택이 가능함
         $("#sitBtn").click(function(){
             if(clickNum == false){
                 alert("날짜를 선택해 주세요.");
 				event.preventDefault();
             } else {
+            	
+            	$.ajax({
+            		type : "GET",
+            		url : "/AtTicketProject/usershowavailseat.do",
+            		data : "showseq=${showSeq}&showroundSeq="+showroundSeq + "&conDate="+conDate,
+            		async: true,
+            		dataType: "json",
+            		success : function(result) {
+            			
+            			
+            			seatResult = result;//전역변수에 객체를 모두 넘긴다.
+            			
+    
+			      		
+						$(result).each(function(index, item) {
+
+							var floor;
+							if (item.usedFloor == 1) {
+								floor = "t";
+							} else {
+								floor = "r";
+							}
+						
+							var code = floor  + item.usedSeatRow + item.usedArea + item.usedSeatCol;
+							
+							console.log(code);
+
+							$("#" + code).removeClass("s6");
+							$("#" + code).addClass("s13");								
+							$("#" + code).prop("disabled",true);
+	
+                    			
+							
+						});
+							
+            		},
+            		error : function(a,b,c) {
+            			console.log(a,b,c);
+            		}
+            	});//여기까지가 ajax
+            	
+            	
                 tabNumMinus = tabNum.shift(),
                 tabNum.push(n),
                 n++;
@@ -1381,7 +1575,7 @@
                     disabled: tabNum,
                     active: n
                 });
-
+				
                 if(n == 1) {
                     $("#side2").css("display","block")
                 }
@@ -1398,10 +1592,13 @@
         });
 
         $("#dialog1").hide();
-
-        // 다음단계
+		
+		var seatResult;
+        // 다음단계 -> 클릭이벤트는 여기서 발생한다.
         $("#nextBtn").click(function(){
-
+			
+        	//alert($("#inputDate").attr("text"));
+        	
             if(clickNum == false){
                 alert("날짜를 선택해 주세요.");
 				event.preventDefault();
@@ -1411,7 +1608,53 @@
                 alert("좌석을 선택해 주세요");
                 event.preventDefault();
             } else {
-                
+            	//alert($(".alternate").attr("text"));
+            	//진짜 신청 페이지에서 문제없이 다음페이지로 가는 경우!.
+            	//여기서 ajax 처리를 해준다.
+            	//여기서 해줄 작업은 -> 사용가능한 좌석을 불러올 것이다...!
+            	
+            	$.ajax({
+                		type : "GET",
+                		url : "/AtTicketProject/usershowavailseat.do",
+                		data : "showseq=${showSeq}&showroundSeq="+showroundSeq + "&conDate="+conDate,
+                		async: true,
+                		dataType: "json",
+                		success : function(result) {
+                			
+                			
+                			seatResult = result;//전역변수에 객체를 모두 넘긴다.
+                			
+        
+				      		
+							$(result).each(function(index, item) {
+	
+								var floor;
+								if (item.usedFloor == 1) {
+									floor = "t";
+								} else {
+									floor = "r";
+								}
+							
+								var code = floor  + item.usedSeatRow + item.usedArea + item.usedSeatCol;
+								
+								console.log(code);
+
+								$("#" + code).removeClass("s6");
+								$("#" + code).addClass("s13");								
+								$("#" + code).prop("disabled",true);
+		
+	                    			
+								
+							});
+								
+                		},
+                		error : function(a,b,c) {
+                			console.log(a,b,c);
+                		}
+                	});//여기까지가 ajax
+            	
+
+            	
                 tabNumMinus = tabNum.shift(),
                 tabNum.push(n),
                 n++;
@@ -1419,7 +1662,7 @@
                     disabled: tabNum,
                     active: n
                 });
-
+				//다음버튼
                 if(n == 1) {
                     $("#side2").css("display","block")
                 }
@@ -1432,10 +1675,92 @@
                     });
                     $("#back").css("display","block")
                 }
-
+				
+				
+                function nextBlock() {
+            		$("#tabs").tabs({
+                        disabled: [0,1,2,3],
+                        active: 4
+                    });
+                    tabNum = [0,1,2,3];
+                    n = 4;
+                    $("#side1").css("display","block")
+                    $("#side2").css("display","none")
+                }
+                
+                
+                var finalPass = 0;
                 //결제까지 완료시 창닫기 and 예매완료 페이지 이동
                 if(n == 5) {
-                    $("#dialog1").dialog({
+                	//여기서 결제완료를 해야 하는데 그러려면 여러정보가 필요하다. -> ajax 로 처리를 해주자 : 결제 & 예약 처리 
+                	finalPass = 0;//한번 초기화를 해준다.
+                	//alert("결제하즈아!");
+                	
+                	//약관 동의1을 안누른 경우
+                	if ($("#pcb1").is(":checked") == false) {
+                		alert("취소기한 확인을 동의해주세요.");
+                		finalPass++;
+                		nextBlock();//블락 처리로 넘어가지 못하게 하자.
+                		return;
+                	}
+                	
+                	//약관 동의2를 안누른 경우
+                	if ($("#pcb2").is(":checked") == false) {
+                		alert("제3자 정보제공 내용에 동의해주세요.");
+                		finalPass++;
+                		nextBlock();//블락 처리로 넘어가지 못하게 하자.
+                		return;
+                	}
+                	
+                	//최종 결제 금액이 0 이 되지 않았는데 결제방법을 선택하지 않은 경우.
+                	//rb1,rb2 가 존재함.
+                	if ($("#finull").text() == "0") {
+                		//결제방식을 선택하지 않아도 된다 -> 넘어가줘도 된다는 말. -> 그럴경우는 거의 없을것이다.
+                		
+                	} else {
+                		//금액이 0 이 되지 않았으므로 결제를 무조건 선택해야한다.
+                		
+                		if ($("#rb1").is(":checked") == false && $("#rb2").is(":checked") == false) {
+                			alert("결제방식을 선택해주세요");
+                			finalPass++;
+                			nextBlock();//블락 처리로 넘어가지 못하게 하자.
+                			return;
+                		} 
+                		
+      
+                	}
+                	
+                	//모든 조건을 만족했을 경우
+                	if (finalPass == 0) {
+						
+                		var inputDate = $("#inputDate").val();
+                		var ticketNum = $("#ticketNum").text();
+
+                		var seatAvail = "";//내가 예매할 좌석
+                		$(".nodab").each(function (index, item) {
+                			seatAvail += $(item).text() + ",";
+                		});
+                		//var parameter = "eggmoney=" + $("#eggpt").val() + "&showroundSeq=" + showroundSeq + "&couponUserSeq=" + couponUserSeq +"&seatAvail=" + seatAvail;
+                		var parameter = "eggmoney=" + $("#eggpt").val() + "&showroundSeq=" + showroundSeq + "&couponUserSeq=" + couponUserSeq +"&seatAvail=" + seatAvail 
+                						+ "&inputDate=" + inputDate + "&ticketNum=" + ticketNum;
+                		
+                    	$.ajax({
+                    		type : "POST",
+                    		url : "/AtTicketProject/usershowfinal.do",
+                    		data : parameter,
+                    		async: true,
+                    		dataType: "text",
+                    		success : function(result) {
+                    			
+    							
+                    		},
+                    		error : function(a,b,c) {
+                    			console.log(a,b,c);
+                    		}
+                    		
+                    	});//여기까지가 ajax
+                    	
+                    	                     $("#dialog1").dialog({
                         // title: "인삿말",
                         width: 500,
                         height: 250,
@@ -1463,11 +1788,17 @@
                         n = 4;
                         $("#side1").css("display","block")
                         $("#side2").css("display","none")
-                    });
-                }
-            }
+                    }); 	
+                		
+                	}
+                	
+                	
+                	
+                	
+                	
 
-            
+                }//n == 5
+            }            
         });
         
         //이전화면
@@ -1533,24 +1864,61 @@
 
 
         })
-        
-
+       	
+        var conDate;//몇일공연인지 -> 애도 ajax 로 넘겨줘야 함.
+		//달력처리
         // $(function() {
             $( "#celender").datepicker({
                 dateFormat: "yy-mm-dd",
-                minDate: "2020-08-29",
-                maxDate: "2020-08-30",
+	            //minDate : "2020-09-01",
+	            //maxDate : "2020-12-12",
+                minDate: "${minDateInfo}",
+                maxDate: "${dto.endDate}",
                 altField: ".alternate",
                 altFormat: "yy.mm.dd(D)",
                 dayNamesShort: ["일","월","화","수","목","금","토"],
-
+				
+                
                 // defaultDate: new Date('2020-08-30'),
 
                 // setDate: "2020-08-30",
 
                 onSelect: function(dateText) {  
-
-                    if(dateText == "2020-08-29") {
+                	
+                	conDate = dateText;
+                	//alert(conDate);
+                	$("#inputTime").empty();
+                	
+                	$.ajax({
+                		type : "GET",
+                		url : "/AtTicketProject/usersemishowreservation.do",
+                		data : "showseq=${showSeq}",
+                		async: true,
+                		dataType: "json",
+                		success : function(result) {
+                			
+							//var list = result;
+							
+							
+							var showRound = 1;
+							$(result).each(function(index, item) {
+								$("#inputTime").append("<li class = 'timeRound' id ='"+ item.rseq +"'> [" + showRound + "]회 " + item.rstartTime + " ~ " + item.rendTime + "</li>");
+								
+								showRound++;
+								
+							});
+							//ajax 정보가 유실되므로 ajax 내에서 함수를 부른다.
+							testClick();
+                		},
+                		error : function(a,b,c) {
+                			console.log(a,b,c);
+                		}
+                		
+                	});//여기까지가 ajax
+                	
+                	
+                	
+/*                     if(dateText == "2020-08-29") {
                         // $("#inputTime").html("[1]회 19시 00분");
                            
                         $("#inputTime" ).empty();
@@ -1559,7 +1927,7 @@
                     }else {
                         $( "#inputTime" ).empty();
                         $("#inputTime").append("<li>[1]회 18시 00분</li>");
-                    }
+                    } */
 
                     $("#inputTime li").click(function(){
                         $("#inputTime li").css({
@@ -1576,11 +1944,44 @@
                         clickNum = true;
                     });
                 
-                },
-                
-                
+                }
+                  
             });
         // } );
+        
+        //회차 seq 를  전역변수로 받아준다.
+        var showroundSeq = 0;//회자seq.
+        
+        function testClick() {
+        	
+        	$(".timeRound").click(function(){
+        		
+        		
+        		$(".timeRound").css("background-color","#FFF");//모든 회차 배경을 하얀색으로 돌리고 밑에서 색을 다시 돌린다.
+        		
+        		showroundSeq = $(this).attr("id");//전역변수에 회차 seq 넣어줌.
+				//alert($(this).attr("id"));//애가 회차 seq 임.
+				$(this).css("background-color","#FECA52");
+				
+	             //$("#clock").css("background-color","#FECA52");
+	             //$("#clock").css("border","#FECA52");F
+	             //$("#clock").css("color","white");
+	             $("#data").css("border","1px solid #eeeeee");
+	             $("#sit").css("border","1px solid #FECA52");
+	             $("#sittitle").css("border-bottom","2px solid black");
+	             $("#sittitle").css("color","black");
+	             $("#sitbox").css("border","1px solid black");
+	             
+	             if($("#sitbox").empty()){
+	                 $("#sitbox").append("본 공연은 잔여좌석 서비스를 제공하지 않습니다.")
+	             }
+	             clickNum = true;
+				
+			}); 
+        }
+        
+        
+        
 
         //미니맵 옮기기     
         $("#miniMapImg").click(function(){
@@ -1602,9 +2003,7 @@
             // alert(event.pageY)
         })
         
-
-
-        // div 만들기 1층
+ // div 만들기 1층
         //행
         var r = 5;
         //열
@@ -1614,20 +2013,22 @@
         //위
         var t = 135;
         // 구역
-        var g = "";
+        var g = "A";
         // 번호
         var gn = 1;
-
+		
         for(r=5; r<45; r++){
 
             for(m=13; m<68; m++){
-
-                $("#container").append('<div class="s6" id="t'+ r+'000'+ m +'" style="left:'+l+'px; top:'+t+'px;" name="tk" value="'+ r+'000'+ m +'" title= "1층 '+g+'구역 '+(r-4)+'열 '+gn+'번" grade="지정석"></div>');
-
+				
+            	
+                $("#container").append('<div class="s6" id="t'+ (r-4) +g + (m-12) +'" style="left:'+l+'px; top:'+t+'px;" name="tk" value="'+ r+'000'+ (m-12) +'" title= "1층 '+g+'구역 '+(r-4)+'행 '+(m-12)+'열" grade="지정석"></div>');
+				
+                
                 //열이동
                 if(m == 67){
                     l =53;
-                } else{
+                } else{	
                     
                     l = l+11;
                 }
@@ -1643,13 +2044,20 @@
                 }             
 
                 //나머지 지우기
-                if(m >=38 && m<43){
-                    $("#t"+r+"000"+m+"").css("display","none");
+                if(m >=39 && m<43){
+                    $("#t"+(r-4)+"B"+(m-12)).css("display","none");
                 }
                 
+                $("#t"+(r-4)+"A"+ 26).css("display","none");
+                
+                 
             }
                 t = t+12;
         }
+        
+        $("#t1B27").css("display","none");
+        
+
 
          // div 만들기 2층
         //행
@@ -1708,7 +2116,33 @@
             }
                 T = T+12;
         }
-
+        
+        
+/*         var code = "t" + seatResult[0].userRow + seatResult[0].usedSeatCol;
+        $("#" + code).attr("class",s13);
+  		console.log(code); */
+        
+        //문제가 있다.
+/*        	for (var i =0; i <= 21; i++) {
+			//t1100026
+			//t8A35
+			//A 구역일 경우에  -> 행 - 4 ,열 - 12
+			//B 구역일 경우에  -> 
+			
+			
+			var floor;
+			if (seatResult[i].usedFloor == 1) {
+				floor = "t";
+			} else {
+				floor = "r";
+			}
+			
+			var code = floor + seatResult[i].userRow + seatResult[i].usedSeatCol;
+			
+      		$("#" + code).attr("class",s13);
+      		
+    	}  
+ */
 
         //체크표시 2층
         var checkList = [];
@@ -1765,9 +2199,9 @@
                     $("#sitFinul").append(sitFinul);
                     $("#ticketNum").text($("#sitFinul").children().length);
                     ticketNum = true;
-                    $("#tickectPice").text($("#ticketNum").text() * 77000 +"원");
-                    $("#totalPrice").text($("#ticketNum").text() * 77000 +2000 +"원");
-                    $("#finull").text($("#ticketNum").text() * 77000 +2000 +"원");
+                    $("#tickectPice").text($("#ticketNum").text() * ${tickectPrice});
+                    $("#totalPrice").text($("#ticketNum").text() * ${tickectPrice} +2000);
+                    $("#finull").text($("#ticketNum").text() * ${tickectPrice} +2000);
 
                     // 체크이미지로 변환
                     $(obj).attr({
@@ -1810,9 +2244,9 @@
                 $("#sitFinul").append(sitFinul);
                 $("#ticketNum").text($("#sitFinul").children().length);
                 ticketNum = false;
-                $("#tickectPice").text($("#ticketNum").text() * 77000 +"원");
-                $("#totalPrice").text($("#ticketNum").text() * 77000 +2000 +"원");
-                $("#finull").text($("#ticketNum").text() * 77000 +2000 +"원");
+                $("#tickectPice").text($("#ticketNum").text() * ${tickectPrice});
+                $("#totalPrice").text($("#ticketNum").text() * ${tickectPrice} +2000);
+                $("#finull").text($("#ticketNum").text() * ${tickectPrice} +2000);
 
             }
             
@@ -1828,8 +2262,12 @@
 
         $(document).ready(function (){
             // 클릭하면 체크이미지로
+            
+            
             $('div[name=tk]').click(function (){
-                s6ClickedEvent($(this));
+                if ($(this).attr("class") != "s13") {
+                	s6ClickedEvent($(this));	
+                }
             });
 
             //좌석 다시 선택 버튼
@@ -1863,7 +2301,7 @@
                 if($(obj).attr("class") == "s6"){
                 // list 추가
                     checkList2.push("<li>"+ $(obj).attr("title") +"</li>");
-                    sitFinul2.push("<dd>"+ $(obj).attr("title") +"</dd>");
+                    sitFinul2.push("<dd class = 'nodab'>"+ $(obj).attr("title") +"</dd>");
 
                     //li초기화
                     $("#choiceSit ul").empty();
@@ -1877,10 +2315,10 @@
                     $("#sitFinul").append(sitFinul2);
                     $("#ticketNum").text($("#sitFinul").children().length);
                     ticketNum = true;
-                    $("#tickectPice").text($("#ticketNum").text() * 77000 +"원");
-                    $("#susu").text(2000+ "원");
-                    $("#totalPrice").text($("#ticketNum").text() * 77000 +2000 +"원");
-                    $("#finull").text($("#ticketNum").text() * 77000 +2000 +"원");
+                    $("#tickectPice").text($("#ticketNum").text() * ${tickectPrice});
+                    $("#susu").text(2000);
+                    $("#totalPrice").text($("#ticketNum").text() * ${tickectPrice} +2000);
+                    $("#finull").text($("#ticketNum").text() * ${tickectPrice} +2000);
                     
                     // 체크이미지로 변환
                     $(obj).attr({
@@ -1924,9 +2362,9 @@
                 $("#ticketNum").text($("#sitFinul").children().length);
                 ticketNum = false;
                 // ticketNum = true;
-                $("#tickectPice").text($("#ticketNum").text() * 77000 +"원");
-                $("#totalPrice").text($("#ticketNum").text() * 77000 +2000 +"원");
-                $("#finull").text($("#ticketNum").text() * 77000 +2000 +"원");
+                $("#tickectPice").text($("#ticketNum").text() * ${tickectPrice});
+                $("#totalPrice").text($("#ticketNum").text() * ${tickectPrice} +2000);
+                $("#finull").text($("#ticketNum").text() * ${tickectPrice} +2000);
 
             }
             
@@ -1962,7 +2400,9 @@
             })
                 
             }
-                
+        
+        	
+      
     </script>
 
 </body>

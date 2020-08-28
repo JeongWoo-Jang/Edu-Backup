@@ -32,3 +32,29 @@ select * from
 (select a.*, rownum as rnum from
 (select seq, subject, name, regdate from vwBoard order by seq desc) a)
 where rnum >=1 and rnum <=10;
+
+select * from tblsearch;
+
+CREATE TABLE TBLSEARCH(
+    SEQ NUMBER PRIMARY KEY,
+    WORD VARCHAR2(100) NOT NULL
+);
+
+INSERT INTO TBLSEARCH VALUES(1, '가위');
+INSERT INTO TBLSEARCH VALUES(2, '가나');
+INSERT INTO TBLSEARCH VALUES(3, '가리비');
+INSERT INTO TBLSEARCH VALUES(4, '가나 초콜렛');
+INSERT INTO TBLSEARCH VALUES(5, '가위손');
+INSERT INTO TBLSEARCH VALUES(6, '가방');
+INSERT INTO TBLSEARCH VALUES(7, '가방손잡이');
+INSERT INTO TBLSEARCH VALUES(8, '가방끈');
+INSERT INTO TBLSEARCH VALUES(9, '나비');
+INSERT INTO TBLSEARCH VALUES(10, '나비잠');
+COMMIT;
+
+select * from tblInsa;
+
+select jikwi, count(*) as cnt
+from tblInsa where buseo = '영업부' group by jikwi;
+
+select distinct buseo from tblInsa;

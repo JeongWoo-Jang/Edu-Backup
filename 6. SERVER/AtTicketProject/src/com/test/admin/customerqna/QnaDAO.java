@@ -8,8 +8,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import com.test.atticket.DBUtil;
-
 public class QnaDAO {
 	
 	private Connection conn;
@@ -38,7 +36,7 @@ public class QnaDAO {
 			
 			if (map.get("search") != null) {
 				//이름 & 제목 & 내용 - 포괄 검색
-				where = String.format("and (name like '%%%s%%' or title like '%%%s%%' or content like '%%%s%%')", map.get("search"), map.get("search"), map.get("search"));
+				where = String.format("and (title like '%%%s%%' or content like '%%%s%%')", map.get("search"), map.get("search"));
 			}
 			
 			String sort = "";
@@ -101,7 +99,7 @@ public class QnaDAO {
 			
 			if (map.get("search") != null) {
 				//이름 & 제목 & 내용 - 포괄 검색
-				where = String.format("where (name like '%%%s%%' or subject like '%%%s%%' or content like '%%%s%%')", map.get("search"), map.get("search"), map.get("search"));
+				where = String.format("where (title like '%%%s%%' or content like '%%%s%%')", map.get("search"), map.get("search"));
 			}
 			
 			String sql = "";
@@ -285,6 +283,25 @@ public class QnaDAO {
 		
 		
 		return 0;
+	}
+
+	public void updateReadcount(String userseq) {
+		
+		try {
+
+			String sql = "update tblQna set qview = qview + 1 where seq = ?";
+			
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, userseq);
+			
+			pstat.executeUpdate();
+			
+
+		} catch (Exception e) {
+			System.out.println("updateReadcount()");
+			e.printStackTrace();
+		}
+		
 	}
 
 }

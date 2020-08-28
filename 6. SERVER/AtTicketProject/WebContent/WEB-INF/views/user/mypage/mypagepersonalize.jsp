@@ -172,6 +172,13 @@
             margin-top: 100px;
             text-align: center;
         }
+        
+       #pagebar {
+       		display: block;
+       		widows: 600px;
+       		text-align: center;
+       		margin: 0px auto;
+        }
 
     </style>
 </head>
@@ -201,23 +208,28 @@
                     <p><i class="glyphicon glyphicon-ok-sign"></i>맞춤 알람 공연<small>해당 공연과 관련된 티켓오픈, 주요 이벤트/쿠폰 등에 대해 알려드립니다.</small></p>
                     <div>
                         <ul>
-                            <!-- <li>
-                                <img src="http://tkfile.yes24.com/upload2/PerfBlog/202007/20200720/20200720-angel_new_36898.jpg">
-                                <input type="checkbox" name="checkbox" class="check">
-                                <strong>뮤지컬 <어쩌면 해피엔딩> 2020</strong>
-                                <span>2020.06.30 ~ 2020.09.13</span>
-                                <span>예스24스테이지 1관</span>
-                                <em>관련공지: <a href="user_notice.html">04</a>개</em>
-                            </li> -->
-                        	<p style="padding-top: 40px; text-align: center;">'맞춤 알람 공연'으로 설정된 공연이 없습니다.</p>
+                            <c:if test="${list1.size() == 0}">
+                        	<p style="padding-top: 40px; text-align: center;">'맞춤 알람 공연'으로 설정된 공연이 없습니다.</p> 
+                        	</c:if>
+                        	<c:forEach items="${list1}" var="dto">
+	                            <li>
+	                                <img src="./images/${dto.myShowPoster}">
+	                                <input type="checkbox" class="check cbDelete" name="cbDelete" value="${dto.msseq}">
+	                                <strong>${dto.myShowTitle }</strong>
+	                                <span>${dto.myShowstart } ~ ${dto.myShowend }</span>
+	                                <span>${dto.myShowTheater}</span>
+	                                <em>관련공지: <a href="/AtTicketProject/show/usernotice.do">04</a>개</em>
+	                            </li>
+                            </c:forEach>
                         </ul>
                     </div>
                 </div>
                 <div id="buttonbox">
                     <button class="btn btn-default btn-sm" id="add">알람공연 추가<span>+</span></button>
                     <input type="button" class="btn btn-default btn-sm" value="전체선택" id="selectall">
-                    <input type="button" class="btn btn-default btn-sm" value="삭제" id="delete">
+                    <input type="button" class="btn btn-default btn-sm" value="삭제" id="delete" onclick="deleteMessage()">
                 </div>
+                    ${pagebar}
                 <div id="alarm">
                     <p><i class="glyphicon glyphicon-ok-sign"></i>티켓오픈 알람<small>티켓 오픈 시간 <span style="text-decoration: underline;">1시간 전</span>에 미리 알려드립니다.</small></p>
                     <div>
@@ -229,9 +241,22 @@
                                 <th>상세보기</th>
                             </thead>
                             <tbody>
+                            	<c:if test="${list2.size() == 0}">
                                 <tr>
                                     <td colspan="4">'티켓오픈 알림 SMS 서비스'를 신청한 공연이 없습니다.</td>
                                 </tr>
+                                </c:if>
+                                <c:forEach items="${list2}" var="dto">
+                                <tr>
+                                	<td>
+	                                	<input type="checkbox" class="check cbDelete2" name="cbDelete2" value="${dto.vellseq}"> 
+	                                	${dto.velltitle } 티켓 오픈 안내
+                                	</td>
+                                	<td>${dto.vellopenDate }</td>
+                                	<td>${dto.velldate }</td>
+                                	<td> <button onclick="location.href='/AtTicketProject/usernoticetemp.do?noticeseq='+ ${dto.noticeseq }+'&page=&search='">상세정보</button> </td>
+                                </tr>
+                                </c:forEach>
                             </tbody>
                         </table>
                     </div>
@@ -241,8 +266,9 @@
                     <div id="infobuttonbox">
                         <button class="btn btn-default btn-sm" id="checknotice">공지사항 확인</button>
                         <input type="button" class="btn btn-default btn-sm" value="전체선택" id="alarmselectall">
-                        <input type="button" class="btn btn-default btn-sm" value="삭제" id="alarmdelete">
+                        <input type="button" class="btn btn-default btn-sm" value="삭제" id="alarmdelete" onclick="deleteMessage2()">
                     </div>
+                    <%-- ${pagebar2} --%>
                 </div>
                 <div id="tips">
                     <img src="http://tkfile.yes24.com/img/mypage/img_notice.gif">
@@ -270,36 +296,73 @@
             }, 500);
         });
 
-        //팝업창 가운데 배치
-        var popupWidth = 900;
-        var popupheight = 650;
-        var popupX = (window.screen.width / 2) - (popupWidth / 2);
-        var popupY = (window.screen.height / 2) - (popupheight / 2);
+
         //관심 공연 담기 팝업창
         $("#add").click(function() {
-            window.open("mypage_interest_popup.html","_black",`left=${popupX}, top=${popupY}, width=${popupWidth}, height=${popupheight};`);
-        });
+           popupCenter("/AtTicketProject/mypageinterestpopup.do?index=3",1210,600);
+        }); 
+   
+        //팝업창 가운데 배치
+        function popupCenter(href, w, h) {
+            
+            var popupX = (window.screen.width / 2) - (w / 2);
+            // 만들 팝업창 좌우 크기의 1/2 만큼 보정값으로 빼주었음
+
+            var popupY= (window.screen.height /2) - (h / 2);
+            // 만들 팝업창 상하 크기의 1/2 만큼 보정값으로 빼주었음
+            
+
+            window.open(href, "pop_name", 'status=no, height=665, width=1235, left='+ popupX + ', top='+ popupY + ', screenX='+ popupX + ', screenY= '+ popupY);
+          
+          }
+
 
         //전체선택
         $("#selectall").click(function() {
-            if ($(".check").prop("checked")) {
-                $(".check").prop("checked", false);
+        	
+            if ($(".cbDelete").prop("checked")) {
+                $(".cbDelete").prop("checked", false);
             } else {
-                $(".check").prop("checked", true);
+                $(".cbDelete").prop("checked", true);
             }
         });
-
-        //삭제
-        $("#delete").click(function() {
-            if (confirm("관심 공연을 삭제하겠습니까?")) {
-                $("input[type='checkbox']:checked").parent().remove();
-            };
+        //전체선택2
+        $("#alarmselectall").click(function() {
+        	
+            if ($(".cbDelete2").prop("checked")) {
+                $(".cbDelete2").prop("checked", false);
+            } else {
+                $(".cbDelete2").prop("checked", true);
+            }
         });
+        
+    	function deleteMessage() {
+    		
+    		if($(".cbDelete:checked").length >0){
+    		 	location.href = "/AtTicketProject/myPersonalizeDeleteok.do?" + $(".cbDelete").serialize();
+    		}else{
+    			alert("삭제할 문의내역를 선택하세요.");
+    		}
+    	}
+    	
+    	function deleteMessage2() {
+    		
+    		if($(".cbDelete2:checked").length >0){
+    		 	location.href = "/AtTicketProject/myVellDeleteok.do?" + $(".cbDelete2").serialize();
+    		}else{
+    			alert("삭제할 문의내역를 선택하세요.");
+    		}
+    	}
 
         //공지사항 확인
         $("#checknotice").click(function() {
-            location.href = "user_notice.html";
+            location.href = "/AtTicketProject/show/usernotice.do";
         });
+        
+		 $("#usermenu p:nth-child(5)").css("color","#4C7CCE");
+		    $("#usermenu p:nth-child(5)").mouseout(function(){
+		    	$("#usermenu p:nth-child(5)").css("color","#4C7CCE");
+		    });
 
     </script>
 

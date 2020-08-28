@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ include file="/WEB-INF/views/inc/asset.jsp" %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -316,24 +318,38 @@
         <div id="top">
             <div id="topmenu">
                 <!-- 상단메뉴 좌측(메인화면으로 돌아가기) -->
-                <a href="main.html" id="topleft"></a>
+                <a href="userindex.do" id="topleft"></a>
                 <!-- 상단메뉴 센터(콘서트, 뮤지컬, 연극, 클래식, 전시) -->
                 <div id="topcenter">
-                    <span data-lo="user_concert.html" class="menubar">콘서트</span>
-                    <span data-lo="user_musical.html" class="menubar">뮤지컬</span>
-                    <span data-lo="user_theater.html" class="menubar">연극</span>
-                    <span data-lo="user_classic.html" class="menubar">클래식</span>
-                    <span data-lo="user_Exhibition.html" class="menubar">전시</span>
+                    <span data-lo="userconcert.do" class="menubar">콘서트</span>
+                    <span data-lo="usermusical.do" class="menubar">뮤지컬</span>
+                    <span data-lo="usertheater.do" class="menubar">연극</span>
+                    <span data-lo="userclassic.do" class="menubar">클래식</span>
+                    <span data-lo="userexhibition.do" class="menubar">전시</span>
                 </div>
                 <!-- 상단메뉴 우측(랭킹, 이벤트, 검색창, 마이페이지) -->
                 <div id="topright">
-                    <span data-lo="user_ranking.html" class="menubar">랭킹</span>
-                    <span data-lo="user_event.html" class="menubar">이벤트</span>
+                    <span data-lo="userranking.do" class="menubar">랭킹</span>
+                    <span data-lo="userevent.do" class="menubar">이벤트</span>
                     <input type="text" value="" id="search">
                     <label for="search" class="glyphicon glyphicon-search"
                         style="font-size: 14px; cursor: pointer;"></label>
-                        <div class="glyphicon glyphicon-user" id="mypage" 
-                        style="font-size: 14px; cursor: pointer; margin: 0 10px; "></div>
+                        <c:if test = "${empty userid}">
+        <span class="menubar" id="slogin">로그인</span>
+        </c:if>
+        <c:if test = "${!empty userid}">
+        <div
+            class="glyphicon glyphicon-user"
+            id="mypage"
+            style="
+                font-size: 14px;
+                cursor: pointer;
+                margin: 0 10px;
+            "
+        ></div>
+        <span class="menubar" id="slogout">로그아웃</span>
+        </c:if>
+                        
                 </div>
             </div>
             <!-- 메인화면 슬라이더 -->
@@ -358,15 +374,16 @@
        		 <c:forEach items="${list}" var="dto">        
        		 <c:if test="${dto.delflag==0}">   
                     <div id="eventbox">
-                        <img src="./images/${dto.banner}" alt="">
+                    <a href="http://localhost:8090/AtTicketProject/userpromotion.do" target='_self'>
+                        <img style="cursor: pointer;" src="./images/${dto.banner}" ></a>
                         <div class="eve-mlist-box">
                             <p class="evemark">${dto.eindex}</p>
                             <p class="evetit">${dto.title}</p>
                             <p class="evetxt">${dto.startdate} ~ ${dto.enddate}</p>
-                            <div class="evepc" data-percent="20">
-                                <progress value="20" max="100" class="pbar"></progress>                         
+                            <div class="evepc" data-percent="90">
+                                <progress value="90" max="100" class="pbar"></progress>                         
                             </div>
-                            <p class="eve-mlist-dday">44일 남음</p>
+                            <p class="eve-mlist-dday">10일 남음</p>
                         </div>           
                     </div>      
              </c:if>
@@ -520,7 +537,27 @@
 
         //마이페이지 클릭시 이동
         $("#mypage").click(function() {
-            location.href = "mypage.html";
+            location.href = "usermypage.do";
+        });
+        
+      //로그인 java 로 이동
+        $("#login").click(function() {
+            location.href = "/AtTicketProject/userlogin.do";
+        });
+        
+        //로그아웃 java 로 이동
+        $("#logout").click(function() {
+            location.href = "/AtTicketProject/userlogout.do";
+        });
+        
+        //로그인 java 로 이동
+        $("#slogin").click(function() {
+            location.href = "/AtTicketProject/userlogin.do";
+        });
+        
+        //로그아웃 java 로 이동
+        $("#slogout").click(function() {
+            location.href = "/AtTicketProject/userlogout.do";
         });
 
 

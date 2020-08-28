@@ -127,6 +127,7 @@
 	            <div>${dto.anregdate}</div>
 	            <!-- 수정하기 버튼 -->
 	            <c:if test="${not empty dto.ancontent}">
+	           	<button class ="btn btn-default" id="close" type="button" style="margin-left: 10px;">닫기</button>
 	            	<button class ="btn btn-default" id="reWrite" type="button">수정하기</button>
 	            	<button class ='btn btn-default' id='rwOk' style="display: none;" type="submit">완료</button>
 	            </c:if>
@@ -134,12 +135,15 @@
 	        
 	        <form method="POST" action="/AtTicketProject/admincustomerqnaWrite.do">
 	            <!-- 댓글달기 버튼 -->
-	            <c:if test="${empty dto.ancontent}">
-		            <div class = "replyon">
+	            <c:if test="${empty dto.ancontent}">		            
+	            	<div class = "replyon">
 		                <textarea style='display:block; width: 870px; min-height:200px; resize:none;' id='answer' name="answer" placeholder="질문에대한 답변을 입력해주세요."></textarea>
 		            	<input type="text" value="${dto.seq}" style="display: none;" name="seq">
 		            </div> 
-	            	<div class = "reply"><button class ="btn btn-default" id="answer" style="margin-right: 25px;" type="submit">답변하기</button></div>
+	            	<div class = "reply">
+		           	<button class ="btn btn-default" id="close2" type="button" style="margin-right: 25px;">닫기</button>
+	            	<button class ="btn btn-default" id="answerok" style="margin-right: 10px;" type="submit">답변하기</button>
+	            	</div>
 	            </c:if>
 	        </form>
 	            
@@ -180,19 +184,27 @@
         	  $("#rwOk").css("display","none");
         	  $("#textW").css("display","none");
         	  
-        	  //var content = $("#textW").val();
-        	  //content = content.replace(/<\n>/gi, "<br>");
-        	  //location.href = "AtTicketProject/admincustomerqnaOk.do?seq=" + ${dto.seq}+"&content="+content;
-        	  opener.parent.location.reload();
+          });
+          
+          $("#answerok").click(function() {
+        	  
+              if ($('#answer').val() == '') {
+                  alert('질문에대한 답변을 입력해주세요.');
+                  return false;
+              } 
         	  
           });
           
-          $("#answer").click(function() {
+          $("#close").click(function() {
         	  opener.parent.location.reload();
-          }
-	
-          /* alert(${dto.anSeq}); */
- 
+        	  window.close();
+          });
+          $("#close2").click(function() {
+        	  //opener.parent.location.reload();
+        	  window.close();
+          });
+          
+          
       </script>
     
     

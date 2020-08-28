@@ -17,6 +17,12 @@ public class UserQnaWrite extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		HttpSession session = req.getSession();
+		String index = req.getParameter("index");
+		
+		
+		req.setAttribute("index", index);
+		
+		System.out.println(index);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/user/userqnawrite.jsp");
 		dispatcher.forward(req, resp);

@@ -235,6 +235,62 @@ public class AjaxDAO {
 		return null;
 	}
 
+	public ArrayList<String> buseolist() {
+		
+		try {
+			
+			String sql = "select distinct buseo from tblInsa order by buseo";
+			
+			stat = conn.createStatement();
+			rs = stat.executeQuery(sql);
+			
+			ArrayList<String> list = new ArrayList<String>();
+			
+			while (rs.next()) {
+				list.add(rs.getString("buseo"));
+			}
+			
+			return list;
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		
+		return null;
+	}
+
+	public ArrayList<BuseoDTO> jikwilist(String buseo) {
+		
+		try {
+			
+			String sql = "select jikwi, count(*) as cnt from tblInsa where buseo = ? group by jikwi";
+			
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, buseo);
+			
+			rs = pstat.executeQuery();
+			
+			ArrayList<BuseoDTO> list = new ArrayList<BuseoDTO>();
+			
+			while (rs.next()) {
+				
+				BuseoDTO dto = new BuseoDTO();
+				dto.setJikwi(rs.getString("jikwi"));
+				dto.setCnt(rs.getString("cnt"));
+				
+				list.add(dto);
+				
+			}
+			
+			return list;
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		
+		return null;
+	}
+
 }
 
 

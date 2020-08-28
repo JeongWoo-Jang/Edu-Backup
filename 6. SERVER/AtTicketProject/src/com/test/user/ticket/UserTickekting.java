@@ -1,6 +1,7 @@
 package com.test.user.ticket;
 
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
@@ -30,7 +31,7 @@ public class UserTickekting extends HttpServlet{
 		
 		
 		String conSeq = req.getParameter("seq");//넘어온 공연seq(실전용)
-		//String conSeq = "1";//테스트용 공연
+		//String conSeq = "2";//테스트용 공연
 
 
 		//System.out.println("?!what");//왜 두번씩 나타나지?
@@ -44,7 +45,6 @@ public class UserTickekting extends HttpServlet{
 		
 		//--show 객체에 대한  공연건물이름,공연장소에 대한 데이터를 불러온다.
 		List<String> showPlace = dao.getPlace(conSeq);
-		//System.out.println(showPlace);
 		String splaceName = showPlace.get(0);
 		String splace = showPlace.get(1);
 		
@@ -90,10 +90,32 @@ public class UserTickekting extends HttpServlet{
 		//해당 공연분류의 랭킹 1~5에 대한 정보를 가져오자. -> 이미지 이름과 해당 공연의 seq 를 받은 객체가 UserShowTopFive 라고 보면 된다.
 		List<UserShowTopFive> bigFiveImgList = dao.getFiveImgList(dto.getGenre());
 		
-		//
+		//랭킹사진 링크를 바꿔주기 위한 작업
+		String rankingImgUrl = "";
+		if (dto.getGenre().equals("musical")) {
+			rankingImgUrl = "http://tkfile.yes24.com/imgNew/sub/rn-tit-15457.png";
+		} else if (dto.getGenre().equals("theater")) {
+			rankingImgUrl = "http://tkfile.yes24.com/imgNew/sub/rn-tit-15458.png";
+		} else if (dto.getGenre().equals("concert")) {
+			rankingImgUrl = "http://tkfile.yes24.com/imgNew/sub/rn-tit-15456.png";
+		} else if (dto.getGenre().equals("exhibition")) {
+			rankingImgUrl = "http://tkfile.yes24.com/imgNew/sub/rn-tit-15460.png";
+		} else if (dto.getGenre().equals("classic")) {
+			rankingImgUrl = "http://tkfile.yes24.com/imgNew/sub/rn-tit-15459.png";
+		}
+		//오늘 날짜+1를 넘겨줄 것이다
+		Calendar minDate = Calendar.getInstance();
+		minDate.add(Calendar.DATE, 1);//날짜 하루뒤부터 예약이 가능함.
+		
+		String minDateInfo = minDate.get(Calendar.YEAR) + "-" + (minDate.get(Calendar.MONTH) + 1) + "-" + (minDate.get(Calendar.DATE));
 		
 		
-		req.setAttribute("bigFiveImgList", bigFiveImgList);
+		
+		
+		//********** req에 넘겨줄 정보들 **********
+		req.setAttribute("minDateInfo", minDateInfo);//최소공연시작 선택일
+		req.setAttribute("rankingImgUrl", rankingImgUrl);//랭킹사진 링크를 바꿔주기 위한 작업
+		req.setAttribute("bigFiveImgList", bigFiveImgList);//랭킹5개!
 		req.setAttribute("couponListLen", couponListLen);//가용 쿠폰 몇개인지 넘겨준다.
 		req.setAttribute("couponList", couponList);//해당 show에서 사용할 수 있는 쿠폰리스트.
 		req.setAttribute("likePush", likePush);//1이 넘어가면 해제 되어있는 상태 0 이 넘어가면 좋아요가 눌린상태
@@ -110,6 +132,8 @@ public class UserTickekting extends HttpServlet{
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/user/userticketing.jsp");
 		dispatcher.forward(req, resp);
+		
+		
 		
 	}
 	
@@ -138,5 +162,4 @@ public class UserTickekting extends HttpServlet{
 		
 		return newPrice;
 	}
-	
 }

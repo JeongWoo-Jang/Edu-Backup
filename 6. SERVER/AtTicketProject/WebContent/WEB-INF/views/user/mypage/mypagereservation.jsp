@@ -119,11 +119,6 @@
             text-indent: 2em;
         }
         
-        .month.active {
-			background-color:"#777";
-		}
-        
-        
     </style>
 </head>
 <body>
@@ -141,11 +136,11 @@
             <div id="right">
                 <h1>예매확인/취소</h1>
                 <div id="datesearch">
-                    <p><span>${username}</span>님의 <span>최근 1개월</span> 예매내역입니다. 지난 예매확인을 원하시면 조회조건을 선택해 주세요.</p>
+                    <p><span>${username}</span>님의 <span id = "monthsearch">최근 1개월</span> 예매내역입니다. 지난 예매확인을 원하시면 조회조건을 선택해 주세요.</p>
                     <ul>
                         <li>
                             ▶ 기간별 조회
-                            <input type="button" class="btn btn-default btn-xs month" value="1개월" data-month="1">
+                            <input style="background-color:#EFEFEF;" type="button" class="btn btn-default btn-xs month" value="1개월" data-month="1">
                             <input type="button" class="btn btn-default btn-xs month" value="3개월" data-month="3">
                             <input type="button" class="btn btn-default btn-xs month" value="6개월" data-month="6">
                         </li>
@@ -154,13 +149,14 @@
                             <input type="text" id="from" name = "from">
                             ~
                             <input type="text" id="to" name = "to">
-                            <input type="button" value="조회" class="btn btn-default btn-sm" id="btnsearch">
+                            <button type="button" class="btn btn-default btn-sm" id="btnsearch">조회</button>
                         </li>
                     </ul>
                 </div>
                 <div class="mycount">
                     <p><i class="glyphicon glyphicon-ok-sign"></i>최근 예매내역</p>
-                    <form method = "POST" action="/AtTikcetProject/mypage/mypagereservationdelete.do" id = "deleteForm">
+                    <form method = "POST" id = "deleteForm">
+                    
                     <table id="tbl1">
                         <thead>
                         	<th><input type = "checkbox" id = "cbAll"></th>
@@ -179,7 +175,7 @@
                             </c:if>
                              <c:forEach items="${rlist}" var="dto">
                              	 <tr>	
-                             	 	 <td><input type = "checkbox" class = "cb1" name = "cb1"></td>
+                             	 	 <td><input type = "checkbox" class = "cb1" name = "cb1" value = "${dto.bookseq}"></td>
 	                             	 <td id = "bookdate">${dto.bookdate}</td>
 	                             	 <td id = "bookseq">${dto.bookseq}</td>
 	                             	 <td id = "showtitle">${dto.showtitle}</td>
@@ -188,18 +184,20 @@
 	                             	 <td id = "bookstate">${dto.bookstate}</td>
                              	 </tr>
                              </c:forEach>
-                        </tbody>
-                          <input type = "hidden" value = "${nowPage}" name = "nowPage">
+                        </tbody>           
                     </table>
                     <div id="paging">
-                        <button type = "button" id = "leftbtn" class="glyphicon glyphicon-menu-left left"></button>
-                        <span>1</span>
+                        <button type = "button" id = "btnleft" class="glyphicon glyphicon-menu-left left"></button>
+                        <span id = "page"> 
+                        <span>${nowPage}</span>
                         <span>(<span id = "nowPage">${nowPage}</span>/${totalPage})</span>
+                        </span>
                         <button type = "button" class="glyphicon glyphicon-menu-right right" id = "btnright"></button>
                     </div>
                     <div style="text-align: right; margin:10px 0px;">
-                    <button id = "delbtn" type = "button" class = "btn btn-default">예매취소</button> 
+                    <button id = "delbtn" type = "button" class = "btn btn-default btn-sm">예매취소</button> 
                     </div>
+                 	
                     </form>
                     <div style="text-align: right;">
                         <p style="font-size: 11px;">▶ 패키지 상품은 결제완료 후 해당공연의 예매권이 회원님 계정으로 자동등록됩니다.</p>
@@ -241,24 +239,41 @@
 
 
     <script>
-    	
-    var begin = ${map.begin+3};
-	var end = ${map.end+3};
+    
+    $("#usermenu p:first-child").css("color","#4C7CCE");
+    $("#usermenu p:first-child").mouseout(function(){
+    	$("#usermenu p:first-child").css("color","#4C7CCE");
+    });	
+    var begin = ${map.begin};
+	var end = ${map.end};
+	var totalPage= ${totalPage};
+	var nowPage = ${nowPage};
+
+	/* if(totalPage == 1){
+		$(".left").attr("disabled",true);
+		$(".right").attr("disabled",true);
+	}
 	
-	var nowPage = $("#nowPage").val();
+	if(nowPage == 1){
+		$(".left").attr("disabled",true);	
+	} */
 	
 	var index = 0;
+ 	var loop = false;
+ 	var month = '1개월';
+
+ 	$(".month").click(function(){
+ 		$(".month").css("background-color","#FFFFFF");
+ 		$(this).css("background-color","#EFEFEF");
+ 		month = $(this).val();
+ 		/* if(loop){
+ 			$("#monthsearch").empty();
+ 			$("#monthsearch").text("최근 "+$(this).val());
+ 			loop = false;
+ 		} */
+ 		
+ 	});
  	
- 	if($(".month").data("index") == "1"){
-		index = 0;
-	} else if($(".month").data("index") == "3") {
-		index = 1;
-	}  else if($(".month").data("index") == "6") {
-		index = 2;
-	}
- 	
- 	$(".month").children().eq(index).addClass("active");
-	
 	$("#cbAll").click(function () {
 		if($("#cbAll").prop("checked")) { //해당화면에 전체 checkbox들을 체크해준다 
 			$("input[name=cb1]:checkbox").prop("checked",true); // 전체선택 체크박스가 해제된 경우
@@ -270,110 +285,177 @@
 	 $("#delbtn").click(function () {
          if ($('input').is(':checked') == true) {
              if (confirm("정말로 삭제하시겠습니까?")) {
+            	 
+            	 //alert("/AtTicketProject/mypagereservationdelete.do?monthsearch="+$("#monthsearch").val()+"&from="+$("#from").val()+"&to="+$("#to").val());
              	
+            	$("#deleteForm").attr("action", "/AtTicketProject/mypagereservationdelete.do?monthsearch="+$("#monthsearch").val()+"&from="+$("#from").val()+"&to="+$("#to").val());
              	$("#deleteForm").submit();	
              }
          } else {
              alert("하나 이상을 체크하시오.");
          }
      });
+	 
+	 $("#btnleft").click(function() {
+
+			var from = $("#from").val();
+			var to = $("#to").val();
+			nowPage-=1;
+			begin-=3;
+			end-=3;
+			$.ajax({
+				type: "GET",
+				url: "/AtTicketProject/mypage/mypagereservationok.do",
+				data: "begin=" + begin + "&end=" + end +"&from=" + from + "&to=" + to + "&totalPage=" + totalPage + "&nowPage=" + nowPage,
+				dataType: "json",
+				success: function(result) {
+					
+					if (result.length == 0) {
+						/* $(".left").attr("disabled",true); */
+						return;
+					}
+					
+					//alert(result.length);
+					$("tbody").empty();
+					$(result).each(function(index, item) {
+						//게시물 1개
+						var temp = "";
+						temp += "<tr>";
+						temp += "<td><input type = 'checkbox' class = 'cb1' name = 'cb1' value = '"+item.bookseq+"'></td>";
+						temp += "<td>" + item.bookdate + "</td>";
+						temp += "<td>" + item.bookseq + "</td>";
+						temp += "<td>" + item.showtitle + "</td>";
+						temp += "<td>" + item.bdate + "</td>";
+						temp += "<td>" + item.cnt + "</td>";
+						temp += "<td>" + item.bookstate + "</td>";
+						temp += "</tr>";
+							
+						$("table > tbody").append(temp); 
+						$("#page").empty();
+						var temp = "";		
+						temp+="<span>"+ item.nowPage+"</span>";
+						temp+=" <span>(<span id = 'nowPage'>"+item.nowPage+"</span>/"+item.totalPage+")</span>";
+						$("#page").append(temp);  
+					});
+					
+				},
+				error: function(a,b,c) {
+					/* $(".left").attr("disabled",true); */
+					console.log(a,b,c);
+				}
+				
+			}); //ajax
+			
+	});
 
 	$("#btnright").click(function() {
 		var from = $("#from").val();
 		var to = $("#to").val();
-		alert(from);
-		$.ajax({
-			type: "GET",
-			url: "/mypage/mypagereservationok.do",
-			data: "begin=" + begin + "&end=" + end +"&from=" + from + "$to=" + to,
-			dataType: "json",
-			success: function(result) {
-				
-				if (result.length == 0) {
-					return;
-				}
-				
-				//alert(result.length);
-				$(result).each(function(index, item) {
-					//게시물 1개
-					$("tbody").empty();
-					var temp = "";
-					temp += "<tr>";
-					temp += "<td><input type = 'checkbox' class = 'cb1' name = 'cb1'></td>";
-					temp += "<td>" + item.bookdate + "</td>";
-					temp += "<td>" + item.seq + "</td>";
-					temp += "<td>" + item.showtile + "</td>";
-					temp += "<td>" + item.bdate + "</td>";
-					temp += "<td>" + item.cnt + "</td>";
-					temp += "<td>" + item.bookstate + "</td>";
-					temp += "</tr>";
-					temp+= "<input type = 'hidden' value =" + item.nowPage + "name = 'nowPage' id = 'nowPage'>";
 
-					$("table > tbody").append(temp); 
-					var nowPage = item.nowPage;
-					$("#nowPage").text(nowPage);
-				});
-				
-			},
-			error: function(a,b,c) {
-				console.log(a,b,c);
-			}
-			
-		}); //ajax
-		
-		begin += 3;
-		end += 3;
-		
-		});
-	 
-
-	$("#btnSearch").click(function() {
-		var from = $("#from").val();
-		var to = $("#to").val();
-		alert(from);
+		begin+=3;
+		end+=3;
+		nowPage +=1;
 		$.ajax({
 			type: "GET",
 			url: "/AtTicketProject/mypage/mypagereservationok.do",
-			data: "begin=" + begin + "&end=" + end +"&from=" + from + "$to=" + to,
+			data: "begin=" + begin + "&end=" + end +"&from=" + from + "&to=" + to + "&totalPage=" + totalPage + "&nowPage=" + nowPage,
 			dataType: "json",
 			success: function(result) {
 				
 				if (result.length == 0) {
-					alert("더 이상 가져올 게시물이 없습니다.");
-					$("#btnMore").attr("disabled", true);
+					/* $(".right").attr("disabled",true); */
 					return;
 				}
 				
 				//alert(result.length);
+				$("tbody").empty();
+				
 				$(result).each(function(index, item) {
 					//게시물 1개
-					$("tbody").empty();
 					var temp = "";
 					temp += "<tr>";
-					temp += "<td><input type = 'checkbox' class = 'cb1' name = 'cb1'></td>";
+					temp += "<td><input type = 'checkbox' class = 'cb1' name = 'cb1' value = '"+item.bookseq+"'></td>";
 					temp += "<td>" + item.bookdate + "</td>";
-					temp += "<td>" + item.seq + "</td>";
-					temp += "<td>" + item.showtile + "</td>";
+					temp += "<td>" + item.bookseq + "</td>";
+					temp += "<td>" + item.showtitle + "</td>";
 					temp += "<td>" + item.bdate + "</td>";
 					temp += "<td>" + item.cnt + "</td>";
 					temp += "<td>" + item.bookstate + "</td>";
 					temp += "</tr>";
-					temp+= "<input type = 'hidden' value =" + item.nowPage + "name = 'nowPage' id = 'nowPage'>";
-
+						
 					$("table > tbody").append(temp); 
-					var nowPage = item.nowPage;
-					$("#nowPage").text(nowPage);
+					$("#page").empty();
+					var temp = "";
+					temp+="<span>"+ item.nowPage+"</span>";
+					temp+=" <span>(<span id = 'nowPage'>"+item.nowPage+"</span>/"+item.totalPage+")</span>";
+					$("#page").append(temp); 
 				});
 				
 			},
 			error: function(a,b,c) {
-				alert("가져올 데이터가 없습니다.");
+				/* $(".right").attr("disabled",true); */
 				console.log(a,b,c);
 			}
 			
 		}); //ajax
-		
+	
 		});
+	
+	
+		$("#btnsearch").click(function() {
+			var from = $("#from").val();
+			var to = $("#to").val();
+			loop = true;
+			begin = 1;
+			end = 3;
+			$.ajax({
+				type: "GET",
+				url: "/AtTicketProject/mypage/mypagereservationok.do",
+				data: "begin=" + begin + "&end=" + end +"&from=" + from + "&to=" + to + "&totalPage=" + totalPage + "&nowPage=" + nowPage,
+				dataType: "json",
+				success: function(result) {
+					
+					$("#monthsearch").text(month);
+					
+					if (result.length == 0) {
+						return;
+					}
+					
+					//alert(result.length);
+					$("tbody").empty();
+					
+					$(result).each(function(index, item) {
+						//게시물 1개
+						var temp = "";
+						temp += "<tr>";
+						temp += "<td><input type = 'checkbox' class = 'cb1' name = 'cb1'value = '"+item.bookseq+"'></td>";
+						temp += "<td>" + item.bookdate + "</td>";
+						temp += "<td>" + item.bookseq + "</td>";
+						temp += "<td>" + item.showtitle + "</td>";
+						temp += "<td>" + item.bdate + "</td>";
+						temp += "<td>" + item.cnt + "</td>";
+						temp += "<td>" + item.bookstate + "</td>";
+						temp += "</tr>";
+							
+						$("table > tbody").append(temp); 
+						var temp = "";
+						$("#page").empty();
+						var temp = "";
+						temp+="<span>"+ item.nowPage+"</span>";
+						temp+=" <span>(<span id = 'nowPage'>"+item.nowPage+"</span>/"+item.totalPage+")</span>";
+						$("#page").append(temp); 
+					});
+					
+					
+				},
+				error: function(a,b,c) {
+					console.log(a,b,c);
+				}
+				
+			}); //ajax		
+			
+		});
+			
 
         //주문일자 텍스트창 css
         $("#from, #to").css("width", "90px");

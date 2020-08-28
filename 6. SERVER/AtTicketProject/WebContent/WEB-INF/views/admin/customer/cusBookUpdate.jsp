@@ -25,7 +25,7 @@
             color : rgb(220,220,220);
             height : 35px;
             font-weight: bold;
-            margin-left: 330px; 
+            margin-left: 290px; 
             width: 60px;
         }
         .modified:hover {

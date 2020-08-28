@@ -32,6 +32,8 @@ public class RealTimeBookRankOk extends HttpServlet{
 			rtemp += "{";
 			rtemp += String.format("\"poster\":\"%s\"", dto.getPoster());
 			rtemp += ",";
+			rtemp += String.format("\"showseq\":\"%s\"", dto.getShowseq());
+			rtemp += ",";
 			rtemp += String.format("\"genre\":\"%s\"", dto.getGenre());
 			rtemp += ",";
 			rtemp += String.format("\"rate\":\"%s\"", dto.getRate());

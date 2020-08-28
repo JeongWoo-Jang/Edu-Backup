@@ -25,6 +25,8 @@ public class AdminShowEditOk extends HttpServlet{
 		
 		req.setCharacterEncoding("UTF-8");
 		
+		System.out.println("####");
+		
 		//파일 업로드
 		String path = req.getRealPath("/images");
 		System.out.println(path);
@@ -97,6 +99,8 @@ public class AdminShowEditOk extends HttpServlet{
 		dto.setTime(time);
 		dto.setPlace(place);
 		
+		//place...?
+		
 		dto.setPoster(poster);
 		dto.setContent(content);
 		
@@ -106,9 +110,6 @@ public class AdminShowEditOk extends HttpServlet{
 		dto.setTime3(time3);
 		
 		
-		
-		System.out.println("tag: " +tag);
-		System.out.println("dto\n" + dto);
 		
 		//DB 넘기기
 		ShowDAO dao = new ShowDAO();

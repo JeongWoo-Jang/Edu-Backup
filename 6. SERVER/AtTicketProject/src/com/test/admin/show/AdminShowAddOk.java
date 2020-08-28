@@ -97,12 +97,20 @@ public class AdminShowAddOk extends HttpServlet{
 		dto.setRound(round);
 		dto.setTime(time);
 		dto.setPlace(place);
-		
-		dto.setRound2(round2);
-		dto.setTime2(time2);
-		dto.setRound3(round3);
-		dto.setTime3(time3);
-		
+	
+		if(round2 == null) {
+			dto.setRound2("");
+		}else {
+			dto.setRound2(round2);
+			dto.setTime2(time2);			
+		}
+		if(round3 == null) {
+			dto.setRound3("");
+		}else {
+			dto.setRound3(round3);
+			dto.setTime3(time3);			
+		}
+
 		dto.setPoster(poster);
 		dto.setContent(content);
 		
@@ -135,6 +143,8 @@ public class AdminShowAddOk extends HttpServlet{
 			resp.sendRedirect("/AtTicketProject/adminshow.do");
 		}else {
 			//글쓰기 실패
+			System.out.printf("add failed : %d %d %d\n",resultShow, resultRound, resultTag);
+			
 			PrintWriter writer = resp.getWriter();
 			writer.print("<html>");
 			writer.print("<body>");

@@ -135,13 +135,13 @@
             width: 170px;
             height: 205px;
             position: relative;
+            left: -15px;
             float: right;
             background-color: white;
             margin-right: 60px;
 	        margin-top: 2px;
             /* text-align: center; */
             display: none;
-	        top: 24px;
         }
         #tagsearch::after {
             content: "";
@@ -246,8 +246,9 @@
         /* 탭 */
         #tabMenu {
             width: 1200px;
-            /* padding-bottom: 100px; */
             text-align: center;
+            padding-bottom: 50px;
+            cursor: pointer;
         }
 
         #tabMenu::after {
@@ -396,6 +397,11 @@
 		
 		#tblList td:nth-child(3) {text-align: left;}
 		#tblList td:nth-child(3) a {color: #333; text-decoration: none;}
+		
+		
+		#searchlogo {
+			cursor: pointer;
+		}
 
     </style>
 
@@ -448,12 +454,13 @@
             </div>
         </form> 
 
-
+			<c:if test="${not empty userid}">
             <button id="myQna" class="move">
                 <span class="
                 glyphicon glyphicon-th-list"></span>
                 My 문의 내역
             </button>
+            </c:if>
             <button id="FAQ" class="move">
                 <span class="
                 glyphicon glyphicon-th-list"></span>
@@ -462,37 +469,18 @@
             <div style="clear:both;"></div>
 
             <div id="tabMenu">
-                <div class="tabMenu" data-tab="tab1" onclick="location.href='/AtTicketProject/userqna.do?';">전체</div>
-                <div class="tabMenu" data-tab="tab2" onclick="location.href='/AtTicketProject/userqna.do?sort=예매방법';">예매방법</div>
-                <div class="tabMenu" data-tab="tab3" onclick="location.href='/AtTicketProject/userqna.do?sort=결제방법';">결제방법</div>
-                <div class="tabMenu" data-tab="tab4" onclick="location.href='/AtTicketProject/userqna.do?sort=수수료';">수수료</div>
-                <div class="tabMenu" data-tab="tab5" onclick="location.href='/AtTicketProject/userqna.do?sort=취소/환불';">취소/환불</div>
-                <div class="tabMenu" data-tab="tab6" onclick="location.href='/AtTicketProject/userqna.do?sort=티켓수령';">티켓수령</div>
-                <div class="tabMenu" data-tab="tab7" onclick="location.href='/AtTicketProject/userqna.do?sort=티켓판매/제휴문의';">티켓반매/재휴문의</div>
-                <div class="tabMenu" data-tab="tab8" onclick="location.href='/AtTicketProject/userqna.do?sort=기타';">기타</div>
+                <div class="tabMenu" onclick="location.href='/AtTicketProject/userqna.do?';">전체</div>
+                <div class="tabMenu" onclick="location.href='/AtTicketProject/userqna.do?sort=예매방법';">예매방법</div>
+                <div class="tabMenu" onclick="location.href='/AtTicketProject/userqna.do?sort=결제방법';">결제방법</div>
+                <div class="tabMenu" onclick="location.href='/AtTicketProject/userqna.do?sort=수수료';">수수료</div>
+                <div class="tabMenu" onclick="location.href='/AtTicketProject/userqna.do?sort=취소/환불';">취소/환불</div>
+                <div class="tabMenu" onclick="location.href='/AtTicketProject/userqna.do?sort=티켓수령';">티켓수령</div>
+                <div class="tabMenu" onclick="location.href='/AtTicketProject/userqna.do?sort=티켓판매/제휴문의';">티켓반매/재휴문의</div>
+                <div class="tabMenu" onclick="location.href='/AtTicketProject/userqna.do?sort=기타';">기타</div>
             </div>
 
 
          <!-- 검색창 -->
-         <div class="searchbox">
-             <span class="noticemenu">등록순</span>
-             <span class="noticemenu">인기순</span>
-             <span class="noticemenu">조회순</span>
-             <!-- <div class="search">
-                 <div class="form-group">
-                     <div class="input-group">
-                         <input
-                             type="text"
-                             class="form-control"
-                             placeholder="검색"
-                         />
-                         <span class="input-group-addon"
-                             ><i class="glyphicon glyphicon-search"></i
-                         ></span>
-                     </div>
-                 </div>
-             </div> -->
-         </div>
          <table id="tblList" class="table table-striped">
              <thead>
                  <tr>
@@ -506,13 +494,25 @@
                  </tr>
              </thead>
              <tbody>
+             
+               	<c:if test="${not empty search and list.size() == 0}">
+                	<tr>
+                		<td colspan="7">검색 결과가 없습니다.</td>
+                	</tr>                    	
+               	</c:if>
+                	
+               	<c:if test="${empty search and list.size() == 0}">
+                	<tr>
+                		<td colspan="7">게시물이 없습니다.</td>
+                	</tr>                    	
+               	</c:if>
                  
           	     <c:forEach items="${list}" var="dto">
 		            <tr>	            	
 		            	<td>${dto.seq}</td>
 		                <td style="width: 200px">${dto.tag}</td>
 		                <td class = "inputcont">
-		                	<a href="/AtTicketProject//userqnacontent.do?seq=${dto.seq}&search=${search}&sort=${sort}">
+		                	<a href="/AtTicketProject/userqnacontent.do?seq=${dto.seq}&search=${search}&sort=${sort}&index=1">
 		                		${dto.subject}
 		                	</a> 
 		                </td>
@@ -530,9 +530,10 @@
 		                </td>
 		                <td>${dto.qview }</td>
 		            </tr>
-		           </c:forEach>
-                            </tbody>
-                        </table>
+                    
+		         </c:forEach>
+            </tbody>
+            </table>
 
             <!-- 글쓰기 -->
 			
@@ -540,10 +541,14 @@
             <span class="glyphicon glyphicon-pencil"></span>
             list
             </button>
+           
+            <c:if test="${not empty userid}">
             <button class="btn btn-primary" id="write">
             <span class="glyphicon glyphicon-pencil"></span>
             Write
             </button>
+            </c:if>
+            
 			<div style="clear: both;"></div>
 
 			${pagebar}
@@ -602,7 +607,7 @@
         //검색창 커서 있을때 팝업 띄우기
         $("#search").focusin(function () {
             $("#tagsearch").css("display", "block");
-            $("#search").css("border-bottom", "2px solid black");
+            //$("#search").css("border-bottom", "2px solid black");
         });
         //검색창 팝업 닫기
         $("#search").focusout(function () {
@@ -647,7 +652,7 @@
         
         // 글쓰기 링크
         $("#write").click(function() {
-            $(location).attr('href','/AtTicketProject/userqnawrite.do');
+            $(location).attr('href','/AtTicketProject/userqnawrite.do?index=1');
         });
         // 마이리스트 링크
         $("#myQna").click(function() {
@@ -706,7 +711,16 @@
     	
     	$("#tabMenu").children().eq(index).addClass("active");
         
+        //로그인 java 로 이동
+        $("#login").click(function() {
+            location.href = "/AtTicketProject/userlogin.do";
+        });
         
+        //로그아웃 java 로 이동
+        $("#logout").click(function() {
+            location.href = "/AtTicketProject/userlogout.do";            
+        //로그인 java 로 이동
+        });
     </script>
 
 

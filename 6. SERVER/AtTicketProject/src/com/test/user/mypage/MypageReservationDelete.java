@@ -10,22 +10,27 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet("/mypage/mypagereservationdelete.do")
+@WebServlet("/mypagereservationdelete.do")
 public class MypageReservationDelete extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		MyPageHDAO dao = new MyPageHDAO();
 		HttpSession session = req.getSession();
+		String from = req.getParameter("from");
+		String to = req.getParameter("to");
+		String monthsearch = req.getParameter("monthsearch");
+		
 		String cusseq = String.valueOf(session.getAttribute("userseq"));
 		String nowPage = req.getParameter("nowPage");
+		String[] bookseq = req.getParameterValues("cb1");
 
-		int result = dao.deleteReservation(cusseq);
+		int result = dao.deleteReservation(bookseq);
 		PrintWriter writer = resp.getWriter();
 		
-		if(result == 1) {
+		if(result == bookseq.length) {
 			
-			resp.sendRedirect(String.format("mypagereservation.do?nowPage=%s",nowPage));
+			resp.sendRedirect(String.format("/AtTicketProject/mypagereservation.do?monthsearch=%s&from=%s&to=%s",monthsearch,from,to));
 			
 		} else {
 			writer.print("<html>");

@@ -119,7 +119,25 @@
         .pagination > li > a, .pagination > li > span{
           color: black;
         }
-        
+        .history, .txtHistory {
+		border: 1px solid rgb(221, 221, 221);
+		border-radius: 3px;
+		resize: none;
+		padding: 0px 20px 20px;
+		margin-left: 20px;
+	}
+	
+	.history h3 {
+		border-bottom: 1px dashed #CCCCCC;
+		padding-bottom: 5px;
+	}
+	
+	.txtHistory {
+		display: none;
+		padding-top: 20px;
+		border: 2px dashed rgb(221, 221, 221);
+	}
+	        
         
         
         /* --------------사내 공지사항 관련 css 끝--------------*/
@@ -133,124 +151,27 @@
 </head>
 
 <body>
-	<!-- -------------------사내공지 게시판 시작------------------------- -->
+	<!-- -------------------작업 히스토리 시작------------------------- -->
 	<div class = "basicBox" style = "height : 600px">
-        <div id = "selectable">
-           <div id = "empNoticeTitle"><span id = "empNoticeTitleImport"><span><i class = "glyphicon glyphicon-pushpin"></i></span></span>&nbsp;사내 공지사항 안내</div>
-           <div id = "slctp2">
-	    		<div class="input-group">
-	    			<input type="text" class="form-control" placeholder = "ex) 랜섬웨어로 인한 복구작업">
-	    			<span class="input-group-addon" id = "searchlogo"><i class="glyphicon glyphicon-search"></i></span>
-	    		</div>
-            </div>
-            <table style = "width:1330px;" class = "table table-striped table-bordered table-condensed" id = "nttable">
-                <thead>
-                    <tr>
-                        <th>번호</th>
-                        <th>제목</th>
-                        <th>작성자</th>
-                        <th>날짜</th>
-                        <th>조회수</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td><span class = "starpoint">긴급</span>&nbsp;랜섬웨어로 인한 복구작업</td>
-                        <td> 이몽룡</td>
-                        <td> 2020.02.17(월)</td>
-                        <td><span class = "seesee">180</span></td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td><span class = "starpoint">긴급</span>&nbsp;랜섬웨어로 인한 복구작업</td>
-                        <td> 이몽룡</td>
-                        <td> 2020.02.17(월)</td>
-                        <td><span class = "seesee">180</span></td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td><span class = "starpoint">긴급</span>&nbsp;랜섬웨어로 인한 복구작업</td>
-                        <td> 이몽룡</td>
-                        <td> 2020.02.17(월)</td>
-                        <td><span class = "seesee">180</span></td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td><span class = "starpoint">긴급</span>&nbsp;랜섬웨어로 인한 복구작업</td>
-                        <td> 이몽룡</td>
-                        <td> 2020.02.17(월)</td>
-                        <td><span class = "seesee">180</span></td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td><span class = "starpoint">긴급</span>&nbsp;랜섬웨어로 인한 복구작업</td>
-                        <td> 이몽룡</td>
-                        <td> 2020.02.17(월)</td>
-                        <td><span class = "seesee">180</span></td>
-                    </tr>
-                    <tr>
-                        <td>6</td>
-                        <td><span class = "starpoint">긴급</span>&nbsp;랜섬웨어로 인한 복구작업</td>
-                        <td> 이몽룡</td>
-                        <td> 2020.02.17(월)</td>
-                        <td><span class = "seesee">180</span></td>
-                    </tr>
-                    <tr>
-                        <td>7</td>
-                        <td><span class = "starpoint">긴급</span>&nbsp;랜섬웨어로 인한 복구작업</td>
-                        <td> 이몽룡</td>
-                        <td> 2020.02.17(월)</td>
-                        <td><span class = "seesee">180</span></td>
-                    </tr>
-                    <tr>
-                        <td>8</td>
-                        <td><span class = "starpoint">긴급</span>&nbsp;랜섬웨어로 인한 복구작업</td>
-                        <td> 이몽룡</td>
-                        <td> 2020.02.17(월)</td>
-                        <td><span class = "seesee">180</span></td>
-                    </tr>
-                    <tr>
-                        <td>9</td>
-                        <td><span class = "starpoint">긴급</span>&nbsp;랜섬웨어로 인한 복구작업</td>
-                        <td> 이몽룡</td>
-                        <td> 2020.02.17(월)</td>
-                        <td><span class = "seesee">180</span></td>
-                    </tr>
-                    <tr>
-                        <td>10</td>
-                        <td><span class = "starpoint">긴급</span>&nbsp;랜섬웨어로 인한 복구작업</td>
-                        <td> 이몽룡</td>
-                        <td> 2020.02.17(월)</td>
-                        <td><span class = "seesee">180</span></td>
-                    </tr>
 
-                </tbody>
-            </table>
+           <div id = "empNoticeTitle" style="margin-bottom: 30px;">
+           	<span id = "empNoticeTitleImport"><span><i class = "glyphicon glyphicon-pushpin"></i></span></span>&nbsp;작업 히스토리</div>
+           <div>
 
-        <!-- 하단 페이지 선택 바 -->
-            <nav class = "pagebar">
-              <ul class="pagination">
-                <li>
-                  <a href="#" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                  </a>
-                </li>
-                <li class = "active"><a href="">1</a></li>
-                <li><a href="">2</a></li>
-                <li><a href="">3</a></li>
-                <li><a href="">4</a></li>
-                <li>
-                  <a href="#" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                  </a>
-                </li>
+			<div class="history">${dto.content}</div>
 
-              </ul>
-            </nav>
+			<form id="formHistory" method="POST"
+				action="/AtTicketProject/historyok.do">
+				<textarea class="txtHistory" name="content"	></textarea>
+				
+				<c:if test="${flag == 0}">
+				<input type="hidden" name="empty" value="${flag}">
+				</c:if>
+			</form>
+           
         </div>       
     </div>
-    <!-- -------------------사내공지 게시판 끝------------------------- -->
+    <!-- -------------------작업 히스토리 끝------------------------- -->
     
     <hr class = "splitHr">
     
@@ -319,14 +240,14 @@
         <!-- 일별 방문자수 요약 -->
         <div style = "margin-left : 200px;">
             <h4 style="margin-right: 140px; color: #666;" class = "chartWord">방문자</h4>
-            <span style="color: #555; font-size: 25px;" class = "chartWord">11.2k</span><span style="color:red"> ▲ 2.1k</span>
+            <span style="color: #555; font-size: 25px;" class = "chartWord" id="visitorNow"></span><span style="color:red" id="visitorPluse"></span>
             <span class="glyphicon glyphicon-stats" style="font-size: 35px; margin-left: 100px; color: #e09b9b;"></span>
         </div>
 
         <!-- 예매율 요약 -->
         <div style = "margin-left : 200px;">
             <h4 style="margin-right: 140px; color: #666;" class = "chartWord">예매율</h4>
-            <span style="color: #555; font-size: 25px;" class = "chartWord">11.1%</span><span style="color: blue"> ▼ 1.6%</span>
+            <span style="color: #555; font-size: 25px;" class = "chartWord" id="rateNow"></span><span style="color: blue" id="ratePluse"></span>
             <span class="glyphicon glyphicon-stats" style="font-size: 35px; margin-left: 100px; color: #e09b9b;"></span>
         </div>
 
@@ -343,94 +264,263 @@
     </div>
     
     <script>
-    //일별 방문자수
-    Highcharts.chart('container2', {
-        colors: [
-            "#8389E0"
-        ],
-        chart: {
-            type: 'line'
-        },
-        title: {
-            text: '2020-07-15 ~ 2020-07-21'
-        },
-        subtitle: {
-            text: 'At-Ticket.com'
-        },
-        xAxis: {
-            categories: ['15', '16', '17', '18', '19', '20', '21']
-        },
-        yAxis: {
-            title: {
-                text: '방문자수(k)'
+    
+	
+	var txt, lines;
+	
+    function showHistory() {
+        txt = $(".history").text().trim();
+        $(".history").text("");
+
+        //라인 분리
+        lines = txt.split("\n");
+        
+        lines.forEach(function(item) {
+
+            item = item.trim();
+
+            //버전 찾기
+            if (item.startsWith("v")) {
+                $(".history").append("<h3>" + item + "</h3>");  
             }
-        },
-        plotOptions: {
-            line: {
-                dataLabels: {
-                    enabled: true
-                },
-                enableMouseTracking: false
+
+            if (item.startsWith("-")) {
+                $(".history").append("<div>" + item + "</div>");  
             }
-        },
-        series: [{
-            name: '일별 방문자(천)',
-            data: [12.7, 15.0, 25.6, 27.8, 22.2, 23.8, 25.9]
-        }]
+        });
+    } 
+
+    showHistory();
+
+    function syncSize() {
+        $(".txtHistory").width($(".history").width());
+        $(".txtHistory").height($(".history").height());
+    }
+
+    //크기 동기화
+    $(window).resize(function() {
+        syncSize();
     });
     
-    // 예매율
-    Highcharts.chart('container1', {
-    colors: [
-        "#92D050"
-    ],
-    chart: {
-        type: 'column'
-    },
-    title: {
-        text: '2020-07-15 ~ 2020-07-21'
-    },
-    subtitle: {
-        text: 'At-Ticket.com'
-    },
-    xAxis: {
-        categories: [
-            '15',
-            '16',
-            '17',
-            '18',
-            '19',
-            '20',
-            '21',
-        ],
-        crosshair: true
-    },
-    yAxis: {
-        min: 0,
-        title: {
-            text: '예매율(%)'
-        }
-    },
-    tooltip: {
-        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-            '<td style="padding:0"><b>{point.y:.1f}%</b></td></tr>',
-        footerFormat: '</table>',
-        shared: true,
-        useHTML: true
-    },
-    plotOptions: {
-        column: {
-            pointPadding: 0.2,
-            borderWidth: 0
-        }
-    },
-    series: [{
-        name: '일별 예매율(%)',
-        data: [26.0, 35.6, 18.5, 16.4, 14.1, 35.6, 26.9]
 
-    }]
-});
+
+    //전환
+    $(".history").dblclick(function() {
+        syncSize();
+        $(".txtHistory").val(txt);
+        $(".history").hide();
+        $(".txtHistory").show();
+    });
+
+    $(".txtHistory").keyup(function() {
+        if (event.ctrlKey && event.keyCode == 13) {
+            syncSize();
+            $(".history").text($(".txtHistory").val());
+            showHistory();
+            $(".history").show();
+            $(".txtHistory").hide();
+            
+            //편집 내용 -> 서버로 전송
+            $("#formHistory").submit();
+            
+        }
+        event.cancelBubble = true;
+    });
+    
+    function callAjax(url, method, params, sCallback, eCallback) {
+    	$.ajax({
+    		type: method,
+    		url: url,
+    		dataType: "json",
+    		success: sCallback,
+    		error: eCallback		
+    	});
+    }
+    
+    $(document).ready(function (){
+    	fn_dailyVisitor(); // 일일방문자 Tran
+    	fn_dailyBookRate(); //일일예매율 Tran
+    });
+    
+ 	// 일일방문자 Tran
+    function fn_dailyVisitor() {
+    	//jin var url = '/AtTicketProject/customer/adminViewOk1.do';
+    	var url = '/AtTicketProject/customer/adminviewok.do';
+    	var method = 'GET';
+    	var s_Callback = fn_callback_dailyVisitor;
+    	var e_Callback = fn_err_callback_dailyVisitor;
+    	
+    	callAjax(url, method, '' , s_Callback, e_Callback);
+    }
+
+    //일일예매율 Tran
+    function fn_dailyBookRate(){
+    	var url = '/AtTicketProject/customer/dailyBookRateOk.do';
+    	var method = 'GET';
+    	var s_Callback = fn_callback_dailyBookRate;
+    	var e_Callback = fn_err_callback_dailyBookRate;
+    	
+    	
+    	callAjax(url, method, '' , s_Callback, e_Callback);
+    }
+    
+    
+  //일일방문자 콜백
+    function fn_callback_dailyVisitor(response){
+    	var vData = [];
+    	var vCnt = [];
+    	$(response[1]).each(function (index, item){
+    		vData.push(item.vdate);
+    		vCnt.push(parseFloat(item.vcnt, 10));
+    	});
+    	
+    	console.log(vData);
+    	console.log(vCnt);
+    	
+    	
+     	$("#visitorNow").html(vCnt[6]+'k');
+    	
+    	if( vCnt[6]-vCnt[5] > 0 ){
+    		$("#visitorPluse").html('▲ ' +(vCnt[6]-vCnt[5]).toFixed(1)+'k')
+    		$("#visitorPluse").css({
+    			"color" : "red",
+    			"margin-left": "10px"
+    		});
+    	} else {
+    		$("#visitorPluse").html('▼ ' +(vCnt[6]-vCnt[5]).toFixed(1)+'k')
+    		$("#visitorPluse").css({
+    			"color" : "blue",
+    			"margin-left": "10px"
+    		});
+    	} 
+    	
+    	Highcharts.chart('container2', {
+            colors: [
+                "#8389E0"
+            ],
+            chart: {
+                type: 'line'
+            },
+            title: {
+                text: vData[0] +' ~ '+ vData[6]
+            },
+            subtitle: {
+                text: 'At-Ticket.com'
+            },
+            xAxis: {
+                categories: vData
+            },
+            yAxis: {
+                title: {
+                    text: '방문자수(k)'
+                }
+            },
+            plotOptions: {
+                line: {
+                    dataLabels: {
+                        enabled: true
+                    },
+                    enableMouseTracking: false
+                }
+            },
+            series: [{
+                name: '일별 방문자(천)',
+                // data: [12.7, 15.0, 25.6, 27.8, 22.2, 23.8, 25.9]
+                data: vCnt
+            }]
+        });
+    }
+
+    //일일예매율 콜백
+    function fn_callback_dailyBookRate(response){
+    	//alert("일일예매율 콜백");
+    	
+    	var dbData = [];
+    	var dbRate = [];
+    	$(response).each(function (index, item){
+    		dbData.push(item.dbdate);
+    		dbRate.push(parseFloat(item.dbrate, 10));
+    	});
+    	//alert("일일예매율 콜백 성공");
+    	
+     	$("#rateNow").html(dbRate[2]+'%');
+    	
+    	if( dbRate[2]-dbRate[1] > 0 ){
+    		$("#ratePluse").html('▲ ' +(dbRate[2]-dbRate[1]).toFixed(1)+'%')
+    		$("#ratePluse").css({
+    			"color" : "red",
+    			"margin-left": "10px"
+    		});
+    	} else {
+    		$("#ratePluse").html('▼ ' +(dbRate[2]-dbRate[1]).toFixed(1)+'%')
+    		$("#ratePluse").css({
+    			"color" : "blue",
+    			"margin-left": "10px"
+    		});
+    	}; 
+    	
+    	
+    	console.log("일일예애: "+dbData);
+    	console.log(dbRate);
+    	
+
+    	
+        Highcharts.chart('container1', {
+            colors: [
+                "#92D050"
+            ],
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: dbData[0] +' ~ '+ dbData[2]
+            },
+            subtitle: {
+                text: 'At-Ticket.com'
+            },
+            xAxis: {
+                categories: dbData,
+                crosshair: true
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: '예매율(%)'
+                }
+            },
+            tooltip: {
+                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                    '<td style="padding:0"><b>{point.y:.1f}%</b></td></tr>',
+                footerFormat: '</table>',
+                shared: true,
+                useHTML: true
+            },
+            plotOptions: {
+                column: {
+                    pointPadding: 0.2,
+                    borderWidth: 0
+                }
+            },
+            series: [{
+                name: '일별 예매율(%)',
+                data: dbRate
+
+            }]
+        });
+    }   
+    
+  //일일방문자 에러콜백
+    function fn_err_callback_dailyVisitor(){
+    	alert("일일방문자 에러콜백");
+    }
+
+    //일일예매율 에러콜백
+    function fn_err_callback_dailyBookRate(){
+    	alert("일일예매율 에러콜백");
+    }
+    
+ 
     
     </script>
     

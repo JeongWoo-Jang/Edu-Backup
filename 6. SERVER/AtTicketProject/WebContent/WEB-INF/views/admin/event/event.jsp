@@ -119,7 +119,7 @@
        
         <div style="margin-left: 700px; width: 150px;">
             <button class = "modified" id = "makebtn"><i class="glyphicon glyphicon-plus"></i>추가</button>
-            <button class="modified" id="viewbtn">보기</button>
+            
             <button class = "modified" id = "delbtn"><i class="glyphicon glyphicon-trash"></i>수정</button>
         </div>
         <!-- <nav style="margin-left: 230px;" class = "pagebar">

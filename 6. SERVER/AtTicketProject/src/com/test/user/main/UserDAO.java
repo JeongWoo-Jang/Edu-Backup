@@ -22,7 +22,7 @@ public class UserDAO {
 		DBUtil util = new DBUtil();
 		conn = util.open();//연결 완료
 	}
-	
+
 	public void close() {
 		try {
 			conn.close();
@@ -48,9 +48,6 @@ public class UserDAO {
 			if (rs.next()) {
 				return rs.getInt("cnt");//1아니면 0이 반환될것이다. -> 위의 cnt 를 말하는 것이다! alias
 			}
-			
-			rs.close();
-			pstat.close();
 			
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -86,12 +83,12 @@ public class UserDAO {
 				dto.setEmail(rs.getString("email"));
 				dto.setGrade(rs.getString("grade"));
 				
+				
 				return dto;
 				
 			}//if
 			
-			rs.close();
-			pstat.close();
+			
 			
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -107,7 +104,7 @@ public class UserDAO {
 		try {
 			
 			String sql = "INSERT INTO TBLCUSTOMER (SEQ, NAME, SSN, ID, PW, EGG, ADDR, TEL, EMAIL, GRADE, DELFLAG) "
-					+ "VALUES (CUSTOMERSEQ.NEXTVAL, ?, ?, ?, ?, DEFAULT, ?, ?, ?, DEFAULT, DEFAULT)";
+					+ "VALUES (CUSTOMERSEQ.NEXTVAL, ?, ?, ?, ?, 2000, ?, ?, ?, DEFAULT, DEFAULT)";
 			pstat = conn.prepareStatement(sql);
 			
 			pstat.setString(1, dto.getName());
@@ -117,10 +114,8 @@ public class UserDAO {
 			pstat.setString(5, dto.getAddr());
 			pstat.setString(6, dto.getTel());
 			pstat.setString(7, dto.getEmail());
-			pstat.close();
 			
 			return pstat.executeUpdate();
-			
 			
 		} catch (Exception e) {
 			System.out.println(e);
@@ -145,8 +140,6 @@ public class UserDAO {
 			
 			pstat.executeUpdate();
 			
-			pstat.close();
-			
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -165,8 +158,6 @@ public class UserDAO {
 			
 			pstat.executeUpdate();
 			
-			pstat.close();
-			
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -178,7 +169,7 @@ public class UserDAO {
 		
 		try {
 			
-			String sql = "SELECT COUNT(*) AS CNT FROM TBLCUSTOMER WHERE DELFLAG = 0 AND ID = ?";
+			String sql = "SELECT COUNT(*) AS CNT FROM TBLCUSTOMER WHERE ID = ?";
 			
 			pstat = conn.prepareStatement(sql);
 			
@@ -189,9 +180,6 @@ public class UserDAO {
 			if (rs.next()) {
 				return rs.getInt("cnt"); //1,0
 			}
-			
-			rs.close();
-			pstat.close();
 			
 		} catch (Exception e) {
 			System.out.println(e);
@@ -205,7 +193,7 @@ public class UserDAO {
 		
 		try {
 			
-			String sql = "SELECT COUNT(*) AS CNT FROM TBLCUSTOMER WHERE DELFLAG = 0 AND SSN = ?";
+			String sql = "SELECT COUNT(*) AS CNT FROM TBLCUSTOMER WHERE SSN = ?";
 			
 			pstat = conn.prepareStatement(sql);
 			
@@ -216,9 +204,6 @@ public class UserDAO {
 			if (rs.next()) {
 				return rs.getInt("cnt"); //1,0
 			}
-			
-			rs.close();
-			pstat.close();
 			
 		} catch (Exception e) {
 			System.out.println(e);
@@ -252,9 +237,6 @@ public class UserDAO {
 				
 				clist.add(dto);
 			}
-			
-			rs.close();
-			pstat.close();
 			
 			return clist;
 			
@@ -293,9 +275,6 @@ public class UserDAO {
 				elist.add(dto);
 			}
 			
-			rs.close();
-			stat.close();
-			
 			return elist;
 			
 		} catch (Exception e) {
@@ -304,8 +283,6 @@ public class UserDAO {
 		
 		return null;
 	}
-
-	
 
 
 }

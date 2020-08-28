@@ -254,7 +254,7 @@ public class NoticeDAO extends HttpServlet {
 		public NtShowDTO getNtShowDTO(String noticeseq) {
 			try {
 				
-				String sql = "select distinct s.title, n.title, n.seq, s.poster from tblShow s, tblnotice n where n.title like '%' || s.title || '%' and n.seq = ?";
+				String sql = "select distinct s.title, s.seq as showseq, n.title, n.seq as noticeseq, s.poster from tblShow s, tblnotice n where n.title like '%' || s.title || '%' and n.seq = ?";
 				pstat = conn.prepareStatement(sql);
 				pstat.setString(1, noticeseq);
 				rs = pstat.executeQuery();
@@ -263,6 +263,7 @@ public class NoticeDAO extends HttpServlet {
 					NtShowDTO dto = new NtShowDTO();
 					dto.setPoster(rs.getString("poster"));
 					dto.setTitle(rs.getString("title"));
+					dto.setShowseq(rs.getString("showseq"));
 					return dto;
 				}
 				
@@ -274,6 +275,7 @@ public class NoticeDAO extends HttpServlet {
 			
 			return null;
 		}
+		
 
 		public void updateReadcount(String noticeseq) {
 			
@@ -289,6 +291,63 @@ public class NoticeDAO extends HttpServlet {
 				e.printStackTrace();
 			}
 			
+		}
+
+		public String getTel(String cusseq) {
+			try {
+				
+				String sql = "select * from tblcustomer where seq = ?";
+				pstat = conn.prepareStatement(sql);
+				pstat.setString(1, cusseq);
+				rs = pstat.executeQuery();
+				if(rs.next()) {
+					String tel = rs.getString("tel");
+					return tel;
+				}
+				
+			} catch (Exception e) {
+				System.out.println("NoticeDAO.getTel()");
+				e.printStackTrace();
+			}
+			return null;
+		}
+
+		public int updateAlarm(HashMap<String, String> map) {
+			try {
+				String sql = "insert into tblmybell values(mybellseq.nextVal, ? ,?,default)";
+				pstat = conn.prepareStatement(sql);
+				System.out.println(map.get("showseq"));
+				System.out.println(map.get("cusseq"));
+				pstat.setString(1, map.get("showseq"));
+				pstat.setString(2, map.get("cusseq"));
+				return pstat.executeUpdate();
+				
+			} catch (Exception e) {
+				System.out.println("NoticeDAO.updateAlarm()");
+				e.printStackTrace();
+			}
+			return 0;
+		}
+
+		public int getRepeat(HashMap<String, String> map) {
+			String sql = "select * from tblmybell where cusseq = ? and showseq = ? and delflag <> 1";
+			try {
+				
+				pstat = conn.prepareStatement(sql);
+				pstat.setString(1, map.get("cusseq"));
+				pstat.setString(2, map.get("showseq"));
+				rs = pstat.executeQuery();
+				int repeat = 0;
+				while(rs.next()) {
+					repeat+=1;
+				}
+				return repeat;
+			} catch (Exception e) {
+				System.out.println("NoticeDAO.getRepeat()");
+				e.printStackTrace();
+			}
+		
+			return 0;
 		}
 		
 }

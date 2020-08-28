@@ -32,8 +32,7 @@
             }
             #top {
                 /* border: 1px solid black; */
-                min-width: 1600px;
-                height: 650px;
+                min-width: 1600px;               
                 margin: 0 auto;  
             }
             #middle {
@@ -373,45 +372,87 @@
 			a {
     			color: black;
 			}
-			
+			#tagsearch {
+    border: 1px solid #111;
+    width: 170px;
+    height: 205px;
+    position: relative;
+    float: right;
+    background-color: white;
+    margin-right: 60px;
+    /* text-align: center; */
+
+    display: none;
+}
+#tagsearch::after {
+    content: "";
+    display: none;
+    clear: both;
+}
+#tag {
+    width: 168px;
+    /* background-color: rgb(253, 236, 236); */
+    background-color: #f6f6f6;
+    height: 25px;
+}
+#tag > span {
+    color: #222;
+    font-size: 14px;
+    width: 50px;
+    height: 30px;
+    font-weight: normal;
+    font-family: "IBMPlexSansKR-Regular";
+    position: relative;
+    left: -20px;
+}
+
+#tag > label {
+    color: #111;
+    float: right;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: 100;
+}
+#tagsearch > a {
+    display: block;
+    color: #555;
+    font-size: 14px;
+    font-family: "IBMPlexSansKR-Regular";
+    font-weight: normal;
+    text-align: left;
+    margin-left: 20px;
+    margin-top: 2px;
+}
+#tagsearch > span {
+    font-size: 12px;
+    color: #999;
+    font-weight: normal;
+    font-family: "IBMPlexSansKR-Regular";
+
+    float: right;
+    margin-top: 5px;
+    margin-right: 5px;
+}
+
+.event-main-list {
+	margin-left:220px;
+}
         </style>
     </head>
     <body>
         <div id="main">
             <!-------------------------------- 화면 상단부 -------------------------------->
             <div id="top">
-                <div id="topmenu">
-                    <!-- 상단메뉴 좌측(메인화면으로 돌아가기) -->
-                    <a href="#" id="topleft"></a>
-                    <!-- 상단메뉴 센터(콘서트, 뮤지컬, 연극, 클래식, 전시) -->
-                    <span data-item="item1" class="menubar">콘서트</span>
-                    <span data-item="item2" class="menubar">뮤지컬</span>
-                    <span data-item="item3" class="menubar">연극</span>
-                    <span data-item="item4" class="menubar">클래식</span>
-                    <span data-item="item5" class="menubar">전시</span>
-                    <!-- 상단메뉴 우측(랭킹, 이벤트, 검색창, 마이페이지) -->
-                    <div id="topright">
-                        <span data-item="item6" class="menubar">랭킹</span>
-                        <span data-item="item7" class="menubar">이벤트</span>
-                        <input type="text" value="" id="search" />
-                        <label
-                            for="search"
-                            class="glyphicon glyphicon-search"
-                            style="font-size: 14px; cursor: pointer;"
-                        ></label>
-                        <div
-                            class="glyphicon glyphicon-user"
-                            style="
-                                font-size: 14px;
-                                cursor: pointer;
-                                margin: 0 10px;
-                            "
-                        ></div>
-                    </div>
-                </div>
+                <%@include file="/WEB-INF/views/inc/usertopbar.jsp" %>
+                
                 <!-- 메인화면 슬라이더 -->
-
-                <hr />
+                <div class="slider">
+                <c:forEach items="${map}" var="map">
+                  <div><img src="./images/${map.value}" /></div>
+              	</c:forEach>
+              </div>
+            </div>
+            <hr style="margin-top: 0px;">
                 <!-------------------------------- 내용부분 -------------------------------->
                 <p
                     class="event-main-tit"
@@ -496,10 +537,10 @@
                 </div>
                 <!-- 검색창 -->
                 <div class="searchbox">
-                    <span  style="position: relative; top: 50px; right: 380px;" class="noticemenu" onclick="location.href='/AtTicketProject/show/usernotice.do?page=${page}&search=${search}&sort=regdate';">등록순</span>
-                    <span  style="position: relative; top: 50px; right: 380px;" class="noticemenu" onclick="location.href='/AtTicketProject/show/usernotice.do?page=${page}&search=${search}&sort=opendate';">오픈일순</span>
-                    <span  style="position: relative; top: 50px; right: 380px;" class="noticemenu" onclick="location.href='/AtTicketProject/show/usernotice.do?page=${page}&search=${search}&sort=nview';">조회순</span>
-                   	<form method="GET" action="/AtTicketProject/show/usernotice.do" id="searchForm" autocomplete="off">
+                    <span  style="position: relative; top: 50px; right: 380px;" class="noticemenu" onclick="location.href='/AtTicketProject/usernotice.do?page=${page}&search=${search}&sort=regdate';">등록순</span>
+                    <span  style="position: relative; top: 50px; right: 380px;" class="noticemenu" onclick="location.href='/AtTicketProject/usernotice.do?page=${page}&search=${search}&sort=opendate';">오픈일순</span>
+                    <span  style="position: relative; top: 50px; right: 380px;" class="noticemenu" onclick="location.href='/AtTicketProject/usernotice.do?page=${page}&search=${search}&sort=nview';">조회순</span>
+                   	<form method="GET" action="/AtTicketProject/usernotice.do" id="searchForm" autocomplete="off">
                     <div class="search">
                         <div class="form-group">
                             <div class="input-group">
@@ -528,7 +569,7 @@
                         <tr>
                         	<td>${dto.seq}</td>
                             <td>${dto.nindex}</td>
-                            <td><a href="/AtTicketProject/show/usernoticetemp.do?noticeseq=${dto.seq}&page=${page}&search=${search}">${dto.title}</td>     
+                            <td><a href="/AtTicketProject/usernoticetemp.do?noticeseq=${dto.seq}&page=${page}&search=${search}">${dto.title}</a></td>     
                             <td>${dto.opendate}</td>
                             <td>${dto.nview}</td>
                         </tr>
@@ -572,15 +613,15 @@
                 </div>
             </div>
                         <!-- 챗봇 : 단비봇 -->
-                        <div
+                      <!--   <div
                             id="frogue-container"
                             class="position-right-bottom"
                             data-chatbot="e4957de9-dad9-448d-a709-e43eeb644f63"
                             data-user="사용자ID"
                             data-init-key="value"
-                        ></div>
+                        ></div> -->
                         <!-- data-init-식별키=값 으로 셋팅하면 챗플로우에 파라미터와 연동가능. 식별키는 소문자만 가능 -->
-                        <script>
+                        <!-- <script>
                             (function (d, s, id) {
                                 var js,
                                     fjs = d.getElementsByTagName(s)[0];
@@ -594,12 +635,13 @@
                                 fjs.parentNode.insertBefore(js, fjs);
                             })(document, "script", "frogue-embed");
                         </script>
-                        <!-- 제일 위로 돌아가기 버튼 -->
+                        제일 위로 돌아가기 버튼
                         <div id="movetop">↑</div>
                     </div>
                 
-            </div>
-       <!--  </div> -->
+            </div> -->
+        </div>
+       <%@include file="/WEB-INF/views/inc/userchat.jsp" %>
 
         <script src="/AtTicketProject/js/slick.min.js"></script>
         <script>

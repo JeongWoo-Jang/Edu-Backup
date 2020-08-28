@@ -361,6 +361,10 @@
             top: 360px;
             z-index: 1;
         }
+        
+        .img, .imgtitle {
+        	cursor: pointer;
+        }
 
     </style>
 
@@ -405,10 +409,12 @@
 							<div>
 						</c:if>
 							<div>
-								<img src="./images/${rank.poster}">
+								<img src="./images/${rank.poster}" class="img">
+								<input type="hidden" value="${rank.seq}">
 							</div>
 							<div>
-								<p>${rank.title}</p>
+								<p class="imgtitle">${rank.title}</p>
+								<input type="hidden" value="${rank.seq}">
 								<span>${rank.startdate} ~ ${rank.enddate}<br>${rank.hall} ${rank.theater}</span>
 							</div>
 							<p>
@@ -436,10 +442,12 @@
                                 <p>${status.index + 1}위</p>
                             </div>
                             <div>
-                                <img src="./images/${rank.poster}">
+                                <img src="./images/${rank.poster}" class="img">
+                                <input type="hidden" value="${rank.seq}">
                             </div>
                             <div>
-                                <p>${rank.title}</p>
+                                <p class="imgtitle">${rank.title}</p>
+                                <input type="hidden" value="${rank.seq}">
                             </div>
                             <div>
                                 <span>${rank.startdate} ~ ${rank.enddate}<br>${rank.hall} ${rank.theater}</span>
@@ -570,6 +578,10 @@
         
         $(".tabMenu").eq(index).addClass("active");
         
+      	//이미지 클릭시 이동 -> 여기서 해당 공연seq 를 넘겨준다!
+        $(".img, .imgtitle").click(function () {
+            location.href = "/AtTicketProject/usertickekting.do?seq=" + $(this).next('input').val();
+        });
         
     </script>
 

@@ -70,6 +70,7 @@
                                     <span>${hot.get(0).name}</span>
                                 </div>
                             </div>
+                            <input type="hidden" value="${hot.get(0).seq}">
                         </div>
                         <div style="display: inline-block; width: 730px;">
                         
@@ -82,6 +83,7 @@
 	                                    <span>${hot.name}</span>
                                     </div>
                                 </div>
+                                <input type="hidden" value="${hot.seq}">
                             </div>
                         <c:set var="i" value="${i + 1}" />
                         </c:forEach>
@@ -94,46 +96,22 @@
                 <div style="text-align: center;">
                     <h1>TICKET OPEN</h1>
                     <div>
-                        <div class="img opne1" value="temp7">
-                            <div class="img-cover1 cover7" value="cover7">
-                                <div class="text1 temp7">
-                                    <h4>select shop</h4>
-                                    <span>10cm X 데이브레이크</span>
+                    
+						<c:set var="i" value="1" />
+                        <c:forEach items="${open}" var="open">
+                        	<div class="img opne${i}" value="temp${i+6}" style="background-image: url(./images/${open.img});">
+                                <div class="img-cover1 cover${i+6}" value="cover${i+6}">
+                                    <div class="text1 temp${i+6}">
+                                    	<p style="color: orange; font-size: 16px; font-weight: bold;">D${open.opendate}</p>
+	                                    <h4>${open.genre}</h4>
+	                                    <span>${open.name}</span>
+                                    </div>
                                 </div>
+                                <input type="hidden" value="${open.seq}">
                             </div>
-                        </div>
-                        <div class="img opne2" value="temp8">
-                            <div class="img-cover1 cover8" value="cover8">
-                                <div class="text1 temp8">
-                                    <h4>select shop</h4>
-                                    <span>10cm X 데이브레이크</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="img opne3" value="temp9">
-                            <div class="img-cover1 cover9" value="cover9">
-                                <div class="text1 temp9">
-                                    <h4>select shop</h4>
-                                    <span>10cm X 데이브레이크</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="img opne4" value="temp10">
-                            <div class="img-cover1 cover10" value="cover10">
-                                <div class="text1 temp10">
-                                    <h4>select shop</h4>
-                                    <span>10cm X 데이브레이크</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="img opne5" value="temp11">
-                            <div class="img-cover1 cover11" value="cover11">
-                                <div class="text1 temp11">
-                                    <h4>select shop</h4>
-                                    <span>10cm X 데이브레이크</span>
-                                </div>
-                            </div>
-                        </div>
+                        <c:set var="i" value="${i + 1}" />
+                        </c:forEach>                    
+                    
                     </div>
                     <!-- 티켓오픈 더보기 버튼 -->
                     <input
@@ -202,6 +180,7 @@
                                     <span>${rank.name}</span>
                                 </div>
                             </div>
+                            <input type="hidden" value="${rank.seq}">
                         </div>
                     <c:set var="i" value="${i + 1}" />
                     </c:forEach>
@@ -230,6 +209,7 @@
                                     <span>${musical.name}</span>
                                 </div>
                             </div>
+                            <input type="hidden" value="${musical.seq}">
                         </div>
                     <c:set var="i" value="${i + 1}" />
                     </c:forEach>
@@ -249,6 +229,7 @@
                                     <span>${concert.name}</span>
                                 </div>
                             </div>
+                            <input type="hidden" value="${concert.seq}">
                         </div>
 					<c:set var="i" value="${i + 1}" />
                     </c:forEach>
@@ -268,6 +249,7 @@
                                     <span>${exhibition.name}</span>
                                 </div>
                             </div>
+                            <input type="hidden" value="${exhibition.seq}">
                         </div>
 					<c:set var="i" value="${i + 1}" />
                     </c:forEach>
@@ -371,10 +353,11 @@
                 $(this).css("transform", "scale(0.97)");
             });
 
-            //이미지 클릭시 이동
+            //이미지 클릭시 이동 -> 여기서 해당 공연seq 를 넘겨준다!
             $(".img").click(function () {
-                location.href = "#";
+                location.href = "/AtTicketProject/usertickekting.do?seq=" + $(this).children('input').val();
             });
+            
 
             //movetop
             $("#movetop").click(function () {
@@ -399,29 +382,26 @@
                 );
             });
 
-            //팝업창 가운데 배치
-            var popupWidth = 600;
-            var popupheight = 400;
-            var popupX = (window.screen.width / 2) - (popupWidth / 2);
-            var popupY = (window.screen.height / 2) - (popupheight / 2);
-            //관심 공연 담기 팝업창
-            
-            //var loginUrl = "/AtTicketProject/userlogin.do";//jsp 로 넘어가기 위함임
-            //var logoutUrl = "/AtTicketProject/userlogout.do";
-            
-            //***여기가 좀 문제가 보이기 때문에 나중에 처리를 하도록 해보자
             //로그인 java 로 이동
             $("#login").click(function() {
                 location.href = "/AtTicketProject/userlogin.do";
-            	//window.open(loginUrl,"_black",`left=${popupX}, top=${popupY}, width=${popupWidth}, height=${popupheight};`);
-            	//window.open(loginUrl,"_black");
             });
             
             //로그아웃 java 로 이동
             $("#logout").click(function() {
+                location.href = "/AtTicketProject/userlogout.do";            
+            //로그인 java 로 이동
+            });
+            
+            $("#slogin").click(function() {
+                location.href = "/AtTicketProject/userlogin.do";
+            });
+            
+            //로그아웃 java 로 이동
+            $("#slogout").click(function() {
                 location.href = "/AtTicketProject/userlogout.do";
             });
-			//로그인 팝업창
+            
         </script>
     </body>
 </html>

@@ -63,6 +63,8 @@ public class RankDAO {
 				dto.setPoster(rs.getString("poster"));
 				dto.setGenre(rs.getString("genre"));
 				
+				dto.setSeq(rs.getString("seq"));
+				
 				list.add(dto);
 			}
 			

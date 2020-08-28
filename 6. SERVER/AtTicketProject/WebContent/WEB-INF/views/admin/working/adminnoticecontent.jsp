@@ -72,7 +72,7 @@
             </tr>
             <tr>
                 <th style="width: 150px;">내용</th>
-                <td style="width: 450px;"><p>${dto.content}</p></td>
+                <td style="width: 450px;"><pre style="background-color: white; border: 0px;">${dto.content}</pre></td>
             </tr>
         </table>
         <hr>

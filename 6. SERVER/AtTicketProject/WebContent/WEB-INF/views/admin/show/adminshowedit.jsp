@@ -145,7 +145,7 @@
             
             <div>
                 <label for="place">공연 장소 : </label>
-                <select name="region" id="region">
+                <select name="region" id="region" required>
                 <option value="0" selected disabled hidden>지역</option>
                	<option value="서울" <c:if test="${dto.place=='서울'}">selected</c:if>>서울</option>
                	<option value="인천" <c:if test="${dto.place=='인천'}">selected</c:if>>인천</option>
@@ -155,11 +155,11 @@
                	
                 </select>
                 
-               	<select name="hall" id="hall">
+               	<select name="hall" id="hall" required>
                	<option value="0" selected disabled hidden>공연장</option>
                	</select>
                	
-               	<select name="theater" id="theater">
+               	<select name="theater" id="theater" required>
                	<option value="0" selected disabled hidden>상영관</option>
                	</select>
             </div>
@@ -201,7 +201,11 @@
             <div><input type="submit" id="btnadd" value="수정하기" class="btn btn-default"></div>
             
             <input type="hidden" name="seq" value="${dto.seq}">
-            <input type="hidden" name="tags" value="${tdto.tags}">
+
+<%--             <c:forEach items="${tdto.tags}" var="tag" varStatus="status">
+            	<input type="text" name="${tag[status.index]}" value="${tag}">
+            </c:forEach> --%>
+            
 			</form>
 			
         </fieldset>

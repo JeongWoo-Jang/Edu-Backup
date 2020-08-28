@@ -27,7 +27,7 @@ public class AdminShowDeleteOk extends HttpServlet{
 		
 		
 		
-		if (sresult == 1 && rresult == 1 && tresult == 1) {
+		if (sresult == 1 && rresult == 1) {
 			//삭제 성공 -> view(X) -> list(O)
 			resp.sendRedirect("/AtTicketProject/adminshow.do");	
 			

@@ -61,6 +61,7 @@
             }
             .menubar {
                 margin: 0 5px;
+                cursor: pointer;
             }
             #topmenu > span {
                 cursor: pointer;
@@ -366,44 +367,52 @@
             	left: 1550px;
             	outline: none;
             }
+            
         </style>
     </head>
     <body>
         <div id="main">
             <!-------------------------------- 화면 상단부 -------------------------------->
             <div id="top">
-                <div id="topmenu">
-                    <!-- 상단메뉴 좌측(메인화면으로 돌아가기) -->
-                    <a href="#" id="topleft"></a>
-                    <!-- 상단메뉴 센터(콘서트, 뮤지컬, 연극, 클래식, 전시) -->
-                    <span data-item="item1" class="menubar">콘서트</span>
-                    <span data-item="item2" class="menubar">뮤지컬</span>
-                    <span data-item="item3" class="menubar">연극</span>
-                    <span data-item="item4" class="menubar">클래식</span>
-                    <span data-item="item5" class="menubar">전시</span>
-                    <!-- 상단메뉴 우측(랭킹, 이벤트, 검색창, 마이페이지) -->
-                    <div id="topright">
-                        <span data-item="item6" class="menubar">랭킹</span>
-                        <span data-item="item7" class="menubar">이벤트</span>
-                        <input type="text" value="" id="search" />
-                        <label
-                            for="search"
-                            class="glyphicon glyphicon-search"
-                            style="font-size: 14px; cursor: pointer;"
-                        ></label>
-                        <div
-                            class="glyphicon glyphicon-user"
-                            style="
-                                font-size: 14px;
-                                cursor: pointer;
-                                margin: 0 10px;
-                            "
-                        ></div>
-                    </div>
+            <div id="topmenu">
+                <!-- 상단메뉴 좌측(메인화면으로 돌아가기) -->
+                <a href="userindex.do" id="topleft"></a>
+                <!-- 상단메뉴 센터(콘서트, 뮤지컬, 연극, 클래식, 전시) -->
+                <div id="topcenter">
+                    <span data-lo="userconcert.do" class="menubar">콘서트</span>
+                    <span data-lo="usermusical.do" class="menubar">뮤지컬</span>
+                    <span data-lo="usertheater.do" class="menubar">연극</span>
+                    <span data-lo="userclassic.do" class="menubar">클래식</span>
+                    <span data-lo="userexhibition.do" class="menubar">전시</span>
                 </div>
+                <!-- 상단메뉴 우측(랭킹, 이벤트, 검색창, 마이페이지) -->
+                <div id="topright">
+                    <span data-lo="userranking.do" class="menubar">랭킹</span>
+                    <span data-lo="userevent.do" class="menubar">이벤트</span>
+                    <input type="text" value="" id="search">
+                    <label for="search" class="glyphicon glyphicon-search"
+                        style="font-size: 14px; cursor: pointer;"></label>
+                        <c:if test = "${empty userid}">
+        <span class="menubar" id="slogin">로그인</span>
+        </c:if>
+        <c:if test = "${!empty userid}">
+        <div
+            class="glyphicon glyphicon-user"
+            id="mypage"
+            style="
+                font-size: 14px;
+                cursor: pointer;
+                margin: 0 10px;
+            "
+        ></div>
+        <span class="menubar" id="slogout">로그아웃</span>
+        </c:if>
+                        
+                </div>
+            </div>
                 <!-- 메인화면 슬라이더 -->
 
-                <hr />
+                <hr / style="margin-top:0px;">
                 <!-------------------------------- 내용부분 -------------------------------->
                 <p
                     class="event-main-tit"
@@ -633,13 +642,17 @@
         	
 
         
-            //상단 메뉴 css
-            $(".menubar").mouseover(function () {
-                $(this).css("border-bottom", "5px solid orange");
-            });
-            $(".menubar").mouseout(function () {
-                $(this).css("border-bottom", "");
-            });
+        //상단 메뉴 css
+        $(".menubar").mouseover(function() {
+            $(this).css("border-bottom", "5px solid orange");
+        });
+        $(".menubar").mouseout(function() {
+            $(this).css("border-bottom", "");
+        });
+        //상단 메뉴 클릭시
+        $(".menubar").click(function() {
+            location.href = $(this).data("lo");
+        });
 
             $(".noticemenu").mouseover(function () {
                 $(this).css("border-top", "5px solid orange");
@@ -661,6 +674,26 @@
                     },
                     1000
                 );
+            });
+            
+          //로그인 java 로 이동
+            $("#login").click(function() {
+                location.href = "/AtTicketProject/userlogin.do";
+            });
+            
+            //로그아웃 java 로 이동
+            $("#logout").click(function() {
+                location.href = "/AtTicketProject/userlogout.do";
+            });
+            
+            //로그인 java 로 이동
+            $("#slogin").click(function() {
+                location.href = "/AtTicketProject/userlogin.do";
+            });
+            
+            //로그아웃 java 로 이동
+            $("#slogout").click(function() {
+                location.href = "/AtTicketProject/userlogout.do";
             });
         </script>
     </body>

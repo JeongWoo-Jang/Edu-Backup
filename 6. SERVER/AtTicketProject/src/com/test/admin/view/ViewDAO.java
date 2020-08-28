@@ -46,6 +46,7 @@ public class ViewDAO {
 				dto.setPoster(rs.getString("poster"));
 				dto.setRate(rs.getFloat("rate"));
 				dto.setTitle(rs.getString("title"));
+				dto.setShowseq(rs.getString("showseq"));
 				
 				rTime.add(dto);
 				

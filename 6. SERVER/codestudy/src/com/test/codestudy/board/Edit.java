@@ -30,6 +30,7 @@ public class Edit extends HttpServlet {
 		dto2.setSeq(seq);
 		
 		BoardDTO dto = dao.get(dto2);
+		dao.close();
 		
 		//3. DTO를 JSP에게 전달하면서 호출하기
 		req.setAttribute("dto", dto);

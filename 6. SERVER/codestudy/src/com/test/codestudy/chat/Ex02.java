@@ -1,4 +1,4 @@
-package com.test.admin.calculate;
+package com.test.codestudy.chat;
 
 import java.io.IOException;
 
@@ -9,14 +9,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/admin/adminbank.do")
-public class AdminBank extends HttpServlet{
-
+@WebServlet ("/ex02.do")
+public class Ex02 extends HttpServlet {
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/admin/calculate/adminbank.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/chat/ex02.jsp");
 		dispatcher.forward(req, resp);
-
+		
 	}
+
 }

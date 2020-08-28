@@ -85,7 +85,8 @@
             <tr>
                 <th style="width: 150px; " >배너</th>
                 <td style="width: 450px;">
-                    <input name ="banner" type="file" class="form-control" style = "padding-bottom: 30px;" value= "${dto.banner}">${dto.banner}
+                    <input name ="banner" type="file" class="form-control" style = "padding-bottom: 30px;" value= "${dto.banner}">
+                    <img src="../images/${dto.banner}">
                 </td>
             </tr>
             <tr>

@@ -1,4 +1,4 @@
-package com.test.user.show;
+package com.test.user.mypage;
 
 import java.io.IOException;
 
@@ -8,27 +8,26 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-@WebServlet("/userreviewedit.do")
-public class UserReviewEdit extends HttpServlet{
-
+@WebServlet("/mypageinterestpopup.do")
+public class MyPageInterestPopup extends HttpServlet {
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+		String index = "1";
 		
+		index = req.getParameter("index");
 		
-		HttpSession session = req.getSession();
+		if(index != null) {
+			req.setAttribute("index", index);
+		} else {
+			req.setAttribute("index", 1);
+		}
 		
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/user/userreviewedit.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/user/mypage/mypageinterestpopup.jsp");
 		dispatcher.forward(req, resp);
 		
-		
-		System.out.println(req.getContextPath());
-		
-		
-		System.out.println(session.getAttribute("userid"));
-		
 	}
-	
-}
 
+}

@@ -49,6 +49,7 @@ public class EditOk extends HttpServlet {
 		} else {
 			result = 2;
 		}
+		dao.close();
 		
 		//3.
 		if (result == 1) {

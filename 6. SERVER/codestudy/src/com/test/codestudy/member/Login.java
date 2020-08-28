@@ -33,7 +33,6 @@ public class Login extends HttpServlet {
 		
 		//dao.login(id, pw);
 		int result = dao.login(dto); //1, 0
-		
 		//3.
 		if (result == 1) {
 			
@@ -48,6 +47,7 @@ public class Login extends HttpServlet {
 			
 			//회원 나머지 정보 -> 세션
 			MemberDTO dto2 = dao.getMember(dto.getId());
+			dao.close();
 			
 			session.setAttribute("name", dto2.getName());
 			session.setAttribute("pic", dto2.getPic());

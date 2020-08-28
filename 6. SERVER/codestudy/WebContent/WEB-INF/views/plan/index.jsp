@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -65,6 +67,20 @@
 			<div>
 				<h1>스터디 일정 <small>Plan</small></h1>
                 
+                <table style="margin: 15px 0px; width: 100%;">
+                	<tr>
+                		<td>
+	               			<button type="button" id="prevMonth" class="btn btn-default" 
+	               			onclick="location.href='/codestudy/plan/index.do?year=${prevYear}&month=${prevMonth}';">이전달</button>
+	               		</td>
+	               		<td style="text-align: center; font-size: 2em; font-weight: bold;">${year}.<fmt:formatNumber minIntegerDigits="2" value="${month+1}"></fmt:formatNumber></td>
+	               		<td style="text-align: right">
+	               			<button type="button" id="nextMonth" class="btn btn-default"
+	               			onclick="location.href='/codestudy/plan/index.do?year=${nextYear}&month=${nextMonth}';">다음달</button>
+	               		</td>
+	               	</tr>
+                </table>
+                
                 <table class="calendar">
                     <thead>
                         <tr>
@@ -78,68 +94,39 @@
                         <tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td><div class="date">1</div></td>
-                            <td><div class="date">2</div></td>
-                            <td><div class="date">3</div></td>
-                            <td><div class="date">4</div></td>
-                        </tr>
-                        <tr>
-                            <td><div class="date">5</div></td>
-                            <td><div class="date">6</div></td>
-                            <td><div class="date">7</div></td>
-                            <td><div class="date">8</div></td>
-                            <td><div class="date">9</div></td>
-                            <td><div class="date">10</div></td>
-                            <td><div class="date">11</div></td>
-                        </tr>
-                        <tr>
-                            <td><div class="date">12</div>
-                                <div class="item">- 교재 배포하기</div></td>
-                            <td><div class="date">13</div></td>
-                            <td><div class="date">14</div></td>
-                            <td><div class="date">15</div></td>
-                            <td><div class="date">16</div></td>
-                            <td><div class="date">17</div></td>
-                            <td><div class="date">18</div></td>
-                        </tr>
-                        <tr>
-                            <td><div class="date">19</div></td>
-                            <td><div class="date">20</div></td>
-                            <td><div class="date">21</div></td>
-                            <td><div class="date">22</div></td>
-                            <td>
-                                <div class="date">23</div>
-                                <div class="item" data-toggle="modal" data-target="#myModal">- 템플릿 만들고 주석 제대로 달기</div>
-                                <div class="item" data-toggle="modal" data-target="#myModal">- 시수 계산하기</div>
-                                <div class="item" data-toggle="modal" data-target="#myModal">- 교재 배포하기</div>
-                            </td>
-                            <td><div class="date">24</div></td>
-                            <td><div class="date">25</div></td>
-                        </tr>                        
-                        <tr>
-                            <td><div class="date">26</div></td>
-                            <td><div class="date">27</div></td>
-                            <td><div class="date">28</div></td>
-                            <td><div class="date">29</div></td>
-                            <td><div class="date">30</div></td>
-                            <td><div class="date">31</div></td>
-                            <td></td>
-                        </tr>
+                    	
+                    	${txtCal}
+                    	
+                    	<%-- 
+                    	<tr>
+                    	<c:forEach var="i" begin="1" end="31">
+                        
+                            <td><div class="date">${i}</div></td>
+                        	
+                        	<!-- 토요일마다 <tr> 처리 -->
+                        	<c:if test="${i mod 7 == 0}">
+                        		</tr>
+                        		<tr>
+                        	</c:if>
+                        	
+                        </c:forEach>
+                        </tr> 
+                        --%>
+                        
                     </tbody>
                 </table>
                 
                 <div style="clear:both;"></div>
 
+				<c:if test="${not empty id}">
                 <div class="btns btn-group">
                     <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">
                         <span class="glyphicon glyphicon-plus"></span>
                         등록
                     </button>
                 </div>
+                </c:if>
+                
                 <div style="clear:both;"></div>
 			</div>
 		</div>
@@ -157,24 +144,28 @@
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <h4 class="modal-title" id="myModalLabel">일정</h4>
             </div>
+            
+            <form method="POST" action="/codestudy/plan/add.do">
             <div class="modal-body">
                 <ul class="list-group">
                     <li class="list-group-item">
-                        <input type="date" class="form-control" id="itemDate">
+                        <input type="date" class="form-control" id="itemDate" name="regdate" required>
                     </li>
                     <li class="list-group-item">
-                        <input type="text" class="form-control" id="itemText">
+                        <input type="text" class="form-control" id="itemText" name="content" required placeholder="일정 내용을 입력하세요.">
                     </li>
                     <li class="list-group-item">
-                        <input type="text" class="form-control" id="itemUser" value="홍길동">
+                        <input type="text" class="form-control" id="itemUser" value="${name}">
                     </li>
                 </ul>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-floppy-disk"></span> 저장</button>
+                <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-floppy-disk"></span> 저장</button>
                 <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-remove"></span> 삭제</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-ok"></span> 닫기</button>                    
             </div>
+            </form>
+            
         </div>
         </div>
     </div>
@@ -186,6 +177,13 @@
 	<!-- ########## 하단 끝 -->
 	
 	<script>
+	
+		function setData(regdate, name) {
+			$("#itemDate").val(regdate);
+			$("#itemUser").val(name);
+		}
+	
+	
 		$('#myModal').on('show.bs.modal', function (e) {
 	        //console.log(e.relatedTarget.innerText);
 	        if (e.relatedTarget.nodeName == "DIV") {

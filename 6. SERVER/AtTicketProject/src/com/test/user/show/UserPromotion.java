@@ -19,6 +19,7 @@ public class UserPromotion extends HttpServlet{
 		
 		HttpSession session = req.getSession();
 		
+
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/user/userpromotion.jsp");
 		dispatcher.forward(req, resp);
 		

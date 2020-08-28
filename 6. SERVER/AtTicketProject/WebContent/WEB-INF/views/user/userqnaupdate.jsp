@@ -82,7 +82,7 @@
             font-size: 15px;
             padding: 40px 0;
             position: absolute;
-            /* margin-top: -120px; */
+            margin-top: -120px;
         }
         .menubar {
             margin: 0 5px;
@@ -132,13 +132,13 @@
             width: 170px;
             height: 205px;
             position: relative;
+            left: -15px;
             float: right;
             background-color: white;
             margin-right: 60px;
 	        margin-top: 2px;
             /* text-align: center; */
             display: none;
-	        top: 24px;
         }
         #tagsearch::after {
             content: "";
@@ -302,12 +302,14 @@
             <h1>Q&A Update</h1>
 
             <div id = "right">
+            
+            <form method="POST" action="/AtTicketProject/userqnaupdateok.do">
 
                 <table id="tbl" class="table table-bordered">
                     <tr>
                         <th>문의 유형</th>
                         <td>
-                            <select class="form-control">
+                            <select class="form-control" id="tagoption" name="tag">
                                 <option>예매방법</option>
                                 <option>결제방법</option>
                                 <option>수수료</option>
@@ -322,13 +324,13 @@
                         <th>제목</th>
                         <td>
                             <!-- block태그로 바뀜 -->
-                            <input type="text" class="form-control"> 
+                            <input type="text" class="form-control" value="${subject}" name="subject"> 
                         </td>
                     </tr>
                     <tr>
                         <th>내용</th>
                         <td>
-                            <textarea class="form-control" style="height: 500px;"></textarea>
+                            <textarea class="form-control" style="height: 500px;" name="content">${content}</textarea>
                         </td>
                     </tr>
                     <tr>
@@ -338,14 +340,19 @@
                         </td>
                     </tr>
                 </table>
+                
+                <input type="text" name="seq" value="${seq}" style="display: none;">
         
-                <button class="btn btn-primary" id="write">
-                    <span class="glyphicon glyphicon-pencil"></span>
-                    Write
+                <button class="btn btn-primary" id="write" type="submit">
+                    <span class="glyphicon glyphicon-ok"></span>
+                    ok
                 </button>
+                
+               </form>
+               
                 <button class="btn btn-primary" id="list">
                     <span class="glyphicon glyphicon-list"></span>
-                    목록
+                    	목록
                 </button>
         
         
@@ -405,7 +412,7 @@
         //검색창 커서 있을때 팝업 띄우기
         $("#search").focusin(function () {
             $("#tagsearch").css("display", "block");
-            $("#search").css("border-bottom", "2px solid black");
+            //$("#search").css("border-bottom", "2px solid black");
         });
         //검색창 팝업 닫기
         $("#search").focusout(function () {
@@ -438,12 +445,21 @@
 
         // 목록 링크
         $("#list").click(function() {
-            $(location).attr('href','user_qna.html');
+            $(location).attr('href','/AtTicketProject/userqna.do');
         });
 
- 
-
-
+        $("#tagoption").val("${tag}").prop("selected", true);
+		
+        //로그인 java 로 이동
+        $("#login").click(function() {
+            location.href = "/AtTicketProject/userlogin.do";
+        });
+        
+        //로그아웃 java 로 이동
+        $("#logout").click(function() {
+            location.href = "/AtTicketProject/userlogout.do";            
+        //로그인 java 로 이동
+        });
 
     </script>
 

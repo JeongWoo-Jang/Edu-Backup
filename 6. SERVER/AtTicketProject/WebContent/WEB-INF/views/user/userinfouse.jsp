@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -91,7 +92,7 @@
             font-size: 15px;
             padding: 40px 0;
             position: absolute;
-            /* margin-top: -120px; */
+            margin-top: -120px;
         }
         .menubar {
             margin: 0 5px;
@@ -452,6 +453,7 @@
             width: 170px;
             height: 205px;
             position: relative;
+            left: -15px;
             float: right;
             background-color: white;
             margin-right: 60px;
@@ -940,9 +942,6 @@
 
             <!-------------------------------- 화면 하단부 -------------------------------->
             <%@include file="/WEB-INF/views/inc/userbottombar.jsp" %>
-        </div>
-
-            <!-- <div id="place"></div> -->
 
             
 
@@ -990,7 +989,7 @@
         //검색창 커서 있을때 팝업 띄우기
         $("#search").focusin(function () {
             $("#tagsearch").css("display", "block");
-            $("#search").css("border-bottom", "2px solid black");
+            //$("#search").css("border-bottom", "2px solid black");
         });
         //검색창 팝업 닫기
         $("#search").focusout(function () {
@@ -1100,20 +1099,31 @@
 
         // 아코디언
 		$(".a1").accordion({
-            heightStyle: "content"
+			collapsible: true,
+	        active: false,
+			heightStyle: "content"
         });
 
         // 문의하기 링크
         $("#qLink").click(function() {
             $(location).attr('href','/AtTicketProject/userqna.do');
         });
+        
+        //로그인 java 로 이동
+        $("#login").click(function() {
+            location.href = "/AtTicketProject/userlogin.do";
+        });
+        
+        //로그아웃 java 로 이동
+        $("#logout").click(function() {
+            location.href = "/AtTicketProject/userlogout.do";            
+        //로그인 java 로 이동
+        });
 
     </script>
 
 
 
-        </div>
-    </div>
 
 
 

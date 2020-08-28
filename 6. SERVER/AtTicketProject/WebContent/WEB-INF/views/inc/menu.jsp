@@ -34,15 +34,16 @@
         <div class="accomenu">
             <h3>공연</h3>
             <div>
-            <div style="margin-left:-30px; padding-left: 30px; width: 231px; height: 25px;"><a href="adminShow.html"><span>▶</span> 공연 조회</a></div>
+            <div style="margin-left:-30px; padding-left: 30px; width: 231px; height: 25px;"><a href="/AtTicketProject/adminshow.do"><span>▶</span> 공연 조회</a></div>
             </div>
             <h3>통계</h3>
             <div>
-            <div style="margin-left:-30px; padding-left: 30px; width: 231px; height: 25px;"><a href="adminViews.html"><span>▶</span> 방문자 통계</a></div>
+            <div style="margin-left:-30px; padding-left: 30px; width: 231px; height: 25px;"><a href="/AtTicketProject/customer/adminview.do"><span>▶</span> 방문자 통계</a></div>
             </div>
             <h3>정산 관리</h3>
             <div>
-            <div style="margin-left:-30px; padding-left: 30px; width: 231px; height: 25px;"><a href="salesManagement.html"><span>▶</span> 매출액 통계</a></div>
+            <div style="margin-left:-30px; padding-left: 30px; width: 231px; height: 25px;"><a href="/AtTicketProject/adminsales.do"><span>▶</span> 매출액 통계</a></div>
+            <div style="margin-left:-30px; padding-left: 30px; width: 231px; height: 25px;"><a href="/AtTicketProject/admin/adminbank.do"><span>▶</span> 계좌 관리</a></div>
             </div>
             <h3>직원 정보</h3>
             <div>
@@ -50,16 +51,12 @@
             </div>
             <h3>이벤트</h3>
             <div>
-            <div style="margin-left:-30px; padding-left: 30px; width: 231px; height: 25px;"><a href="event.html"><span>▶</span> 이벤트 조회</a></div>
+            <div style="margin-left:-30px; padding-left: 30px; width: 231px; height: 25px;"><a href="/AtTicketProject/event/adminevent.do"><span>▶</span> 이벤트 조회</a></div>
             <div style="margin-left:-30px; padding-left: 30px; width: 231px; height: 25px;"><a href="/AtTicketProject/coupon/admincoupon.do"><span>▶</span> 쿠폰 조회</a></div>
             </div>
             <h3>1:1 문의</h3>
             <div>
             <div style="margin-left:-30px; padding-left: 30px; width: 231px; height: 25px;"><a href="/AtTicketProject/admincustomerqna.do"><span>▶</span> 문의 조회</a></div>
-            </div>
-            <h3>공연 랭킹</h3>
-            <div>
-            <div style="margin-left:-30px; padding-left: 30px; width: 231px; height: 25px;"><a href="Ranking.html"><span>▶</span> 랭킹 조회</a></div>
             </div>
             <h3>공지사항</h3>
             <div>
@@ -67,16 +64,12 @@
             </div>
             <h3>고객 정보</h3>
             <div>
-            <div style="margin-left:-30px; padding-left: 30px; width: 231px; height: 25px;"><a href="adminCustomer.html"><span>▶</span> 고객 정보 조회</a></div>
+            <div style="margin-left:-30px; padding-left: 30px; width: 231px; height: 25px;"><a href="/AtTicketProject/customer/admincustomerlist.do"><span>▶</span> 고객 정보 조회</a></div>
             </div>
             <h3>업무 게시판</h3>
             <div>
                 <div style="margin-left:-30px; padding-left: 30px; width: 231px; height: 25px;"><a href="adminworking.do"><span>▶</span> 업무 게시판 조회</a></div>
             </div>
-            <h3>Q&A 게시판</h3>
-            <div>
-                <div style="margin-left:-30px; padding-left: 30px; width: 231px; height: 25px;"><a href="hansiyeonBoard.html"><span>▶</span> Q&A 게시판 조회</a></div>
-            </div> 
             <h3>배너 관리</h3>
             <div>
                 <div style="margin-left:-30px; padding-left: 30px; width: 231px; height: 25px;"><a href="/AtTicketProject/admin/adminbannermain.do"><span>▶</span>메인 배너 수정</a></div>
@@ -85,7 +78,7 @@
                 <div style="margin-left:-30px; padding-left: 30px; width: 231px; height: 25px;"><a href="/AtTicketProject/admin/adminbannertheater.do"><span>▶</span>연극 배너 수정</a></div>
                 <div style="margin-left:-30px; padding-left: 30px; width: 231px; height: 25px;"><a href="/AtTicketProject/admin/adminbannerclassic.do"><span>▶</span>클래식 배너 수정</a></div>
                 <div style="margin-left:-30px; padding-left: 30px; width: 231px; height: 25px;"><a href="/AtTicketProject/admin/adminbannerdisplay.do"><span>▶</span>전시 배너 수정</a></div>
-            </div> 
+            </div>
         </div>
         
 

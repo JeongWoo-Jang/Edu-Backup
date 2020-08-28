@@ -137,34 +137,50 @@
                 <h1>할인쿠폰/예매권</h1>
                 <div id="line"></div>
                 <p><i class="glyphicon glyphicon-menu-right
-                    "></i><span>${username}</span>님이 가지고 계신 <span style="color: #7A98B4">할인쿠폰 번호 12자리</span>를 입력해 주세요.
+                    "></i><span>${username}</span>님이 가지고 계신 <span style="color: #7A98B4">할인쿠폰 번호</span>를 입력해 주세요.
                 </p>
-                <div id="coupon">
-                    공연 할인쿠폰 <input type="text" id="coupontxt" placeholder="할인쿠폰 번호 12자리"><input type="button" value="등록하기" class="btn btn-default" id="btncoupon">
-                </div>
+                
+                <form method="POST" action="/AtTicketProject/mypagecouponok.do" name="signup" id="signup">	
+	                <div id="coupon">
+	                   	공연 할인쿠폰 
+	                   <input type="text" id="coupontxt" placeholder="할인쿠폰 번호" name="couponseq">
+	                   <input type="submit" value="등록하기" class="btn btn-default" id="btncoupon">
+	                </div>
+                </form>
+                
                 <h2>사용가능한 쿠폰</h2>
                 <p><i class="glyphicon glyphicon-menu-right
-                    "></i>현재 사용 가능한 공연 할인 쿠폰은 <span style="color: red;">0</span>매 입니다.
+                    "></i>현재 사용 가능한 공연 할인 쿠폰은 <span style="color: red;">${totalCount }</span>매 입니다.
                 </p>
                 <table id="tbl1">
                     <thead>
                         <th>쿠폰</th>
                         <th>할인금액</th>
-                        <th>사용조건</th>
                         <th>사용기간</th>
                         <th>등록일</th>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td colspan="5">사용 가능한 쿠폰 목록이 없습니다.</td>
-                        </tr>
+                    	<!-- 쿠폰 없을때  -->
+		                <c:if test="${empty search and list.size() == 0}">
+		                	<tr>
+		                		<td colspan="4">사용 가능한 쿠폰 목록이 없습니다.</td>
+		                	</tr>                    	
+		               	</c:if>
+		                 
+		          	     <c:forEach items="${list}" var="dto">
+				            <tr>
+	                        	<td>${dto.couponName}</td>
+	                        	<td>${dto.couponDiscount}</td>
+	                        	<td>${dto.couponStart} ~ ${dto.couponEnd}</td>
+	                        	<td>${dto.couponRegistration}</td>
+                        	</tr>
+                        	<%-- <div class="couponSeq">${dto.couponSeq}</div> --%>
+				         </c:forEach>
+                        
                     </tbody>
                 </table>
                 <div id="paging">
-                    <button class="glyphicon glyphicon-menu-left left"></button>
-                    <span>1</span>
-                    <span>(<span>1</span>/1)</span>
-                    <button class="glyphicon glyphicon-menu-right right"></button>
+                    ${pagebar}
                 </div>
                 <div id="precaution">
                     <p><i class="glyphicon glyphicon-ok-sign"></i>공연 할인쿠폰 사용 안내</p>
@@ -201,6 +217,39 @@
                 scrollTop: 0
             }, 500);
         });
+        
+        
+        var couponSeq = [];
+        
+        
+         <c:forEach items="${seqAllGet}" var="dto">
+        	couponSeq.push("${dto.couponSeq}");
+		</c:forEach> 
+        
+         $(document).ready(function() {
+        	 
+        	 
+            $('#signup').submit(function() {
+                if ($('#coupontxt').val() == '') {
+                    alert('쿠폰번호를 입력해 주세요.');
+                    return false;
+                } 
+                 else if (couponSeq.indexOf($('#coupontxt').val()) != "-1") {
+                	alert('이미 등록된 쿠폰번호 입니다.');
+                    return false;
+                }
+            }); 
+        });   
+        
+
+        
+        //alert(couponSeq.indexOf($('#coupontxt').val()));
+		 $("#usermenu p:nth-child(2)").css("color","#4C7CCE");
+	    $("#usermenu p:nth-child(2)").mouseout(function(){
+	    	$("#usermenu p:nth-child(2)").css("color","#4C7CCE");
+	    });
+        
+
 
     </script>
 

@@ -82,6 +82,7 @@ public class List extends HttpServlet {
 		//? = 175 / 10 -> 17.5 -> 18
 		totalCount = dao.getTotalCount(map);
 //		System.out.println(totalCount);
+		dao.close();
 		
 		totalPage = (int)Math.ceil((double)totalCount / pageSize);
 		System.out.println(totalPage);

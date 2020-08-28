@@ -64,6 +64,10 @@ public class AdminCustomerList extends HttpServlet {
 //				addr = addr.replace(search,"<span style = 'font-weight:bold;color:tomato;'>"+search+"</span>");
 //				dto.setAddr(addr);
 				
+				String seq = dto.getSeq();
+				seq = seq.replace(search,"<span style = 'font-weight:bold;color:tomato;'>"+search+"</span>");
+				dto.setSeq(seq);
+				
 				String name = dto.getName();
 				name = name.replace(search,"<span style = 'font-weight:bold;color:tomato;'>"+search+"</span>");
 				dto.setName(name);

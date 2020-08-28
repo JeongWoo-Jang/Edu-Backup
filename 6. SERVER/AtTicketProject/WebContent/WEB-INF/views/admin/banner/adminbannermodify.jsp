@@ -92,7 +92,7 @@
     <div id = "title">배너 사진 선택하기</div>
     <hr class = "splitLine">
     <br>
-    <form method="GET" action="/AtTicketProject/adimn/adminbannermain.do" target="parentPage">
+    <form method="GET" action="/AtTicketProject/admin/adminbannermain.do" target="parentPage">
 	    <div><input type="file" id = "fileSelect" name="file"></div>
 	    <div id = "imgback">
 	        <div id = "imgShow"></div>

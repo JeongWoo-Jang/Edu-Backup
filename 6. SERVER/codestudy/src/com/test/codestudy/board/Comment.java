@@ -39,7 +39,7 @@ public class Comment extends HttpServlet {
 		
 		//2.
 		int result = dao.writeComment(dto);
-		
+		dao.close();
 		
 		//3.
 		if (result == 1) {

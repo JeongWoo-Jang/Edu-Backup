@@ -174,7 +174,7 @@
                         <td>
                             <input type="text" id="frontregnum" name="frontregnum" class="register" autocomplete="off">
                             -
-                            <input type="text" id="backregnum" name="backregnum" class="register" autocomplete="off">
+                            <input type="password" id="backregnum" name="backregnum" class="register" autocomplete="off">
                         </td>
                     </tr>
                     <tr>

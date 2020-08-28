@@ -325,24 +325,38 @@
         <div id="top">
             <div id="topmenu">
                 <!-- 상단메뉴 좌측(메인화면으로 돌아가기) -->
-                <a href="#" id="topleft"></a>
-                
+                <a href="userindex.do" id="topleft"></a>
                 <!-- 상단메뉴 센터(콘서트, 뮤지컬, 연극, 클래식, 전시) -->
-                <span data-item="item1" class="menubar">콘서트</span>
-                <span data-item="item2" class="menubar">뮤지컬</span>
-                <span data-item="item3" class="menubar">연극</span>
-                <span data-item="item4" class="menubar">클래식</span>
-                <span data-item="item5" class="menubar">전시</span>
-                
+                <div id="topcenter">
+                    <span data-lo="userconcert.do" class="menubar">콘서트</span>
+                    <span data-lo="usermusical.do" class="menubar">뮤지컬</span>
+                    <span data-lo="usertheater.do" class="menubar">연극</span>
+                    <span data-lo="userclassic.do" class="menubar">클래식</span>
+                    <span data-lo="userexhibition.do" class="menubar">전시</span>
+                </div>
                 <!-- 상단메뉴 우측(랭킹, 이벤트, 검색창, 마이페이지) -->
                 <div id="topright">
-                    <span data-item="item6" class="menubar">랭킹</span>
-                    <span data-item="item7" class="menubar">이벤트</span>
+                    <span data-lo="userranking.do" class="menubar">랭킹</span>
+                    <span data-lo="userevent.do" class="menubar">이벤트</span>
                     <input type="text" value="" id="search">
                     <label for="search" class="glyphicon glyphicon-search"
                         style="font-size: 14px; cursor: pointer;"></label>
-                    <div class="glyphicon glyphicon-user" 
-                        style="font-size: 14px; cursor: pointer; margin: 0 10px; "></div>
+                        <c:if test = "${empty userid}">
+        <span class="menubar" id="slogin">로그인</span>
+        </c:if>
+        <c:if test = "${!empty userid}">
+        <div
+            class="glyphicon glyphicon-user"
+            id="mypage"
+            style="
+                font-size: 14px;
+                cursor: pointer;
+                margin: 0 10px;
+            "
+        ></div>
+        <span class="menubar" id="slogout">로그아웃</span>
+        </c:if>
+                        
                 </div>
             </div>
 
@@ -351,7 +365,7 @@
             
             
             
-        <hr>
+        <hr style="margin-top: 0px;">
 <!-------------------------------- 내용부분 -------------------------------->
         <p class="event-main-tit" style="margin-top: 150px; font-size:2em;"></p>
         <h2 style="text-align: center;">리뷰 게시판</h2>
@@ -510,7 +524,15 @@
         
 
        
-
+      //로그인 java 로 이동
+        $("#slogin").click(function() {
+            location.href = "/AtTicketProject/userlogin.do";
+        });
+        
+        //로그아웃 java 로 이동
+        $("#slogout").click(function() {
+            location.href = "/AtTicketProject/userlogout.do";
+        });
         
 
         

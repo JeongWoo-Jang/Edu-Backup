@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 
 
 
-@WebServlet("/show/usernoticetemp.do")
+@WebServlet("/usernoticetemp.do")
 public class UserNoticeTemp extends HttpServlet{
 
 	@Override
@@ -29,15 +29,24 @@ public class UserNoticeTemp extends HttpServlet{
 		String search = req.getParameter("search");
 		String sort = req.getParameter("sort");
 		String noticeseq = req.getParameter("noticeseq");
+		String cusseq = String.valueOf(session.getAttribute("userseq"));
+		String tel = String.valueOf(session.getAttribute("usertel"));
 		
 		req.setAttribute("noticeseq", noticeseq);
 		req.setAttribute("page", page);
 		req.setAttribute("search", search);
 		req.setAttribute("sort", sort);
+		req.setAttribute("cusseq", cusseq);
+		req.setAttribute("tel", tel);
 		
 		NoticeDAO dao = new NoticeDAO();
 		
 		NoticeDTO dto = dao.getNotice(noticeseq);
+		String showseq = dto.getSeq();
+		String showtitle = dto.getTitle();
+		
+		req.setAttribute("showseq", showseq);
+		req.setAttribute("showtitle", showtitle);
 		
 		if(session.getAttribute("read") == null || (boolean)session.getAttribute("read")==false) {
 			//2.3 조회수 증가 
@@ -73,7 +82,13 @@ public class UserNoticeTemp extends HttpServlet{
 		
 		req.setAttribute("dto", dto);
 		req.setAttribute("showdto", showdto);
+		HashMap<String,String> map = new HashMap<String,String>();
+		map.put("cusseq", cusseq);
+		map.put("showseq", showseq);
+
+		int repeat = dao.getRepeat(map);
 		
+		req.setAttribute("repeat", repeat);
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/user/usernoticetemp.jsp");
 		dispatcher.forward(req, resp);
 		

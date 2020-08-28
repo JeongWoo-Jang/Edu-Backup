@@ -123,7 +123,7 @@
         <div>
             <div style="width: 305px;">
                 <div class="find">
-                    <a href="">아이디 찾기</a> | <a href="">비밀번호 찾기</a>
+                    <a href="/AtTicketProject/index.do">관리자페이지로 이동하기</a>
                 </div>
                 <a class="create">회원가입</a>
             </div>

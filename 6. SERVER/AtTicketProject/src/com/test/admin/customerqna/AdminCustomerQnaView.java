@@ -43,6 +43,7 @@ public class AdminCustomerQnaView extends HttpServlet{
 		String ancontent = dto.getAncontent();
 		if(ancontent != null) {
 		ancontent = ancontent.replace("\r\n", "<br>");
+		ancontent = ancontent.replace("\n", "<br>");
 		dto.setAncontent(ancontent);
 		}
 		

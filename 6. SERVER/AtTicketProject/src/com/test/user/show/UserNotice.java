@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet("/show/usernotice.do")
+@WebServlet("/usernotice.do")
 public class UserNotice extends HttpServlet{
 	
 	@Override
@@ -25,6 +25,7 @@ public class UserNotice extends HttpServlet{
 		String search = req.getParameter("search");
 		String sort = req.getParameter("sort");
 		String page = req.getParameter("page");
+		String cusseq = String.valueOf(session.getAttribute("userseq"));
 		
 		//페이징 처리 관련 변수
 		int nowPage = 0; //현재 페이지 번호
@@ -62,7 +63,8 @@ public class UserNotice extends HttpServlet{
 		
 		totalCount = dao.getTotalCount(map);
 		totalPage = (int)Math.ceil((double)totalCount/pageSize);
-		
+		String tel = dao.getTel(cusseq);
+		req.setAttribute("tel", tel);
 		ArrayList<NoticeDTO> list = dao.list(map);
 		
 		for(NoticeDTO dto : list) {
@@ -107,7 +109,7 @@ public class UserNotice extends HttpServlet{
 			pagebar+="</li>";
 		} else {
 			pagebar+="<li>";
-			pagebar+=String.format("<a href=\"/AtTicketProject/show/usernotice.do?page=%d&search=%s&sort=%s\" aria-label=\"Previous\">",n-1,search,sort);
+			pagebar+=String.format("<a href=\"/AtTicketProject/usernotice.do?page=%d&search=%s&sort=%s\" aria-label=\"Previous\">",n-1,search,sort);
 			pagebar+="<span aria-hidden=\"true\">&laquo;</span>";
 			pagebar+="</a>";
 			pagebar+="</li>";
@@ -120,7 +122,7 @@ public class UserNotice extends HttpServlet{
 				pagebar+="</li>";
 			} else {
 				pagebar+="<li>";
-				pagebar+=String.format("<a href=\"/AtTicketProject/show/usernotice.do?page=%d&search=%s&sort=%s\">%d</a>",n,search,sort,n);
+				pagebar+=String.format("<a href=\"/AtTicketProject/usernotice.do?page=%d&search=%s&sort=%s\">%d</a>",n,search,sort,n);
 				pagebar+="</li>";
 			}
 			loop++;
@@ -135,7 +137,7 @@ public class UserNotice extends HttpServlet{
 			pagebar+="</li>";
 		} else {
 			pagebar+="<li>";
-			pagebar+=String.format(" <a href=\"/AtTicketProject/show/usernotice.do?page=%d&search=%s&sort=%s\" aria-label=\"Next\">",n,search,sort);
+			pagebar+=String.format(" <a href=\"/AtTicketProject/usernotice.do?page=%d&search=%s&sort=%s\" aria-label=\"Next\">",n,search,sort);
 			pagebar+="<span aria-hidden=\"true\">&raquo;</span>";
 			pagebar+="</a>";
 			pagebar+="</li>";

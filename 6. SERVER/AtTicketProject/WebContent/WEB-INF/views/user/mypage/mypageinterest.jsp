@@ -110,39 +110,40 @@
                         <th>상세정보</th>
                     </thead>
                     <tbody>
-                        <!-- <tr>
-                            <td><p>2020.07.20</p><input type="checkbox" class="check"></td>
+                        <c:if test="${empty search and list.size() == 0}">
+                        <tr>
+                            <td colspan="4">등록한 관심공연이 없습니다.</td>
+                        </tr>
+                        </c:if>
+                        
+                    	<c:forEach items="${list}" var="dto">
+                        <tr>
+                            <td><p>${dto.myShowRegistration }</p><input type="checkbox" class="check cbDelete" name="cbDelete" value="${dto.msseq}"></td>
                             <td>
                                 <div>
-                                <img src="http://tkfile.yes24.com/upload2/PerfBlog/202007/20200709/20200709-37137_11.jpg">
-                                <strong>뮤지컬 <머더 발라드></strong>
-                                <p>2020.08.11 ~ 2020.10.25<br>
-                                세종문화회관 S씨어터</p>
+                                <img src="./images/${dto.myShowPoster}">
+                                <strong>${dto.myShowTitle }</strong>
+                                <p>${dto.myShowstart } ~ ${dto.myShowend }<br>
+                                ${dto.myShowTheater}</p>
                                 </div>
                             </td>
                             <td>
                                 <p>관련 공지 : <span class="notice">02</span>개</p>
                             </td>
                             <td>
-                                <button class="btn btn-danger btn-sm" class="book">예매하기</button>
+                                <button class="btn btn-danger btn-sm" class="book" onclick="location.href='/AtTicketProject/usertickekting.do?seq=${dto.myShowseq}'">예매하기</button>
                             </td>
-                        </tr> -->
-                        <tr>
-                            <td colspan="4">등록한 관심공연이 없습니다.</td>
-                        </tr>
+                        </tr> 
+                        </c:forEach>
                     </tbody>
                 </table>
                 <div id="buttonbox">
                     <button class="btn btn-default btn-sm" id="add">관심 공연 담기<span>+</span></button>
                     <input type="button" class="btn btn-default btn-sm" value="전체선택" id="selectall">
-                    <input type="button" class="btn btn-default btn-sm" value="삭제" id="delete">
+                    <input type="button" class="btn btn-default btn-sm" value="삭제" id="delete" onclick="deleteMessage()">
                 </div>
-                <div id="paging">
-                    <button class="glyphicon glyphicon-menu-left left"></button>
-                    <span>1</span>
-                    <span>(<span>1</span>/1)</span>
-                    <button class="glyphicon glyphicon-menu-right right"></button>
-                </div>
+           		<!-- 페이징 -->
+           		${pagebar}
             </div>
 
             <!-- 챗봇 : 단비봇 -->
@@ -160,7 +161,7 @@
 
         //관련 컨텐츠 공지 클릭시
         $(".notice").click(function() {
-            location.href = "user_notice.html";
+            location.href = "/AtTicketProject/usernotice.do";
         });
 
         //예매하기 클릭시
@@ -170,30 +171,57 @@
         })
 
         //팝업창 가운데 배치
-        var popupWidth = 900;
+/*         var popupWidth = 900;
         var popupheight = 650;
         var popupX = (window.screen.width / 2) - (popupWidth / 2);
         var popupY = (window.screen.height / 2) - (popupheight / 2);
         //관심 공연 담기 팝업창
         $("#add").click(function() {
-            window.open("mypage_interest_popup.html","_black",`left=${popupX}, top=${popupY}, width=${popupWidth}, height=${popupheight};`);
-        });
+            window.open("/AtTicketProject/mypageinterestpopup.do","_black",`left=${popupX}, top=${popupY}, width=${popupWidth}, height=${popupheight};`);
+        }); */
+        
+        //관심 공연 담기 팝업창
+        $("#add").click(function() {
+           popupCenter("/AtTicketProject/mypageinterestpopup.do",1220,600);
+        }); 
+   
+        //팝업창 가운데 배치
+        function popupCenter(href, w, h) {
+            
+            var popupX = (window.screen.width / 2) - (w / 2);
+            // 만들 팝업창 좌우 크기의 1/2 만큼 보정값으로 빼주었음
+
+            var popupY= (window.screen.height /2) - (h / 2);
+            // 만들 팝업창 상하 크기의 1/2 만큼 보정값으로 빼주었음
+            
+
+            window.open(href, "pop_name", 'status=no, height=665, width=1235, left='+ popupX + ', top='+ popupY + ', screenX='+ popupX + ', screenY= '+ popupY);
+          
+          }
 
         //전체선택
         $("#selectall").click(function() {
-            if ($(".check").prop("checked")) {
-                $(".check").prop("checked", false);
+            if ($(".cbDelete").prop("checked")) {
+                $(".cbDelete").prop("checked", false);
             } else {
-                $(".check").prop("checked", true);
+                $(".cbDelete").prop("checked", true);
             }
         });
-
-        //삭제
-        $("#delete").click(function() {
-            if (confirm("관심 공연을 삭제하겠습니까?")) {
-                $("input[type='checkbox']:checked").parent().parent().remove();
-            };
-        });
+        
+    	function deleteMessage() {
+    		
+    		if($(".cbDelete:checked").length >0){
+    		 	location.href = "/AtTicketProject/myShowDeleteok.do?" + $(".cbDelete").serialize();
+    		}else{
+    			alert("삭제할 문의내역를 선택하세요.");
+    		}
+    	}
+    	
+        //alert(couponSeq.indexOf($('#coupontxt').val()));
+		 $("#usermenu p:nth-child(3)").css("color","#4C7CCE");
+	    $("#usermenu p:nth-child(3)").mouseout(function(){
+	    	$("#usermenu p:nth-child(3)").css("color","#4C7CCE");
+	    });
 
     </script>
 

@@ -16,16 +16,13 @@ public class AdminShowView extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		HttpSession session = req.getSession();
 		
 		String seq = req.getParameter("seq");
 		String search = req.getParameter("search");
 		String page = req.getParameter("page");
 		
 		ShowDAO dao = new ShowDAO();
-		
 		ShowDTO dto = dao.loadview(seq);
-		
 		TagDTO tdto = dao.loadTag(seq);
 		
 //		System.out.println(dto.toString());

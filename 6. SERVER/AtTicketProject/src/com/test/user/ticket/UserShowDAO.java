@@ -404,7 +404,7 @@ public class UserShowDAO {
 	public void downCoupon(int userSeq, String couponSeq) {
 		try {
 			
-			String sql = "insert into tblCusCoupon values (cuscouponSeq.nextVal,to_date(sysdate,'yyyy/mm/dd'),?,?,0)";
+			String sql = "insert into tblCusCoupon values (cuscouponSeq.nextVal,default,?,?,0)";
 			
 			pstat = conn.prepareStatement(sql);
 			
@@ -459,7 +459,233 @@ public class UserShowDAO {
 		return null;
 	}
 
-	//map 형식으로 맨 위에 
+	//공연에 대한 회차정보 객체를 돌려주는 메서드
+	public List<UserShowRoundDTO> getRoundInfo(String showSeq) {
+		
+		try {
+			
+			String sql = "select * from tblRoundInfo where showseq = ? and delflag = 0 order by startdate";
+			
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, showSeq);
+			rs = pstat.executeQuery();
+			
+			List<UserShowRoundDTO> dtoList = new ArrayList<UserShowRoundDTO>();
+			
+			while(rs.next()) {
+				
+				UserShowRoundDTO dto = new UserShowRoundDTO();
+				
+				dto.setRseq(rs.getString("seq"));
+				dto.setRstartTime(rs.getString("startdate"));
+				dto.setRendTime(rs.getString("enddate"));
+				dto.setShowSeq(rs.getString("showseq"));
+				dto.setDelflag(rs.getString("delflag"));
+				
+				
+				dtoList.add(dto);
+				
+			}
+			
+			return dtoList;
+			
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		return null;
+	}
+
+	//이미 예약된 좌석에 대한 정보를 돌려줄것이다.
+	public List<UserShowTicktAllDTO> getUsedSeat(String showSeq, String showRoundSeq, String conDate) {
+		
+		try {
+			
+			String sql = "select distinct ts.seq,ts.floor,ts.area,ts.seatrow,ts.seatcol from tblTheater tt inner join tblSeat ts on tt.seq = ts.thSeq inner join TBLTICKET tk on tk.seat = ts.seq inner join tblBooking tbb on tbb.seq = tk.bookingseq inner join tblshow tsh on tsh.theaterseq = tt.seq where tsh.seq = ? and tbb.roundSeq = ? and tbb.bdate = ? and tt.delflag = 0 and tbb.delflag = 0 and tsh.delflag = 0 order by seq";
+			
+			pstat = conn.prepareStatement(sql);
+			
+			pstat.setString(1, showSeq);
+			pstat.setString(2, showRoundSeq);
+			pstat.setString(3, conDate);
+			
+			rs = pstat.executeQuery();
+			
+			List<UserShowTicktAllDTO> usedSeatList = new ArrayList<UserShowTicktAllDTO>();
+			
+			while(rs.next()) {
+				
+				UserShowTicktAllDTO dto = new UserShowTicktAllDTO();
+				
+				dto.setSeq(rs.getString("seq"));
+				dto.setFloor(rs.getString("floor"));
+				dto.setArea(rs.getString("area"));
+				dto.setSeatrow(rs.getString("seatrow"));
+				dto.setSeatcol(rs.getString("seatcol"));
+				
+				
+				usedSeatList.add(dto);
+				
+			}
+			
+			return usedSeatList;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		return null;
+	}
+
+	//해당 유저의 쿠폰목록을 가져올것
+	public List<UserShowCouponDTO> getMyCouponList(int userSeq, String showSeq) {
+		try {
+			
+			String sql  = "select tcc.seq,tc.title,tc.startdate,tc.enddate,tc.discount,tc.showseq from tblCusCoupon tcc inner join tblCoupon tc on tcc.couponSeq = tc.seq where tc.showSeq = ? and tcc.cusSeq = ? and tcc.delflag = 0";
+			
+			pstat = conn.prepareStatement(sql);
+			
+			pstat.setString(1, showSeq);
+			pstat.setInt(2, userSeq);
+			
+			rs = pstat.executeQuery();
+			
+			List<UserShowCouponDTO> hasCouponList = new ArrayList<UserShowCouponDTO>();
+			
+			while(rs.next()) {
+				UserShowCouponDTO dto = new UserShowCouponDTO();	
+				
+				dto.setSeq(rs.getString("seq"));
+				dto.setTitle(rs.getString("title"));
+				dto.setStartDate(rs.getString("startdate").substring(0,10));
+				dto.setEndDate(rs.getString("enddate").substring(0,10));
+				dto.setDiscount(rs.getString("discount"));
+				dto.setShowSeq(rs.getString("showseq"));
+				
+				hasCouponList.add(dto);
+				
+			}
+			
+			return hasCouponList;
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	
+	//티켓 가격
+	public int getTicketPrice(String showSeq) {
+		try {
+			
+			String sql = "select price from tblShow where seq = ?";
+			
+			pstat = conn.prepareStatement(sql);
+			
+			pstat.setString(1,showSeq);
+			
+			rs = pstat.executeQuery();
+			
+			if (rs.next()) {
+				return rs.getInt("price");
+			}
+			
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		return 0;
+	}
+
+	
+	//UserShowFinal 서블릿
+	public int insertBook(BookDTO dto) {
+		
+		try {
+			int result = 0;
+			
+			String sql = "insert into tblBooking (seq, bookdate,bdate,state,cnt,roundSeq,delflag) values (bookingSeq.nextVal,sysdate,to_date(?,'yyyy.mm.dd'),'완료',?,?,default)";
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, dto.getInputDate());
+			pstat.setString(2, dto.getTicketNum());//문제
+			pstat.setString(3, dto.getShowroundSeq());
+			
+			result += pstat.executeUpdate();
+			
+			//예매 번호 가져오기
+			sql = "select max(seq) as seq from tblBooking";
+			stat = conn.createStatement();
+			stat.execute(sql);
+			rs = stat.executeQuery(sql);
+			String bookseq = "";
+			if(rs.next()) {
+				bookseq = rs.getString("seq");
+			}
+			
+			//결제 테이블 insert
+			sql = "insert into tblPay (Seq,opseq, bookseq, cusseq, delflag) values (paySeq.nextVal,3,?,?,default)";
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, bookseq);
+			pstat.setInt(2, dto.getCusseq());
+			
+			result += pstat.executeUpdate();
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return 0;
+	}
+
+	//회원이 가지고 있는 쿠폰을 없애준다.
+	public void removeUserCoup(String couponUserSeq) {
+		try {
+			
+			
+			String sql = "update tblCusCoupon set delflag = 1 where seq = ?";
+			
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, couponUserSeq);
+			
+			rs = pstat.executeQuery();//쿼리를 날려준다...
+			
+			
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	//유저가 쓰고 남은 egg money 를 넣어줄것이다.
+	public void removeEggMoney(int cseq, int remainEgg) {
+		try {
+			
+			String sql = "update tblCustomer set egg = ? where seq = ?";
+			
+			pstat = conn.prepareStatement(sql);
+			
+			pstat.setInt(1, remainEgg);
+			pstat.setInt(2, cseq);
+			
+			rs = pstat.executeQuery();
+			
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	
+	
 
 	
 	

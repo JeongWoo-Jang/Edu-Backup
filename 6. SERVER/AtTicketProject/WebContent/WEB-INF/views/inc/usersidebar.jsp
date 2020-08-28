@@ -37,7 +37,7 @@
              class="glyphicon glyphicon-map-marker"
          ></span>
          <br />
-         <a class="subfont" href="user_local.html"
+         <a class="subfont" href="#!"
              >지역 검색</a
          >
      </li>

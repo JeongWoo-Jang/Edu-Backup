@@ -11,8 +11,15 @@ public class RankDTO {
 	private String poster;
 	private String genre;
 	
+	private String seq;
 	
 	
+	public String getSeq() {
+		return seq;
+	}
+	public void setSeq(String seq) {
+		this.seq = seq;
+	}
 	public String getTitle() {
 		return title;
 	}

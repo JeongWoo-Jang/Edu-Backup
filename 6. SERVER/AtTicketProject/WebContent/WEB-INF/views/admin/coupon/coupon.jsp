@@ -9,7 +9,17 @@
 <%@ include file="/WEB-INF/views/inc/asset.jsp"%>
 <link rel="stylesheet" href="/AtTicketProject/css/adminmain.css">
 <style>
-	
+		#left {
+           position: absolute;
+           left: 0px;
+           top: 0px;
+           width: 250px;
+           height: 1600px;
+           /* border: 1px solid black; */
+           background-color: #444;
+           text-align: center;
+           z-index: 10;
+       }
 	
 
 

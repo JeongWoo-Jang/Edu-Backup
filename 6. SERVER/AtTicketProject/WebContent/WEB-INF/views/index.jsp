@@ -109,7 +109,27 @@
         	padding-left : 100px;
         	
         }
-         #robotTest:hover {
+        
+        #transferUser {
+        	margin-left : 72px;
+        	width : 305px;
+        	height : 50px;
+        	border : 1px solid #C8C8C8;
+        	padding-top : 10px;
+        	font-size : 1.3em;
+        	border-radius: 3px;
+        	/* padding-left : 100px; */
+        	text-align : center;
+        
+        
+        }
+        #transferUser:hover {
+        	cursor : pointer;
+         	background-color : #C8C8C8;
+        
+        }
+        
+         #robotTest:hover  {
          	cursor : pointer;
          	background-color : #C8C8C8;
          }
@@ -137,7 +157,13 @@
         <div id = "robotTest" style = "font-size : 1.2em;">
         	I'm not a robot
         </div>
+        
+        <div id = "transferUser" style = "font-size : 1.2em;">
+        	유저페이지로 이동
+        </div>
        	</c:if>
+        
+        
         
         <c:if test = "${!empty robot}">
         <div style = "margin-top : 30px;" id = "signgo">
@@ -159,6 +185,12 @@
     </div>
 
     <script>
+    	//유저페이지로 바로 이동
+    	$("#transferUser").click(function(){
+    		location.href = "/AtTicketProject/userindex.do";
+    	});
+    
+    
 
         //회원가입 클릭시
         $(".create").click(function() {
@@ -223,6 +255,8 @@
         	$("#signgo").css("visibility","hidden");
         }
          */
+         
+         
         
 
     </script>

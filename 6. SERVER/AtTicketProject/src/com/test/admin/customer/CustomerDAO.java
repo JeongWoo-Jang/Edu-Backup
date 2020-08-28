@@ -41,7 +41,7 @@ public class CustomerDAO {
 				String where = "";
 				
 				if(map.get("search")!=null) {
-					where = String.format("and (name like '%%%s%%' or id like '%%%s%%' or tel like '%%%s%%' or ssn like '%%%s%%')", map.get("search"),map.get("search"),map.get("search"),map.get("search"));
+					where = String.format("and (seq like '%%%s%%' or name like '%%%s%%' or id like '%%%s%%' or tel like '%%%s%%' or ssn like '%%%s%%')",map.get("search"), map.get("search"),map.get("search"),map.get("search"),map.get("search"));
 				} 
 				String sql = String.format("select count(*) as cnt from tblcustomer where delflag <> 1 %s", where);
 				
@@ -68,7 +68,7 @@ public class CustomerDAO {
 				String where = "";
 			
 				if(map.get("search")!=null && map.get("search")!="") {
-					where = String.format("where (name like '%%%s%%' or id like '%%%s%%' or tel like '%%%s%%' or ssn like '%%%s%%') and delflag <> 1", map.get("search"),map.get("search"),map.get("search"),map.get("search"));
+					where = String.format("where (seq like '%%%s%%' or name like '%%%s%%' or id like '%%%s%%' or tel like '%%%s%%' or ssn like '%%%s%%') and delflag <> 1",map.get("search"), map.get("search"),map.get("search"),map.get("search"),map.get("search"));
 				} else {
 					where = "where delflag <> 1";
 				}
@@ -128,9 +128,9 @@ public class CustomerDAO {
 			String sql = null;
 			try {
 				if(dto.getPhoto()!=null) {
-				 sql = "insert into tblCustomer values (customerSeq.nextVal,?,?,?,?,?,?,?,?,?,default,?)";
+				 sql = "insert into tblCustomer values (customerSeq.nextVal,?,?,?,?,?,?,?,?,?,default,?,default)";
 				} else {
-				 sql = "insert into tblCustomer values (customerSeq.nextVal,?,?,?,?,?,?,?,?,?,default, default)";
+				 sql = "insert into tblCustomer values (customerSeq.nextVal,?,?,?,?,?,?,?,?,?,default, default,default)";
 				}
 				
 				pstat = conn.prepareStatement(sql);

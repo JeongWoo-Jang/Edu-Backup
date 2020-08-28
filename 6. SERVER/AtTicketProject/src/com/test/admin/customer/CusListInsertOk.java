@@ -20,7 +20,7 @@ public class CusListInsertOk extends HttpServlet{
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		req.setCharacterEncoding("UTF-8");
-		String path = req.getRealPath("/files");
+		String path = req.getRealPath("/images");
 		System.out.println(path);
 		int size = 1024*1024*100; //100MB
 		

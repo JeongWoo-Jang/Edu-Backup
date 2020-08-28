@@ -22,6 +22,8 @@ public class UserQna extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		HttpSession session = req.getSession();
+		
+		String userseq = String.valueOf( session.getAttribute("userseq"));
 			
 		//String seq = req.getParameter("seq");
 		String search = req.getParameter("search");
@@ -96,6 +98,10 @@ public class UserQna extends HttpServlet{
 			dto.setAnsSeq(ansSeq);
 		}
 		
+		//새로고침 조회수 증가 방지
+		session.setAttribute("read", false);
+		
+		
 		//페이지바 제작
 				loop = 1;
 				n = ((nowPage - 1) / blockSize) * blockSize + 1;
@@ -163,6 +169,8 @@ public class UserQna extends HttpServlet{
 		req.setAttribute("totalPage", totalPage);
 		
 		req.setAttribute("pagebar", pagebar);
+		
+		req.setAttribute("userseq", userseq);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/user/userqna.jsp");
 		dispatcher.forward(req, resp);

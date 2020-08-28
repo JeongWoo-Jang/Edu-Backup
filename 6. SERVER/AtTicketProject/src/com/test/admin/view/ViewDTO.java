@@ -7,6 +7,7 @@ public class ViewDTO {
 	private String title;
 	private String poster;
 	private float rate;
+	private String showseq;
 	
 	//방문자
 	private String vdate;
@@ -109,6 +110,12 @@ public class ViewDTO {
 	}
 	public void setRate(float rate) {
 		this.rate = rate;
+	}
+	public String getShowseq() {
+		return showseq;
+	}
+	public void setShowseq(String showseq) {
+		this.showseq = showseq;
 	}
 	
 	

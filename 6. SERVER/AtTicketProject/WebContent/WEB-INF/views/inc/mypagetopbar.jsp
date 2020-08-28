@@ -16,9 +16,13 @@
             <input type="text" value="" id="search">
             <label for="search" class="glyphicon glyphicon-search"
                 style="font-size: 14px; cursor: pointer;"></label>
+            <c:if test = "${empty userid}">
+        	<span class="menubar" id="slogin">로그인</span>
+        	</c:if>
             <c:if test = "${!empty userid}">
             <div class="glyphicon glyphicon-user" id="mypage" 
                 style="font-size: 14px; cursor: pointer; margin: 0 10px; "></div>
+            <span class="menubar" id="slogout">로그아웃</span>
             </c:if>
         </div>
     </div>
@@ -41,6 +45,16 @@ $(".menubar").click(function() {
 //마이페이지 클릭시 이동
 $("#mypage").click(function() {
     location.href = "#!";
+});
+
+//로그인 java 로 이동
+$("#slogin").click(function() {
+    location.href = "/AtTicketProject/userlogin.do";
+});
+
+//로그아웃 java 로 이동
+$("#slogout").click(function() {
+    location.href = "/AtTicketProject/userlogout.do";
 });
 
 </script>

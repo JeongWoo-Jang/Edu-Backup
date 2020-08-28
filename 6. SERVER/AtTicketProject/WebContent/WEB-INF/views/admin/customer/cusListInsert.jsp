@@ -122,11 +122,67 @@
     }
     );
 
+    var nameCheck = RegExp(/^[가-힣]{2,6}$/);
+    var phonNumberCheck = RegExp(/(01[0179])-{1}([1-9]{1}[0-9]{2,3})-{1}([0-9]{4})$/);
+    var emailCheck = RegExp(/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/);
+    var userIdCheck = RegExp(/^[A-Za-z0-9_\-]{6,12}$/);
+    var passwdCheck = RegExp(/^(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^*()\-_=+\\\|\[\]{};:\'",.<>\/?]).{8,16}$/);
+
     $("#makebtn").click(function () {
+       
+        //이름 유효성검사
+        if (!nameCheck.test($("#name").val())) {
+            alert("형식에 맞게 입력해주세요.");
+            $("#name").val('');
+            $("#name").focus();
+            return false;
+        };
+        
+        //아이디 유효성검사
+        if (!userIdCheck.test($("#id").val())) {
+            alert("형식에 맞게 입력해주세요.");
+            $("#id").val('');
+            $("#id").focus();
+            return false;
+        };
+        
+        //이메일 유효성검사
+        if (!emailCheck.test($("#email").val())) {
+            alert("형식에 맞게 입력해주세요.")
+            $("#email").val('');
+            $("#email").focus();
+            return false;
+        };
+        
+        //휴대폰번호 유효성검사
+        if (!phonNumberCheck.test($("#tel").val())) {
+            alert("형식에 맞게 입력해주세요.")
+            $("#tel").val('');
+            $("#tel").focus();
+            return false;
+        };
+        
+        //비밀번호 유효성검사
+        if (!passwdCheck.test($("#pw").val())) {
+            alert("형식에 맞게 입력해주세요.");
+            $("#pw").val('');
+            $("#pw").focus();
+            return false;
+        };
+        
+        //에그머니
+        if (isNaN($("#egg").val())) {
+           alert("형식에 맞게 입력해주세요.");
+            $("#egg").val('');
+            $("#egg").focus();
+            return false;
+        }
+       
         if (confirm("추가하시겠습니까?")) {
-        	location.href="/AtTicketProject/customer/cuslistinsertok.do?cussseq=${cusseq}";
+           location.href="/AtTicketProject/customer/cuslistinsertok.do?cussseq=${cusseq}";
         }
     });
+
 
     $("#closebtn").click(function () {
         window.close();

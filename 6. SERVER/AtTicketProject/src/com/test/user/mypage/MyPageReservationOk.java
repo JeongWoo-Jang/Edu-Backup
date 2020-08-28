@@ -10,27 +10,46 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 @WebServlet("/mypage/mypagereservationok.do")
 public class MyPageReservationOk extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
+		HttpSession session = req.getSession();
+		String cusseq = String.valueOf(session.getAttribute("userseq"));
 		String begin = req.getParameter("begin");
 		String end = req.getParameter("end");
 		String from = req.getParameter("from");
 		String to = req.getParameter("to");
-		int nowPage = Integer.parseInt(req.getParameter("nowPage"))+1;
-		
+		String nowPage = req.getParameter("nowPage");
 		HashMap<String,String> map = new HashMap<String,String>();
+		req.setCharacterEncoding("UTF-8");
+		
+		
+		
+		map.put("cusseq", cusseq);
 		map.put("begin", begin);
 		map.put("end", end);
 		map.put("from", from);
-		map.put("end", end);
+		map.put("to", to);
+	
 		
 		//2.
 		MyPageHDAO dao = new MyPageHDAO();
-		ArrayList<MyReDTO> list = dao.getlist(map);
+//		(int)Math.ceil((double)totalCount/pageSize);
+		int pageSize = 3;
+		int totalPage = (int)Math.ceil((double)dao.getTotalCountR(map)/pageSize);
+	
+		if(totalPage == 0) {
+			totalPage = 1;
+		}
+		
+		ArrayList<MyReDTO> list = dao.getlistB(map);
 		
 		dao.close();
 		
@@ -38,40 +57,25 @@ public class MyPageReservationOk extends HttpServlet {
 		resp.setCharacterEncoding("UTF-8");
 		resp.setContentType("application/json");
 		
-		PrintWriter writer = resp.getWriter();
 		
-		String temp = "";
-		
-		
-		//[]
-		
-		temp += "[";
+		JSONArray arr = new JSONArray();
 		
 		for (MyReDTO dto : list) {
-			temp += "{";
-				temp += String.format("\"bookdate\": \"%s\","
-					,dto.getBookdate());
-				temp += String.format("\"bookseq\": \"%s\","
-										,dto.getBookseq());
-				temp += String.format("\"showtitle\": \"%s\", "
-										, dto.getShowtitle());
-				temp += String.format("\"bdate\": \"%s\","
-										, dto.getBdate());
-				temp += String.format("\"cnt\": \"%s\""
-										, dto.getCnt());
-				temp += String.format("\"bookstate\": \"%s\","
-						,dto.getBookstate());
-				temp += String.format("\"nowPage\": \"%d\","
-						,nowPage);
-			temp += "}";
-			temp += ",";
+			JSONObject obj = new JSONObject();
+			obj.put("bdate",dto.getBdate());
+			obj.put("bookdate",dto.getBookdate());
+			obj.put("bookseq",dto.getBookseq());
+			obj.put("bookstate",dto.getBookstate());
+			obj.put("cnt",dto.getCnt());
+			obj.put("showtitle",dto.getShowtitle());
+			obj.put("nowPage", nowPage);
+			obj.put("totalPage", totalPage);
+			arr.add(obj);
 		}
 		
-		temp = temp.substring(0, temp.length()-1);
+		PrintWriter writer = resp.getWriter();
 		
-		temp += "]";
-		
-		writer.print(temp);
+		writer.print(arr);
 		writer.close();
 		
 	}

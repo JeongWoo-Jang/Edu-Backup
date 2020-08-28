@@ -21,16 +21,21 @@ public class UserQnaContent extends HttpServlet{
 
 		HttpSession session = req.getSession();
 		
+		String id = (String) session.getAttribute("userid");
+		
 		String seq = req.getParameter("seq");
 		String search = req.getParameter("search");
+		String index = req.getParameter("index");
 		
-		//System.out.println(seq);
 		//DB
 		QnaDAO dao = new QnaDAO();
 		
-		//QnaDTO dto2 = new QnaDTO();
-		//dto2.setSeq(seq);
-		//dto2.setMseq((String)session.getAttribute("seq"));	//****** 회원번호 가져오기
+		if (session.getAttribute("read") == null || (boolean)session.getAttribute("read") == false) {
+			//2.3 조회수 증가
+			dao.updateReadcount(seq);
+			
+			session.setAttribute("read", true);
+		}
 		
 		
 		QnaDTO dto = dao.get(seq);
@@ -64,6 +69,8 @@ public class UserQnaContent extends HttpServlet{
 		
 		req.setAttribute("dto", dto);
 		req.setAttribute("search", search);
+		req.setAttribute("id", id);
+		req.setAttribute("index", index);
 		
 		//req.setAttribute("clist", clist);
 		//req.setAttribute("sort", sort);

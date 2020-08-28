@@ -42,6 +42,7 @@ public class Heart extends HttpServlet {
 		} else {
 			result = dao.removeHeart(dto);
 		}
+		dao.close();
 		
 		//3.
 		if (result == 1) {

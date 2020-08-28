@@ -85,7 +85,7 @@
             font-size: 15px;
             padding: 40px 0;
             position: absolute;
-            /* margin-top: -120px; */
+            margin-top: -120px;
         }
         .menubar {
             margin: 0 5px;
@@ -122,7 +122,7 @@
 
         #search {
             border: 0;
-            border-bottom: 1px solid white;
+            border-bottom: 1px solid black;
             background-color: transparent;
             outline: none;
             color: black;
@@ -131,17 +131,17 @@
 
         /*-------------------------------- 태그 --------------------------------*/
         #tagsearch {
-            border: 1px solid #111;
+            border: 1px solid black;
             width: 170px;
             height: 205px;
             position: relative;
+            left: -15px;
             float: right;
             background-color: white;
             margin-right: 60px;
 	        margin-top: 2px;
             /* text-align: center; */
             display: none;
-	        top: 24px;
         }
         #tagsearch::after {
             content: "";
@@ -172,6 +172,8 @@
             font-size: 20px;
             font-weight: 100;
         }
+        
+        
         #tagsearch > a {
             display: block;
             color: #555;
@@ -242,29 +244,30 @@
             font-weight: bold;
         }
 
-        #board {
-            /* border-collapse: collapse; */
-            width: 1200px;
+        #tblList th {text-align: center;}
+        #tblList td {text-align: center;}
+        
+        #tblList tbody tr:hover {
+        	background-color:#ddd; 
         }
-
-    
-
-        #board th:nth-child(1) {width: 60px;}
-        #board th:nth-child(2) {width: 60px;}
-        #board th:nth-child(3) {width: 120px;}
-        #board th:nth-child(5) {width: 110px;}
-        #board th:nth-child(6) {width: 110px;}
-        #board th:nth-child(7) {width: 60px;}
-        /* #board tr:nth-child(even) {background-color: #e3e8f1;} */
-
-        #board td:nth-child(3) {text-align: left; padding: 0px 10px;}
-        /* #board td:last-child {border-right: none;} */
+		
+		#tblList th:nth-child(1) {width : 50px;}
+        #tblList th:nth-child(2) {width : 80px;}
+        #tblList th:nth-child(3) {width : auto;}
+        #tblList th:nth-child(4) {width : 100px;}
+        #tblList th:nth-child(5) {width : 200px;}
+        #tblList th:nth-child(6) {width : 100px;}
+		#tblList th:nth-child(7) {width : 60px}
+		
+		#tblList td:nth-child(3) {text-align: left;}
+		#tblList td:nth-child(3) a {color: #333; text-decoration: none;}
 
         /* 탭 */
         #tabMenu {
             width: 1200px;
-            padding-bottom: 100px;
+            padding-bottom: 50px;
             text-align: center;
+            cursor: pointer;
         }
 
         #tabMenu::after {
@@ -283,12 +286,6 @@
             border-right: none;
             color: black;
             margin-top: 50px;
-        }
-
-        .tabMenu:first-child{
-            /* background-color: orange; */
-            color: #7E9CB6;
-            border-bottom: 2px solid #7E9CB6;
         }
 
         /* 검색 */
@@ -394,19 +391,26 @@
             display:inline-block;
             width: 15px;
             height: 15px;
-            /* margin:-2px 10px 0 0; */
-            margin: 0px;
             vertical-align:middle;
             background: white;
             border: 1px solid #7E9CB6;
             cursor:pointer;
-            /* margin-top: 8px; */
             margin-left: 5px;
         }
+		
+		#tblList label {
+			margin-bottom: 0px;
+		}
 
         input[type="checkbox"]:checked + label span {
             background: #7E9CB6;
             border: 1px solid white;
+        }
+        
+        
+       .active{
+            color: #7E9CB6;
+            border-bottom: 2px solid #7E9CB6;
         }
 
 
@@ -450,10 +454,12 @@
             <h1>My Q&A List</h1>
 
 
+		<form method="GET" action="/AtTicketProject/userqnamylist.do" id="searchForm">
             <div id="searchFAQ">
-                <input type="text" placeholder="궁금하신 내용을 입력해주세요" id="searchFAQBox">
-                <div><span class="glyphicon glyphicon-search"></span></div>
+                <input type="text" placeholder="궁금하신 내용을 입력해주세요" id="searchFAQBox" name="search" required value="${search}">
+                <div id = "searchlogo" onclick="$('#searchForm').submit();"><span class="glyphicon glyphicon-search"></span></div>
             </div>
+        </form> 
 
             <button id="qna">
                 <span class="
@@ -463,157 +469,78 @@
             <div style="clear:both;"></div>
 
             <div id="tabMenu">
-                <div class="tabMenu" data-tab="tab1">전체</div>
-                <div class="tabMenu" data-tab="tab2">예매방법</div>
-                <div class="tabMenu" data-tab="tab3">결제방법</div>
-                <div class="tabMenu" data-tab="tab4">수수료</div>
-                <div class="tabMenu" data-tab="tab5">취소/환불</div>
-                <div class="tabMenu" data-tab="tab6">티켓수령</div>
-                <div class="tabMenu" data-tab="tab7">티켓반매/재휴문의</div>
-                <div class="tabMenu" data-tab="tab8">기타</div>
+                <div class="tabMenu" onclick="location.href='/AtTicketProject/userqnamylist.do?';">전체</div>
+                <div class="tabMenu" onclick="location.href='/AtTicketProject/userqnamylist.do?sort=예매방법';">예매방법</div>
+                <div class="tabMenu" onclick="location.href='/AtTicketProject/userqnamylist.do?sort=결제방법';">결제방법</div>
+                <div class="tabMenu" onclick="location.href='/AtTicketProject/userqnamylist.do?sort=수수료';">수수료</div>
+                <div class="tabMenu" onclick="location.href='/AtTicketProject/userqnamylist.do?sort=취소/환불';">취소/환불</div>
+                <div class="tabMenu" onclick="location.href='/AtTicketProject/userqnamylist.do?sort=티켓수령';">티켓수령</div>
+                <div class="tabMenu" onclick="location.href='/AtTicketProject/userqnamylist.do?sort=티켓판매/제휴문의';">티켓반매/재휴문의</div>
+                <div class="tabMenu" onclick="location.href='/AtTicketProject/userqnamylist.do?sort=기타';">기타</div>
             </div>
-
-
-            <table id="board" class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>    
-                            <input type="checkbox" id="c0" name="c0" />
-                            <label for="c0"><span></span></label>
-                        </th>
-                        
-                        <th>번호</th>
-                        <th>문의유형</th>
-                        <th>제목</th>
-                        <th>날짜</th>
-                        <th>답변완료</th>
-                        <th>조회수</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>    
-                            <input type="checkbox" id="c1" name="c1" />
-                            <label for="c1"><span></span></label>
+            
+            
+             <table id="tblList" class="table table-striped">
+             <thead>
+                 <tr>
+                     <th>    
+                       <input type="checkbox" id="c0" name="c0" />
+                       <label for="c0"><span></span></label>
+                     </th>
+                     <th>태그</th>
+                     <th>제목</th>
+                     <th>이름</th>
+                     <th>날짜</th>
+                     <th>답변</th>
+                     <th>조회수</th>
+                 </tr>
+             </thead>
+             <tbody>
+         
+                 <c:if test="${not empty search and list.size() == 0}">
+                	<tr>
+                		<td colspan="7">검색 결과가 없습니다.</td>
+                	</tr>                    	
+               	</c:if>
+                	
+               	<c:if test="${empty search and list.size() == 0}">
+                	<tr>
+                		<td colspan="7">게시물이 없습니다.</td>
+                	</tr>                    	
+               	</c:if>
+                 
+          	     <c:forEach items="${list}" var="dto">
+		            <tr>	            	
+		                <td>  
+                            <input type="checkbox" id="${dto.seq}" class="cbDelete" name="cbDelete" value="${dto.seq}">
+                            <label for="${dto.seq}"><span></span></label>
                         </td>
-                        <td>1</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>    
-                            <input type="checkbox" id="c2" name="c2" />
-                            <label for="c2"><span></span></label>
-                        </td>
-                        <td>2</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>    
-                            <input type="checkbox" id="c3" name="c3" />
-                            <label for="c3"><span></span></label>
-                        </td>
-                        <td>3</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>    
-                            <input type="checkbox" id="c4" name="c4" />
-                            <label for="c4"><span></span></label>
-                        </td>
-                        <td>4</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>    
-                            <input type="checkbox" id="c5" name="c5" />
-                            <label for="c5"><span></span></label>
-                        </td>
-                        <td>5</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>    
-                            <input type="checkbox" id="c6" name="c6" />
-                            <label for="c6"><span></span></label>
-                        </td>
-                        <td>6</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>    
-                            <input type="checkbox" id="c7" name="c7" />
-                            <label for="c7"><span></span></label>
-                        </td>
-                        <td>7</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>    
-                            <input type="checkbox" id="c8" name="c8" />
-                            <label for="c8"><span></span></label>
-                        </td>
-                        <td>8</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>    
-                            <input type="checkbox" id="c9" name="c9" />
-                            <label for="c9"><span></span></label>
-                        </td>
-                        <td>9</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>    
-                            <input type="checkbox" id="c10" name="c10" />
-                            <label for="c10"><span></span></label>
-                        </td>
-                        <td>10</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-
-                </tbody>
-            </table>
+		                <td style="width: 200px">${dto.tag}</td>
+		                <td class = "inputcont">
+		                	<a href="/AtTicketProject/userqnacontent.do?seq=${dto.seq}&search=${search}&sort=${sort}&index=2">
+		                		${dto.subject}
+		                	</a> 
+		                </td>
+		                <td>${dto.name}</td>
+		                <td>${dto.regdate} </td>
+		                <td>
+			                <c:if test="${dto.ansSeq ne 0}">
+			                <%-- ${dto.ansSeq} --%>
+			                	<span class="complete ok">완료</span>
+			                </c:if> 
+			                
+			                <c:if test="${dto.ansSeq eq 0}">
+			                	<span class="complete no">미완료</span>
+			                </c:if> 
+		                </td>
+		                <td>${dto.qview }</td>
+		            </tr>
+		           </c:forEach>
+		           
+		           
+                            </tbody>
+                        </table>
+            
 
             <!-- 글쓰기 -->
 
@@ -623,7 +550,7 @@
             </button>
 
             <!-- 삭제하기 -->
-            <button class="btn btn-primary" id="delete">
+            <button class="btn btn-primary" id="delete" onclick="deleteMessage()">
                 <span class="
                 glyphicon glyphicon-trash"></span>
                 삭제하기
@@ -631,40 +558,7 @@
             <div style="clear:both;"></div>
 
             <!-- 페이징바 -->
-            <nav class="pagebar">
-                <ul class="pagination">
-                    <li>
-                      <a href="#" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;&laquo;</span>
-                      </a>
-                    </li>
-                  <li>
-                    <a href="#" aria-label="Previous">
-                      <span aria-hidden="true">&laquo;</span>
-                    </a>
-                  </li>
-                  <li class="active"><a href="#">1</a></li>
-                  <li><a href="#">2</a></li>
-                  <li><a href="#">3</a></li>
-                  <li><a href="#">4</a></li>
-                  <li><a href="#">5</a></li>
-                  <li><a href="#">6</a></li>
-                  <li><a href="#">7</a></li>
-                  <li><a href="#">8</a></li>
-                  <li><a href="#">9</a></li>
-                  <li><a href="#">10</a></li>
-                  <li>
-                    <a href="#" aria-label="Next">
-                      <span aria-hidden="true">&raquo;</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#" aria-label="Next">
-                      <span aria-hidden="true">&raquo;&raquo;</span>
-                    </a>
-                  </li>
-                </ul>
-              </nav>
+            ${pagebar}
 
 
         </div>
@@ -717,7 +611,7 @@
         //검색창 커서 있을때 팝업 띄우기
         $("#search").focusin(function () {
             $("#tagsearch").css("display", "block");
-            $("#search").css("border-bottom", "2px solid black");
+            //$("#search").css("border-bottom", "2px solid black");
         });
         //검색창 팝업 닫기
         $("#search").focusout(function () {
@@ -763,47 +657,75 @@
         
         // 글쓰기 링크
         $("#write").click(function() {
-            $(location).attr('href','/AtTicketProject/userqnawrite.do');
+        	$(location).attr('href','/AtTicketProject/userqnawrite.do?index=2');
         });
         // Q&A 링크
         $("#qna").click(function() {
             $(location).attr('href','/AtTicketProject/userqna.do');
         });
-
-        //탭
-        $(".tabMenu").click(function(){
-            $(".tabMenu").css({
-                "border-bottom" : "2px solid #eee",
-                "color": "black"
-            })
-            $(this).css({
-                "border-bottom" : "2px solid #7E9CB6",
-                "color": "#7E9CB6"
-            })
-        });
-
-                //탭
-                $(".tabMenu").click(function(){
-            $(".tabMenu").css({
-                "border-bottom" : "2px solid #eee",
-                "color": "black"
-            })
-            $(this).css({
-                "border-bottom" : "2px solid #7E9CB6",
-                "color": "#7E9CB6"
-            })
-        });
-
-        $("#c0").click(function(){
-            if($("#c0").is(":checked") == true){
-                $("#board input[type = checkbox]").prop("checked", true);
-            } else {
-                $("#board input[type = checkbox]").prop("checked", false);
-            }
-        });
  
-
-
+    	var index = 0;
+    	
+    	if ("${sort}" == "전체") {
+    		index = 0;	
+    	} else if ("${sort}" == "예매방법") {
+    		index = 1;
+    	} else if ("${sort}" == "결제방법") {
+    		index = 2;
+    	} else if ("${sort}" == "수수료") {
+    		index = 3;
+    	} else if ("${sort}" == "취소/환불") {
+    		index = 4;
+    	} else if ("${sort}" == "티켓수령") {
+    		index = 5;
+    	} else if ("${sort}" == "티켓반매/재휴문의") {
+    		index = 6;
+    	} else if ("${sort}" == "기타") {
+    		index = 7;
+    	}
+    	
+    	//alert("${sort}");
+    	//alert(index);
+    	
+    	$("#tabMenu").children().eq(index).addClass("active");
+    	
+     	$("#c0").click(function() {
+    		if($("#c0").is(":checked") == true) {
+    			$("input[name='cbDelete']").prop("checked", true);
+    		}else{
+    			$("input[name='cbDelete']").prop("checked", false);
+    		}
+    	}); 
+    	
+    	function deleteMessage() {
+    		
+    		if($(".cbDelete:checked").length >0){
+    		 	location.href = "/AtTicketProject/customerqna/userqnamylistdeleteok.do?" + $(".cbDelete").serialize();
+    		}else{
+    			alert("삭제할 문의내역를 선택하세요.");
+    		}
+    	}
+		
+    	
+    	function deleteMessage() {
+    		
+    		if($(".cbDelete:checked").length >0){
+    		 	location.href = "/AtTicketProject/userqnamylistdelete.do?" + $(".cbDelete").serialize();
+    		}else{
+    			alert("삭제할 문의내역를 선택하세요.");
+    		}
+    	}
+    	
+        //로그인 java 로 이동
+        $("#login").click(function() {
+            location.href = "/AtTicketProject/userlogin.do";
+        });
+        
+        //로그아웃 java 로 이동
+        $("#logout").click(function() {
+            location.href = "/AtTicketProject/userlogout.do";            
+        //로그인 java 로 이동
+        });
 
     </script>
 

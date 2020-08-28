@@ -889,7 +889,8 @@
         }
 
         #rankingImg {
-            background-image: url("http://tkfile.yes24.com/imgNew/sub/rn-tit-15456.png");
+            /* background-image: url("http://tkfile.yes24.com/imgNew/sub/rn-tit-15456.png"); */
+            background-image: url("${rankingImgUrl}");
             width: 207px;
             height: 175px;
             margin-bottom: 100px;
@@ -980,8 +981,14 @@
                     <option value="option1">예매가능좌석</option>
                     <option>잔여석 정보 제공 안 함</option>
                 </select>
+                
+        
+  
                 <input type="button" value="예매하기" id="mTTicketing">
+   
+
             </div>
+            
         </div>
         <!-------------------------------- 화면 상단부 -------------------------------->
         <%@include file="/WEB-INF/views/inc/usertopbar.jsp" %>
@@ -1057,7 +1064,7 @@
                             </div>
                         </div>
                     </div> -->
-
+					
     <!-- 내용============================================================================================================================================= -->
     <%@include file="/WEB-INF/views/inc/usersidebar.jsp" %>
     <div id="mainsection">
@@ -1257,9 +1264,13 @@
                         <div id="celender"> </div>
                         <!-- 시간 선택 -->
                         <div id="clock">
-                            <!-- <div class="selectClock">1회 오후7시 00분</div> -->
+                  
                             <ul id="inputTime">
-                                
+<!--                                 <li class = "testjammy" id ="round1">123123123</li>
+                                <li class = "testjammy" id ="round2">123123123</li>
+                                <li class = "testjammy" id ="round3">123123123</li>
+                                <li class = "testjammy" id ="round4">123123123</li>
+                                <li class = "testjammy" id ="round5">123123123</li> -->
                             </ul>
                         </div>
                     </div>
@@ -1272,8 +1283,14 @@
                     </div>
                 </div>
             </div>
-            <input type="button" value="예매하기" id="ticketing">
-
+            
+            <c:if test = "${not empty userseq}">
+            	<input type="button" value="예매하기" id="ticketing">
+			</c:if>
+			
+			<c:if test = "${empty userseq}">
+            	<input type="button" value="예매하기" id="ticketing" style = "visibility : hidden;">
+			</c:if>
             <div id="tabs" style="text-align: center;">
                 <!-- <ul>
                     <li><a href="#tab1">상세정보</a></li>
@@ -1497,7 +1514,7 @@
 
             <div id="ranking">
                 <div id="rankingImg"></div>
-                <input type="button" value="더보기">
+                <input type="button" value="더보기" onclick = "location.href = '/AtTicketProject/userranking.do?sort=${dto.genre}';">
                 <c:forEach items = "${bigFiveImgList}" var ="imgdto">
                 <div class="rank1" id = "${imgdto.seq}"><img src="./images/${imgdto.imgName}"></div>
                 </c:forEach>
@@ -1527,6 +1544,7 @@
             	
             
             </script>
+            
             
             
             <!-- 챗봇 : 단비봇 --------------------------------------------------------------------------------------------------------------------------------->
@@ -1580,6 +1598,18 @@
     </div> -->
 
             <!-- <div id="place"></div> -->
+            
+     	<!-- <form method = "POST" action = "/AtTicketProject/userticketpage.do" id = "roundShowInfo" style = " visibility : hidden;">
+ 			<input type="submit" id = "throwSubmit">
+ 		</form> -->        
+            
+
+	<!-- 애는 추후에 다시 처리할것이다. -->
+	<style>
+		.timeRound:hover {
+			cursor : pointer;
+		}
+	</style>
 
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1785ef08d0443cdeee98d927c39145d8libraries=services"></script>
     <script src="js/slick.min.js"></script>
@@ -1671,32 +1701,70 @@
         // });
 		
         /* 날짜 */
-        $( "#celender").datepicker({
-                dateFormat: "yy-mm-dd",
-                minDate: "2020-08-29",/* 오늘날짜로 해야한다. */
-                maxDate: "2020-09-30",
-                altField: ".alternate",
-                altFormat: "yy.mm.dd(D)",
-                dayNamesShort: ["일","월","화","수","목","금","토"],
+        $("#celender").datepicker({
+	            dateFormat: "yy-mm-dd",
+	            //minDate : "2020-09-01",
+	            //maxDate : "2020-12-12",
+	            minDate: "${minDateInfo}",/* 오늘날짜로 해야한다. */
+	            maxDate: "${dto.endDate}",
+	            altField: ".alternate",
+	            altFormat: "yy.mm.dd(D)",
+	            dayNamesShort: ["일","월","화","수","목","금","토"],
 
                 // defaultDate: new Date('2020-08-30'),
 
                 // setDate: "2020-08-30",
+				
+                
+                //여기가  달력을 클릭할때 생기는 이벤트.
+                onSelect: function(dateText) { 
+                	
+                	//alert("asd");
+                	//alert(dateText);//2020-03-08 이런식으로 보임
+                	$("#inputTime").empty();
+                	/* $("#inputTime").append("<li>[1]회 19시 00분</li>"); */
+                	 $("#data").css("border","1px solid #FECA52");
+    	             $("#sit").css("border","1px solid #eeeeee");
+                	 $("#sittitle").css("border-bottom","2px solid #EEEEEE");
+    	             $("#sittitle").css("color","#EEEEEE");
+    	             $("#sitbox").css("border","1px solid #EEEEEE");
+    	             $("#sitbox").empty();
+                	
+                	
+                	$.ajax({
+                		type : "GET",
+                		url : "/AtTicketProject/usersemishowreservation.do",
+                		data : "showseq=" + ${dto.seq},
+                		async: true,
+                		dataType: "json",
+                		success : function(result) {
+                			
+							//var list = result;
+							
+							
+							var showRound = 1;
+							$(result).each(function(index, item) {
+								$("#inputTime").append("<li class = 'timeRound' id ='"+ item.rseq +"'> [" + showRound + "]회 " + item.rstartTime + " ~ " + item.rendTime + "</li>");
+								
+								showRound++;
+								
+							});
+							//ajax 정보가 유실되므로 ajax 내에서 함수를 부른다.
+							testClick();
+                		},
+                		error : function(a,b,c) {
+                			console.log(a,b,c);
+                		}
+                	});//여기까지가 ajax
+                	
+					
+                	
+/*                 	$(document).on('click', '.testjammy', function(){
+                		alert("된다된다된다 안심이된다");
+                	} */
 
-                onSelect: function(dateText) {  
-
-                    if(dateText == "2020-08-29") {
-                        // $("#inputTime").html("[1]회 19시 00분");
-                           
-                        $("#inputTime" ).empty();
-                        $("#inputTime").append("<li>[1]회 19시 00분</li>");
-                        $("#inputTime").append("<li>[2]회 20시 00분</li>");
-                    }else {
-                        $( "#inputTime" ).empty();
-                        $("#inputTime").append("<li>[1]회 18시 00분</li>");
-                    }
-
-                    $("#inputTime li").click(function(){
+//$(document).on('click', '. everdevel', function(){
+/*                     $("#inputTime li").click(function(){
                         $("#inputTime li").css({
                             "background-color":"white",
                             "color": "#424242"
@@ -1709,14 +1777,39 @@
                         console.log($(this).text());
                         $("#choicInfo dd:nth-child(5)").text($(this).text());
                         clickNum = true;
-                    });
+                    });  */
                 
                 },
-                
-                
             });
-
-
+                	
+            
+                	
+            function testClick() {
+            	
+            	$(".timeRound").click(function(){
+            		
+            		
+            		$(".timeRound").css("background-color","#FFF");//모든 회차 배경을 하얀색으로 돌리고 밑에서 색을 다시 돌린다.
+            	
+    				//alert($(this).attr("id"));
+    				$(this).css("background-color","#FECA52");
+    				
+    	             //$("#clock").css("background-color","#FECA52");
+    	             //$("#clock").css("border","#FECA52");
+    	             //$("#clock").css("color","white");
+    	             $("#data").css("border","1px solid #eeeeee");
+    	             $("#sit").css("border","1px solid #FECA52");
+    	             $("#sittitle").css("border-bottom","2px solid black");
+    	             $("#sittitle").css("color","black");
+    	             $("#sitbox").css("border","1px solid black");
+    	             
+    	             if($("#sitbox").empty()){
+    	                 $("#sitbox").append("본 공연은 잔여좌석 서비스를 제공하지 않습니다.")
+    	             }
+    				
+    			}); 
+            }
+			
 
         //탭
         // $("#tabs").tabs({
@@ -1725,20 +1818,23 @@
 
 
         //시간 선택 후 예매가능좌석 선택 가능
-        $("#inputTime").click(function(){
+        
 
-            // $("#clock").css("background-color","#FECA52");
+        
+/*          $("#inputTime").click(function(){
+				
+             $("#clock").css("background-color","#FECA52");
             $("#clock").css("border","#FECA52");
             $("#clock").css("color","white");
             $("#data").css("border","1px solid #eeeeee");
             $("#sit").css("border","1px solid #FECA52");
             $("#sittitle").css("border-bottom","2px solid black");
             $("#sittitle").css("color","black");
-            $("#sitbox").css("border","1px solid black");
+            $("#sitbox").css("border","1px solid black"); 
             if($("#sitbox").empty()){
                 $("#sitbox").append("본 공연은 잔여좌석 서비스를 제공하지 않습니다.")
             }
-        });
+        });  */
 
         // 맵=========================================================
 
@@ -2024,10 +2120,15 @@
 
         });
 
-        // 예매하기 링크1
+        // 예매하기 링크1 -> 예매 페이지를 열어준다.
         $("#ticketing").click(function(){
-            window.open("/AtTicketProject/userticketpage.do", "PopupWin", "width=1000,height=672");
+            //window.open("/AtTicketProject/userticketpage.do", "PopupWin", "width=1000,height=672");
+            popupCenter("/AtTicketProject/userticketpage.do?showSeq=${dto.seq}",1000,672);
+            //$("#throwSubmit").attr("type","submit")throwSubmit
+        	//onSubmit();
+        	//$("#throwSubmit").trigger("click");
         });
+        
         // 예매하기 링크2
         $("#mTTicketing").click(function(){
             window.open("/AtTicketProject/userticketpage.do", "PopupWin", "width=1000,height=672");
@@ -2038,6 +2139,56 @@
         //	$(location).attr('href','/AtTicketProject/userranking.do');
         // }); 
 		
+        
+        
+        //팝업 중앙정렬 알고리즘 
+	    function popupCenter(href, w, h) {
+	    	
+	    	var popupX = (window.screen.width / 2) - (w / 2);
+	    	// 만들 팝업창 좌우 크기의 1/2 만큼 보정값으로 빼주었음
+
+	    	var popupY= (window.screen.height /2) - (h / 2);
+	    	// 만들 팝업창 상하 크기의 1/2 만큼 보정값으로 빼주었음
+
+	    	window.open(href, "pop_name", 'status=no, height=680, width=1000, left='+ popupX + ', top='+ popupY + ', screenX='+ popupX + ', screenY= '+ popupY);
+        
+        }
+        
+        
+/* 	    function onSubmit(){
+	    	 var myForm = document.popForm;
+	    	 var url = "/AtTicketProject/userticketpage.do";
+	    	 window.open(url ,"popForm",
+	    	       "toolbar=no, width=540, height=467, directories=no, status=no,scrollorbars=no, resizable=no");
+	    	 myForm.action =url;
+	    	 myForm.method="post";
+	    	 myForm.target="popForm";
+	    	 myForm.testVal = 'test';
+	    	 myForm.submit();
+	    	} */
+
+	    	
+            //로그인 java 로 이동
+            $("#login").click(function() {
+                location.href = "/AtTicketProject/userlogin.do";
+            });
+            
+            //로그아웃 java 로 이동
+            $("#logout").click(function() {
+                location.href = "/AtTicketProject/userlogout.do";
+            });
+            
+            //로그인 java 로 이동
+            $("#slogin").click(function() {
+                location.href = "/AtTicketProject/userlogin.do";
+            });
+            
+            //로그아웃 java 로 이동
+            $("#slogout").click(function() {
+                location.href = "/AtTicketProject/userlogout.do";
+            });
+
+
         
     </script>
 

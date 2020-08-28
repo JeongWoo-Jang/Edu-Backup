@@ -50,7 +50,7 @@ public class UserLoginEnd extends HttpServlet{
 			
 			//나머지 회원들의 정보들도 session에 넘겨줘야 한다.
 			UserDTO dto2 = dao.getMember(dto.getId());
-	
+		
 			//dao.close();
 			session.setAttribute("userseq", dto2.getSeq());//회원 번호
 			session.setAttribute("username", dto2.getName());//회원 이름 

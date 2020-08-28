@@ -71,12 +71,13 @@
 
     $(".accomenu").accordion({
         collapsible: true,
-        active: false
+        active: false,
+        heightStyle: "content"
     });
 
     //홈버튼 링크
     $("#homeLogo").click(function() {
-        location.href = "adminMain.html";
+        location.href = "/AtTicketProject/adminmain.do";
     });
 
     //상단 메뉴 고정
@@ -116,7 +117,7 @@
 
     //티켓 홈
     $("#tickethome").click(function() {
-        window.open("../main.html","At-Ticket");
+        window.open("/AtTicketProject/userindex.do","At-Ticket");
     });
 
     

@@ -26,7 +26,7 @@ public class AdminUserNoticeCreateOk extends HttpServlet {
 		String sort = req.getParameter("sort");
 		
 		
-		String path = req.getRealPath("/files");
+		String path = req.getRealPath("/images");
 	
 		int size = 1024*1024*100; //100MB
 		String filename = ""; 		//첨부파일명

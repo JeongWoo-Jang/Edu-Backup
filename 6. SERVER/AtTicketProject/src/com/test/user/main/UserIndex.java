@@ -48,6 +48,7 @@ public class UserIndex extends HttpServlet{
 		req.setAttribute("exhibition", exhibition);
 		req.setAttribute("open", open);
 		
+		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/userindex.jsp");
 		dispatcher.forward(req, resp);
 		

@@ -116,8 +116,8 @@
 
         <fieldset id="add" class="form-control" style="border: 0px;">
 
-            <%-- <div><img id="img1" src="<%= request.getContextPath() %>/images/${dto.poster}"/></div> --%>
-            <div><img id="img1" src="<%= request.getContextPath() %>/images/consert1.jpeg"/></div>
+            <div><img id="img1" src="<%= request.getContextPath() %>/images/${dto.poster}"/></div>
+            <%-- <div><img id="img1" src="<%= request.getContextPath() %>/images/consert1.jpeg"/></div> --%>
 
     
             <div id="rightbox">
@@ -182,9 +182,9 @@
 
             <div id="imgcontent" style="position: relative; top: -350px; font-size: 16px;">
             <label for="txtcontent">공연 내용 </label><br>
-            <%-- <img id="img2" src="<%= request.getContextPath() %>/images/${dto.content}" /> --%>
-            <img id="img2" src="<%= request.getContextPath() %>/images/공연정보1.jpg" />
-            <img id="img3" src="<%= request.getContextPath() %>/images/공연정보.jpg" />
+            <img id="img2" src="<%= request.getContextPath() %>/images/${dto.content}" />
+           <%--  <img id="img2" src="<%= request.getContextPath() %>/images/공연정보1.jpg" />
+            <img id="img3" src="<%= request.getContextPath() %>/images/공연정보.jpg" /> --%>
             </div>
 
         </fieldset>

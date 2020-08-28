@@ -27,7 +27,6 @@
         #top {
             /* border: 1px solid black; */
             min-width: 1600px;
-            height: 650px;
             margin: 0 auto;
         }
         #middle {
@@ -120,111 +119,250 @@
                 text-align: center;
                 padding-top: 3px;
             }
-            #movetop:hover {
-                background-color: orange;
-            }
-            #movetop a {
-                text-decoration: none;
-                color: white;
-                font-weight: bold;
-                font-size: 1.5em;
-            }
-             #frogue-container,
-            .frogue-chat {
-                position: absolute;
-                left: 20px;
-                bottom: 0;
-            }
-            #bottom > div {
-                float: left;
-                position: relative;
-                left: 12%;
-                top: 22%;
-            }
-            #bottom .txt {
-                margin-left: 30px;
-                line-height: 1.1em;
-                color: #666;
-                top: 28%;
-            }
-            #bottom .txt .black {
-                color: black;
-            }
-            #bottom #service {
-                margin-left: 250px;
-                top: 18%;
-            }
-            #bottom #service p:first-child {
-                border-bottom: 1px solid #bbb;
-                padding: 0 0 5px 20px;
-                font-weight: bold;
-                font-size: 1.1em;
-            }
-            #bottom #service p > span {
-                color: #444;
-                font-size: 1.3em;
-            }
-            #bottom #service p:nth-child(2) {
-                text-align: center;
-                font-size: 3em;
-                padding-left: 10px;
-            }
-            #bottom #service p {
-                margin-bottom: -2px;
-                padding-left: 20px;
-            }
+           #movetop:hover {
+               background-color: orange;
+           }
+           #movetop a {
+               text-decoration: none;
+               color: white;
+               font-weight: bold;
+               font-size: 1.5em;
+           }
+            #frogue-container,
+           .frogue-chat {
+               position: absolute;
+               left: 20px;
+               bottom: 0;
+           }
+           #bottom > div {
+               float: left;
+               position: relative;
+               left: 12%;
+               top: 22%;
+           }
+           #bottom .txt {
+               margin-left: 30px;
+               line-height: 1.1em;
+               color: #666;
+               top: 28%;
+           }
+           #bottom .txt .black {
+               color: black;
+           }
+           #bottom #service {
+               margin-left: 250px;
+               top: 18%;
+           }
+           #bottom #service p:first-child {
+               border-bottom: 1px solid #bbb;
+               padding: 0 0 5px 20px;
+               font-weight: bold;
+               font-size: 1.1em;
+           }
+           #bottom #service p > span {
+               color: #444;
+               font-size: 1.3em;
+           }
+           #bottom #service p:nth-child(2) {
+               text-align: center;
+               font-size: 3em;
+               padding-left: 10px;
+           }
+           #bottom #service p {
+               margin-bottom: -2px;
+               padding-left: 20px;
+           }
+           
+           #openAlarm{ cursor: pointer; }
+       
+		 #tel { 
+		 	margin: 0 auto;
+		 	margin-bottom:40px;
+		    color: #333;
+		    font-size: 18px;
+		    text-align: center;
+		    font-weight: 700;
+		    height: 58px;
+		    line-height: 50px;
+		    border: 1px solid #ec7d2c;
+		    background: #fbe5d5;
+		    font-style: normal;
+		    vertical-align: baseline;
+		    font-family: 'NanumBarunGothic', '���� ����', 'Malgun Gothic', sans-serif;
+		} 
         
+         #alarm {
+        	padding: 25px 0 18px 0;
+		    border-bottom: 2px solid #333;
+		    font-size: 18px;
+		    color: #ec7d2c;
+        } 
         
+        #dialog1 a {
+		    font-size: 13px;
+		    line-height: 20px;
+		    color: #000;
+		    text-decoration: underline;
+        }
+        
+        #dialog1 div,p,span,a{
+         outline: none;
+        }
+        
+        .ui-dialog .ui-dialog-buttonpane button {
+        	position:relative;
+        	left:-180px;
+        	display: inline-block;
+		    width: 78px;
+		    height: 32px;
+		    line-height: 32px;
+		    text-align: center;
+		    font-size: 13px;
+		    margin: 0 5px;
+		    border: 1px solid #ec7d2c;
+		    background: #ec7d2c;
+		    color: #fff;
+		   
+        }
+        
+        #mcontent{
+        font-size: 14px;
+	    line-height: 22px;
+	    text-align: center;
+	    padding: 26px 0 21px 0;   
+        }
       
+      	#bcontent{
+      		font-size: 13px;
+		    line-height: 20px;
+		    padding: 22px 0 19px 0;
+      		display: block;
+		    margin-block-start: 1em;
+		    margin-block-end: 1em;
+		    margin-inline-start: 0px;
+		    margin-inline-end: 0px;
+		    font-style: normal;
+		    vertical-align: baseline;
+		    font-family: 'NanumBarunGothic', '���� ����', 'Malgun Gothic', sans-serif;
+      	}
+      	#tagsearch {
+    border: 1px solid #111;
+    width: 170px;
+    height: 205px;
+    position: relative;
+    float: right;
+    background-color: white;
+    margin-right: 60px;
+    /* text-align: center; */
+
+    display: none;
+}
+#tagsearch::after {
+    content: "";
+    display: none;
+    clear: both;
+}
+#tag {
+    width: 168px;
+    /* background-color: rgb(253, 236, 236); */
+    background-color: #f6f6f6;
+    height: 25px;
+}
+#tag > span {
+    color: #222;
+    font-size: 14px;
+    width: 50px;
+    height: 30px;
+    font-weight: normal;
+    font-family: "IBMPlexSansKR-Regular";
+    position: relative;
+    left: -20px;
+}
+
+#tag > label {
+    color: #111;
+    float: right;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: 100;
+}
+#tagsearch > a {
+    display: block;
+    color: #555;
+    font-size: 14px;
+    font-family: "IBMPlexSansKR-Regular";
+    font-weight: normal;
+    text-align: left;
+    margin-left: 20px;
+    margin-top: 2px;
+}
+#tagsearch > span {
+    font-size: 12px;
+    color: #999;
+    font-weight: normal;
+    font-family: "IBMPlexSansKR-Regular";
+
+    float: right;
+    margin-top: 5px;
+    margin-right: 5px;
+}
     </style>
+      	
 </head>
 <body>
     
     <div id="main">
 <!-------------------------------- 화면 상단부 -------------------------------->
-        <div id="top">
-            <div id="topmenu">
-                <!-- 상단메뉴 좌측(메인화면으로 돌아가기) -->
-                <a href="#" id="topleft"></a>
-                <!-- 상단메뉴 센터(콘서트, 뮤지컬, 연극, 클래식, 전시) -->
-                <span data-item="item1" class="menubar">콘서트</span>
-                <span data-item="item2" class="menubar">뮤지컬</span>
-                <span data-item="item3" class="menubar">연극</span>
-                <span data-item="item4" class="menubar">클래식</span>
-                <span data-item="item5" class="menubar">전시</span>
-                <!-- 상단메뉴 우측(랭킹, 이벤트, 검색창, 마이페이지) -->
-                <div id="topright">
-                    <span data-item="item6" class="menubar">랭킹</span>
-                    <span data-item="item7" class="menubar">이벤트</span>
-                    <input type="text" value="" id="search">
-                    <label for="search" class="glyphicon glyphicon-search"
-                        style="font-size: 14px; cursor: pointer;"></label>
-                    <div class="glyphicon glyphicon-user" 
-                        style="font-size: 14px; cursor: pointer; margin: 0 10px; "></div>
-                </div>
+            <div id="top">
+                <%@include file="/WEB-INF/views/inc/usertopbar.jsp" %>
+                
+                <!-- 메인화면 슬라이더 -->
+                <div class="slider">
+                <c:forEach items="${map}" var="map">
+                  <div><img src="./images/${map.value}" /></div>
+              	</c:forEach>
+              </div>
             </div>
-            <!-- 메인화면 슬라이더 -->
-            
-        <hr>
+            <hr style="margin-top: 0px;">
 <!-------------------------------- 내용부분 -------------------------------->
+ 		
         <h2 style="text-align: center; margin-top: 200px; margin-bottom: 50px; font-size: 4em; font-weight: bold;">공지사항</h2>
         <div class="noticebar">
             <div style="display: inline-block; width:90px; border: 1px solid orange; color: orange; text-align: center;">${dto.nindex}</div>
             <span>${dto.title}</span>
         </div>
         <p style="text-align: center; margin-left: 1000px; padding-top: 10px; color: gray;">등록일 : ${dto.regdate} 조회수: ${dto.nview}</p>
-
+		
         <div style="width: 1200px; height: 370px; background-color: #eeeeee; margin: 0px auto;" >
             <div style="width: 180px; height: 252px; margin-left: 50px; "><img style="margin-top: 50px; width: 180px; height: 252px;" src="/AtTicketProject/images/${showdto.poster}" alt=""></div>
             <span style="font-size: 18px; margin-left: 300px; position: relative; bottom: 180px; left: 0px;">${showdto.title}</span>
             <div style=" padding-left: 30px; padding-top: 18px; background-color: rgb(253, 221, 190); position: relative; bottom: 120px; margin-left: 300px; margin-bottom: 500px; border: 1px solid gray; width: 840px; height: 60px;">
                 <span class="glyphicon glyphicon-time" style= "color: orange; font-weight: bold;">&nbsp;${dto.nindex}</span><span style="padding-left: 30px;">|</span>
                 <span style="padding-left: 30px; font-weight: bold; font-size: 17px;">${dto.opendate}(${dto.dy})</span>                
-                <div style=" width: 236px; height: 46px; border: 3px solid orange; margin-top: 80px; position: relative; left: -30px; padding-top: 10px; text-align: center; background-color: white; color: orange; font-weight: bold; font-size: 18px;">티켓오픈 알림<span class="glyphicon glyphicon-bell"></span></div>
-            </div>
+                <div id="openAlarm" style=" width: 236px; height: 46px; border: 3px solid orange; margin-top: 80px; position: relative; left: -30px; padding-top: 10px; text-align: center; background-color: white; color: orange; font-weight: bold; font-size: 18px;">티켓오픈 알림<span class="glyphicon glyphicon-bell"></span></div>
+		        
+		        <form id="form1" method = "POST" action="/AtTicketProject/useralarm.do?noticeseq=${noticeseq}&page=${page}&search=${search}&showseq=${showseq}">
+		     
+		        <div role="dialog" id="dialog1" style="border:0px;">
+		        	<p id = "alarm">티켓오픈 알람 신청</p>
+		        	<p id = "mcontent">티켓오픈 알람 신청 시<br>
+		        		<span style="color:red;">티켓 오픈 1시간 전에 </span>회원님께 SMS를 보내드립니다.</p>
+		        		<div id = "tel">${tel}</div>
+		        		<p id = "bcontent">일반 티켓 오픈 시간을 기준으로 발송됩니다.<br>
+							(팬클럽 선예매 등은 발송 대상이 아닙니다.)<br>
+							알림 받을 휴대전화번호 변경을 원하시면, <a href = "/AtTicketProject/mypagepersonalize.do" target="_blank">마이페이지>회원정보관리</a> 에서<br>
+							변경하신 후 신청하시면 됩니다.</p>
+							 <input type = "hidden" name = "showseq" value = "${showseq}">
+							<!-- <button type="submit" class="btn btn-primary">확인</button>
+							<button type="button" class="btn btn-default" data-dismiss="modal">취소</button> -->
+		        </div> 
+				  
+		        </form>
+	    	</div>
+           </div>
             
         </div>
-        <div style="width: 1200px; margin: 0px auto;">
+        <div style="width: 1200px; margin: 200px auto;">
 
         <hr>
         <p style="font-size: 1.8em; font-weight: bold;">공연 개요</p>
@@ -366,7 +504,6 @@ Special 2. 지정석 20% <br>
         
 </div>        
             
-            
 
         
       
@@ -428,6 +565,49 @@ Special 2. 지정석 20% <br>
 
     <script src="/AtTicketProject/js/slick.min.js"></script>
     <script>
+    	
+    	$("#dialog1").hide();
+    	
+    	$("#openAlarm").click(function() {
+			if(${cusseq == null}) {
+				alert("로그인이 필요한 서비스 입니다.");
+				return;
+			}else {
+				//모달
+				$(".ui-dialog-buttonset button:first-child").hide();
+				 $("#dialog1").dialog({//작은 팝업창 생성
+		                title: "티켓오픈 알람 신청",
+		                width: 600,
+		                height: 550,
+		                draggable: false,
+		                resizable: false,
+		                modal: true,
+		                buttons: {
+		                    // "text": function() { alert(); }
+		                    "등록":
+			                   function() {  
+		                    	alert(${repeat});
+		                    	if(${repeat}==0) {
+			                        alert("[${showtitle} - 티켓오픈 안내 SMS 알림서비스가 신청되었습니다.MY공연>나의맞춤설정 에서 확인해주세요.]");
+			                        
+			                        $("#dialog1").dialog("close");
+			                        
+			                        $("#form1").submit();
+		                    	} else {
+		           					alert("이미 등록되어있습니다.");
+		           					$("#dialog1").dialog("close");
+		                    	}
+		                    },
+		                    "취소" : function () {
+		                        $("#dialog1").dialog("close");
+		                    }
+		                } 
+		            }); 
+				}
+			
+		});
+    	
+
 
         //상단 메뉴 css
         $(".menubar").mouseover(function() {
@@ -449,7 +629,7 @@ Special 2. 지정석 20% <br>
       
 
        $(".golist").click(function(){
-    	  	location.href="/AtTicketProject/show/usernotice.do?page=${page}&search=${search}&sort=${sort}"; 
+    	  	location.href="/AtTicketProject/usernotice.do?page=${page}&search=${search}&sort=${sort}"; 
        });
 
         

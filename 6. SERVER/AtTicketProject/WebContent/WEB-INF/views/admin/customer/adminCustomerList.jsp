@@ -17,6 +17,18 @@
             width: 1500px;
             border-bottom: 1px dashed black;
         }
+        
+        #left {
+           position: absolute;
+           left: 0px;
+           top: 0px;
+           width: 250px;
+           height: 900px;
+           /* border: 1px solid black; */
+           background-color: #444;
+           text-align: center;
+           z-index: 10;
+       }
 
         h1 {
             font-weight: bold;
@@ -135,39 +147,33 @@
 <body>
 
     <div id="title">
-        <h1>
-            고객 관리 <small>> Home </small>
-        </h1>
+        <h1> 고객 관리 <small>> Home </small></h1>
     </div>
 
-
-    <div style="margin-top: 30px;margin-left:480px;">
-        <c:if test="${not empty search}">
-            <div style="width: 300px; float: left;margin-bottom:0px;"
-                class="message well well-sm">'${search}'(으)로 ${totalCount}건의 게시물을 검색했습니다.
-             </div>
-        </c:if>
-        <!-- <select style="margin-left: 220px; width: 100px;" name="sel1"
-			id="sel1" class="form-control">
-			<option value="name">이름</option>
-			<option value="tel">전화번호</option>
-			<option value="id">회원아이디</option>
-			<option value="ssn">주민번호</option>
-		</select>  -->
-		
-		<!-- 이름, 아이디, 주민번호, 전화번호 -->
-        <form style="margin-left:1010px;" method="GET" action="/AtTicketProject/customer/admincustomerlist.do" id="searchForm">
-            <div class="input-group search">
-                <input placeholder="검색어를 입력하세요." type="text" class="form-control" aria-describedby="basic-addon2"
-                    name="search" id="search" required value="${search}" autocomplete="off"> <span class="input-group-addon"
-                    id="basic-addon2" style="cursor: pointer;" onclick="$('#searchForm').submit();"><span
-                        class="glyphicon glyphicon-search"></span></span>
-            </div>
-        </form>
-       
-    </div>
-   
-    <div style="clear:both;"></div>
+	<table style="width:1320px; margin:30px 380px;">
+		<tr>
+			<!-- <div style="margin-top: 30px; margin-left: 480px;"> -->
+				<td style="width:50%;">
+					<c:if test="${not empty search}">
+							<div style="width:270px;"class="message well well-sm">'${search}'(으)로
+								${totalCount}건의 게시물을 검색했습니다.</div>
+					</c:if>
+				</td>
+				<!-- 이름, 아이디, 주민번호, 전화번호 -->
+				<td>
+					<form method="GET"action="/AtTicketProject/customer/admincustomerlist.do" id="searchForm">
+						<div style="margin-left:500px;" class="input-group search">
+							<input placeholder="검색어를 입력하세요." type="text" class="form-control" aria-describedby="basic-addon2" name="search" id="search" required value="${search}" autocomplete="off"> 
+								<span class="input-group-addon" id="basic-addon2" style="cursor: pointer;" onclick="$('#searchForm').submit();">
+								<span class="glyphicon glyphicon-search"></span>
+								</span>
+						</div>
+					</form>
+				</td>
+			<!-- </div> -->
+		<tr>
+	</table>
+	<div style="clear:both;"></div>
     
     <form method = "POST" action = "/AtTicketProject/customer/cuslistdelete.do" id="deleteForm">
     <div id="box" style="margin-left: 100px; margin-top:30px;">
@@ -231,7 +237,11 @@
     <input type="hidden" name="search" value="${search}">
     
     </form>
-    <div style="margin-left: 800px;">${pagebar}</div>
+    <table style="width:100%;">
+    	<tr style="text-align:center">
+    			<td>${pagebar}<td>
+    	</tr>
+    </table>
 
     <%@include file="/WEB-INF/views/inc/menu.jsp"%>
     <script>
@@ -253,12 +263,12 @@
         });
 
 
-        for (var i = 2; i < tr.length; i++) {
+        /* for (var i = 2; i < tr.length; i++) {
             tr[i].children[2].onclick = function () {
-                // location.href="hansiyeoncontent.html";
+               
 
             };
-        }
+        } */
 
         cbAll.onchange = function () {
             for (var i = 0; i < cb.length; i++) {

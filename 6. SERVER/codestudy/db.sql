@@ -42,7 +42,6 @@ create table tblBoard (
 delete from tblHeart;
 delete from tblComment;
 delete from tblBoard;
-select * from tblBoard;
 
 alter table tblBoard
 add (thread number not null);
@@ -162,6 +161,12 @@ create sequence seqHeart;
 
 
 
+
+
+
+
+
+
 select * from tblHeart;
 
 select a.*, 
@@ -172,9 +177,71 @@ from tblBoard a ;
 
 select count(*) as cnt from tblHeart where bseq = 61 and mseq = 5;
 
-select * from tblBoard order by heart desc;
 
+select nvl(max(thread), 0) + 1000 from tblBoard;
+
+
+select * from vwBoard order by thread desc, depth asc;
+
+select * from tblMember;
+
+-- 초기화
+delete from tblHeart;
+delete from tblComment;
+delete from tblBoard;
+
+commit;
 
 -- 한페이지 당 -> 20개씩
-select * from (select a.*, rownum as rnum from (select * from vwBoard order by thread desc) a) where rnum >= 1 and rnum <= 20;
+select * from (select a.*, rownum as rnum from (select * from vwBoard order by thread desc) a) where rnum >= 21 and rnum <= 40;
+
+
+
+-- 일정 테이블
+create table tblPlan (
+    seq number primary key,                             --번호(PK)
+    mseq number not null references tblMember(seq),    --회원(FK)
+    regdate varchar2(10) not null,                      --날짜
+    content varchar2(300) not null                      --일정 내용
+);
+
+create sequence seqPlan;
+
+select * from tblPlan;
+
+
+select p.*, (select name from tblMember where seq = p.mseq) as name 
+from tblPlan p;
+
+
+
+
+-- 쪽지
+create table tblMessage (
+    seq number primary key,
+    smseq number not null references tblMember(seq),
+    rmseq number not null references tblMember(seq),
+    content varchar2(1000) not null,
+    regdate date default sysdate,
+    state number(1) default 0 
+    -- 0(안읽음+확인안함), 1(안읽음+확인했음)
+    -- , 2(읽음,확인했음)
+);
+
+create sequence seqMessage;
+
+select * from tblMessage;
+
+select * from tblMember;
+delete from tblMember where seq = 44;
+
+
+
+
+
+
+
+
+
+
 

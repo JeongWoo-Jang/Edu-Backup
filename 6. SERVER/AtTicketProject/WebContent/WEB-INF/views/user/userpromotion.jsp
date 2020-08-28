@@ -203,52 +203,42 @@
         <div id="main">
             <!-------------------------------- 화면 상단부 -------------------------------->
             <div id="top">
-                <div id="topmenu">
-                    <!-- 상단메뉴 좌측(메인화면으로 돌아가기) -->
-                    <a href="main.html" id="topleft"></a>
-                    <!-- 상단메뉴 센터(콘서트, 뮤지컬, 연극, 클래식, 전시) -->
-                    <div id="topcenter">
-                        <span data-lo="user_concert.html" class="menubar"
-                            >콘서트</span
-                        >
-                        <span data-lo="user_musical.html" class="menubar"
-                            >뮤지컬</span
-                        >
-                        <span data-lo="user_theater.html" class="menubar"
-                            >연극</span
-                        >
-                        <span data-lo="user_classic.html" class="menubar"
-                            >클래식</span
-                        >
-                        <span data-lo="user_Exhibition.html" class="menubar"
-                            >전시</span
-                        >
-                    </div>
-                    <!-- 상단메뉴 우측(랭킹, 이벤트, 검색창, 마이페이지) -->
-                    <div id="topright">
-                        <span data-lo="user_ranking.html" class="menubar"
-                            >랭킹</span
-                        >
-                        <span data-lo="user_event.html" class="menubar"
-                            >이벤트</span
-                        >
-                        <input type="text" value="" id="search" />
-                        <label
-                            for="search"
-                            class="glyphicon glyphicon-search"
-                            style="font-size: 14px; cursor: pointer;"
-                        ></label>
-                        <div
-                            class="glyphicon glyphicon-user"
-                            id="mypage"
-                            style="
-                                font-size: 14px;
-                                cursor: pointer;
-                                margin: 0 10px;
-                            "
-                        ></div>
-                    </div>
+            <div id="topmenu">
+                <!-- 상단메뉴 좌측(메인화면으로 돌아가기) -->
+                <a href="userindex.do" id="topleft"></a>
+                <!-- 상단메뉴 센터(콘서트, 뮤지컬, 연극, 클래식, 전시) -->
+                <div id="topcenter">
+                    <span data-lo="userconcert.do" class="menubar">콘서트</span>
+                    <span data-lo="usermusical.do" class="menubar">뮤지컬</span>
+                    <span data-lo="usertheater.do" class="menubar">연극</span>
+                    <span data-lo="userclassic.do" class="menubar">클래식</span>
+                    <span data-lo="userexhibition.do" class="menubar">전시</span>
                 </div>
+                <!-- 상단메뉴 우측(랭킹, 이벤트, 검색창, 마이페이지) -->
+                <div id="topright">
+                    <span data-lo="userranking.do" class="menubar">랭킹</span>
+                    <span data-lo="userevent.do" class="menubar">이벤트</span>
+                    <input type="text" value="" id="search">
+                    <label for="search" class="glyphicon glyphicon-search"
+                        style="font-size: 14px; cursor: pointer;"></label>
+                        <c:if test = "${empty userid}">
+        <span class="menubar" id="slogin">로그인</span>
+        </c:if>
+        <c:if test = "${!empty userid}">
+        <div
+            class="glyphicon glyphicon-user"
+            id="mypage"
+            style="
+                font-size: 14px;
+                cursor: pointer;
+                margin: 0 10px;
+            "
+        ></div>
+        <span class="menubar" id="slogout">로그아웃</span>
+        </c:if>
+                        
+                </div>
+            </div>
                 <div class="comebackbar">
                     <div class="comebackimg">
                         <img src="./images/eventPro.gif" alt="" />
@@ -300,15 +290,15 @@
                 </div>
             </div>
             <!-------------------------------- 화면 하단부 -------------------------------->
-            <div id="bottom">
+            <!-- <div id="bottom">
                 <div>
-                    <!-- 회사 마크 -->
+                    회사 마크
                     <img
                         src="./images/title2.png"
                         style="transform: translate(0, 40px);"
                     />
                 </div>
-            </div>
+            </div> -->
         </div>
 
         <script src="js/slick.min.js"></script>
@@ -336,16 +326,64 @@
             
             //쿠폰
             $("#coupon").click(function(){
+            	//여기서 session 이 있을때랑 없을때랑 나눠주면 된다.
+            	<c:if test = "${not empty userseq}">
+	            	
+	            	$.ajax({
+                		type : "GET",
+                		url : "/AtTicketProject/userpromotionadd.do",
+                		data : "",
+                		async: true,
+                		dataType: "text",
+                		success : function(result) {
+                			
+                			if (result == 1) {
+                				//이미 발급받은 경우
+                				alert("해당 쿠폰을 소유중입니다.");
+                			} else {
+                				//발급받은적이 없는 경우
+                				alert("쿠폰이 발급되었습니다.");
+                			}
+							
+                			
+                		},
+                		error : function(a,b,c) {
+                			console.log(a,b,c);
+                		}
+                	});//여기까지가 ajax
+	            	
+	            	
+            	</c:if>
+	            <c:if test = "${empty userseq}">
+	            	alert("로그인이 필요한 서비스 입니다.");
+	            </c:if>
             	
-            	alert("쿠폰이 발급되었습니다.");
-            	//쿠폰을 주는 서블릿으로 이동.
-            	location.href = "/AtTicketProject/userpromotionadd.do"
             	
             }); 
 
             //마이페이지 클릭시 이동
             $("#mypage").click(function () {
-                location.href = "mypage.html";
+                location.href = "usermypage.do";
+            });
+            
+          //로그인 java 로 이동
+            $("#login").click(function() {
+                location.href = "/AtTicketProject/userlogin.do";
+            });
+            
+            //로그아웃 java 로 이동
+            $("#logout").click(function() {
+                location.href = "/AtTicketProject/userlogout.do";
+            });
+            
+            //로그인 java 로 이동
+            $("#slogin").click(function() {
+                location.href = "/AtTicketProject/userlogin.do";
+            });
+            
+            //로그아웃 java 로 이동
+            $("#slogout").click(function() {
+                location.href = "/AtTicketProject/userlogout.do";
             });
         </script>
     </body>
