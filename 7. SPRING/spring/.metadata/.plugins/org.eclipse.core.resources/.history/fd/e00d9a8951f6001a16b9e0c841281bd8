@@ -1,0 +1,17 @@
+package com.test.spring.di.seven;
+
+public class Ex07 {
+	
+	public static void main(String[] args) {
+		
+		m1();
+		
+	}
+
+	private static void m1() {
+		
+		
+		
+	}
+
+}

@@ -1,0 +1,17 @@
+package com.test.spring;
+
+import org.springframework.stereotype.Controller;
+
+@Controller
+public class BoardController {
+
+	//요청 메소드(URL)
+	@RequestMapping(value = "/template.action", method = { RequestMethod.GET })
+	public String template(HttpServletRequest request, HttpServletResponse response) {
+
+		
+
+		return "template";
+	}
+	
+}

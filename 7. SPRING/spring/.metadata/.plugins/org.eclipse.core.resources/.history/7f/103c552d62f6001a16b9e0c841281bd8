@@ -1,0 +1,23 @@
+package com.test.spring.aop;
+
+//컨트롤러 역할(전체 업무 제어하는 역할)
+public class Main {
+	
+	public static void main(String[] args) {
+		
+		//메모 업무 구현
+		
+		//IMemo memo = new Memo();
+		//memo.xxx();
+		
+		IMemo memo = new Memo();
+		
+		//1. 주업무 - 글쓰기
+		memo.add("메모입니다.");
+		
+		//2. 주업무 - 읽기
+		memo.read(2);
+		
+	}
+
+}

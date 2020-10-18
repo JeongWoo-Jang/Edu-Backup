@@ -1,0 +1,21 @@
+@charset "UTF-8";
+
+@font-face {
+    font-family: 'IBMPlexSansKR-Text';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/IBMPlexSansKR-Text.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body, div, span, p, input, textarea, ul, ol, li, a, table, th, td, h1, h2, h3, h4, h5, h6, pre, code {
+	font-family: 'IBMPlexSansKR-Text';
+}
+
+.container {
+	width: 800px;
+}
+
+.footer {
+	border-top: 1px solid #DDD;
+	margin-top: 50px;
+}

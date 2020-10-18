@@ -1,0 +1,12 @@
+package com.test.spring.di.seven;
+
+//*** 중심 클래스
+public class Service {
+
+	//의존 객체 -> 멤버 변수
+	private IData data;
+	
+	//의존 주입 도구 -> 생성자 or setter
+	
+	
+}

@@ -1,0 +1,10 @@
+package com.test.spring.aop;
+
+public interface IMemo {
+
+	//a. 메모 쓰기
+	void add(String memo);
+	
+	
+	
+}

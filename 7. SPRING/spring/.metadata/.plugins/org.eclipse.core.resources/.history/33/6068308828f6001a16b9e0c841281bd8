@@ -1,0 +1,11 @@
+package com.test.spring.di.one;
+
+public class Util {
+	
+	public string getName() {
+		
+		
+		
+	}
+
+}

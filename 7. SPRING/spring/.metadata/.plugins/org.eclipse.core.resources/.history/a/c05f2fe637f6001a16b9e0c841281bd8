@@ -1,0 +1,19 @@
+package com.test.spring.di.five;
+
+import java.util.ArrayList;
+
+//Service 객체는 MyFile 객체를 의존한다.
+// - MyFile 객체는 Service 객체의 의존 객체이다.
+public class Service {
+
+	public ArrayList<String> list() {
+		
+		//1. 의존 객체 생성하는 코드를 삭제한다.
+		//IData data = new MyDB(); // 의존 객체
+		
+		ArrayList<String> list = data.getList();
+		
+		return list;
+	}
+
+}

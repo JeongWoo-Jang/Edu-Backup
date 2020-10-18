@@ -1,0 +1,22 @@
+package com.test.spring.di.three;
+
+import java.util.ArrayList;
+
+public class Service {
+
+	public ArrayList<String> list() {
+		
+		//데이터 소스 : 텍스트 파일
+		// 
+		
+		//변경 사항
+		// - 데이터 소스 : 텍스트 파일 -> 오라클 전환
+		
+		MyFile file = new MyFile();
+		
+		ArrayList<String> list = file.list();
+		
+		return list;
+	}
+
+}

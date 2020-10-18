@@ -1,0 +1,16 @@
+
+3. db.sql
+
+4. 버전 변경
+
+5. 라이브러리
+	- JDBC
+	- MyBatis
+	- AOP(스프링 트랜잭션 기능이 AOP 기반으로 동작한다.)
+	- Transaction(스프링 트랜잭션에 필요한 <dependency>는 없음)
+
+6. web.xml
+	- 확장자 수정
+	- 인코딩 필터 추가
+
+7. 

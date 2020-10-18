@@ -1,0 +1,33 @@
+
+Spring + MyBatis
+
+MyBatis(iBatis)
+- 응용 프로그램(Java) <-> 중간계층(JDBC, Spring-JDBC, MyBatis) <-> 데이터베이스(Oracle)
+
+프로젝트 세팅
+
+1. 버전
+	- Java 1.8
+	- Spring 4.3.8
+
+2. pom.xml
+	- mybatis
+	- log4j
+	- jdbc : WEB-INF > lib > ojdbc6.jar 복사
+
+3. web.xml
+	- *.action
+	- POST > 인코딩 > UTF-8 : 인코딩 필터 등록
+	
+4. root-context.xml
+	- <bean> x 3개
+	- mybatis.xml
+	- mapper > *.xml
+
+5. 파일 생성
+	a. MyBatisController.java
+	b. IMyBatisService.java + MyBatisService.java
+	c. MyBatisDAO.java
+	d. MyBatisDTO.java
+	e. views > result.jsp
+	f. SpringMyBatis > db.sql

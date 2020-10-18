@@ -1,0 +1,9 @@
+package com.test.spring;
+
+public class DTO {
+
+	private String seq;
+	private String subject;
+	private String tseq;
+	
+}

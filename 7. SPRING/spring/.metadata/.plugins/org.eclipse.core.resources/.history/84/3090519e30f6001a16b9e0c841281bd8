@@ -1,0 +1,5 @@
+package com.test.spring.di.three;
+
+public class Service {
+
+}

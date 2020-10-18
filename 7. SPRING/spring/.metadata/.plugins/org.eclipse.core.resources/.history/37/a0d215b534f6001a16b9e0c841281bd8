@@ -1,0 +1,26 @@
+package com.test.spring.di.four;
+
+import java.util.ArrayList;
+
+public class Service {
+
+	public ArrayList<String> list() {
+		
+		//데이터 소스 : 텍스트 파일
+		//Service -> (의존) -> MyFile or MyDB
+		
+		//변경 사항
+		// - 데이터 소스 : 텍스트 파일 -> 오라클 전환
+		
+		//MyFile과 MyDB는 동일한 업무를 하는 객체
+		// - 둘 다 데이터소스로부터 데이터를 가져와서 돌려주는 역할
+		
+		//MyFile file = new MyFile();
+		IData file = new MyFile();
+		
+		ArrayList<String> list = db.getList();
+		
+		return list;
+	}
+
+}

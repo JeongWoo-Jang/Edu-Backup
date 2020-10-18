@@ -1,0 +1,14 @@
+package com.test.spring.di.two;
+
+public class Ex02 {
+
+	public static void main(String[] args) {
+		
+		//m1.
+		Util util = new Util();
+		String name = util.getName();
+		System.out.printf("안녕~ %s\n", name);
+		
+	}
+	
+}

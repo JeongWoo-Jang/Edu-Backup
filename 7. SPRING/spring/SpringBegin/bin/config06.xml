@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+	config06.xml 
+	스프링 설정 파일 
+	- 스프링에서 객체 정의 
+	- 의존 관계 및 의존 주입을 정의 
+-->
+
+
+<!--  
+	
+	자바빈, Java Bean
+	- 자바 객체, 인스턴스
+
+-->
+
+<beans  xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- 
+	
+		스프링이 하는 행동 중 하나 > 객체 생성		
+		
+		스프링이 객체 생성~소멸까지 스프링이 관리한다. 
+	
+	-->
+	
+	<!-- 객체 생성 -> <bean> 사용 -->
+	<bean id="s1" class="com.test.spring.di.six.Service"></bean>
+	
+	<bean id="user" class="com.test.spring.di.six.User"></bean>
+	
+	<bean id="user2" class="com.test.spring.di.six.User">
+		<!--  
+			User 클래스의 setter
+			- name -> setName 호출
+			- age -> setAge 호출
+		-->
+		<property name="name" value="하하하"></property>
+		<property name="age" value="25"></property>
+	</bean>
+	
+	<bean id="user3" class="com.test.spring.di.six.User">
+		<!-- 
+			User 클래스의 생성자 호출		
+		-->
+		<constructor-arg value="호호호"></constructor-arg>
+		<constructor-arg value="27"></constructor-arg>
+	</bean>
+	
+</beans>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans  xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- 
+		new MyFile();
+		new MyDB();
+	-->
+	
+	<bean id="file" class="com.test.spring.di.seven.MyFile"></bean>
+	<bean id="db" class="com.test.spring.di.seven.MyDB"></bean>
+	
+	<!-- 
+		new Service(data)
+	-->
+	
+	<bean id="service" class="com.test.spring.di.seven.Service">
+		<constructor-arg ref="db"></constructor-arg> <!-- 의존 주입 발생 -->
+	</bean>
+
+</beans>

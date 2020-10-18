@@ -1,0 +1,9 @@
+package com.test.spring;
+
+import org.aspectj.lang.annotation.Aspect;
+
+//보조업무 객체
+@Aspect //보조 업무 객체의 자격
+public class Cross {
+
+}

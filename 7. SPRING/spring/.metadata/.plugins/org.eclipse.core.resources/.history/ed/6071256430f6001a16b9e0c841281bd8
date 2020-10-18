@@ -1,0 +1,16 @@
+package com.test.spring.di.three;
+
+public class Ex03 {
+
+	public static void main(String[] args) {
+		
+		//[객체 관계]
+		//Ex02 -> (의존) -> Util -> (의존) -> Scanner
+		//Ex03 -> (의존) -> Service -> (의존) -> MyFile or MyDB
+		
+		//업무
+		// - 구성원 목록을 가져와서 화면에 출력하시오.
+		
+	}
+	
+}

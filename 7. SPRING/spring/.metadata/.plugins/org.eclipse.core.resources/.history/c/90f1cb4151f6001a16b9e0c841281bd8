@@ -1,0 +1,12 @@
+package com.test.spring.di.six;
+
+public class Ex06 {
+	
+	public static void main(String[] args) {
+		
+		//의존 객체 -> DI 방식으로 전환 -> 스프링을 사용해서 전환
+		Service service = new Service();
+		
+	}
+
+}

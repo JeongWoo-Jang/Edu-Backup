@@ -1,0 +1,15 @@
+package com.test.spring.aop;
+
+public class Memo implements IMemo {
+
+	@Override
+	public void add(String memo) {
+		System.out.printf("메모 쓰기 : %s\n", memo);
+	}
+	
+	@Override
+	public void read(int seq) throws Exception {
+		System.out.printf("메모 쓰기 : %s\n", memo);
+	}
+	
+}

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans  xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:aop="http://www.springframework.org/schema/aop"
+		
+		xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<!-- 주업무객체 + 보조업무객체 -->
+	
+	<!-- 주업무 객체 -->
+	<bean id="memo" class="com.test.spring.aop.Memo"></bean>
+	
+	<!-- 보조업무 객체 -->
+	<bean id="logger" class="com.test.spring.aop.Logger"></bean>
+	
+	<!-- 
+		Spring AOP 설정
+	-->
+	<aop:config>
+	
+		<!-- 보조 업무 객체 지정한다. -->
+		<aop:aspect ref="logger" id="loggerAdvice">
+		
+			<!--
+				주 업무를 지정한다.
+				: 주 업무 객체를 지정한다.(X)
+				: 주 업무 객체의 메소드를 지정한다.(O)
+				
+				주 업무 객체의 특정 메소드를 지정한다. -> Point Cut(주업무 메소드)
+				
+				Point Cut 지정 방식 -> AspectJ 표현식
+			-->
+			<aop:pointcut expression="execution(public void com.test.spring.aop.Memo.add(String))" id="m1"/>
+			
+			<!-- 보조업무 객체의 특정 메소드와 주업무 객체의 특정 메소드를 연결 -->
+			<aop:after method="after" pointcut-ref="m1"/>
+		
+		</aop:aspect>
+	
+	</aop:config>
+	
+
+</beans>

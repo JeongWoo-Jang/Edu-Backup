@@ -1,0 +1,28 @@
+package com.test.spring.di.seven;
+
+import java.util.ArrayList;
+
+public class Ex07 {
+	
+	public static void main(String[] args) {
+		
+		m1();
+		
+	}
+
+	private static void m1() {
+		
+		//Ex07 -> (의존, 위임) -> Service -> (의존, 위임) -> IData(MyFile, MyDB)
+		IData data = new MyFile();
+		
+		Service service = new Service(data); //생성자를 통한 의존 주입
+		
+		ArrayList<String> list = service.getList();
+		
+		for (String name : list) {
+			System.out.println(name);
+		}
+		
+	}
+
+}

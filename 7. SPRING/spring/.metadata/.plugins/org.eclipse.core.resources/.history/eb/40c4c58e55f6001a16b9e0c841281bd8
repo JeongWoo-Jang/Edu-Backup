@@ -1,0 +1,86 @@
+스프링 프레임워크, Spring Framework
+- 000 라이브러리
+- 000 프레임워크
+- 개발자 작업 > 본인 주도하에 모든 통제 + 000 라이브러리
+- 개발자 작업 > 본인 주도 + 미리 정해진 룰(체계) + 000 프레임워크
+- 스프링 프레임워크는 자바 플랫폼을 위한 오픈 소스 애플리케이션 프레임워크이다.
+- 전자 정부 표준 프레임워크(정부 -> 스프링)
+- 세팅된 개발 환경 제공(안정적) + 생산성(반복되는 코드 생략) + 개발 편의성 + 유지/보수성
+ + 협업 + 대형화 프로젝트 등 
+
+Servlet/JSP - 사용자 주도 -> 업무 체계 (자유도가 높음)
+Spring - 시스템 주도 -> 업무 체계
+
+https://spring.io
+
+스프링 프레임워크 구성 요소
+1. 의존성 주입 지원(DI)
+2. 관점 지향 프로그래밍 지원(AOP)
+3. Spring MVC 지원(****)
+4. 레이아웃 지원(Tiles)
+5. 데이터베이스 프레임워크와 호환성 높음
+	- JDBC 연동(원시)
+	- Spring JDBC 지원
+	- MyBatis 지원
+
+스프링 선수 지식
+1. Java -> OOP
+2. 콘솔 or 웹 지식 (자바, Servlet, JSP 등)
+3. XML
+	- 데이터를 저장하는 용도의 수준(= JSON 정도)
+	- 스프링과 관련된 여러가지 설정 -> XML 형식으로 저장
+
+스프링 개발 환경
+- JDK + JRE
+1. 이클립스 + 스프링 관련 라이브러리(*.jar)
+2. 이클립스 + 플러그인(STS)
+3. STS(이클립스 + 플러그인(STS)) - 두가지를 미리 합쳐놓은 이클립스
+
+
+---------------------------------------------------------------
+
+스프링 DI
+- Dependency Injection
+- 의존(성) 주입
+- 디자인 패턴 중 하나
+- 프로그래밍에서 구성 요소간의 의존 관게가 소스 내부가 아닌 외부환경에 의해서 정의되게 하는 디자인 패턴
+- 의존 객체의 생성을 누가 하느냐??
+
+- 패키지 > com.test.spring.di.one
+- 파일 > Ex01.java
+- 파일 > Util.java
+
+- 패키지 > com.test.spring.di.two
+- 파일 > Ex02.java
+- 파일 > Util.java
+
+- 패키지 > com.test.spring.di.three
+- 파일 > Ex03.java
+- 파일 > MyDB.java
+- 파일 > MyFile.java
+- 파일 > Service.java
+
+- 패키지 > com.test.spring.di.four
+- 파일 > three 모두 복사
+
+- 패키지 > com.test.spring.di.five
+- 파일 > four 모두 복사
+
+- 패키지 > com.test.spring.di.six
+- 파일 > Ex06.java
+- 파일 > Service.java
+- 파일 > src > config06.xml
+
+
+
+
+
+
+
+
+
+
+
+
+
+

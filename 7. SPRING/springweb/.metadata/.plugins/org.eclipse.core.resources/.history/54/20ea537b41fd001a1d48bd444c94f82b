@@ -1,0 +1,22 @@
+package com.test.spring;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+@org.springframework.stereotype.Service
+public class Service implements IService {
+	
+	@Autowired
+	private DAO dao;
+
+	@Override
+	public int add(DTO dto) {
+		
+		int result = 0;
+		
+		result += dao.add(dto); //글쓰기
+		result += dao.point(dto); //포인트 증가
+		
+		return result;
+	}
+
+}
